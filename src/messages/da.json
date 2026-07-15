@@ -1,0 +1,130 @@
+{
+  "common": {
+    "appName": "KitchenProof",
+    "loading": "Indlæser…",
+    "save": "Gem",
+    "cancel": "Annullér",
+    "close": "Luk",
+    "copy": "Kopiér link",
+    "copied": "Kopieret",
+    "back": "Tilbage",
+    "error": "Noget gik galt. Prøv igen.",
+    "language": "Sprog",
+    "locales": { "da": "Dansk", "en": "English", "it": "Italiano" }
+  },
+  "auth": {
+    "loginTitle": "Log ind",
+    "signupTitle": "Opret konto",
+    "fullName": "Fulde navn",
+    "email": "E-mail",
+    "password": "Adgangskode",
+    "loginButton": "Log ind",
+    "signupButton": "Opret konto",
+    "noAccount": "Har du ikke en konto?",
+    "haveAccount": "Har du allerede en konto?",
+    "signOut": "Log ud",
+    "invalidCredentials": "Forkert e-mail eller adgangskode.",
+    "signupFailed": "Kontoen kunne ikke oprettes. Prøv igen.",
+    "passwordHint": "Mindst 8 tegn"
+  },
+  "welcome": {
+    "title": "Velkommen til KitchenProof",
+    "subtitle": "Opret din virksomhed for at komme i gang.",
+    "orgName": "Virksomhedens navn",
+    "locale": "Foretrukket sprog",
+    "createButton": "Opret virksomhed"
+  },
+  "nav": {
+    "sites": "Steder",
+    "members": "Medlemmer",
+    "chooseSite": "Vælg sted"
+  },
+  "sites": {
+    "title": "Steder",
+    "newSite": "Nyt sted",
+    "name": "Navn",
+    "activityType": "Aktivitetstype",
+    "address": "Adresse",
+    "city": "By",
+    "postalCode": "Postnummer",
+    "cvrPNumber": "P-nummer",
+    "createButton": "Opret sted",
+    "empty": "Ingen steder endnu — opret dit første sted.",
+    "open": "Åbn",
+    "activityTypes": {
+      "restaurant": "Restaurant",
+      "cafe": "Café / kaffebar",
+      "takeaway": "Takeaway / pizzeria / grillbar",
+      "canteen": "Kantine / storkøkken",
+      "bakery": "Bageri / konditori",
+      "butcher": "Slagterbutik",
+      "catering": "Catering / diner transportable",
+      "foodtruck": "Food truck / madbod",
+      "retail_kiosk": "Kiosk / minimarked",
+      "hotel_breakfast": "Hotelmorgenmad / buffet",
+      "small_producer": "Mindre fødevareproducent",
+      "wholesale_small": "Lille engrosvirksomhed"
+    }
+  },
+  "members": {
+    "title": "Medlemmer",
+    "inviteTitle": "Invitér medlem",
+    "email": "E-mail",
+    "role": "Rolle",
+    "roles": {
+      "org_owner": "Ejer",
+      "org_admin": "Administrator",
+      "site_manager": "Stedansvarlig",
+      "operator": "Medarbejder",
+      "consultant": "Konsulent"
+    },
+    "siteScope": "Adgang til steder",
+    "allSites": "Alle steder",
+    "createInvite": "Opret invitation",
+    "inviteLinkTitle": "Invitationslink",
+    "inviteLinkHint": "Kopiér linket nu — det vises kun én gang. Send det selv til medlemmet.",
+    "pending": "Afventer",
+    "you": "dig",
+    "revoke": "Fjern",
+    "revoked": "Adgang fjernet",
+    "setPin": "Sæt PIN",
+    "pinLabel": "PIN-kode (4 cifre)",
+    "pinSaved": "PIN gemt",
+    "pinLocked": "PIN låst",
+    "unlockPin": "Lås PIN op",
+    "pinUnlocked": "PIN låst op",
+    "inviteCreated": "Invitation oprettet"
+  },
+  "invite": {
+    "title": "Bliv medlem af {org}",
+    "roleLabel": "Rolle: {role}",
+    "acceptButton": "Acceptér invitation",
+    "needAuth": "Log ind eller opret en konto for at fortsætte.",
+    "invalid": "Invitationen er ugyldig eller udløbet.",
+    "alreadyMember": "Du er allerede medlem af denne virksomhed.",
+    "accepted": "Du er nu medlem"
+  },
+  "today": {
+    "title": "I dag",
+    "placeholder": "Dine daglige opgaver kommer her (fase 2).",
+    "registerDeviceTitle": "Registrér denne enhed",
+    "registerDeviceHint": "Enheden deles af personalet — hver handling registreres med personlig PIN.",
+    "deviceName": "Enhedens navn",
+    "deviceNameDefault": "Køkken-tablet",
+    "registerButton": "Registrér enhed",
+    "deviceRegistered": "Enhed registreret",
+    "onlyManagerHint": "Kun en stedansvarlig kan registrere enheden."
+  },
+  "pin": {
+    "switchUser": "Skift bruger",
+    "whoAreYou": "Hvem er du?",
+    "enterPin": "Indtast din PIN-kode",
+    "wrongPin": "Forkert PIN. {remaining} forsøg tilbage.",
+    "locked": "PIN er låst. Bed en leder om at låse op.",
+    "noPin": "Ingen PIN endnu",
+    "verify": "Bekræft",
+    "actingAs": "Aktiv bruger",
+    "nobodyActive": "Ingen aktiv bruger",
+    "switched": "Bruger skiftet"
+  }
+}

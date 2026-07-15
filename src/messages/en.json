@@ -1,0 +1,130 @@
+{
+  "common": {
+    "appName": "KitchenProof",
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "copy": "Copy link",
+    "copied": "Copied",
+    "back": "Back",
+    "error": "Something went wrong. Please try again.",
+    "language": "Language",
+    "locales": { "da": "Dansk", "en": "English", "it": "Italiano" }
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "signupTitle": "Create account",
+    "fullName": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Log in",
+    "signupButton": "Create account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signOut": "Sign out",
+    "invalidCredentials": "Wrong email or password.",
+    "signupFailed": "The account could not be created. Please try again.",
+    "passwordHint": "At least 8 characters"
+  },
+  "welcome": {
+    "title": "Welcome to KitchenProof",
+    "subtitle": "Create your company to get started.",
+    "orgName": "Company name",
+    "locale": "Preferred language",
+    "createButton": "Create company"
+  },
+  "nav": {
+    "sites": "Sites",
+    "members": "Members",
+    "chooseSite": "Choose site"
+  },
+  "sites": {
+    "title": "Sites",
+    "newSite": "New site",
+    "name": "Name",
+    "activityType": "Activity type",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "cvrPNumber": "P-number",
+    "createButton": "Create site",
+    "empty": "No sites yet — create your first site.",
+    "open": "Open",
+    "activityTypes": {
+      "restaurant": "Restaurant (full service)",
+      "cafe": "Café / coffee bar",
+      "takeaway": "Takeaway / pizzeria / grill",
+      "canteen": "Canteen / institutional kitchen",
+      "bakery": "Bakery / pastry",
+      "butcher": "Butcher shop",
+      "catering": "Catering & events",
+      "foodtruck": "Food truck / market stall",
+      "retail_kiosk": "Kiosk / convenience retail",
+      "hotel_breakfast": "Hotel breakfast / buffet",
+      "small_producer": "Small producer / dark kitchen",
+      "wholesale_small": "Small wholesale"
+    }
+  },
+  "members": {
+    "title": "Members",
+    "inviteTitle": "Invite member",
+    "email": "Email",
+    "role": "Role",
+    "roles": {
+      "org_owner": "Owner",
+      "org_admin": "Administrator",
+      "site_manager": "Site manager",
+      "operator": "Operator",
+      "consultant": "Consultant"
+    },
+    "siteScope": "Site access",
+    "allSites": "All sites",
+    "createInvite": "Create invite",
+    "inviteLinkTitle": "Invite link",
+    "inviteLinkHint": "Copy the link now — it is shown only once. Send it to the member yourself.",
+    "pending": "Pending",
+    "you": "you",
+    "revoke": "Remove",
+    "revoked": "Access removed",
+    "setPin": "Set PIN",
+    "pinLabel": "PIN code (4 digits)",
+    "pinSaved": "PIN saved",
+    "pinLocked": "PIN locked",
+    "unlockPin": "Unlock PIN",
+    "pinUnlocked": "PIN unlocked",
+    "inviteCreated": "Invite created"
+  },
+  "invite": {
+    "title": "Join {org}",
+    "roleLabel": "Role: {role}",
+    "acceptButton": "Accept invite",
+    "needAuth": "Log in or create an account to continue.",
+    "invalid": "This invite is invalid or has expired.",
+    "alreadyMember": "You are already a member of this company.",
+    "accepted": "You are now a member"
+  },
+  "today": {
+    "title": "Today",
+    "placeholder": "Your daily tasks will appear here (Phase 2).",
+    "registerDeviceTitle": "Register this device",
+    "registerDeviceHint": "This device is shared by staff — every action is attributed via a personal PIN.",
+    "deviceName": "Device name",
+    "deviceNameDefault": "Kitchen tablet",
+    "registerButton": "Register device",
+    "deviceRegistered": "Device registered",
+    "onlyManagerHint": "Only a site manager can register this device."
+  },
+  "pin": {
+    "switchUser": "Switch user",
+    "whoAreYou": "Who are you?",
+    "enterPin": "Enter your PIN",
+    "wrongPin": "Wrong PIN. {remaining} attempts left.",
+    "locked": "PIN is locked. Ask a manager to unlock it.",
+    "noPin": "No PIN yet",
+    "verify": "Confirm",
+    "actingAs": "Active user",
+    "nobodyActive": "No active user",
+    "switched": "User switched"
+  }
+}

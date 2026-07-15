@@ -1,0 +1,130 @@
+{
+  "common": {
+    "appName": "KitchenProof",
+    "loading": "Caricamento…",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "close": "Chiudi",
+    "copy": "Copia link",
+    "copied": "Copiato",
+    "back": "Indietro",
+    "error": "Qualcosa è andato storto. Riprova.",
+    "language": "Lingua",
+    "locales": { "da": "Dansk", "en": "English", "it": "Italiano" }
+  },
+  "auth": {
+    "loginTitle": "Accedi",
+    "signupTitle": "Crea account",
+    "fullName": "Nome completo",
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Accedi",
+    "signupButton": "Crea account",
+    "noAccount": "Non hai un account?",
+    "haveAccount": "Hai già un account?",
+    "signOut": "Esci",
+    "invalidCredentials": "Email o password errata.",
+    "signupFailed": "Impossibile creare l'account. Riprova.",
+    "passwordHint": "Almeno 8 caratteri"
+  },
+  "welcome": {
+    "title": "Benvenuto in KitchenProof",
+    "subtitle": "Crea la tua azienda per iniziare.",
+    "orgName": "Nome dell'azienda",
+    "locale": "Lingua preferita",
+    "createButton": "Crea azienda"
+  },
+  "nav": {
+    "sites": "Sedi",
+    "members": "Membri",
+    "chooseSite": "Scegli sede"
+  },
+  "sites": {
+    "title": "Sedi",
+    "newSite": "Nuova sede",
+    "name": "Nome",
+    "activityType": "Tipo di attività",
+    "address": "Indirizzo",
+    "city": "Città",
+    "postalCode": "Codice postale",
+    "cvrPNumber": "P-number",
+    "createButton": "Crea sede",
+    "empty": "Nessuna sede — crea la tua prima sede.",
+    "open": "Apri",
+    "activityTypes": {
+      "restaurant": "Ristorante",
+      "cafe": "Caffè / caffetteria",
+      "takeaway": "Takeaway / pizzeria / grill",
+      "canteen": "Mensa / cucina istituzionale",
+      "bakery": "Panetteria / pasticceria",
+      "butcher": "Macelleria",
+      "catering": "Catering ed eventi",
+      "foodtruck": "Food truck / bancarella",
+      "retail_kiosk": "Chiosco / minimarket",
+      "hotel_breakfast": "Colazione hotel / buffet",
+      "small_producer": "Piccolo produttore / dark kitchen",
+      "wholesale_small": "Piccolo ingrosso"
+    }
+  },
+  "members": {
+    "title": "Membri",
+    "inviteTitle": "Invita membro",
+    "email": "Email",
+    "role": "Ruolo",
+    "roles": {
+      "org_owner": "Titolare",
+      "org_admin": "Amministratore",
+      "site_manager": "Responsabile sede",
+      "operator": "Operatore",
+      "consultant": "Consulente"
+    },
+    "siteScope": "Accesso alle sedi",
+    "allSites": "Tutte le sedi",
+    "createInvite": "Crea invito",
+    "inviteLinkTitle": "Link di invito",
+    "inviteLinkHint": "Copia il link adesso — viene mostrato una sola volta. Invialo tu al membro.",
+    "pending": "In attesa",
+    "you": "tu",
+    "revoke": "Rimuovi",
+    "revoked": "Accesso rimosso",
+    "setPin": "Imposta PIN",
+    "pinLabel": "Codice PIN (4 cifre)",
+    "pinSaved": "PIN salvato",
+    "pinLocked": "PIN bloccato",
+    "unlockPin": "Sblocca PIN",
+    "pinUnlocked": "PIN sbloccato",
+    "inviteCreated": "Invito creato"
+  },
+  "invite": {
+    "title": "Unisciti a {org}",
+    "roleLabel": "Ruolo: {role}",
+    "acceptButton": "Accetta invito",
+    "needAuth": "Accedi o crea un account per continuare.",
+    "invalid": "L'invito non è valido o è scaduto.",
+    "alreadyMember": "Sei già membro di questa azienda.",
+    "accepted": "Ora sei membro"
+  },
+  "today": {
+    "title": "Oggi",
+    "placeholder": "I tuoi compiti giornalieri appariranno qui (fase 2).",
+    "registerDeviceTitle": "Registra questo dispositivo",
+    "registerDeviceHint": "Il dispositivo è condiviso dal personale — ogni azione è attribuita tramite PIN personale.",
+    "deviceName": "Nome del dispositivo",
+    "deviceNameDefault": "Tablet cucina",
+    "registerButton": "Registra dispositivo",
+    "deviceRegistered": "Dispositivo registrato",
+    "onlyManagerHint": "Solo un responsabile può registrare il dispositivo."
+  },
+  "pin": {
+    "switchUser": "Cambia utente",
+    "whoAreYou": "Chi sei?",
+    "enterPin": "Inserisci il tuo PIN",
+    "wrongPin": "PIN errato. {remaining} tentativi rimasti.",
+    "locked": "PIN bloccato. Chiedi a un responsabile di sbloccarlo.",
+    "noPin": "Nessun PIN",
+    "verify": "Conferma",
+    "actingAs": "Utente attivo",
+    "nobodyActive": "Nessun utente attivo",
+    "switched": "Utente cambiato"
+  }
+}
