@@ -1,5 +1,8 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/lib/supabase/database.types";
+import type { Database, Json } from "@/lib/supabase/database.types";
+import { parsePack } from "@/lib/compliance/pack-schema";
 
 // Local-stack defaults (shared, well-known supabase-cli dev keys); CI/dev can
 // override via env. NEVER points at production.
@@ -50,4 +53,35 @@ export async function signIn(email: string): Promise<Client> {
   });
   if (error) throw new Error(`signIn failed: ${error.message}`);
   return client;
+}
+
+/** Publishes the DK pack exactly like the seed does (idempotent, validated). */
+export async function ensurePackPublished(admin: Client): Promise<void> {
+  const raw = JSON.parse(
+    readFileSync(resolve(process.cwd(), "supabase/seed/dk-pack.json"), "utf8"),
+  );
+  const pack = parsePack(raw);
+  const { error: packError } = await admin.from("compliance_packs").upsert({
+    code: pack.pack,
+    name: "Danmark — Fødevarestyrelsen (DVFA)",
+    authority_json: pack.authority as unknown as Json,
+  });
+  if (packError) throw new Error(`compliance_packs upsert: ${packError.message}`);
+
+  const { data: existing } = await admin
+    .from("pack_versions")
+    .select("id")
+    .eq("pack_code", pack.pack)
+    .eq("version", pack.version)
+    .maybeSingle();
+  if (!existing) {
+    const { error } = await admin.from("pack_versions").insert({
+      pack_code: pack.pack,
+      version: pack.version,
+      content: raw as Json,
+    });
+    if (error && !error.message.includes("duplicate")) {
+      throw new Error(`pack_versions insert: ${error.message}`);
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { CalendarCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getActorSession, getDeviceSession } from "@/lib/actor/session";
+import { SiteNav } from "../site-nav";
 import { PinSwitcher, type SwitcherMember } from "./pin-switcher";
 import { RegisterDeviceForm } from "./register-device-form";
 import { Badge } from "@/components/ui/badge";
@@ -78,6 +79,7 @@ export default async function TodayPage({
   return (
     // Kitchen mode (§15.1): base font 18px, ≥56px touch targets.
     <main className="mx-auto w-full max-w-xl flex-1 p-4 text-[18px]">
+      <SiteNav siteId={site.id} active="today" />
       <header className="mb-6 grid gap-3">
         <div className="flex items-center justify-between gap-2">
           <div>

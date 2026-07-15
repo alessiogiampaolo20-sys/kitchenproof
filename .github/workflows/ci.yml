@@ -44,10 +44,13 @@ jobs:
           EOF
           echo "ACTOR_SESSION_SECRET=$(openssl rand -base64 32)" >> .env.local
 
-      # RLS fail-closed proof (§17/§20 gate)
+      # RLS fail-closed proof (§17/§20 gate) + programme-flow integration
       - run: pnpm test:rls
 
-      # Build + e2e smoke
+      # Seed: DK pack + corpus + demo fixture (needed by e2e)
+      - run: pnpm db:seed
+
+      # Build + e2e
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e

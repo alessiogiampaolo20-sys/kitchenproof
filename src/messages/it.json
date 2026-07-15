@@ -37,7 +37,108 @@
   "nav": {
     "sites": "Sedi",
     "members": "Membri",
-    "chooseSite": "Scegli sede"
+    "chooseSite": "Scegli sede",
+    "today": "Oggi",
+    "programme": "Programma",
+    "equipment": "Attrezzature"
+  },
+  "programme": {
+    "title": "Programma di autocontrollo",
+    "statusLabel": "Stato",
+    "status": {
+      "draft": "Bozza",
+      "in_review": "In revisione",
+      "approved": "Approvato",
+      "superseded": "Sostituito"
+    },
+    "version": "Versione {version}",
+    "packVersion": "Pacchetto DK {version}",
+    "startTitle": "Parti dal modello",
+    "startHint": "Crea una bozza di analisi dei rischi dal modello ufficiale per il tuo tipo di attività — con attrezzature e punti di controllo suggeriti. Rivedi e approvi prima che qualcosa entri in vigore.",
+    "startButton": "Crea bozza dal modello",
+    "approveButton": "Approva programma",
+    "approveHint": "L'approvazione attiva il piano giornaliero delle attività. Solo i responsabili possono approvare.",
+    "approvedToast": "Programma approvato — piano attività attivo",
+    "errors": {
+      "criticalNoCp": "Un'attività critica non ha un punto di controllo attivo — impossibile approvare.",
+      "justificationRequired": "Allentare un limite del pacchetto richiede una giustificazione scritta.",
+      "error": "Qualcosa è andato storto. Riprova."
+    },
+    "sectionsTitle": "Analisi dei rischi (modulo ufficiale)",
+    "applies": "Pertinente",
+    "critical": "Attività critica",
+    "cpTitle": "Punti di controllo",
+    "limit": "Limite",
+    "frequency": "Frequenza",
+    "perEvent": "Per evento",
+    "timesLabel": "Orari (HH:MM, separati da virgola)",
+    "monitoring": {
+      "manual_temp": "Temperatura manuale",
+      "photo_temp": "Foto del display",
+      "photo_only": "Solo foto",
+      "checklist": "Checklist",
+      "probe": "Sonda"
+    },
+    "categories": {
+      "temperature": "Temperatura",
+      "cleaning": "Pulizia",
+      "receiving": "Ricevimento",
+      "pest": "Infestanti",
+      "hygiene": "Igiene",
+      "other": "Altro"
+    },
+    "source": "Fonte",
+    "edit": "Modifica",
+    "deactivate": "Disattiva",
+    "activate": "Attiva",
+    "inactive": "Inattivo",
+    "loosened": "Limite allentato",
+    "justification": "Giustificazione",
+    "justificationHint": "Richiesta se allenti il limite predefinito del pacchetto (§7.3).",
+    "newCpButton": "Nuovo punto di controllo",
+    "cpName": "Nome",
+    "limitType": {
+      "max": "Temperatura max",
+      "min": "Temperatura min",
+      "checklist": "Checklist"
+    },
+    "value": "Valore (°C)",
+    "equipmentTarget": "Attrezzatura (opzionale)",
+    "noEquipment": "Non legato ad attrezzatura",
+    "saved": "Salvato",
+    "tasksTitle": "Attività pianificate (7 giorni)"
+  },
+  "equipment": {
+    "title": "Attrezzature",
+    "newTitle": "Nuova attrezzatura",
+    "name": "Nome",
+    "kindLabel": "Tipo",
+    "kinds": {
+      "fridge": "Frigorifero",
+      "freezer": "Congelatore",
+      "hot_holding": "Mantenimento a caldo",
+      "dishwasher": "Lavastoviglie",
+      "probe": "Sonda",
+      "oven": "Forno",
+      "blast_chiller": "Abbattitore",
+      "other": "Altro"
+    },
+    "brandModel": "Marca/modello",
+    "location": "Posizione",
+    "photo": "Foto di riferimento",
+    "photoHint": "Fotografa l'unità — l'immagine appare a ogni controllo per non confondere le unità.",
+    "createButton": "Crea attrezzatura",
+    "saved": "Salvato",
+    "retireButton": "Dismetti",
+    "retired": "Dismesso",
+    "qrTitle": "Codice QR",
+    "qrHint": "Scansiona il codice per aprire l'unità direttamente su questo dispositivo.",
+    "printLabels": "Stampa etichette QR",
+    "empty": "Nessuna attrezzatura — fotografa il tuo primo frigorifero.",
+    "backToList": "Tutte le attrezzature"
+  },
+  "scan": {
+    "invalid": "Codice QR non valido o sconosciuto."
   },
   "sites": {
     "title": "Sedi",

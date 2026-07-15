@@ -37,7 +37,108 @@
   "nav": {
     "sites": "Steder",
     "members": "Medlemmer",
-    "chooseSite": "Vælg sted"
+    "chooseSite": "Vælg sted",
+    "today": "I dag",
+    "programme": "Program",
+    "equipment": "Udstyr"
+  },
+  "programme": {
+    "title": "Egenkontrolprogram",
+    "statusLabel": "Status",
+    "status": {
+      "draft": "Kladde",
+      "in_review": "Til gennemsyn",
+      "approved": "Godkendt",
+      "superseded": "Erstattet"
+    },
+    "version": "Version {version}",
+    "packVersion": "DK-pakke {version}",
+    "startTitle": "Start fra skabelon",
+    "startHint": "Opretter en kladde til risikoanalysen ud fra den officielle skabelon for din aktivitetstype — med foreslået udstyr og kontrolpunkter. Du gennemgår og godkender, før noget træder i kraft.",
+    "startButton": "Opret kladde fra skabelon",
+    "approveButton": "Godkend program",
+    "approveHint": "Godkendelse aktiverer den daglige opgaveplan. Kun stedansvarlige kan godkende.",
+    "approvedToast": "Programmet er godkendt — opgaveplanen er aktiv",
+    "errors": {
+      "criticalNoCp": "En kritisk aktivitet mangler et aktivt kontrolpunkt — programmet kan ikke godkendes.",
+      "justificationRequired": "Lempelse af pakkens grænse kræver en skriftlig begrundelse.",
+      "error": "Noget gik galt. Prøv igen."
+    },
+    "sectionsTitle": "Risikoanalyse (officielt skema)",
+    "applies": "Relevant",
+    "critical": "Kritisk aktivitet",
+    "cpTitle": "Kontrolpunkter",
+    "limit": "Grænse",
+    "frequency": "Frekvens",
+    "perEvent": "Pr. hændelse",
+    "timesLabel": "Tidspunkter (HH:MM, adskilt med komma)",
+    "monitoring": {
+      "manual_temp": "Manuel temperatur",
+      "photo_temp": "Foto af display",
+      "photo_only": "Kun foto",
+      "checklist": "Tjekliste",
+      "probe": "Føler"
+    },
+    "categories": {
+      "temperature": "Temperatur",
+      "cleaning": "Rengøring",
+      "receiving": "Modtagelse",
+      "pest": "Skadedyr",
+      "hygiene": "Hygiejne",
+      "other": "Andet"
+    },
+    "source": "Kilde",
+    "edit": "Redigér",
+    "deactivate": "Deaktivér",
+    "activate": "Aktivér",
+    "inactive": "Inaktiv",
+    "loosened": "Lempet grænse",
+    "justification": "Begrundelse",
+    "justificationHint": "Krævet, hvis du lemper pakkens standardgrænse (§7.3).",
+    "newCpButton": "Nyt kontrolpunkt",
+    "cpName": "Navn",
+    "limitType": {
+      "max": "Maks. temperatur",
+      "min": "Min. temperatur",
+      "checklist": "Tjekliste"
+    },
+    "value": "Værdi (°C)",
+    "equipmentTarget": "Udstyr (valgfrit)",
+    "noEquipment": "Ikke knyttet til udstyr",
+    "saved": "Gemt",
+    "tasksTitle": "Planlagte opgaver (7 dage)"
+  },
+  "equipment": {
+    "title": "Udstyr",
+    "newTitle": "Nyt udstyr",
+    "name": "Navn",
+    "kindLabel": "Type",
+    "kinds": {
+      "fridge": "Køleskab",
+      "freezer": "Fryser",
+      "hot_holding": "Varmholdelse",
+      "dishwasher": "Opvaskemaskine",
+      "probe": "Termometer",
+      "oven": "Ovn",
+      "blast_chiller": "Blæstkøler",
+      "other": "Andet"
+    },
+    "brandModel": "Mærke/model",
+    "location": "Placering",
+    "photo": "Referencefoto",
+    "photoHint": "Fotografér enheden — billedet vises ved hver kontrol, så enheder ikke forveksles.",
+    "createButton": "Opret udstyr",
+    "saved": "Gemt",
+    "retireButton": "Tag ud af drift",
+    "retired": "Ude af drift",
+    "qrTitle": "QR-kode",
+    "qrHint": "Scan koden for at åbne udstyret direkte på denne enhed.",
+    "printLabels": "Print QR-labels",
+    "empty": "Intet udstyr endnu — fotografér dit første køleskab.",
+    "backToList": "Alt udstyr"
+  },
+  "scan": {
+    "invalid": "Ugyldig eller ukendt QR-kode."
   },
   "sites": {
     "title": "Steder",

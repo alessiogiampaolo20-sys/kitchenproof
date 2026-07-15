@@ -1,0 +1,667 @@
+
+===== PAGE 1 =====
+EXAMPLE OF  
+Own-Check programme
+This example can be used in connection with the introduction of own-
+checks in small food business operators with limited processing of foods.
+Risk analysis
+The FBOs must always prepare a written risk analysis as the basis for its own-check, possibly including a written 
+own-check programme. The risk analysis is a review of the business’ activities. The FBO must decide whether risks 
+(hazards) are associated with its activities. The FBO must identify the relevant risks and describe how they are 
+prevented or avoided in the risk analysis.
+Own-check programme
+FBOs with activities covered by this example may use the example as the basis for preparing an own-check 
+programme. If the FBOs have other activities, they must be described as a supplement to the example. It is your 
+responsibility that your own-check programme covers the activities.
+In the legislation there are special requirements to ensure and that the critical control points (CCP) are in control. 
+You can read more about risk analysis and critical control points at the website of the Danish Veterinary and Food 
+Administration. 
+Forms 1, 2, 3 and 4 are associated procedures in this example covers activities that are typically critical control points. 
+The other forms and procedures cover prerequisite programmes. The FBO has to be able to orally explain these 
+procedures. It is recommended to use the forms because they support the prerequisite programmes.
+The CEO of the food business is responsible for ensuring that the written risk analysis and own-check programme are 
+always present in the business and that this documentation can be presented at any time when the Danish Veterinary 
+and Food Administration ask for it.
+Always remember to check whether your suppliers are registered for the relevant activity on www.findsmiley.dk.
+Remember to make copies of blank forms.
+The example is a recommendation and should be adapted to the activities that you have in 
+your business. The Danish Veterinary and Food Administration (DVFA) generally recommends, 
+that food business operators (FBOs) use national guidelines, when preparing own-check 
+programmes, and introducing prerequisite programmess (Good Hygiene Practice).
+===== PAGE 2 =====
+Page 2 of 25
+Brief description of the business
+Name and address of the business : 
+Date of authorisation/registration of the business 
+by the Danish Veterinary and Food Administration :
+CEO : 
+Import/receipt/collection of food from abroad : 
+ 
+ Yes, date of registration by the Danish  
+Veterinary and Food Administration :
+  
+ No
+Products :
+(Pizza, burger, kebabs, lasagne, sausages, ice cream, soft ice, etc.)
+
+===== PAGE 3 =====
+Page 3 of 25
+Select 
+(X) Activities Checked How often must this  
+be written down?
+Receipt/transport of goods
+Form 1, page 17 Every receipt of goods  Once a week
+ other  :
+Cold storage/freezing
+Form 2, page 18 Daily  Once a week
+ other  :
+Heating/heat treatment
+Form 3, page 19 Every time  Once a week
+ other  :
+Refrigeration
+Form 3, page 20 Every time  Once a week
+ other  :
+Keeping hot
+Form 4, page 21 Every time  Once a week
+ other :
+Sales and storage of non-refrigerated food
+See page 9 Regularly Only in the event of errors
+Separation Daily Only in the event of errors
+Delivery of goods Every time Only in the event of errors
+Cleaning
+(Form 5 may be used), page 22 Daily -
+Personlig hygiejne Daily -
+Maintenance/pest control
+(Form 6 may be used), page 24 Regularly
+Regularly and in the event of 
+defects/pests
+Min. once a year
+Traceability (mandatory) -
+It must be possible to present 
+invoices
+Invoices must be available for 
+presentation at any time
+Recall (mandatory) - In the event of recall
+Annual inspection and revision (mandatory)
+Form 7, page 25
+Annually and in the 
+event of changes
+Annually
+Note the month :
+Other  :
+NB. Forms 1-4 are often used and are on pages 17-21.
+Activities of the business :
+The business must review its activities and check those that are relevant.
+===== PAGE 4 =====
+Page 4 of 25
+Transportation of food
+If your business collects food from wholesale businesses itself, you must meet hygiene requirements when 
+transporting it to your business. The cold chain may not be broken and you must be able to transport the food 
+at the temperatures specified in the legislation.
+In the event of errors :
+Describe what you do, if errors are identified. This might be :
+ The goods are returned.
+ The goods are assessed and used immediately if this presents no risk.
+ The goods are assessed and discarded. 
+ The supplier is contacted. 
+Errors must always be documented in form 1 on ‘Receipt of goods. 
+Documentation :
+Describe how often the self-inspection/own-check must be documented,  
+i.e. noted in form 1 on ‘Receipt of goods.
+For example once a week.
+Errors must always be documented.
+ I only receive food from Danish businesses
+ I receive food from other EU member states (intra-EU trade)
+ I import foods from third countries (import) (Note the special rules for this)
+Food may only be received from authorised or registered food businesses
+Check the following every time goods are received : 
+ Is the delivery temperature correct? When food is collected, the temperature should be noted 
+upon arrival at the final destination. Always take measurements if you suspect errors. Remember 
+that there may be different temperature requirements for different types of food, and describe 
+the limits applicable to the food in your business. The maximum temperature is usually 5 °C for 
+refrigerated foods and – 18 °C for frozen foods. Be aware that in some cases the temperature 
+limit for fish/fishproducts is maximum +2°C. 
+ Is the packaging complete and intact?
+ Is the best before date correct?
+ Is the labelling correct?
+Receipt of goods
+===== PAGE 5 =====
+Page 5 of 25
+Food must be stored hygienically and at temperatures specified in the legislation.
+Check daily 
+ Storage temperature depends on the type of food and often the limits are maximum +5 °C for refrigerated  
+and – 18 °C for frozen. However, there can be requirements for only max. +2°C for fresh fish if the fish is not 
+well iced. 
+ Durability of food. Assess if the food can be used or sold. Food products marked with “use by” may not be 
+used or sold after the use by date. Food products with “best before” can be used or sold after the best before 
+date, but only if the food products are suitable for consumption. If the business wants to use or sell a food 
+product after the “best before” date a professional assessment must be made whether or not the food is 
+suitable for consumption.
+ Location of food. . Is raw meat, prepared food, vegetables, etc. stored separately?
+ Food must be thawed in a refrigerated environment. You have to ensure that no contamination occurs during 
+thawing e.g. dripping of meat juices from the thawed item onto other items.
+In the event of errors :
+ If refrigerators and freezers are unable to maintain the temperatures required, the business must decide 
+whether the foods can be used or they should be discarded. For example, prepacked food that has been 
+stored at an excessive temperature must not be sold.
+Documentation :
+Describe how often the check should be documented, i.e. note it in form 2 ‘Cold storage/freezing’.
+For example, once a week. 
+Errors must always be documented.
+Food contact materials such as packaging, production equipment and tools that are designed to come into 
+contact with food or may reasonably be assumed to come into contact with food, must be appropriate for their 
+intended use.
+Obtain a declaration from suppliers of materials and objects to ensure that they are appropriate for their intended 
+use. You should also obtain instructions for use from suppliers. Ensure that you only use materials and objects 
+as they are intended to be used. For example, plastic containers suitable for storing cold food may not be 
+suitable for hot food. 
+Food storage
+Food contact materials
+===== PAGE 6 =====
+Page 6 of 25
+Food must be heat treated at a given combination of time and temperature to ensure its safety. The FBO must 
+document that the chosen combination of time and temperature is sufficient.
+It is possible to use an alternative combination of time and temperature if the company documents that it is safe. You 
+can use the online-tool SiTTi, abbreviated from “Sikker Temperatur Tid”, as documentation that the heat treatment is 
+safe. The online-tool is available at the Danish Veterinary and Food Administration’s website. 
+If the food is heat treated to 75 ˚C, the food is considered safe and no documentation is required.
+It is important that the temperature is measured in the centre of the food or where the food is thickest. 
+The temperature must be measured with a calibrated probe thermometer every time food is heated. You can do the 
+calibration of the thermometer by using hot water (100 ˚C) and in ice water (0 ˚C).
+You must be aware of special rules for frozen raspberries as they have to be cooked for min. 1 minute before they can 
+be used in e.g. smoothies and desserts or as cake decoration. 
+What type of heat treatment is used? (Check)
+ Heat treatment to min. 75˚C.
+ Heat treatment to an alternative temperature (documentation must be presented)
+ The food is exempt from the requirement for heating to 75˚C. For example, intact cuts of meat that are not 
+normally cooked through, such as roast beef. 
+How is food heated in the business?  
+Procedures for heat treatment of individual product groups may be described here. 
+If heating to min. 75 °C is used, it is necessary to ensure that the temperature is min. 75 °C 
+throughout the food. 
+In the event of errors :
+If the temperature is not 75 °C, heating continues until the temperature has been reached. 
+Documentation  :
+Describe how often the check should be documented, i.e. note it in form 3 ‘Heating and refrigeration’.
+For example once a week.
+Heating/heat treatment
+
+===== PAGE 7 =====
+Page 7 of 25
+Heat-treated food to be stored or served at low temperatures must be refrigerated as quickly as possible. The 
+temperature must be reduced from 65 °C to 10 °C within four hours to ensure a safe cool down.
+The online-tool SiTTI, abbreviated from “Sikker Temperatur Tid”, can assist you in calculating a specific time for the 
+cool down period for a given type of food and as documentation for a sufficient and safe cool down. The online-tool is 
+available at the Danish Veterinary and Food Administration’s website. 
+The food should be cooled down in minor portions to give a faster cool down period. 
+The refrigeration must be measured and checked using a probe thermometer. Remember to measure the temperature 
+in the centre of the food or where the food is thickest.
+Each time food is refrigerated, it is necessary to ensure that the temperature falls from 65 °C 
+to 10 °C in max. 4 hours. 
+The food must then be stored at max. 5 °C.
+In the event of errors :
+If the food is not refrigerated to 10 °C in max. 4 hours, it may immediately be reheated to 75° C and refrigerated 
+again. The food may be refrigerated in smaller portions, if necessary.
+If the food is not immediately reheated to 75 °C, it must be discarded.
+Documentation :
+Describe how often the check should be documented, i.e. note it in form 3 ‘Heating and refrigeration’.
+For example once a week.
+errors must always be documented.
+How is food refrigerated in the business? Procedures for refrigeration of individual product groups may be 
+described here. 
+Refrigeration
+
+===== PAGE 8 =====
+Page 8 of 25
+After heat treatment, food must be kept hot at a temperature of at least 65˚C throughout the food. The temperature 
+must be measured and checked with a calibrated probe thermometer in the coldest part of the food, which normally is 
+in the centre of the food or where the food is thickest
+(YHU\WLPHIRRGLVNHSWKRWLWLVQHFHVVDU\WRHQVXUHWKDWWKHWHPSHUDWXUHLVDWOHDVWÛ& 
+throughout the food.
+How is food kept hot in your business?  
+Procedures for keeping individual product groups hot may be described here.
+In the event of errors  :
+The food must be discarded, if the food temperature drops below 65 °C while being kept hot for serving.  
+Errors must always be documented in the form.
+Documentation :
+Describe how and how often the check should be documented. This means that it must be noted in form 4 on 
+‘Keeping hot’. 
+Keeping hot
+===== PAGE 9 =====
+Page 9 of 25
+Food that is kept unrefrigerated must be sold within 3 hours
+PHDWEDOOVVDXVDJHUROOVSL]]DVOLFHVSL]]DWRSSLQJDQGVDQGZLFKHV
+The 3 hours are managed as follows : (Note below)
+ Parking timer
+ Fixed times (note the times)
+ Other :
+How is food stored in your business? Procedures for non-refrigerated storage of individual product groups may be 
+described here :
+                     
+                    
+                     
+                     
+                     
+                     
+                    
+In the event of errors : 
+The food must be discarded, if the temperature drops below 65 °C for more than 3 hours or if the food is kept 
+outside of the refrigerator at a temperature above 5 °C for more than 3 hours. If an error occurs it must be noted in 
+the form.
+Documentation :
+Describe how and how often the check should be documented. This means that it must be noted in form 4 on 
+‘Keeping hot/sales of non-refrigerated goods’.
+Sales and storage of non-refrigerated food
+
+===== PAGE 10 =====
+Page 10 of 25
+Separation
+To prevent cross-contamination by pathogenic bacteria between different foods, it is essential to separate vegetables, 
+raw meat, prepared food, etc. during production and storage. 
+Separation also applies when handling raw materials or products with allergens, in order to prevent 
+cross-contamination. 
+Ways of achieving this include :
+ Cleaning knives, cutting boards, work surfaces and cutting machines when switching between foods
+ Using different kitchen areas and cutting boards for the various types of products
+ Time-shifted production and cleaning after every change in handling food types
+ Keeping food covered and separated.
+Check regularly that food is kept separate during production and storage.
+In the event of errors :
+Decide whether the foods can be used, for example by heating them, or discard them.
+How to separate food :
+ In refrigerators (describe or enclose a drawing)
+ During production (describe separate areas or different times)
+
+===== PAGE 11 =====
+Page 11 of 25
+Goods delivery
+Food must be transported in clean and appropriate boxes and vehicles. Boxes and vehicles must have surfaces that 
+are easy to clean. 
+When the business delivers food that requires refrigeration, this can be done without control of the temperature if the 
+FBO can ensure the safety of the food during transportation. 
+When the business delivers hot food, the temperature may not drop below 65 °C. 
+When refrigerated food is delivered, the temperature must not increase.
+How is the temperature maintained when goods are delivered (describe)?
+
+===== PAGE 12 =====
+Page 12 of 25
+Cleaning and disinfection
+A cleaning plan, as shown in form 5, can be useful, particularly if the business has several employees. The cleaning 
+plan is like a job description to ensure that employees know what to clean and how often. If there is no written plan for 
+cleaning, the FBO must be able to give a verbal description. 
+If form 5 is used, missing areas can be added. Please ensure that all machines and premises are described in the 
+cleaning plan. Identify the machines and areas that need to be disinfected and label them with a D in the cleaning plan.
+ Disinfection is possible in a dishwasher with a rinse temperature of min. 80 °C.
+ Disinfection is also possible by dousing with boiling water.
+ Or with an approved disinfectant that is suitable for the use in a food business as approved by the Danish 
+Veterinary and Food Administration (DVFA) or by the Danish Environmental Protection Agency (DEPA). Products 
+that are approved by DVFA can be found here. Products that are approved by DEPA can be found here.
+Cleaning must be checked daily before production starts. 
+In the event of errors :
+If cleaning is necessary, it must be done before production starts.
+Remember that there must always be soap and paper at washbasins and in toilets.
+===== PAGE 13 =====
+Page 13 of 25
+Personal hygiene
+Remember that there must always be access to washbasins, soap and paper. The CEO must 
+ensure that staff is familiar with the rules of the business on hygiene and completion of the 
+own-check.
+ A washbasin for washing hands is usually an independently located washbasin with mixer tap that is not identical 
+to washbasins for food or dishes. There must be a sufficient number of washbasins and there must always be a 
+washbasin at the toilet. A washbasin must always have flowing warm and cold water and drinking water quality.
+A. Use clean work clothes :
+ When changing tasks, it may be necessary to change clothes.
+B. Wash your hands :
+ Before you start to work with food
+ When you change processes
+ When you have been to the toilet
+ When you return from a break.
+ Whenever necessary for example after sneezing.
+C. Illness  :
+ If you have an open wound, diarrhoea or other infectious diseases that may be passed on via food, you must notify 
+the CEO. The CEO is then responsible for deciding when you may resume work. Employees with norovirus/acute 
+gastroenteritis are recommended to remain off work for 48 hours after the symptoms have ceased. Detailed rules 
+on work and illness are available in Annex II, Chapter 8 (2), of the Regulation on the Hygiene of Foodstuffs.
+D. Smoking :
+ Smoking is not permitted in premises where food is produced/stored.
+E. Other rules :
+ Jewllery :
+ Headgear (describe) :
+ Tasks not directly associated with food.  
+For example; nursing tasks, filling up with petrol, or cleaning (describe) :
+
+===== PAGE 14 =====
+Page 14 of 25
+Maintenance and pest control
+The business’ standard of maintenance and pest monitoring must be inspected.
+It may be appropriate to use form 6 ‘Maintenance plan’. If not, the business must be able to give a verbal 
+account of maintenance and pest control.
+All premises are reviewed. Remember to include outdoor areas, storage and toilets. 
+Inspection of premises and equipment may involve the following :
+ Checking that walls, floors, ceilings and window frames are intact, smooth and washable. 
+ Checking that equipment and machines are intact, easy to clean and rust-free.
+ Checking that there are no pests in the premises, for example flies, moths, mice and rats.
+ Checking that there are attached gratings on drains.
+ Checking that doors and windows close tightly.
+ Checking that thermometers used for temperature measurements in food, display correct temperatures.
+The business must contact the municipality if rats are found in or around  
+a food business operator.
+If mice are found, there is no corresponding duty to report them to the municipality.
+The business has a duty to contact the Danish Veterinary and Food Administration immediately if there is reason to 
+assume that it has placed food that is injurious to human health on the market, cf. Article 19 (3) of the General Food 
+Law Regulation - notice must be given IMMEDIATELY - applies to mice, rats and other pests.
+===== PAGE 15 =====
+Page 15 of 25
+Review
+The own-check programme of a business must always be reviewed if the activities of the business change (for 
+example changes in production or product range). If changes have not been made, the programme should be 
+reviewed at least once a year. Where appropriate, use form 7 on ‘Annual inspection and review’.
+===== PAGE 16 =====
+Page 16 of 25
+Traceability
+Traceability is the ability to trace and follow a food throughout its phases of production, manufacturing and 
+distribution. A food business operator must be able to document the sources of its food (one step back). This can 
+be done by keeping invoices or delivery notes at its premises. Invoices must be itemised, permitting identification 
+of the goods. When food is sold to other businesses, it must be possible to document these sales as well.
+The traceability documentation, which is mandatory, must contain at least : 
+ Name and address of supplier.
+ Name and address of customer.
+ Date and, when necessary, time of transaction / delivery.
+ Identification of products supplied.
+ Volume, where appropriate, or quantity.
+A cash or credit card receipt does not meet traceability requirements. It is the FBO’s responsibility to ensure that 
+traceability requirements are fulfilled.
+When selling food to other food companies (one step forward) this will require documentation to ensure the 
+traceability.
+Traceability guidelines (in Danish) are available here : Traceability guidelines.
+Further information is available on the website of the Danish Veterinary and Food Administration.
+Food that does not meet food safety requirements and may make humans ill must be withdrawn from the market.
+If the business receives written communication from a supplier about the recall of a food : 
+ this communication must be kept as documentation in the own-check programme
+ with a note about the action taken by the business. For example how many items or kg have been  
+returned or discarded.
+Recall guidelines (in Danish) are available here : Recall guidelines.
+Further information on recall is available on the website of the Danish Veterinary and Food Administration  
+at www.fvst.dk.
+Recall
+===== PAGE 17 =====
+Page 17 of 25
+Errors
+ The goods were returned.
+ The goods were assessed and used immediately as this presents no risk. 
+ The goods were assessed and discarded.
+ The supplier was contacted.
+ Other :
+Done by : ___________________       Date :_____________
+Every delivery must be checked.
+How often should the check be documented? 
+ Once a week      other, how often? ____________ 
+Errors must always be documented.
+Temperature limits for goods : Refrigerated, max. 5 °C/max. +2 °C. Frozen, max. – 18 °C.  
+Other temperatures :___________
+Date 
+and 
+year
+Goods/Supplier
+Enter the 
+temperature 
+measured
+Date/labelling/
+packaging  
+checked (9)
+OK Errors Checked by :
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+°C 
+Receipt of goods
+Form 1, Year : 20_____
+
+===== PAGE 18 =====
+Page 18 of 25
+Cold storage and freezing
+Checks must be carried out daily.
+How often should the check be documented? 
+ Once a week or      other : __________________
+Action taken in the event of errors must always be documented.
+Date :
+Refrigerator/
+Freezer
+no._____
+Max :___°C
+Refrigerator/
+Freezer
+no._____
+Max :___°C
+Refrigerator/
+Freezer
+no._____
+Max :___°C
+Refrigerator/
+Freezer
+no._____
+Max :___°C
+Refrigerator/
+Freezer
+no._____
+Max :___°C
+Refrigerator/
+Freezer
+no._____
+Max :___°C
+OK Errors Checked by :
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+°C °C °C °C °C °C
+If you have more than 6 refrigeration or freezer cabinets/counters, simply use more forms.
+Errors    
+Date : What action has been taken to remedy the errors? Error remedied by :
+ The food was discarded
+ Other  :
+ The food was discarded
+ Other  :
+Use more forms, if necessary
+Form 2, Year  : 20_____
+
+===== PAGE 19 =====
+Page 19 of 25
+Heating/heat treatment and refrigeration
+Heating
+How often should the check be documented? 
+ Once a week      other  :_______________
+The temperature must be minimum 75 °C in the centre of the food.
+Date Food Temperature 
+after heating OK Comments Checked by :
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+     °C
+Form 3, Year  : 20_____
+===== PAGE 20 =====
+Page 20 of 25
+Refrigeration
+How often should the check be documented? 
+ Once a week      other  :_______________
+Errors must always be documented.
+Refrigeration from 65 °C to 10 °C may not last more than 4 hours.
+Date Food Refrigeration - start 
+Time/Temp.
+Refrigeration - stop 
+Time/Temp. OK Errors Checked by :
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Kl.    /    °C Kl.    /    °C
+Errors during refrigeration
+Date : What action has been taken to remedy the error? Error remedied 
+by :
+ heating to 75 °C and refrigerated again. Document the temperature and time :
+ The food was discarded.
+ Other :
+Heating/heat treatment and refrigeration
+Form 3, Year  : 20_____
+===== PAGE 21 =====
+Page 21 of 25
+Keeping food hot/Sales of non-refrigerated food
+Keeping food hot at min. 65 °C and sales of food at temperatures between 5 °C and 65 °C.
+How often should the check be documented?
+ Once a week      other  :_________________
+Errors must always be documented..
+The temperature of food kept hot must be minimum 65 °C.
+Food must not be kept for more than 3 hours at temperatures between 5 °C and 65 °C.
+Date Food Food 
+temperature
+OK 
+(time)
+Error 
+What action has been taken to 
+remedy the error?
+Checked 
+by :
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+°C
+Form 4, Year  : 20_____
+===== PAGE 22 =====
+Page 22 of 25
+Cleaning plan
+(Indicate the frequency and enter D for disinfection)
+ Daily Weekly Monthly Every 3. months Other (enter)
+Kitchen  :
+Walls/windows
+Floors
+Ceilings
+Refrigerators
+Freezers
+Ventilation
+Shelves
+Cabinets
+Tables
+Machines :
+Other  :
+Storage :
+Floor
+Ceiling
+Walls/windows
+Refrigerators/freezers
+Shelves
+Are there soap and disposable towels at all washbasins?
+Form 5, Year  : 20_____
+===== PAGE 23 =====
+Page 23 of 25
+Cleaning plan
+(Indicate the frequency and enter D for disinfection)
+Daily Weekly Monthly Every 3 
+months Other (enter)
+Toilets :
+Toilet
+Washbasin
+Walls/windows
+Floor
+Ceiling
+Outdoor areas :
+Waste
+Are there soap and disposable towels at all washbasins?
+Form 5, Year  : 20_____
+===== PAGE 24 =====
+Page 24 of 25
+Maintenance plan
+(Note errors and deficiencies found during maintenance and when they are remedied)
+Errors/deficiencies found : Date  : Expected
+to be remedied in week :
+Remedied 
+Date :
+Buildings/premises
+Fixtures and equipment
+Outdoor areas :
+Pests
+Date  :________________        Done by :_________________________________
+What happened?
+What did you do? 
+Form 6, Year  : 20_____
+
+===== PAGE 25 =====
+Page 25 of 25
+Annual inspection and review
+Reviewed at least once a year.
+Inspection/review of : Review of :
+Yes
+Enter 
+X
+Not in order.
+Enter what is being done :
+Maintenance  : Is the maintenance plan being followed?
+Pests  :
+Is there adequate pest control?
+Doors and windows, floors and walls 
+must close tightly and have no holes. 
+Open windows and doors must be fitted 
+with insect nets.
+Cleaning Is the cleaning plan being followed?
+Is the cleaning plan adequate?
+Remember new equipment.
+Production  : Is production the same as at the last 
+review?
+Have the thermometers been checked 
+within the past year?
+Employees :
+Have all employees been given 
+instruction in carrying out and 
+documenting the own-check?
+Own-check : Review the own-check.
+Have any errors been remedied?
+Is the current own-check appropriate for 
+your production/activities?
+Checked by  :_______________________________________     Date/Year  :___________________
+Form 7, Year  : 20_____

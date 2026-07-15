@@ -12,6 +12,7 @@
     "test:rls": "vitest run --config vitest.rls.config.ts",
     "test:e2e": "playwright test",
     "i18n:check": "node scripts/check-i18n.mjs",
+    "db:seed": "tsx scripts/seed.ts",
     "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts"
   },
   "dependencies": {
@@ -26,9 +27,11 @@
     "next": "16.2.10",
     "next-intl": "^4.13.2",
     "next-themes": "^0.4.6",
+    "qrcode": "^1.5.4",
     "radix-ui": "^1.6.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "rrule": "^2.8.1",
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
@@ -39,12 +42,14 @@
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5",
     "vitest": "^4.1.10"
   }

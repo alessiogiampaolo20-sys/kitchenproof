@@ -37,7 +37,108 @@
   "nav": {
     "sites": "Sites",
     "members": "Members",
-    "chooseSite": "Choose site"
+    "chooseSite": "Choose site",
+    "today": "Today",
+    "programme": "Programme",
+    "equipment": "Equipment"
+  },
+  "programme": {
+    "title": "Own-check programme",
+    "statusLabel": "Status",
+    "status": {
+      "draft": "Draft",
+      "in_review": "In review",
+      "approved": "Approved",
+      "superseded": "Superseded"
+    },
+    "version": "Version {version}",
+    "packVersion": "DK pack {version}",
+    "startTitle": "Start from template",
+    "startHint": "Creates a draft risk analysis from the official template for your activity type — with suggested equipment and control points. You review and approve before anything goes live.",
+    "startButton": "Create draft from template",
+    "approveButton": "Approve programme",
+    "approveHint": "Approval activates the daily task schedule. Only site managers can approve.",
+    "approvedToast": "Programme approved — task schedule is live",
+    "errors": {
+      "criticalNoCp": "A critical activity has no active control point — the programme cannot be approved.",
+      "justificationRequired": "Loosening a pack limit requires a written justification.",
+      "error": "Something went wrong. Please try again."
+    },
+    "sectionsTitle": "Risk analysis (official form)",
+    "applies": "Applies",
+    "critical": "Critical activity",
+    "cpTitle": "Control points",
+    "limit": "Limit",
+    "frequency": "Frequency",
+    "perEvent": "Per event",
+    "timesLabel": "Times (HH:MM, comma-separated)",
+    "monitoring": {
+      "manual_temp": "Manual temperature",
+      "photo_temp": "Photo of display",
+      "photo_only": "Photo only",
+      "checklist": "Checklist",
+      "probe": "Probe"
+    },
+    "categories": {
+      "temperature": "Temperature",
+      "cleaning": "Cleaning",
+      "receiving": "Receiving",
+      "pest": "Pest control",
+      "hygiene": "Hygiene",
+      "other": "Other"
+    },
+    "source": "Source",
+    "edit": "Edit",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "inactive": "Inactive",
+    "loosened": "Loosened limit",
+    "justification": "Justification",
+    "justificationHint": "Required if you loosen the pack's default limit (§7.3).",
+    "newCpButton": "New control point",
+    "cpName": "Name",
+    "limitType": {
+      "max": "Max temperature",
+      "min": "Min temperature",
+      "checklist": "Checklist"
+    },
+    "value": "Value (°C)",
+    "equipmentTarget": "Equipment (optional)",
+    "noEquipment": "Not tied to equipment",
+    "saved": "Saved",
+    "tasksTitle": "Scheduled tasks (7 days)"
+  },
+  "equipment": {
+    "title": "Equipment",
+    "newTitle": "New equipment",
+    "name": "Name",
+    "kindLabel": "Type",
+    "kinds": {
+      "fridge": "Fridge",
+      "freezer": "Freezer",
+      "hot_holding": "Hot holding",
+      "dishwasher": "Dishwasher",
+      "probe": "Probe",
+      "oven": "Oven",
+      "blast_chiller": "Blast chiller",
+      "other": "Other"
+    },
+    "brandModel": "Brand/model",
+    "location": "Location",
+    "photo": "Reference photo",
+    "photoHint": "Photograph the unit — the picture is shown at every check so units are never mixed up.",
+    "createButton": "Create equipment",
+    "saved": "Saved",
+    "retireButton": "Retire",
+    "retired": "Retired",
+    "qrTitle": "QR code",
+    "qrHint": "Scan the code to open this unit directly on this device.",
+    "printLabels": "Print QR labels",
+    "empty": "No equipment yet — photograph your first fridge.",
+    "backToList": "All equipment"
+  },
+  "scan": {
+    "invalid": "Invalid or unknown QR code."
   },
   "sites": {
     "title": "Sites",

@@ -109,6 +109,219 @@ export type Database = {
           },
         ]
       }
+      compliance_packs: {
+        Row: {
+          authority_json: Json
+          code: string
+          created_at: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          authority_json?: Json
+          code: string
+          created_at?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          authority_json?: Json
+          code?: string
+          created_at?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      control_points: {
+        Row: {
+          active: boolean
+          area_i18n: Json | null
+          category: Database["public"]["Enums"]["cp_category"]
+          corrective_guidance_i18n: Json | null
+          created_at: string
+          equipment_id: string | null
+          frequency_json: Json
+          hazard_id: string | null
+          id: string
+          instructions_i18n: Json | null
+          limit_json: Json | null
+          limit_justification: string | null
+          limit_loosened: boolean
+          monitoring_method: string
+          name_i18n: Json
+          responsible_role: string | null
+          risk_analysis_id: string
+          site_id: string
+          source_ref: Json | null
+          target_kind: Database["public"]["Enums"]["cp_target_kind"]
+          template_key: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          area_i18n?: Json | null
+          category: Database["public"]["Enums"]["cp_category"]
+          corrective_guidance_i18n?: Json | null
+          created_at?: string
+          equipment_id?: string | null
+          frequency_json: Json
+          hazard_id?: string | null
+          id?: string
+          instructions_i18n?: Json | null
+          limit_json?: Json | null
+          limit_justification?: string | null
+          limit_loosened?: boolean
+          monitoring_method: string
+          name_i18n: Json
+          responsible_role?: string | null
+          risk_analysis_id: string
+          site_id: string
+          source_ref?: Json | null
+          target_kind: Database["public"]["Enums"]["cp_target_kind"]
+          template_key?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          area_i18n?: Json | null
+          category?: Database["public"]["Enums"]["cp_category"]
+          corrective_guidance_i18n?: Json | null
+          created_at?: string
+          equipment_id?: string | null
+          frequency_json?: Json
+          hazard_id?: string | null
+          id?: string
+          instructions_i18n?: Json | null
+          limit_json?: Json | null
+          limit_justification?: string | null
+          limit_loosened?: boolean
+          monitoring_method?: string
+          name_i18n?: Json
+          responsible_role?: string | null
+          risk_analysis_id?: string
+          site_id?: string
+          source_ref?: Json | null
+          target_kind?: Database["public"]["Enums"]["cp_target_kind"]
+          template_key?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "control_points_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "control_points_hazard_id_fkey"
+            columns: ["hazard_id"]
+            isOneToOne: false
+            referencedRelation: "hazards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "control_points_risk_analysis_id_fkey"
+            columns: ["risk_analysis_id"]
+            isOneToOne: false
+            referencedRelation: "risk_analyses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "control_points_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      corpus_chunks: {
+        Row: {
+          content: string
+          created_at: string
+          doc_id: string
+          embedding: string | null
+          id: string
+          page_from: number
+          page_to: number
+          section: string | null
+          tsv: unknown
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          doc_id: string
+          embedding?: string | null
+          id?: string
+          page_from: number
+          page_to: number
+          section?: string | null
+          tsv?: unknown
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          doc_id?: string
+          embedding?: string | null
+          id?: string
+          page_from?: number
+          page_to?: number
+          section?: string | null
+          tsv?: unknown
+        }
+        Relationships: [
+          {
+            foreignKeyName: "corpus_chunks_doc_id_fkey"
+            columns: ["doc_id"]
+            isOneToOne: false
+            referencedRelation: "corpus_documents"
+            referencedColumns: ["doc_id"]
+          },
+        ]
+      }
+      corpus_documents: {
+        Row: {
+          created_at: string
+          doc_id: string
+          file_path: string
+          lang: string
+          pack_code: string
+          pages: number | null
+          title: string
+          version_date: string | null
+        }
+        Insert: {
+          created_at?: string
+          doc_id: string
+          file_path: string
+          lang?: string
+          pack_code: string
+          pages?: number | null
+          title: string
+          version_date?: string | null
+        }
+        Update: {
+          created_at?: string
+          doc_id?: string
+          file_path?: string
+          lang?: string
+          pack_code?: string
+          pages?: number | null
+          title?: string
+          version_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "corpus_documents_pack_code_fkey"
+            columns: ["pack_code"]
+            isOneToOne: false
+            referencedRelation: "compliance_packs"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       device_sessions: {
         Row: {
           created_at: string
@@ -146,6 +359,134 @@ export type Database = {
             columns: ["site_id"]
             isOneToOne: false
             referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      equipment: {
+        Row: {
+          active: boolean
+          brand_model: string | null
+          created_at: string
+          id: string
+          kind: Database["public"]["Enums"]["equipment_kind"]
+          location_note: string | null
+          name: string
+          nfc_tag_id: string | null
+          photo_path: string | null
+          qr_code_token: string
+          retired_at: string | null
+          site_id: string
+          target_limit_json: Json | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          brand_model?: string | null
+          created_at?: string
+          id?: string
+          kind: Database["public"]["Enums"]["equipment_kind"]
+          location_note?: string | null
+          name: string
+          nfc_tag_id?: string | null
+          photo_path?: string | null
+          qr_code_token?: string
+          retired_at?: string | null
+          site_id: string
+          target_limit_json?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          brand_model?: string | null
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["equipment_kind"]
+          location_note?: string | null
+          name?: string
+          nfc_tag_id?: string | null
+          photo_path?: string | null
+          qr_code_token?: string
+          retired_at?: string | null
+          site_id?: string
+          target_limit_json?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "equipment_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hazards: {
+        Row: {
+          ai_suggested: boolean
+          category: Database["public"]["Enums"]["hazard_category"]
+          control_measure_i18n: Json | null
+          created_at: string
+          description_i18n: Json
+          human_edited: boolean
+          id: string
+          is_ccp: boolean
+          is_oprp: boolean
+          justification_i18n: Json | null
+          likelihood: number | null
+          process_step_id: string
+          ra_row_id: string | null
+          severity: number | null
+          updated_at: string
+        }
+        Insert: {
+          ai_suggested?: boolean
+          category: Database["public"]["Enums"]["hazard_category"]
+          control_measure_i18n?: Json | null
+          created_at?: string
+          description_i18n: Json
+          human_edited?: boolean
+          id?: string
+          is_ccp?: boolean
+          is_oprp?: boolean
+          justification_i18n?: Json | null
+          likelihood?: number | null
+          process_step_id: string
+          ra_row_id?: string | null
+          severity?: number | null
+          updated_at?: string
+        }
+        Update: {
+          ai_suggested?: boolean
+          category?: Database["public"]["Enums"]["hazard_category"]
+          control_measure_i18n?: Json | null
+          created_at?: string
+          description_i18n?: Json
+          human_edited?: boolean
+          id?: string
+          is_ccp?: boolean
+          is_oprp?: boolean
+          justification_i18n?: Json | null
+          likelihood?: number | null
+          process_step_id?: string
+          ra_row_id?: string | null
+          severity?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hazards_process_step_id_fkey"
+            columns: ["process_step_id"]
+            isOneToOne: false
+            referencedRelation: "process_steps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hazards_ra_row_id_fkey"
+            columns: ["ra_row_id"]
+            isOneToOne: false
+            referencedRelation: "ra_activity_rows"
             referencedColumns: ["id"]
           },
         ]
@@ -334,6 +675,47 @@ export type Database = {
         }
         Relationships: []
       }
+      pack_versions: {
+        Row: {
+          changelog: string | null
+          content: Json
+          created_at: string
+          id: string
+          pack_code: string
+          published_at: string
+          published_by: string | null
+          version: string
+        }
+        Insert: {
+          changelog?: string | null
+          content: Json
+          created_at?: string
+          id?: string
+          pack_code: string
+          published_at?: string
+          published_by?: string | null
+          version: string
+        }
+        Update: {
+          changelog?: string | null
+          content?: Json
+          created_at?: string
+          id?: string
+          pack_code?: string
+          published_at?: string
+          published_by?: string | null
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pack_versions_pack_code_fkey"
+            columns: ["pack_code"]
+            isOneToOne: false
+            referencedRelation: "compliance_packs"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       platform_roles: {
         Row: {
           created_at: string
@@ -354,6 +736,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      process_steps: {
+        Row: {
+          created_at: string
+          description_i18n: Json | null
+          id: string
+          key: string
+          name_i18n: Json
+          position: number
+          risk_analysis_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description_i18n?: Json | null
+          id?: string
+          key: string
+          name_i18n: Json
+          position: number
+          risk_analysis_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description_i18n?: Json | null
+          id?: string
+          key?: string
+          name_i18n?: Json
+          position?: number
+          risk_analysis_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "process_steps_risk_analysis_id_fkey"
+            columns: ["risk_analysis_id"]
+            isOneToOne: false
+            referencedRelation: "risk_analyses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -384,6 +807,183 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      programme_documents: {
+        Row: {
+          created_at: string
+          generated_at: string
+          id: string
+          kind: string
+          pdf_path: string | null
+          risk_analysis_id: string
+          site_id: string
+        }
+        Insert: {
+          created_at?: string
+          generated_at?: string
+          id?: string
+          kind: string
+          pdf_path?: string | null
+          risk_analysis_id: string
+          site_id: string
+        }
+        Update: {
+          created_at?: string
+          generated_at?: string
+          id?: string
+          kind?: string
+          pdf_path?: string | null
+          risk_analysis_id?: string
+          site_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programme_documents_risk_analysis_id_fkey"
+            columns: ["risk_analysis_id"]
+            isOneToOne: false
+            referencedRelation: "risk_analyses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "programme_documents_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ra_activity_rows: {
+        Row: {
+          activity_key: string
+          ai_suggested: boolean
+          applies: boolean
+          control_measures_i18n: Json | null
+          created_at: string
+          human_edited: boolean
+          id: string
+          if_it_goes_wrong_i18n: Json | null
+          is_critical: boolean
+          position: number
+          process_step_id: string
+          risk_analysis_id: string
+          source_import_id: string | null
+          source_page: number | null
+          source_region: Json | null
+          updated_at: string
+          what_can_go_wrong_i18n: Json | null
+          what_you_do_i18n: Json | null
+        }
+        Insert: {
+          activity_key: string
+          ai_suggested?: boolean
+          applies?: boolean
+          control_measures_i18n?: Json | null
+          created_at?: string
+          human_edited?: boolean
+          id?: string
+          if_it_goes_wrong_i18n?: Json | null
+          is_critical?: boolean
+          position: number
+          process_step_id: string
+          risk_analysis_id: string
+          source_import_id?: string | null
+          source_page?: number | null
+          source_region?: Json | null
+          updated_at?: string
+          what_can_go_wrong_i18n?: Json | null
+          what_you_do_i18n?: Json | null
+        }
+        Update: {
+          activity_key?: string
+          ai_suggested?: boolean
+          applies?: boolean
+          control_measures_i18n?: Json | null
+          created_at?: string
+          human_edited?: boolean
+          id?: string
+          if_it_goes_wrong_i18n?: Json | null
+          is_critical?: boolean
+          position?: number
+          process_step_id?: string
+          risk_analysis_id?: string
+          source_import_id?: string | null
+          source_page?: number | null
+          source_region?: Json | null
+          updated_at?: string
+          what_can_go_wrong_i18n?: Json | null
+          what_you_do_i18n?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ra_activity_rows_process_step_id_fkey"
+            columns: ["process_step_id"]
+            isOneToOne: false
+            referencedRelation: "process_steps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ra_activity_rows_risk_analysis_id_fkey"
+            columns: ["risk_analysis_id"]
+            isOneToOne: false
+            referencedRelation: "risk_analyses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      risk_analyses: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          id: string
+          site_id: string
+          status: Database["public"]["Enums"]["ra_status"]
+          supersedes_id: string | null
+          updated_at: string
+          version: number
+          wizard_transcript: Json | null
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          id?: string
+          site_id: string
+          status?: Database["public"]["Enums"]["ra_status"]
+          supersedes_id?: string | null
+          updated_at?: string
+          version?: number
+          wizard_transcript?: Json | null
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          id?: string
+          site_id?: string
+          status?: Database["public"]["Enums"]["ra_status"]
+          supersedes_id?: string | null
+          updated_at?: string
+          version?: number
+          wizard_transcript?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "risk_analyses_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "risk_analyses_supersedes_id_fkey"
+            columns: ["supersedes_id"]
+            isOneToOne: false
+            referencedRelation: "risk_analyses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       sites: {
         Row: {
@@ -446,6 +1046,57 @@ export type Database = {
             columns: ["org_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tasks: {
+        Row: {
+          assigned_role: string | null
+          control_point_id: string
+          created_at: string
+          due_at: string
+          due_window_minutes: number
+          id: string
+          site_id: string
+          status: Database["public"]["Enums"]["task_status"]
+          updated_at: string
+        }
+        Insert: {
+          assigned_role?: string | null
+          control_point_id: string
+          created_at?: string
+          due_at: string
+          due_window_minutes?: number
+          id?: string
+          site_id: string
+          status?: Database["public"]["Enums"]["task_status"]
+          updated_at?: string
+        }
+        Update: {
+          assigned_role?: string | null
+          control_point_id?: string
+          created_at?: string
+          due_at?: string
+          due_window_minutes?: number
+          id?: string
+          site_id?: string
+          status?: Database["public"]["Enums"]["task_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_control_point_id_fkey"
+            columns: ["control_point_id"]
+            isOneToOne: false
+            referencedRelation: "control_points"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
             referencedColumns: ["id"]
           },
         ]
@@ -530,6 +1181,24 @@ export type Database = {
         | "hotel_breakfast"
         | "small_producer"
         | "wholesale_small"
+      cp_category:
+        | "temperature"
+        | "cleaning"
+        | "receiving"
+        | "pest"
+        | "hygiene"
+        | "other"
+      cp_target_kind: "equipment" | "area" | "process" | "supplier"
+      equipment_kind:
+        | "fridge"
+        | "freezer"
+        | "hot_holding"
+        | "dishwasher"
+        | "probe"
+        | "oven"
+        | "blast_chiller"
+        | "other"
+      hazard_category: "micro" | "chemical" | "physical" | "allergen"
       org_role:
         | "org_owner"
         | "org_admin"
@@ -537,7 +1206,9 @@ export type Database = {
         | "site_manager"
         | "operator"
       platform_role: "platform_admin" | "platform_support"
+      ra_status: "draft" | "in_review" | "approved" | "superseded"
       site_status: "active" | "paused" | "archived"
+      task_status: "pending" | "done" | "missed" | "skipped_justified"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -682,6 +1353,26 @@ export const Constants = {
         "small_producer",
         "wholesale_small",
       ],
+      cp_category: [
+        "temperature",
+        "cleaning",
+        "receiving",
+        "pest",
+        "hygiene",
+        "other",
+      ],
+      cp_target_kind: ["equipment", "area", "process", "supplier"],
+      equipment_kind: [
+        "fridge",
+        "freezer",
+        "hot_holding",
+        "dishwasher",
+        "probe",
+        "oven",
+        "blast_chiller",
+        "other",
+      ],
+      hazard_category: ["micro", "chemical", "physical", "allergen"],
       org_role: [
         "org_owner",
         "org_admin",
@@ -690,7 +1381,9 @@ export const Constants = {
         "operator",
       ],
       platform_role: ["platform_admin", "platform_support"],
+      ra_status: ["draft", "in_review", "approved", "superseded"],
       site_status: ["active", "paused", "archived"],
+      task_status: ["pending", "done", "missed", "skipped_justified"],
     },
   },
 } as const
