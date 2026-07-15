@@ -91,6 +91,27 @@ as $$
   );
 $$;
 
+-- Same check from row columns (org_id, id) without re-querying sites — needed
+-- for the sites SELECT policy so INSERT ... RETURNING can see the new row
+-- (rows inserted by the current command are invisible to same-command scans).
+create or replace function private.can_access_site_row(p_org_id uuid, p_site_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1
+    from public.memberships m
+    where m.org_id = p_org_id
+      and m.user_id = (select auth.uid())
+      and m.accepted_at is not null
+      and (m.expires_at is null or m.expires_at > now())
+      and (m.site_ids is null or p_site_id = any (m.site_ids))
+  );
+$$;
+
 -- Caller's role for a given site (site_ids-scoped), null if no access.
 create or replace function private.site_role(p_site_id uuid)
 returns public.org_role
@@ -165,7 +186,7 @@ create policy organizations_update on public.organizations
 -- ── sites ────────────────────────────────────────────────────────────────────
 create policy sites_select on public.sites
   for select to authenticated
-  using (private.can_access_site(id) or private.is_platform_staff());
+  using (private.can_access_site_row(org_id, id) or private.is_platform_staff());
 
 -- §4.2: only org_owner creates sites (platform_admin for white-glove).
 create policy sites_insert on public.sites

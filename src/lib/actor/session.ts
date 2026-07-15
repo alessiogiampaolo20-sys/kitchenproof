@@ -1,6 +1,6 @@
 import "server-only";
-import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { signSession, verifySession } from "./token";
 
 /**
  * Shared-device identity layer (§4.2): the device holds a normal Supabase
@@ -33,29 +33,9 @@ function secret(): Uint8Array {
   return new TextEncoder().encode(value);
 }
 
-async function sign(
-  payload: Record<string, string>,
-  ttlSeconds: number,
-): Promise<string> {
-  return new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime(`${ttlSeconds}s`)
-    .sign(secret());
-}
-
-async function verify<T>(token: string): Promise<T | null> {
-  try {
-    const { payload } = await jwtVerify(token, secret());
-    return payload as T;
-  } catch {
-    return null;
-  }
-}
-
 export async function setActorCookie(session: ActorSession): Promise<void> {
   const store = await cookies();
-  store.set(ACTOR_COOKIE, await sign(session, ACTOR_TTL_SECONDS), {
+  store.set(ACTOR_COOKIE, await signSession(session, ACTOR_TTL_SECONDS, secret()), {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
@@ -69,7 +49,7 @@ export async function getActorSession(
   const store = await cookies();
   const token = store.get(ACTOR_COOKIE)?.value;
   if (!token) return null;
-  const session = await verify<ActorSession>(token);
+  const session = await verifySession<ActorSession>(token, secret());
   if (!session) return null;
   if (siteId && session.siteId !== siteId) return null;
   return session;
@@ -77,7 +57,7 @@ export async function getActorSession(
 
 export async function setDeviceCookie(session: DeviceSession): Promise<void> {
   const store = await cookies();
-  store.set(DEVICE_COOKIE, await sign(session, DEVICE_TTL_SECONDS), {
+  store.set(DEVICE_COOKIE, await signSession(session, DEVICE_TTL_SECONDS, secret()), {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
@@ -91,7 +71,7 @@ export async function getDeviceSession(
   const store = await cookies();
   const token = store.get(DEVICE_COOKIE)?.value;
   if (!token) return null;
-  const session = await verify<DeviceSession>(token);
+  const session = await verifySession<DeviceSession>(token, secret());
   if (!session) return null;
   if (siteId && session.siteId !== siteId) return null;
   return session;

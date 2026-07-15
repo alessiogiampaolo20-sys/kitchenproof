@@ -55,6 +55,7 @@ export default async function MembersPage() {
           {active.map((m) => (
             <div
               key={m.id}
+              data-testid="member-row"
               className="flex flex-wrap items-center gap-2 rounded-lg p-2 hover:bg-muted/50"
             >
               <span className="font-medium">

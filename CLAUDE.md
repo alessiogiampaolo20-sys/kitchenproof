@@ -127,4 +127,8 @@ pnpm · 30-day trial · traceability retention 5 y (6 mo highly-perishable) · s
 
 | Date | Item | Change | Justification |
 |---|---|---|---|
-| _(empty)_ | | | |
+| 2026-07-15 | §6.1 memberships.pin_hash | Moved to `membership_pins` side table (RLS deny-all, RPC-only access) | PIN hashes must never be readable via PostgREST; §17 hashing + rate-limit state lives with the hash |
+| 2026-07-15 | §6.1 memberships | Added `invited_email`, `invite_token_hash`, `invite_expires_at` | Implements the §20 invite flow; `expires_at` keeps its §6.1 meaning (access expiry for consultants/guests) |
+| 2026-07-15 | §5 dependency set | Service SDKs (Stripe, Resend) + phase-specific libs (dexie, serwist, @react-pdf/renderer, recharts) installed in their phases, not upfront | Keeps the tree clean; no behavioural change to §5 choices |
+| 2026-07-15 | Next.js middleware | `src/proxy.ts` (Next 16 convention) instead of deprecated `middleware.ts` | Next 16.2 scaffold; same session-refresh + route-gating logic |
+| 2026-07-15 | DB grants | Explicit per-table verb grants; TRUNCATE revoked for all API roles; audit_log UPDATE/DELETE revoked even for service_role | Local stack grants no DML by default but included TRUNCATE — a §17 append-only hole |
