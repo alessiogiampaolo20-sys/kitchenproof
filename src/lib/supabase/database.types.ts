@@ -195,6 +195,147 @@ export type Database = {
           },
         ]
       }
+      b2b_customers: {
+        Row: {
+          address: string | null
+          created_at: string
+          cvr: string | null
+          email: string | null
+          id: string
+          name: string
+          org_id: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          cvr?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          org_id: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          cvr?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          org_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "b2b_customers_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      batches: {
+        Row: {
+          created_at: string
+          expiry_date: string | null
+          expiry_kind: Database["public"]["Enums"]["batch_expiry_kind"] | null
+          goods_receipt_id: string | null
+          id: string
+          label_printed: boolean
+          lot_code: string
+          origin: Database["public"]["Enums"]["batch_origin"]
+          parent_batch_ids: string[] | null
+          product_id: string
+          quantity: number
+          remaining: number
+          site_id: string
+          status: Database["public"]["Enums"]["batch_status"]
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          expiry_date?: string | null
+          expiry_kind?: Database["public"]["Enums"]["batch_expiry_kind"] | null
+          goods_receipt_id?: string | null
+          id?: string
+          label_printed?: boolean
+          lot_code: string
+          origin?: Database["public"]["Enums"]["batch_origin"]
+          parent_batch_ids?: string[] | null
+          product_id: string
+          quantity: number
+          remaining: number
+          site_id: string
+          status?: Database["public"]["Enums"]["batch_status"]
+          unit: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          expiry_date?: string | null
+          expiry_kind?: Database["public"]["Enums"]["batch_expiry_kind"] | null
+          goods_receipt_id?: string | null
+          id?: string
+          label_printed?: boolean
+          lot_code?: string
+          origin?: Database["public"]["Enums"]["batch_origin"]
+          parent_batch_ids?: string[] | null
+          product_id?: string
+          quantity?: number
+          remaining?: number
+          site_id?: string
+          status?: Database["public"]["Enums"]["batch_status"]
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "batches_goods_receipt_id_fkey"
+            columns: ["goods_receipt_id"]
+            isOneToOne: false
+            referencedRelation: "goods_receipts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_goods_receipt_id_fkey"
+            columns: ["goods_receipt_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["goods_receipt_id"]
+          },
+          {
+            foreignKeyName: "batches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "batches_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       cleaning_areas: {
         Row: {
           active: boolean
@@ -693,6 +834,101 @@ export type Database = {
           },
         ]
       }
+      goods_receipts: {
+        Row: {
+          created_at: string
+          id: string
+          invoice_id: string | null
+          note: string | null
+          packaging_ok: boolean | null
+          photo_paths: string[]
+          received_at: string
+          received_by: string
+          site_id: string
+          supplier_id: string | null
+          temp_reading: number | null
+          transport_temp_ok: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          invoice_id?: string | null
+          note?: string | null
+          packaging_ok?: boolean | null
+          photo_paths?: string[]
+          received_at?: string
+          received_by: string
+          site_id: string
+          supplier_id?: string | null
+          temp_reading?: number | null
+          transport_temp_ok?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          invoice_id?: string | null
+          note?: string | null
+          packaging_ok?: boolean | null
+          photo_paths?: string[]
+          received_at?: string
+          received_by?: string
+          site_id?: string
+          supplier_id?: string | null
+          temp_reading?: number | null
+          transport_temp_ok?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goods_receipts_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_receipts_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["invoice_id"]
+          },
+          {
+            foreignKeyName: "goods_receipts_received_by_fkey"
+            columns: ["received_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_receipts_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_receipts_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "goods_receipts_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goods_receipts_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
       hazards: {
         Row: {
           ai_suggested: boolean
@@ -807,6 +1043,365 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "v_site_compliance_today"
             referencedColumns: ["site_id"]
+          },
+        ]
+      }
+      inventory_moves: {
+        Row: {
+          b2b_customer_id: string | null
+          batch_id: string
+          created_at: string
+          id: string
+          kind: Database["public"]["Enums"]["move_kind"]
+          leftover_session_id: string | null
+          moved_at: string
+          moved_by: string
+          note: string | null
+          quantity: number
+          reason: Database["public"]["Enums"]["waste_reason"] | null
+          site_id: string
+        }
+        Insert: {
+          b2b_customer_id?: string | null
+          batch_id: string
+          created_at?: string
+          id?: string
+          kind: Database["public"]["Enums"]["move_kind"]
+          leftover_session_id?: string | null
+          moved_at?: string
+          moved_by: string
+          note?: string | null
+          quantity: number
+          reason?: Database["public"]["Enums"]["waste_reason"] | null
+          site_id: string
+        }
+        Update: {
+          b2b_customer_id?: string | null
+          batch_id?: string
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["move_kind"]
+          leftover_session_id?: string | null
+          moved_at?: string
+          moved_by?: string
+          note?: string | null
+          quantity?: number
+          reason?: Database["public"]["Enums"]["waste_reason"] | null
+          site_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_moves_b2b_customer_id_fkey"
+            columns: ["b2b_customer_id"]
+            isOneToOne: false
+            referencedRelation: "b2b_customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "v_expiring_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["batch_id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_leftover_session_id_fkey"
+            columns: ["leftover_session_id"]
+            isOneToOne: false
+            referencedRelation: "leftover_sessions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_moved_by_fkey"
+            columns: ["moved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_moves_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
+      invoice_lines: {
+        Row: {
+          created_at: string
+          description: string
+          gtin: string | null
+          id: string
+          invoice_id: string
+          is_food: boolean
+          line_no: number
+          lot_code: string | null
+          match_confidence: number | null
+          needs_review: boolean
+          page: number | null
+          product_id: string | null
+          quantity: number | null
+          raw_text: string
+          unit: string | null
+          unit_price: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          gtin?: string | null
+          id?: string
+          invoice_id: string
+          is_food?: boolean
+          line_no: number
+          lot_code?: string | null
+          match_confidence?: number | null
+          needs_review?: boolean
+          page?: number | null
+          product_id?: string | null
+          quantity?: number | null
+          raw_text: string
+          unit?: string | null
+          unit_price?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          gtin?: string | null
+          id?: string
+          invoice_id?: string
+          is_food?: boolean
+          line_no?: number
+          lot_code?: string | null
+          match_confidence?: number | null
+          needs_review?: boolean
+          page?: number | null
+          product_id?: string | null
+          quantity?: number | null
+          raw_text?: string
+          unit?: string | null
+          unit_price?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoice_lines_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoice_lines_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["invoice_id"]
+          },
+          {
+            foreignKeyName: "invoice_lines_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoice_lines_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["product_id"]
+          },
+        ]
+      }
+      invoices: {
+        Row: {
+          confirmed_at: string | null
+          confirmed_by: string | null
+          created_at: string
+          currency: string | null
+          duplicate_of_id: string | null
+          extraction_json: Json | null
+          file_paths: string[]
+          id: string
+          invoice_date: string | null
+          invoice_number: string | null
+          kind: Database["public"]["Enums"]["invoice_kind"]
+          page_count: number
+          site_id: string
+          status: Database["public"]["Enums"]["invoice_status"]
+          supplier_id: string | null
+          total_amount: number | null
+          updated_at: string
+        }
+        Insert: {
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          currency?: string | null
+          duplicate_of_id?: string | null
+          extraction_json?: Json | null
+          file_paths: string[]
+          id?: string
+          invoice_date?: string | null
+          invoice_number?: string | null
+          kind?: Database["public"]["Enums"]["invoice_kind"]
+          page_count?: number
+          site_id: string
+          status?: Database["public"]["Enums"]["invoice_status"]
+          supplier_id?: string | null
+          total_amount?: number | null
+          updated_at?: string
+        }
+        Update: {
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          currency?: string | null
+          duplicate_of_id?: string | null
+          extraction_json?: Json | null
+          file_paths?: string[]
+          id?: string
+          invoice_date?: string | null
+          invoice_number?: string | null
+          kind?: Database["public"]["Enums"]["invoice_kind"]
+          page_count?: number
+          site_id?: string
+          status?: Database["public"]["Enums"]["invoice_status"]
+          supplier_id?: string | null
+          total_amount?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_duplicate_of_id_fkey"
+            columns: ["duplicate_of_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_duplicate_of_id_fkey"
+            columns: ["duplicate_of_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["invoice_id"]
+          },
+          {
+            foreignKeyName: "invoices_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "invoices_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      leftover_sessions: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          discarded_count: number
+          id: string
+          items_count: number
+          service_label: string
+          site_id: string
+          started_at: string
+          started_by: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          discarded_count?: number
+          id?: string
+          items_count?: number
+          service_label: string
+          site_id: string
+          started_at?: string
+          started_by: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          discarded_count?: number
+          id?: string
+          items_count?: number
+          service_label?: string
+          site_id?: string
+          started_at?: string
+          started_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leftover_sessions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leftover_sessions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "leftover_sessions_started_by_fkey"
+            columns: ["started_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -1111,6 +1706,88 @@ export type Database = {
           },
         ]
       }
+      products: {
+        Row: {
+          ai_created: boolean
+          allergens: string[]
+          allergens_ai_suggested: boolean
+          category: Database["public"]["Enums"]["product_category"]
+          created_at: string
+          default_shelf_life_days: number | null
+          favourite: boolean
+          gtin: string | null
+          id: string
+          is_food: boolean
+          merged_into_id: string | null
+          name: string
+          normalized_name: string
+          org_id: string
+          storage_type: Database["public"]["Enums"]["storage_type"]
+          unit_default: string
+          updated_at: string
+        }
+        Insert: {
+          ai_created?: boolean
+          allergens?: string[]
+          allergens_ai_suggested?: boolean
+          category?: Database["public"]["Enums"]["product_category"]
+          created_at?: string
+          default_shelf_life_days?: number | null
+          favourite?: boolean
+          gtin?: string | null
+          id?: string
+          is_food?: boolean
+          merged_into_id?: string | null
+          name: string
+          normalized_name: string
+          org_id: string
+          storage_type?: Database["public"]["Enums"]["storage_type"]
+          unit_default?: string
+          updated_at?: string
+        }
+        Update: {
+          ai_created?: boolean
+          allergens?: string[]
+          allergens_ai_suggested?: boolean
+          category?: Database["public"]["Enums"]["product_category"]
+          created_at?: string
+          default_shelf_life_days?: number | null
+          favourite?: boolean
+          gtin?: string | null
+          id?: string
+          is_food?: boolean
+          merged_into_id?: string | null
+          name?: string
+          normalized_name?: string
+          org_id?: string
+          storage_type?: Database["public"]["Enums"]["storage_type"]
+          unit_default?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_merged_into_id_fkey"
+            columns: ["merged_into_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_merged_into_id_fkey"
+            columns: ["merged_into_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "products_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -1397,6 +2074,54 @@ export type Database = {
           },
         ]
       }
+      recall_events: {
+        Row: {
+          created_at: string
+          id: string
+          initiated_at: string
+          initiated_by: string
+          org_id: string
+          reason: string
+          report_pdf_path: string | null
+          scope_json: Json
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          initiated_at?: string
+          initiated_by: string
+          org_id: string
+          reason: string
+          report_pdf_path?: string | null
+          scope_json: Json
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          initiated_at?: string
+          initiated_by?: string
+          org_id?: string
+          reason?: string
+          report_pdf_path?: string | null
+          scope_json?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recall_events_initiated_by_fkey"
+            columns: ["initiated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recall_events_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       risk_analyses: {
         Row: {
           approved_at: string | null
@@ -1520,6 +2245,82 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      suppliers: {
+        Row: {
+          address: string | null
+          ai_created: boolean
+          approved: boolean
+          city: string | null
+          country: string
+          created_at: string
+          cvr: string | null
+          email: string | null
+          id: string
+          name: string
+          org_id: string
+          phone: string | null
+          postal_code: string | null
+          site_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          ai_created?: boolean
+          approved?: boolean
+          city?: string | null
+          country?: string
+          created_at?: string
+          cvr?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          org_id: string
+          phone?: string | null
+          postal_code?: string | null
+          site_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          ai_created?: boolean
+          approved?: boolean
+          city?: string | null
+          country?: string
+          created_at?: string
+          cvr?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          org_id?: string
+          phone?: string | null
+          postal_code?: string | null
+          site_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "suppliers_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "suppliers_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "suppliers_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
           },
         ]
       }
@@ -1720,6 +2521,72 @@ export type Database = {
       }
     }
     Views: {
+      v_expiring_batches: {
+        Row: {
+          created_at: string | null
+          expiry_date: string | null
+          expiry_kind: Database["public"]["Enums"]["batch_expiry_kind"] | null
+          goods_receipt_id: string | null
+          id: string | null
+          label_printed: boolean | null
+          lot_code: string | null
+          origin: Database["public"]["Enums"]["batch_origin"] | null
+          parent_batch_ids: string[] | null
+          product_id: string | null
+          product_name: string | null
+          quantity: number | null
+          remaining: number | null
+          site_id: string | null
+          status: Database["public"]["Enums"]["batch_status"] | null
+          storage_type: Database["public"]["Enums"]["storage_type"] | null
+          unit: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "batches_goods_receipt_id_fkey"
+            columns: ["goods_receipt_id"]
+            isOneToOne: false
+            referencedRelation: "goods_receipts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_goods_receipt_id_fkey"
+            columns: ["goods_receipt_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["goods_receipt_id"]
+          },
+          {
+            foreignKeyName: "batches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "batches_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       v_site_compliance_today: {
         Row: {
           done_today: number | null
@@ -1773,6 +2640,48 @@ export type Database = {
           },
           {
             foreignKeyName: "task_completions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
+      v_traceability_lookup: {
+        Row: {
+          allergens: string[] | null
+          batch_created_at: string | null
+          batch_id: string | null
+          expiry_date: string | null
+          goods_receipt_id: string | null
+          invoice_date: string | null
+          invoice_id: string | null
+          invoice_number: string | null
+          lot_code: string | null
+          origin: Database["public"]["Enums"]["batch_origin"] | null
+          parent_batch_ids: string[] | null
+          product_id: string | null
+          product_name: string | null
+          quantity: number | null
+          received_at: string | null
+          remaining: number | null
+          site_id: string | null
+          status: Database["public"]["Enums"]["batch_status"] | null
+          supplier_cvr: string | null
+          supplier_id: string | null
+          supplier_name: string | null
+          unit: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "batches_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "batches_site_id_fkey"
             columns: ["site_id"]
             isOneToOne: false
             referencedRelation: "v_site_compliance_today"
@@ -1857,6 +2766,9 @@ export type Database = {
         | "hotel_breakfast"
         | "small_producer"
         | "wholesale_small"
+      batch_expiry_kind: "use_by" | "best_before" | "internal"
+      batch_origin: "received" | "produced" | "leftover"
+      batch_status: "active" | "finished" | "discarded" | "recalled"
       cp_category:
         | "temperature"
         | "cleaning"
@@ -1879,6 +2791,21 @@ export type Database = {
         | "other"
       food_assessment: "kept" | "moved" | "discarded" | "recalled" | "na"
       hazard_category: "micro" | "chemical" | "physical" | "allergen"
+      invoice_kind: "invoice" | "delivery_note" | "credit_note" | "receipt"
+      invoice_status:
+        | "uploaded"
+        | "extracting"
+        | "needs_review"
+        | "confirmed"
+        | "failed"
+      move_kind:
+        | "receive"
+        | "use"
+        | "waste"
+        | "leftover_in"
+        | "transfer_out"
+        | "sale_b2b"
+        | "correction"
       org_role:
         | "org_owner"
         | "org_admin"
@@ -1886,6 +2813,18 @@ export type Database = {
         | "site_manager"
         | "operator"
       platform_role: "platform_admin" | "platform_support"
+      product_category:
+        | "meat"
+        | "fish"
+        | "dairy"
+        | "produce"
+        | "dry"
+        | "frozen"
+        | "beverage"
+        | "bakery"
+        | "packaging"
+        | "nonfood"
+        | "other"
       ra_import_kind: "photo_set" | "pdf" | "docx" | "xlsx" | "paper_scan"
       ra_import_status:
         | "uploaded"
@@ -1896,7 +2835,14 @@ export type Database = {
         | "failed"
       ra_status: "draft" | "in_review" | "approved" | "superseded"
       site_status: "active" | "paused" | "archived"
+      storage_type: "fridge" | "freezer" | "dry" | "ambient"
       task_status: "pending" | "done" | "missed" | "skipped_justified"
+      waste_reason:
+        | "expired"
+        | "dropped"
+        | "overproduction"
+        | "deviation"
+        | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2041,6 +2987,9 @@ export const Constants = {
         "small_producer",
         "wholesale_small",
       ],
+      batch_expiry_kind: ["use_by", "best_before", "internal"],
+      batch_origin: ["received", "produced", "leftover"],
+      batch_status: ["active", "finished", "discarded", "recalled"],
       cp_category: [
         "temperature",
         "cleaning",
@@ -2065,6 +3014,23 @@ export const Constants = {
       ],
       food_assessment: ["kept", "moved", "discarded", "recalled", "na"],
       hazard_category: ["micro", "chemical", "physical", "allergen"],
+      invoice_kind: ["invoice", "delivery_note", "credit_note", "receipt"],
+      invoice_status: [
+        "uploaded",
+        "extracting",
+        "needs_review",
+        "confirmed",
+        "failed",
+      ],
+      move_kind: [
+        "receive",
+        "use",
+        "waste",
+        "leftover_in",
+        "transfer_out",
+        "sale_b2b",
+        "correction",
+      ],
       org_role: [
         "org_owner",
         "org_admin",
@@ -2073,6 +3039,19 @@ export const Constants = {
         "operator",
       ],
       platform_role: ["platform_admin", "platform_support"],
+      product_category: [
+        "meat",
+        "fish",
+        "dairy",
+        "produce",
+        "dry",
+        "frozen",
+        "beverage",
+        "bakery",
+        "packaging",
+        "nonfood",
+        "other",
+      ],
       ra_import_kind: ["photo_set", "pdf", "docx", "xlsx", "paper_scan"],
       ra_import_status: [
         "uploaded",
@@ -2084,7 +3063,15 @@ export const Constants = {
       ],
       ra_status: ["draft", "in_review", "approved", "superseded"],
       site_status: ["active", "paused", "archived"],
+      storage_type: ["fridge", "freezer", "dry", "ambient"],
       task_status: ["pending", "done", "missed", "skipped_justified"],
+      waste_reason: [
+        "expired",
+        "dropped",
+        "overproduction",
+        "deviation",
+        "other",
+      ],
     },
   },
 } as const
