@@ -24,5 +24,8 @@ export default defineConfig({
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
+    // e2e is deterministic by design: always the fixture AI provider, even if
+    // .env.local carries a real ANTHROPIC_API_KEY (process env wins in Next).
+    env: { AI_PROVIDER: "fixture" },
   },
 });
