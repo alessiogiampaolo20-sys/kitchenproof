@@ -1,0 +1,34 @@
+{
+ "documentKind": "credit_note",
+ "supplier": {
+  "name": "Dansk Cater A/S",
+  "cvr": "12345678",
+  "address": "Katervej 10",
+  "city": "Glostrup",
+  "postal": "2600",
+  "country": "DK",
+  "email": "ordre@danskcater.dk"
+ },
+ "invoiceNumber": "KN-88412",
+ "invoiceDate": "2026-07-16",
+ "currency": "DKK",
+ "totalAmount": -290.0,
+ "lines": [
+  {
+   "rawText": "RETUR: MOZZARELLA FIOR DI LATTE 8X125G KS",
+   "description": "Mozzarella fior di latte",
+   "quantity": -2,
+   "unit": "box",
+   "unitsPerBox": 8,
+   "unitPrice": 145.0,
+   "lineTotal": -290.0,
+   "lotCode": "L2607A",
+   "expiryDate": null,
+   "gtin": null,
+   "isFood": true,
+   "confidence": 0.98,
+   "page": 1
+  }
+ ],
+ "overallConfidence": 0.97
+}

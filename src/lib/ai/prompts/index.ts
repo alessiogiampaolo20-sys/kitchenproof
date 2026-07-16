@@ -7,6 +7,8 @@ export const PROMPT_VERSIONS = {
   wizard_draft: "wizard-draft-v1",
   ra_import_extract: "import-extract-v1",
   photo_read: "photo-read-v1",
+  invoice_extract: "invoice-extract-v1",
+  product_enrich: "product-enrich-v1",
 } as const;
 
 export function wizardInterviewSystem(args: {
@@ -119,6 +121,47 @@ ABSOLUTE RULES (§7.5 of the product specification):
    unreadable or absent.
 7. If the document is not a risk analysis at all, return zero rows and note it
    in unreadableNotes.`;
+}
+
+export function invoiceExtractSystem(): string {
+  return `You extract supplier invoices, delivery notes, credit notes and receipts for
+a food-business inventory system. Multi-page documents are supported.
+
+ABSOLUTE RULES (§9.1 of the product specification):
+1. rawText is the line EXACTLY as printed — never cleaned, translated or fixed.
+2. NEVER invent values. quantity, unit, unitPrice, lotCode, expiryDate, gtin
+   are null unless clearly printed. An unreadable value is null, not a guess.
+3. description is the cleaned product name (strip quantities, codes, packaging
+   noise) in the document's language.
+4. Normalize units only when printed: kg | g | l | ml | pcs | box. When a box
+   line states its content (e.g. "ks à 12 stk"), set unit=box and unitsPerBox.
+5. isFood=false for napkins, detergents, packaging, deposit/pant, freight,
+   fees, rentals — anything not eaten.
+6. Set documentKind correctly: credit notes (kreditnota) keep their printed
+   negative quantities/amounts and documentKind="credit_note".
+7. Per-line confidence (0-1): 1.0 clearly printed; lower for handwriting or
+   poor photos; below 0.6 forces human review. Record the page per line.
+8. Supplier header: extract name and, when printed, CVR (8 digits), address,
+   postal code, city, email. Danish invoices print CVR as "CVR-nr" or "SE-nr".
+9. lineTotal when printed — it is used for an arithmetic sanity check.
+10. Dates in ISO format (YYYY-MM-DD).`;
+}
+
+export function productEnrichSystem(): string {
+  return `You classify NEW food products entering a Danish restaurant's inventory
+catalog. For each line description, propose: category, storage type, a
+CONSERVATIVE default shelf life in days from receipt (null when it varies too
+much to default — e.g. printed expiry always wins over your value), the EU
+Annex II allergens plausibly present, and the default unit.
+
+Rules:
+- Be conservative on shelf life: fresh fish/minced meat 1-2 days, fresh meat
+  2-3, dairy per typical label, produce 3-7, frozen 90+, dry goods 180+.
+- Allergens: only those plausibly IN the product itself (gluten in pasta,
+  milk in cheese). These are SUGGESTIONS a human must confirm — when unsure,
+  include the allergen (false positives are safer than false negatives).
+- Echo each input description unchanged in the description field (join key).
+- nonfood/packaging items: category accordingly, no allergens, shelfLifeDays null.`;
 }
 
 export function photoReadSystem(): string {

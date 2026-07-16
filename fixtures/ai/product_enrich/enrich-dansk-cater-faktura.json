@@ -1,0 +1,74 @@
+{
+ "products": [
+  {
+   "description": "Mozzarella fior di latte",
+   "category": "dairy",
+   "storageType": "fridge",
+   "shelfLifeDays": 7,
+   "allergens": [
+    "milk"
+   ],
+   "unitDefault": "pcs"
+  },
+  {
+   "description": "Hvedemel tipo 00",
+   "category": "dry",
+   "storageType": "dry",
+   "shelfLifeDays": 180,
+   "allergens": [
+    "gluten"
+   ],
+   "unitDefault": "kg"
+  },
+  {
+   "description": "San Marzano tomater",
+   "category": "dry",
+   "storageType": "dry",
+   "shelfLifeDays": 365,
+   "allergens": [],
+   "unitDefault": "pcs"
+  },
+  {
+   "description": "Spegepølse skivet",
+   "category": "meat",
+   "storageType": "fridge",
+   "shelfLifeDays": 21,
+   "allergens": [],
+   "unitDefault": "pcs"
+  },
+  {
+   "description": "Sødmælk",
+   "category": "dairy",
+   "storageType": "fridge",
+   "shelfLifeDays": 5,
+   "allergens": [
+    "milk"
+   ],
+   "unitDefault": "l"
+  },
+  {
+   "description": "Opvaskemiddel",
+   "category": "nonfood",
+   "storageType": "dry",
+   "shelfLifeDays": null,
+   "allergens": [],
+   "unitDefault": "pcs"
+  },
+  {
+   "description": "Pant",
+   "category": "nonfood",
+   "storageType": "dry",
+   "shelfLifeDays": null,
+   "allergens": [],
+   "unitDefault": "pcs"
+  },
+  {
+   "description": "Fragt",
+   "category": "nonfood",
+   "storageType": "dry",
+   "shelfLifeDays": null,
+   "allergens": [],
+   "unitDefault": "pcs"
+  }
+ ]
+}

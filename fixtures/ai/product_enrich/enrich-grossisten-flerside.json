@@ -1,0 +1,46 @@
+{
+ "products": [
+  {
+   "description": "Kyllingebryst fersk",
+   "category": "meat",
+   "storageType": "fridge",
+   "shelfLifeDays": 2,
+   "allergens": [],
+   "unitDefault": "kg"
+  },
+  {
+   "description": "Oksekød hakket",
+   "category": "meat",
+   "storageType": "fridge",
+   "shelfLifeDays": 1,
+   "allergens": [],
+   "unitDefault": "kg"
+  },
+  {
+   "description": "Rucola",
+   "category": "produce",
+   "storageType": "fridge",
+   "shelfLifeDays": 4,
+   "allergens": [],
+   "unitDefault": "kg"
+  },
+  {
+   "description": "Parmesan",
+   "category": "dairy",
+   "storageType": "fridge",
+   "shelfLifeDays": 60,
+   "allergens": [
+    "milk"
+   ],
+   "unitDefault": "kg"
+  },
+  {
+   "description": "Olivenolie ekstra jomfru",
+   "category": "dry",
+   "storageType": "dry",
+   "shelfLifeDays": 365,
+   "allergens": [],
+   "unitDefault": "l"
+  }
+ ]
+}

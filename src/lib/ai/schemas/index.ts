@@ -149,6 +149,85 @@ export const importExtractionSchema = z
   .strict();
 export type ImportExtraction = z.infer<typeof importExtractionSchema>;
 
+/* ── Invoice / delivery-note extraction (§9.1) ─────────────────────────────── */
+
+export const INVOICE_UNITS = ["kg", "g", "l", "ml", "pcs", "box"] as const;
+
+export const invoiceSupplierSchema = z
+  .object({
+    name: z.string(),
+    cvr: z.string().nullable(),
+    address: z.string().nullable(),
+    city: z.string().nullable(),
+    postal: z.string().nullable(),
+    country: z.string().nullable(),
+    email: z.string().nullable(),
+  })
+  .strict();
+
+export const invoiceLineSchema = z
+  .object({
+    rawText: z.string(),              // exact line as printed (§9.1)
+    description: z.string(),          // cleaned product name
+    quantity: z.number().nullable(),
+    unit: z.enum(INVOICE_UNITS).nullable(),
+    unitsPerBox: z.number().nullable(),   // box(=N pcs) when stated
+    unitPrice: z.number().nullable(),
+    lineTotal: z.number().nullable(),     // for the total sanity check
+    lotCode: z.string().nullable(),
+    expiryDate: z.string().nullable(),    // ISO date when PRINTED (delivery notes)
+    gtin: z.string().nullable(),
+    isFood: z.boolean(),                  // excludes napkins, detergents, fees…
+    confidence: z.number().min(0).max(1),
+    page: z.number().int(),
+  })
+  .strict();
+
+export const invoiceExtractionSchema = z
+  .object({
+    documentKind: z.enum(["invoice", "delivery_note", "credit_note", "receipt"]),
+    supplier: invoiceSupplierSchema,
+    invoiceNumber: z.string().nullable(),
+    invoiceDate: z.string().nullable(),   // ISO date
+    currency: z.string().nullable(),
+    totalAmount: z.number().nullable(),
+    lines: z.array(invoiceLineSchema).max(80),
+    overallConfidence: z.number().min(0).max(1),
+  })
+  .strict();
+export type InvoiceExtraction = z.infer<typeof invoiceExtractionSchema>;
+export type InvoiceLine = InvoiceExtraction["lines"][number];
+
+/* ── New-product enrichment (§9.1 step 3) — AI-suggested, human-confirmed ──── */
+
+export const EU_ALLERGENS = [
+  "gluten", "crustaceans", "eggs", "fish", "peanuts", "soybeans", "milk",
+  "nuts", "celery", "mustard", "sesame", "sulphites", "lupin", "molluscs",
+] as const;
+
+export const productEnrichSchema = z
+  .object({
+    products: z
+      .array(
+        z
+          .object({
+            description: z.string(),   // echo of the line description (join key)
+            category: z.enum([
+              "meat", "fish", "dairy", "produce", "dry", "frozen",
+              "beverage", "bakery", "packaging", "nonfood", "other",
+            ]),
+            storageType: z.enum(["fridge", "freezer", "dry", "ambient"]),
+            shelfLifeDays: z.number().int().positive().nullable(),
+            allergens: z.array(z.enum(EU_ALLERGENS)).max(14),
+            unitDefault: z.enum(INVOICE_UNITS),
+          })
+          .strict(),
+      )
+      .max(40),
+  })
+  .strict();
+export type ProductEnrichment = z.infer<typeof productEnrichSchema>;
+
 /* ── Thermometer/display photo reading (§8.2/§14) ──────────────────────────── */
 
 export const photoReadSchema = z

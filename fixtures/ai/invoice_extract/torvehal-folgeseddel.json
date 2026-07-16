@@ -1,0 +1,64 @@
+{
+ "documentKind": "delivery_note",
+ "supplier": {
+  "name": "Torvehallen Fisk",
+  "cvr": null,
+  "address": null,
+  "city": "København",
+  "postal": null,
+  "country": "DK",
+  "email": null
+ },
+ "invoiceNumber": null,
+ "invoiceDate": "2026-07-16",
+ "currency": null,
+ "totalAmount": null,
+ "lines": [
+  {
+   "rawText": "laks 3 kg",
+   "description": "Laks fersk",
+   "quantity": 3,
+   "unit": "kg",
+   "unitsPerBox": null,
+   "unitPrice": null,
+   "lineTotal": null,
+   "lotCode": null,
+   "expiryDate": null,
+   "gtin": null,
+   "isFood": true,
+   "confidence": 0.55,
+   "page": 1
+  },
+  {
+   "rawText": "rejer 2 ps",
+   "description": "Rejer",
+   "quantity": 2,
+   "unit": "pcs",
+   "unitsPerBox": null,
+   "unitPrice": null,
+   "lineTotal": null,
+   "lotCode": "RJ-16",
+   "expiryDate": "2026-07-18",
+   "gtin": null,
+   "isFood": true,
+   "confidence": 0.62,
+   "page": 1
+  },
+  {
+   "rawText": "muslinger ?kg",
+   "description": "Muslinger",
+   "quantity": null,
+   "unit": null,
+   "unitsPerBox": null,
+   "unitPrice": null,
+   "lineTotal": null,
+   "lotCode": null,
+   "expiryDate": null,
+   "gtin": null,
+   "isFood": true,
+   "confidence": 0.35,
+   "page": 1
+  }
+ ],
+ "overallConfidence": 0.5
+}

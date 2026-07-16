@@ -1,0 +1,34 @@
+{
+ "products": [
+  {
+   "description": "Laks fersk",
+   "category": "fish",
+   "storageType": "fridge",
+   "shelfLifeDays": 2,
+   "allergens": [
+    "fish"
+   ],
+   "unitDefault": "kg"
+  },
+  {
+   "description": "Rejer",
+   "category": "fish",
+   "storageType": "fridge",
+   "shelfLifeDays": 2,
+   "allergens": [
+    "crustaceans"
+   ],
+   "unitDefault": "pcs"
+  },
+  {
+   "description": "Muslinger",
+   "category": "fish",
+   "storageType": "fridge",
+   "shelfLifeDays": 1,
+   "allergens": [
+    "molluscs"
+   ],
+   "unitDefault": "pcs"
+  }
+ ]
+}
