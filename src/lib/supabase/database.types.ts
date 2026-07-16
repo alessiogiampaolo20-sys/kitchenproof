@@ -107,6 +107,64 @@ export type Database = {
             referencedRelation: "sites"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "audit_log_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
+      cleaning_areas: {
+        Row: {
+          active: boolean
+          created_at: string
+          frequency_json: Json | null
+          id: string
+          instructions_i18n: Json | null
+          name_i18n: Json
+          position: number
+          site_id: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          frequency_json?: Json | null
+          id?: string
+          instructions_i18n?: Json | null
+          name_i18n: Json
+          position?: number
+          site_id: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          frequency_json?: Json | null
+          id?: string
+          instructions_i18n?: Json | null
+          name_i18n?: Json
+          position?: number
+          site_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cleaning_areas_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cleaning_areas_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
         ]
       }
       compliance_packs: {
@@ -235,6 +293,13 @@ export type Database = {
             referencedRelation: "sites"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "control_points_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
         ]
       }
       corpus_chunks: {
@@ -322,6 +387,119 @@ export type Database = {
           },
         ]
       }
+      deviations: {
+        Row: {
+          control_point_id: string | null
+          corrective_action_at: string | null
+          corrective_action_by: string | null
+          corrective_action_text: string | null
+          created_at: string
+          description: string
+          detected_at: string
+          detected_by: string
+          food_assessment: Database["public"]["Enums"]["food_assessment"] | null
+          id: string
+          photo_paths: string[]
+          severity: Database["public"]["Enums"]["deviation_severity"]
+          site_id: string
+          source: Database["public"]["Enums"]["deviation_source"]
+          status: Database["public"]["Enums"]["deviation_status"]
+          updated_at: string
+          verification_text: string | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          control_point_id?: string | null
+          corrective_action_at?: string | null
+          corrective_action_by?: string | null
+          corrective_action_text?: string | null
+          created_at?: string
+          description: string
+          detected_at?: string
+          detected_by: string
+          food_assessment?:
+            | Database["public"]["Enums"]["food_assessment"]
+            | null
+          id?: string
+          photo_paths?: string[]
+          severity: Database["public"]["Enums"]["deviation_severity"]
+          site_id: string
+          source: Database["public"]["Enums"]["deviation_source"]
+          status?: Database["public"]["Enums"]["deviation_status"]
+          updated_at?: string
+          verification_text?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          control_point_id?: string | null
+          corrective_action_at?: string | null
+          corrective_action_by?: string | null
+          corrective_action_text?: string | null
+          created_at?: string
+          description?: string
+          detected_at?: string
+          detected_by?: string
+          food_assessment?:
+            | Database["public"]["Enums"]["food_assessment"]
+            | null
+          id?: string
+          photo_paths?: string[]
+          severity?: Database["public"]["Enums"]["deviation_severity"]
+          site_id?: string
+          source?: Database["public"]["Enums"]["deviation_source"]
+          status?: Database["public"]["Enums"]["deviation_status"]
+          updated_at?: string
+          verification_text?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deviations_control_point_id_fkey"
+            columns: ["control_point_id"]
+            isOneToOne: false
+            referencedRelation: "control_points"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deviations_corrective_action_by_fkey"
+            columns: ["corrective_action_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deviations_detected_by_fkey"
+            columns: ["detected_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deviations_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deviations_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "deviations_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       device_sessions: {
         Row: {
           created_at: string
@@ -360,6 +538,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "sites"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "device_sessions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
           },
         ]
       }
@@ -419,6 +604,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "sites"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "equipment_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
           },
         ]
       }
@@ -530,6 +722,13 @@ export type Database = {
             referencedRelation: "sites"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "inspector_links_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
         ]
       }
       membership_pins: {
@@ -626,6 +825,61 @@ export type Database = {
           },
           {
             foreignKeyName: "memberships_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          channels: string[]
+          created_at: string
+          id: string
+          kind: string
+          payload: Json
+          read_at: string | null
+          site_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          channels?: string[]
+          created_at?: string
+          id?: string
+          kind: string
+          payload?: Json
+          read_at?: string | null
+          site_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          channels?: string[]
+          created_at?: string
+          id?: string
+          kind?: string
+          payload?: Json
+          read_at?: string | null
+          site_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -851,6 +1105,13 @@ export type Database = {
             referencedRelation: "sites"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "programme_documents_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
         ]
       }
       ra_activity_rows: {
@@ -977,6 +1238,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "risk_analyses_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
             foreignKeyName: "risk_analyses_supersedes_id_fkey"
             columns: ["supersedes_id"]
             isOneToOne: false
@@ -1050,6 +1318,133 @@ export type Database = {
           },
         ]
       }
+      task_completions: {
+        Row: {
+          client_created_at: string | null
+          client_uuid: string
+          control_point_id: string | null
+          corrects_id: string | null
+          created_at: string
+          deviation_id: string | null
+          equipment_id: string | null
+          id: string
+          is_late: boolean
+          note: string | null
+          passed: boolean | null
+          performed_by: string
+          photo_ai_reading: Json | null
+          photo_paths: string[]
+          server_received_at: string
+          site_id: string
+          task_id: string | null
+          value_json: Json
+        }
+        Insert: {
+          client_created_at?: string | null
+          client_uuid?: string
+          control_point_id?: string | null
+          corrects_id?: string | null
+          created_at?: string
+          deviation_id?: string | null
+          equipment_id?: string | null
+          id?: string
+          is_late?: boolean
+          note?: string | null
+          passed?: boolean | null
+          performed_by: string
+          photo_ai_reading?: Json | null
+          photo_paths?: string[]
+          server_received_at?: string
+          site_id: string
+          task_id?: string | null
+          value_json: Json
+        }
+        Update: {
+          client_created_at?: string | null
+          client_uuid?: string
+          control_point_id?: string | null
+          corrects_id?: string | null
+          created_at?: string
+          deviation_id?: string | null
+          equipment_id?: string | null
+          id?: string
+          is_late?: boolean
+          note?: string | null
+          passed?: boolean | null
+          performed_by?: string
+          photo_ai_reading?: Json | null
+          photo_paths?: string[]
+          server_received_at?: string
+          site_id?: string
+          task_id?: string | null
+          value_json?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_completions_control_point_id_fkey"
+            columns: ["control_point_id"]
+            isOneToOne: false
+            referencedRelation: "control_points"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_corrects_id_fkey"
+            columns: ["corrects_id"]
+            isOneToOne: false
+            referencedRelation: "task_completions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_corrects_id_fkey"
+            columns: ["corrects_id"]
+            isOneToOne: false
+            referencedRelation: "v_temperature_history"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_deviation_id_fkey"
+            columns: ["deviation_id"]
+            isOneToOne: false
+            referencedRelation: "deviations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_performed_by_fkey"
+            columns: ["performed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "task_completions_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           assigned_role: string | null
@@ -1061,6 +1456,7 @@ export type Database = {
           site_id: string
           status: Database["public"]["Enums"]["task_status"]
           updated_at: string
+          verifies_deviation_id: string | null
         }
         Insert: {
           assigned_role?: string | null
@@ -1072,6 +1468,7 @@ export type Database = {
           site_id: string
           status?: Database["public"]["Enums"]["task_status"]
           updated_at?: string
+          verifies_deviation_id?: string | null
         }
         Update: {
           assigned_role?: string | null
@@ -1083,6 +1480,7 @@ export type Database = {
           site_id?: string
           status?: Database["public"]["Enums"]["task_status"]
           updated_at?: string
+          verifies_deviation_id?: string | null
         }
         Relationships: [
           {
@@ -1099,11 +1497,84 @@ export type Database = {
             referencedRelation: "sites"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "tasks_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "tasks_verifies_deviation_id_fkey"
+            columns: ["verifies_deviation_id"]
+            isOneToOne: false
+            referencedRelation: "deviations"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
     Views: {
-      [_ in never]: never
+      v_site_compliance_today: {
+        Row: {
+          done_today: number | null
+          due_today: number | null
+          missed_total: number | null
+          open_deviations: number | null
+          site_id: string | null
+        }
+        Relationships: []
+      }
+      v_temperature_history: {
+        Row: {
+          control_point_id: string | null
+          equipment_id: string | null
+          equipment_name: string | null
+          id: string | null
+          passed: boolean | null
+          performed_by: string | null
+          server_received_at: string | null
+          site_id: string | null
+          temp_c: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_completions_control_point_id_fkey"
+            columns: ["control_point_id"]
+            isOneToOne: false
+            referencedRelation: "control_points"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_performed_by_fkey"
+            columns: ["performed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
     }
     Functions: {
       accept_invite: { Args: { p_token: string }; Returns: string }
@@ -1189,6 +1660,9 @@ export type Database = {
         | "hygiene"
         | "other"
       cp_target_kind: "equipment" | "area" | "process" | "supplier"
+      deviation_severity: "minor" | "major" | "critical"
+      deviation_source: "task" | "receiving" | "adhoc" | "ai_flag"
+      deviation_status: "open" | "corrected" | "verified" | "closed"
       equipment_kind:
         | "fridge"
         | "freezer"
@@ -1198,6 +1672,7 @@ export type Database = {
         | "oven"
         | "blast_chiller"
         | "other"
+      food_assessment: "kept" | "moved" | "discarded" | "recalled" | "na"
       hazard_category: "micro" | "chemical" | "physical" | "allergen"
       org_role:
         | "org_owner"
@@ -1362,6 +1837,9 @@ export const Constants = {
         "other",
       ],
       cp_target_kind: ["equipment", "area", "process", "supplier"],
+      deviation_severity: ["minor", "major", "critical"],
+      deviation_source: ["task", "receiving", "adhoc", "ai_flag"],
+      deviation_status: ["open", "corrected", "verified", "closed"],
       equipment_kind: [
         "fridge",
         "freezer",
@@ -1372,6 +1850,7 @@ export const Constants = {
         "blast_chiller",
         "other",
       ],
+      food_assessment: ["kept", "moved", "discarded", "recalled", "na"],
       hazard_category: ["micro", "chemical", "physical", "allergen"],
       org_role: [
         "org_owner",

@@ -10,7 +10,11 @@
     "back": "Tilbage",
     "error": "Noget gik galt. Prøv igen.",
     "language": "Sprog",
-    "locales": { "da": "Dansk", "en": "English", "it": "Italiano" }
+    "locales": {
+      "da": "Dansk",
+      "en": "English",
+      "it": "Italiano"
+    }
   },
   "auth": {
     "loginTitle": "Log ind",
@@ -139,6 +143,119 @@
   },
   "scan": {
     "invalid": "Ugyldig eller ukendt QR-kode."
+  },
+  "check": {
+    "enterTemp": "Indtast temperatur",
+    "confirm": "Gem måling",
+    "passed": "Godkendt",
+    "failed": "Uden for grænsen",
+    "limitLabel": "Grænse: {limit}",
+    "noActor": "Vælg først hvem du er (PIN).",
+    "alreadyDone": "Opgaven er allerede udført.",
+    "saved": "Registreret",
+    "lateBadge": "Registreret for sent",
+    "noteLabel": "Bemærkning (valgfri)",
+    "checklistOk": "OK",
+    "checklistFail": "Fejl",
+    "checklistNa": "N/A",
+    "reasonRequired": "Angiv en årsag for hvert ✗",
+    "reasons": {
+      "dirty": "Ikke rent",
+      "broken": "Defekt/ødelagt",
+      "missing": "Mangler",
+      "other": "Andet"
+    },
+    "cooling": {
+      "start": "Start nedkøling (56 °C)",
+      "addReading": "Tilføj måling",
+      "finish": "Afslut nedkøling",
+      "blastChiller": "Blæstkøler — færdig i ét trin",
+      "elapsed": "Tid siden start",
+      "startedAt": "Startet kl. {time}",
+      "finalTemp": "Sluttemperatur (°C)",
+      "readingTemp": "Temperatur nu (°C)"
+    },
+    "verification": "Opfølgende kontrol",
+    "verificationHint": "Denne kontrol verificerer en tidligere afvigelse."
+  },
+  "todayScreen": {
+    "overdue": "Forsinket",
+    "dueNow": "Nu",
+    "later": "Senere i dag",
+    "doneSection": "Udført",
+    "progress": "{done} af {total} udført",
+    "allDone": "Alt er udført — flot arbejde!",
+    "noTasks": "Ingen opgaver i dag. Godkend programmet for at aktivere planen.",
+    "logLate": "Registrér (markeres som for sent)",
+    "adHoc": "Ny registrering",
+    "adHocTemp": "Ad hoc-temperatur",
+    "adHocNote": "Notat",
+    "adHocDeviation": "Meld afvigelse",
+    "adHocText": "Beskrivelse",
+    "adHocEquipment": "Udstyr (valgfrit)",
+    "dueAt": "kl. {time}"
+  },
+  "deviation": {
+    "title": "Afvigelse",
+    "listTitle": "Afvigelser",
+    "sheetTitle": "Afvigelse — hvad nu?",
+    "step1": "1. Hvad med maden?",
+    "step2": "2. Hvad løste problemet?",
+    "step3": "3. Verificér senere",
+    "food": {
+      "kept": "Beholdt (vurderet OK)",
+      "moved": "Flyttet",
+      "discarded": "Kasseret",
+      "recalled": "Tilbagekaldt",
+      "na": "Ikke relevant"
+    },
+    "fixes": {
+      "technician": "Tilkaldte tekniker",
+      "thermostat": "Justerede termostat",
+      "movedGoods": "Flyttede varer",
+      "reheated": "Genopvarmede til 75 °C",
+      "cleaned": "Rengjorde igen",
+      "other": "Andet"
+    },
+    "correctiveLabel": "Korrigerende handling",
+    "followUpLabel": "Opfølgende kontrol om {hours} timer",
+    "skipFollowUp": "Ingen opfølgning nødvendig",
+    "submit": "Gem afvigelse",
+    "saved": "Afvigelsen er registreret",
+    "guidance": "Anbefaling",
+    "severity": {
+      "minor": "Mindre",
+      "major": "Alvorlig",
+      "critical": "Kritisk"
+    },
+    "status": {
+      "open": "Åben",
+      "corrected": "Korrigeret",
+      "verified": "Verificeret",
+      "closed": "Lukket"
+    },
+    "filterOpen": "Åbne",
+    "filterAll": "Alle",
+    "detectedBy": "Registreret af {name}",
+    "verifiedBy": "Verificeret af {name}",
+    "correctedBy": "Korrigeret af {name}",
+    "empty": "Ingen afvigelser — det er godt!",
+    "goToFollowUp": "Udfør opfølgende kontrol"
+  },
+  "reports": {
+    "title": "Rapporter",
+    "tempHistory": "Temperaturhistorik",
+    "selectEquipment": "Vælg udstyr",
+    "misses": "Oversprungne opgaver",
+    "noMisses": "Ingen oversprungne opgaver.",
+    "missedAt": "Skulle være udført {time}",
+    "records": "Seneste registreringer",
+    "recordBy": "af {name}",
+    "noData": "Ingen data endnu."
+  },
+  "nav2": {
+    "deviations": "Afvigelser",
+    "reports": "Rapporter"
   },
   "sites": {
     "title": "Steder",

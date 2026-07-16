@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { CalendarCheck, ClipboardList, Refrigerator } from "lucide-react";
+import {
+  AlertTriangle,
+  BarChart3,
+  CalendarCheck,
+  ClipboardList,
+  Refrigerator,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export async function SiteNav({
@@ -8,13 +14,15 @@ export async function SiteNav({
   active,
 }: {
   siteId: string;
-  active: "today" | "programme" | "equipment";
+  active: "today" | "programme" | "equipment" | "deviations" | "reports";
 }) {
-  const t = await getTranslations("nav");
+  const t = await getTranslations();
   const tabs = [
-    { key: "today" as const, href: `/app/${siteId}/today`, label: t("today"), icon: CalendarCheck },
-    { key: "programme" as const, href: `/app/${siteId}/programme`, label: t("programme"), icon: ClipboardList },
-    { key: "equipment" as const, href: `/app/${siteId}/equipment`, label: t("equipment"), icon: Refrigerator },
+    { key: "today" as const, href: `/app/${siteId}/today`, label: t("nav.today"), icon: CalendarCheck },
+    { key: "deviations" as const, href: `/app/${siteId}/deviations`, label: t("nav2.deviations"), icon: AlertTriangle },
+    { key: "reports" as const, href: `/app/${siteId}/reports`, label: t("nav2.reports"), icon: BarChart3 },
+    { key: "programme" as const, href: `/app/${siteId}/programme`, label: t("nav.programme"), icon: ClipboardList },
+    { key: "equipment" as const, href: `/app/${siteId}/equipment`, label: t("nav.equipment"), icon: Refrigerator },
   ];
   return (
     <nav className="mb-4 flex gap-1 overflow-x-auto">
@@ -23,7 +31,7 @@ export async function SiteNav({
           key={tab.key}
           href={tab.href}
           className={cn(
-            "inline-flex min-h-12 items-center gap-2 rounded-xl px-4 text-sm font-medium",
+            "inline-flex min-h-12 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-medium",
             active === tab.key
               ? "bg-primary text-primary-foreground"
               : "text-muted-foreground hover:bg-muted",

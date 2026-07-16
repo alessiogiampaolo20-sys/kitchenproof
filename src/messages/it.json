@@ -10,7 +10,11 @@
     "back": "Indietro",
     "error": "Qualcosa è andato storto. Riprova.",
     "language": "Lingua",
-    "locales": { "da": "Dansk", "en": "English", "it": "Italiano" }
+    "locales": {
+      "da": "Dansk",
+      "en": "English",
+      "it": "Italiano"
+    }
   },
   "auth": {
     "loginTitle": "Accedi",
@@ -139,6 +143,119 @@
   },
   "scan": {
     "invalid": "Codice QR non valido o sconosciuto."
+  },
+  "check": {
+    "enterTemp": "Inserisci temperatura",
+    "confirm": "Salva lettura",
+    "passed": "Entro il limite",
+    "failed": "Fuori limite",
+    "limitLabel": "Limite: {limit}",
+    "noActor": "Prima scegli chi sei (PIN).",
+    "alreadyDone": "Attività già completata.",
+    "saved": "Registrato",
+    "lateBadge": "Registrato in ritardo",
+    "noteLabel": "Nota (opzionale)",
+    "checklistOk": "OK",
+    "checklistFail": "Errore",
+    "checklistNa": "N/A",
+    "reasonRequired": "Indica un motivo per ogni ✗",
+    "reasons": {
+      "dirty": "Non pulito",
+      "broken": "Rotto/difettoso",
+      "missing": "Mancante",
+      "other": "Altro"
+    },
+    "cooling": {
+      "start": "Avvia raffreddamento (56 °C)",
+      "addReading": "Aggiungi lettura",
+      "finish": "Termina raffreddamento",
+      "blastChiller": "Abbattitore — fatto in un passaggio",
+      "elapsed": "Tempo dall'avvio",
+      "startedAt": "Avviato alle {time}",
+      "finalTemp": "Temperatura finale (°C)",
+      "readingTemp": "Temperatura ora (°C)"
+    },
+    "verification": "Controllo di verifica",
+    "verificationHint": "Questo controllo verifica una deviazione precedente."
+  },
+  "todayScreen": {
+    "overdue": "In ritardo",
+    "dueNow": "Adesso",
+    "later": "Più tardi oggi",
+    "doneSection": "Completate",
+    "progress": "{done} di {total} completate",
+    "allDone": "Tutto fatto — ottimo lavoro!",
+    "noTasks": "Nessuna attività oggi. Approva il programma per attivare il piano.",
+    "logLate": "Registra (segnato come in ritardo)",
+    "adHoc": "Nuova registrazione",
+    "adHocTemp": "Temperatura ad hoc",
+    "adHocNote": "Nota",
+    "adHocDeviation": "Segnala deviazione",
+    "adHocText": "Descrizione",
+    "adHocEquipment": "Attrezzatura (opzionale)",
+    "dueAt": "alle {time}"
+  },
+  "deviation": {
+    "title": "Deviazione",
+    "listTitle": "Deviazioni",
+    "sheetTitle": "Deviazione — e adesso?",
+    "step1": "1. Il cibo?",
+    "step2": "2. Cosa ha risolto?",
+    "step3": "3. Verifica più tardi",
+    "food": {
+      "kept": "Tenuto (valutato OK)",
+      "moved": "Spostato",
+      "discarded": "Scartato",
+      "recalled": "Richiamato",
+      "na": "Non rilevante"
+    },
+    "fixes": {
+      "technician": "Chiamato tecnico",
+      "thermostat": "Regolato termostato",
+      "movedGoods": "Spostato la merce",
+      "reheated": "Riscaldato a 75 °C",
+      "cleaned": "Ripulito",
+      "other": "Altro"
+    },
+    "correctiveLabel": "Azione correttiva",
+    "followUpLabel": "Controllo di verifica tra {hours} ore",
+    "skipFollowUp": "Nessuna verifica necessaria",
+    "submit": "Salva deviazione",
+    "saved": "Deviazione registrata",
+    "guidance": "Indicazione",
+    "severity": {
+      "minor": "Lieve",
+      "major": "Grave",
+      "critical": "Critica"
+    },
+    "status": {
+      "open": "Aperta",
+      "corrected": "Corretta",
+      "verified": "Verificata",
+      "closed": "Chiusa"
+    },
+    "filterOpen": "Aperte",
+    "filterAll": "Tutte",
+    "detectedBy": "Registrata da {name}",
+    "verifiedBy": "Verificata da {name}",
+    "correctedBy": "Corretta da {name}",
+    "empty": "Nessuna deviazione — ottimo!",
+    "goToFollowUp": "Esegui il controllo di verifica"
+  },
+  "reports": {
+    "title": "Report",
+    "tempHistory": "Storico temperature",
+    "selectEquipment": "Scegli attrezzatura",
+    "misses": "Attività saltate",
+    "noMisses": "Nessuna attività saltata.",
+    "missedAt": "Prevista {time}",
+    "records": "Ultime registrazioni",
+    "recordBy": "di {name}",
+    "noData": "Ancora nessun dato."
+  },
+  "nav2": {
+    "deviations": "Deviazioni",
+    "reports": "Report"
   },
   "sites": {
     "title": "Sedi",

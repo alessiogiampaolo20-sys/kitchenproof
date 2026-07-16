@@ -10,7 +10,11 @@
     "back": "Back",
     "error": "Something went wrong. Please try again.",
     "language": "Language",
-    "locales": { "da": "Dansk", "en": "English", "it": "Italiano" }
+    "locales": {
+      "da": "Dansk",
+      "en": "English",
+      "it": "Italiano"
+    }
   },
   "auth": {
     "loginTitle": "Log in",
@@ -139,6 +143,119 @@
   },
   "scan": {
     "invalid": "Invalid or unknown QR code."
+  },
+  "check": {
+    "enterTemp": "Enter temperature",
+    "confirm": "Save reading",
+    "passed": "Within limit",
+    "failed": "Outside limit",
+    "limitLabel": "Limit: {limit}",
+    "noActor": "First choose who you are (PIN).",
+    "alreadyDone": "This task is already done.",
+    "saved": "Recorded",
+    "lateBadge": "Recorded late",
+    "noteLabel": "Note (optional)",
+    "checklistOk": "OK",
+    "checklistFail": "Fail",
+    "checklistNa": "N/A",
+    "reasonRequired": "Give a reason for every ✗",
+    "reasons": {
+      "dirty": "Not clean",
+      "broken": "Broken/defective",
+      "missing": "Missing",
+      "other": "Other"
+    },
+    "cooling": {
+      "start": "Start cooling (56 °C)",
+      "addReading": "Add reading",
+      "finish": "Finish cooling",
+      "blastChiller": "Blast chiller — done in one step",
+      "elapsed": "Time since start",
+      "startedAt": "Started at {time}",
+      "finalTemp": "Final temperature (°C)",
+      "readingTemp": "Temperature now (°C)"
+    },
+    "verification": "Follow-up check",
+    "verificationHint": "This check verifies an earlier deviation."
+  },
+  "todayScreen": {
+    "overdue": "Overdue",
+    "dueNow": "Now",
+    "later": "Later today",
+    "doneSection": "Done",
+    "progress": "{done} of {total} done",
+    "allDone": "All done — great work!",
+    "noTasks": "No tasks today. Approve the programme to activate the schedule.",
+    "logLate": "Record (marked as late)",
+    "adHoc": "New record",
+    "adHocTemp": "Ad-hoc temperature",
+    "adHocNote": "Note",
+    "adHocDeviation": "Report deviation",
+    "adHocText": "Description",
+    "adHocEquipment": "Equipment (optional)",
+    "dueAt": "at {time}"
+  },
+  "deviation": {
+    "title": "Deviation",
+    "listTitle": "Deviations",
+    "sheetTitle": "Deviation — what now?",
+    "step1": "1. What about the food?",
+    "step2": "2. What fixed it?",
+    "step3": "3. Verify later",
+    "food": {
+      "kept": "Kept (assessed OK)",
+      "moved": "Moved",
+      "discarded": "Discarded",
+      "recalled": "Recalled",
+      "na": "Not relevant"
+    },
+    "fixes": {
+      "technician": "Called technician",
+      "thermostat": "Adjusted thermostat",
+      "movedGoods": "Moved goods",
+      "reheated": "Reheated to 75 °C",
+      "cleaned": "Re-cleaned",
+      "other": "Other"
+    },
+    "correctiveLabel": "Corrective action",
+    "followUpLabel": "Follow-up check in {hours} hours",
+    "skipFollowUp": "No follow-up needed",
+    "submit": "Save deviation",
+    "saved": "Deviation recorded",
+    "guidance": "Guidance",
+    "severity": {
+      "minor": "Minor",
+      "major": "Major",
+      "critical": "Critical"
+    },
+    "status": {
+      "open": "Open",
+      "corrected": "Corrected",
+      "verified": "Verified",
+      "closed": "Closed"
+    },
+    "filterOpen": "Open",
+    "filterAll": "All",
+    "detectedBy": "Recorded by {name}",
+    "verifiedBy": "Verified by {name}",
+    "correctedBy": "Corrected by {name}",
+    "empty": "No deviations — that's good!",
+    "goToFollowUp": "Do the follow-up check"
+  },
+  "reports": {
+    "title": "Reports",
+    "tempHistory": "Temperature history",
+    "selectEquipment": "Select equipment",
+    "misses": "Missed tasks",
+    "noMisses": "No missed tasks.",
+    "missedAt": "Was due {time}",
+    "records": "Latest records",
+    "recordBy": "by {name}",
+    "noData": "No data yet."
+  },
+  "nav2": {
+    "deviations": "Deviations",
+    "reports": "Reports"
   },
   "sites": {
     "title": "Sites",

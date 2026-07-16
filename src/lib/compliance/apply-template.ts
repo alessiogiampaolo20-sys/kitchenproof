@@ -146,6 +146,29 @@ export async function applyActivityTemplate(
     equipment = created;
   }
 
+  // 4b — default cleaning areas (operational defaults, site-adjustable; the
+  // cleaning checklist renders from these rows, §6.3)
+  const { data: existingAreas } = await supabase
+    .from("cleaning_areas")
+    .select("id")
+    .eq("site_id", site.id)
+    .limit(1);
+  if (!existingAreas || existingAreas.length === 0) {
+    const defaultAreas: { da: string; en: string }[] = [
+      { da: "Køkken og arbejdsflader", en: "Kitchen and work surfaces" },
+      { da: "Køl og frys", en: "Fridges and freezers" },
+      { da: "Lager", en: "Storage" },
+      { da: "Gulve og afløb", en: "Floors and drains" },
+    ];
+    await supabase.from("cleaning_areas").insert(
+      defaultAreas.map((area, i) => ({
+        site_id: site.id,
+        name_i18n: asJson(area),
+        position: i,
+      })),
+    );
+  }
+
   // 5 — control points: applying rows' template keys + the pack's standing
   // prerequisite programmes (cleaning, hygiene, pest, training — EK p. 3)
   const cpKeys = new Set<string>(pack.prerequisiteControlPointKeys);
