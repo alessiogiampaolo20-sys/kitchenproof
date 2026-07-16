@@ -34,6 +34,85 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_runs: {
+        Row: {
+          accepted: boolean | null
+          confidence: number | null
+          created_at: string
+          edited: boolean | null
+          error: string | null
+          feature: string
+          id: string
+          input_ref: string | null
+          latency_ms: number | null
+          model: string
+          org_id: string
+          output_ref: string | null
+          prompt_version: string
+          site_id: string | null
+          tokens_in: number | null
+          tokens_out: number | null
+        }
+        Insert: {
+          accepted?: boolean | null
+          confidence?: number | null
+          created_at?: string
+          edited?: boolean | null
+          error?: string | null
+          feature: string
+          id?: string
+          input_ref?: string | null
+          latency_ms?: number | null
+          model: string
+          org_id: string
+          output_ref?: string | null
+          prompt_version: string
+          site_id?: string | null
+          tokens_in?: number | null
+          tokens_out?: number | null
+        }
+        Update: {
+          accepted?: boolean | null
+          confidence?: number | null
+          created_at?: string
+          edited?: boolean | null
+          error?: string | null
+          feature?: string
+          id?: string
+          input_ref?: string | null
+          latency_ms?: number | null
+          model?: string
+          org_id?: string
+          output_ref?: string | null
+          prompt_version?: string
+          site_id?: string | null
+          tokens_in?: number | null
+          tokens_out?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_runs_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_runs_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_runs_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       audit_log: {
         Row: {
           action: string
@@ -1244,6 +1323,80 @@ export type Database = {
           },
         ]
       }
+      ra_imports: {
+        Row: {
+          confirmed_at: string | null
+          confirmed_by: string | null
+          created_at: string
+          extraction_json: Json | null
+          file_paths: string[]
+          gap_report_json: Json | null
+          id: string
+          kind: Database["public"]["Enums"]["ra_import_kind"]
+          risk_analysis_id: string | null
+          site_id: string
+          status: Database["public"]["Enums"]["ra_import_status"]
+          updated_at: string
+        }
+        Insert: {
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          extraction_json?: Json | null
+          file_paths: string[]
+          gap_report_json?: Json | null
+          id?: string
+          kind: Database["public"]["Enums"]["ra_import_kind"]
+          risk_analysis_id?: string | null
+          site_id: string
+          status?: Database["public"]["Enums"]["ra_import_status"]
+          updated_at?: string
+        }
+        Update: {
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          extraction_json?: Json | null
+          file_paths?: string[]
+          gap_report_json?: Json | null
+          id?: string
+          kind?: Database["public"]["Enums"]["ra_import_kind"]
+          risk_analysis_id?: string | null
+          site_id?: string
+          status?: Database["public"]["Enums"]["ra_import_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ra_imports_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ra_imports_risk_analysis_id_fkey"
+            columns: ["risk_analysis_id"]
+            isOneToOne: false
+            referencedRelation: "risk_analyses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ra_imports_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ra_imports_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       risk_analyses: {
         Row: {
           approved_at: string | null
@@ -1733,6 +1886,14 @@ export type Database = {
         | "site_manager"
         | "operator"
       platform_role: "platform_admin" | "platform_support"
+      ra_import_kind: "photo_set" | "pdf" | "docx" | "xlsx" | "paper_scan"
+      ra_import_status:
+        | "uploaded"
+        | "extracting"
+        | "mapped"
+        | "needs_review"
+        | "confirmed"
+        | "failed"
       ra_status: "draft" | "in_review" | "approved" | "superseded"
       site_status: "active" | "paused" | "archived"
       task_status: "pending" | "done" | "missed" | "skipped_justified"
@@ -1912,6 +2073,15 @@ export const Constants = {
         "operator",
       ],
       platform_role: ["platform_admin", "platform_support"],
+      ra_import_kind: ["photo_set", "pdf", "docx", "xlsx", "paper_scan"],
+      ra_import_status: [
+        "uploaded",
+        "extracting",
+        "mapped",
+        "needs_review",
+        "confirmed",
+        "failed",
+      ],
       ra_status: ["draft", "in_review", "approved", "superseded"],
       site_status: ["active", "paused", "archived"],
       task_status: ["pending", "done", "missed", "skipped_justified"],

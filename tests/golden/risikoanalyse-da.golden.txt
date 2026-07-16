@@ -1,0 +1,101 @@
+Skema til risikoanalyse
+– hvad gør du, og hvad kan du gøre, hvis det går galt
+Beskriv virksomheden kort
+Virksomhedens navn og adresse: Golden Restaurant, Testgade 1, 1050 København
+Virksomheden er registreret af Fødevarestyrelsen den (dato): 2026-01-01
+Virksomhedsejer: Golden Ejer
+CVR-nummer: 12345678
+Beskriv din virksomhed kort: Italiensk restaurant med 40 pladser.
+Modtagelse af varer
+Sæt kryds hvis
+ja, og hvis du
+har en kritisk
+aktivitet
+Uddyb hvad du laver/gør? Hvad kan der ske/gå galt, og hvad er
+risikoen ved det?
+Hvad gør du for at styre processen og
+opnå sikre fødevarer?
+Hvad gør du hvis det går galt?
+OBS: Husk egenkontrolprogram (hent skema på
+fvst.dk)
+modtagelse.chilled
+Kritisk aktivitet
+Vi modtager kølevarer to gange om ugen. Varerne kan være for varme. Modtagekontrol med termometer. Afvis varen.
+Opbevaring/lager
+Sæt kryds hvis
+ja, og hvis du
+har en kritisk
+aktivitet
+Uddyb hvad du laver/gør? Hvad kan der ske/gå galt, og hvad er
+risikoen ved det?
+Hvad gør du for at styre processen og
+opnå sikre fødevarer?
+Hvad gør du hvis det går galt?
+OBS: Husk egenkontrolprogram (hent skema på
+fvst.dk)
+opbevaring.chilled
+Kritisk aktivitet
+Opbevaring på køl. Bakterievækst over 5 °C. Daglig temperaturkontrol. Vurdér og kassér.
+Tilberedning og håndtering
+Sæt kryds hvis
+ja, og hvis du
+har en kritisk
+aktivitet
+Uddyb hvad du laver/gør? Hvad kan der ske/gå galt, og hvad er
+risikoen ved det?
+Hvad gør du for at styre processen og
+opnå sikre fødevarer?
+Hvad gør du hvis det går galt?
+OBS: Husk egenkontrolprogram (hent skema på
+fvst.dk)
+tilberedning.cooling
+Kritisk aktivitet
+Nedkøling af saucer. Langsom nedkøling. 56’10 °C på højst 4 timer. Kassér eller genopvarm.
+-- 1 of 2 --
+Salg og servering
+Sæt kryds hvis
+ja, og hvis du
+har en kritisk
+aktivitet
+Uddyb hvad du laver/gør? Hvad kan der ske/gå galt, og hvad er
+risikoen ved det?
+Hvad gør du for at styre processen og
+opnå sikre fødevarer?
+Hvad gør du hvis det går galt?
+OBS: Husk egenkontrolprogram (hent skema på
+fvst.dk)
+salg_servering.unpack-
+aged_chilled Kritisk aktivitet
+Servering.
+Transport
+Sæt kryds hvis
+ja, og hvis du
+har en kritisk
+aktivitet
+Uddyb hvad du laver/gør? Hvad kan der ske/gå galt, og hvad er
+risikoen ved det?
+Hvad gør du for at styre processen og
+opnå sikre fødevarer?
+Hvad gør du hvis det går galt?
+OBS: Husk egenkontrolprogram (hent skema på
+fvst.dk)
+transport.hot_takeaway
+Kritisk aktivitet
+Udbringning.
+Andet – har du aktiviteter der ikke er nævnt, skriv dem her
+Sæt kryds hvis
+ja, og hvis du
+har en kritisk
+aktivitet
+Uddyb hvad du laver/gør? Hvad kan der ske/gå galt, og hvad er
+risikoen ved det?
+Hvad gør du for at styre processen og
+opnå sikre fødevarer?
+Hvad gør du hvis det går galt?
+OBS: Husk egenkontrolprogram (hent skema på
+fvst.dk)
+andet.custom
+Kritisk aktivitet
+Andet.
+KitchenProof · v1 · 2026-07-16
+-- 2 of 2 --

@@ -1,0 +1,17 @@
+{
+  "done": false,
+  "question": {
+    "id": "menu_style",
+    "text_da": "Hvilken type mad laver I primært?",
+    "text_en": "What kind of food do you mainly make?",
+    "chips": [
+      { "id": "pizza", "label_da": "Pizza", "label_en": "Pizza" },
+      { "id": "pasta", "label_da": "Pasta", "label_en": "Pasta" },
+      { "id": "salads", "label_da": "Salater", "label_en": "Salads" },
+      { "id": "meat_dishes", "label_da": "Kødretter", "label_en": "Meat dishes" }
+    ],
+    "allowFreeText": true,
+    "multiSelect": true
+  },
+  "summary_da": null
+}

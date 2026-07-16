@@ -12,6 +12,7 @@ import {
 } from "@/lib/compliance/materialize-runner";
 import { compareStrictness, parseLimit } from "@/lib/compliance/limits";
 import { findUncoveredCriticalRows } from "@/lib/compliance/approval";
+import { uploadProgrammeSnapshot } from "@/lib/pdf/render";
 import { frequencySchema, type PackLimit } from "@/lib/compliance/pack-schema";
 import {
   approveSchema,
@@ -129,11 +130,40 @@ export async function approveProgramme(
     .eq("status", "draft");
   if (approveError) return { error: "error" };
 
-  // programme snapshot row (official-layout PDF renderer lands in Phase 4)
+  // §7.4/§7.6: approval snapshots the programme as official-layout PDFs (da+en)
+  let pdfPath: string | null = null;
+  try {
+    const snapshot = await uploadProgrammeSnapshot(
+      sc.supabase,
+      sc.site.id,
+      parsed.data.riskAnalysisId,
+    );
+    pdfPath = snapshot.egenkontrolPath;
+    for (const raPath of snapshot.raPaths) {
+      await sc.supabase.from("programme_documents").insert({
+        site_id: sc.site.id,
+        risk_analysis_id: parsed.data.riskAnalysisId,
+        kind: "annex",
+        pdf_path: raPath,
+      });
+    }
+  } catch (err) {
+    // rendering failure must not roll back a valid approval — record it
+    await writeAudit(sc.supabase, {
+      orgId: sc.site.org_id,
+      siteId: sc.site.id,
+      actorId: sc.ctx.user.id,
+      actorRole: sc.ctx.role,
+      action: "programme.pdf_failed",
+      entityTable: "programme_documents",
+      diff: { error: err instanceof Error ? err.message : "unknown" },
+    });
+  }
   await sc.supabase.from("programme_documents").insert({
     site_id: sc.site.id,
     risk_analysis_id: parsed.data.riskAnalysisId,
     kind: "egenkontrolprogram",
+    pdf_path: pdfPath,
   });
 
   await writeAudit(sc.supabase, {

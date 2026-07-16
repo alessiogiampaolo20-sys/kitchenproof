@@ -1,0 +1,21 @@
+Own-check programme
+Brief description of the business
+Golden Restaurant Testgade 1, 1050 København
+CVR 12345678
+Italiensk restaurant.
+Activities of the business
+Activity Checked How often must this be written down?
+Køletemperatur — Køleskab 1 Dagligt kl. 08:00
+Nedkøling 56’10 °C Hver gang
+-- 1 of 2 --
+Procedures and control points
+Køletemperatur — Køleskab 1
+Limit: d 5 °C Frequency: Dagligt kl. 08:00 Monitoring: manual_temp
+Aflæs og registrér temperaturen.
+If something goes wrong: Vurdér varerne og tilkald service.
+Source: DK-HYGIEJNE §kap. 26.1 + bilag 3, s. 56
+Approval
+Version 1
+Approved by Golden Ejer
+Date 2026-07-16
+-- 2 of 2 --

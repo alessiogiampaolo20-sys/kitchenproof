@@ -1,0 +1,109 @@
+Risk analysis form
+- What do you do - and what can you do - if something goes wrong?
+Brief description of the business
+Name and address of the business: Golden Restaurant, Testgade 1, 1050 København
+Date of authorisation/registration of the business by the Danish Veterinary and Food Ad-
+ministration:
+2026-01-01
+Business owner: Golden Ejer
+CVR number: 12345678
+Brief description of your business: Italiensk restaurant med 40 pladser.
+Receipt of goods
+Tick the box if
+yes, and if you
+have a critical
+activity
+Explain what you do/make? What could go wrong and what is the
+associated risk?
+What process controls do you have to
+ensure food safety?
+What do you do if something goes
+wrong?
+NOTE: Follow own control procedures! (Get form at
+fvst.dk)
+modtagelse.chilled
+Critical activity
+Vi modtager kølevarer to gange om ugen. Varerne kan være for varme. Modtagekontrol med termometer. Afvis varen.
+Storing/storage
+Tick the box if
+yes, and if you
+have a critical
+activity
+Explain what you do/make? What could go wrong and what is the
+associated risk?
+What process controls do you have to
+ensure food safety?
+What do you do if something goes
+wrong?
+NOTE: Follow own control procedures! (Get form at
+fvst.dk)
+opbevaring.chilled
+Critical activity
+Opbevaring på køl. Bakterievækst over 5 °C. Daglig temperaturkontrol. Vurdér og kassér.
+Preparation and handling
+Tick the box if
+yes, and if you
+have a critical
+activity
+Explain what you do/make? What could go wrong and what is the
+associated risk?
+What process controls do you have to
+ensure food safety?
+What do you do if something goes
+wrong?
+NOTE: Follow own control procedures! (Get form at
+fvst.dk)
+tilberedning.cooling
+Critical activity
+Nedkøling af saucer. Langsom nedkøling. 56’10 °C på højst 4 timer. Kassér eller genopvarm.
+-- 1 of 2 --
+Selling and serving
+Tick the box if
+yes, and if you
+have a critical
+activity
+Explain what you do/make? What could go wrong and what is the
+associated risk?
+What process controls do you have to
+ensure food safety?
+What do you do if something goes
+wrong?
+NOTE: Follow own control procedures! (Get form at
+fvst.dk)
+salg_servering.unpack-
+aged_chilled Critical activity
+Servering.
+Transport
+Tick the box if
+yes, and if you
+have a critical
+activity
+Explain what you do/make? What could go wrong and what is the
+associated risk?
+What process controls do you have to
+ensure food safety?
+What do you do if something goes
+wrong?
+NOTE: Follow own control procedures! (Get form at
+fvst.dk)
+transport.hot_takeaway
+Critical activity
+Udbringning.
+Other - here you can add other activities not mentioned above
+Tick the box if
+yes, and if you
+have a critical
+activity
+Explain what you do/make? What could go wrong and what is the
+associated risk?
+What process controls do you have to
+ensure food safety?
+What do you do if something goes
+wrong?
+NOTE: Follow own control procedures! (Get form at
+fvst.dk)
+andet.custom
+Critical activity
+Andet.
+KitchenProof · v1 · 2026-07-16
+-- 2 of 2 --
