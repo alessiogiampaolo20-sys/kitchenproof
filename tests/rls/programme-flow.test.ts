@@ -128,16 +128,21 @@ describe("approval → 7-day schedule (DoD)", () => {
       counts.set(key, (counts.get(key) ?? 0) + 1);
     }
 
-    // Daily CPs occur exactly N times in a rolling 168h window (N=7, ±1 only
-    // across DST transitions); scheduled counts scale with equipment units.
-    const n = counts.get("freezer_temp") ?? 0;
-    expect(n).toBeGreaterThanOrEqual(6);
-    expect(n).toBeLessThanOrEqual(8);
-    expect(counts.get("cold_storage_temp")).toBe(2 * n);   // 2 fridges
-    expect(counts.get("hot_holding_56")).toBe(2 * n);       // 2 service periods
-    expect(counts.get("cleaning_plan")).toBe(n);
-    expect(counts.get("personal_hygiene")).toBe(n);
-    expect(counts.get("separation_check")).toBe(n);
+    // Daily CPs occur 7× in a rolling 168h window, +1 when an earlier-today
+    // occurrence's completion window is still open at run time (the
+    // materializer keeps it — §8.4 decision log), −1 across DST transitions.
+    // Counts scale with equipment units (2 fridges, 2 service periods).
+    const dailyBounds = (key: string, units = 1) => {
+      const count = counts.get(key) ?? 0;
+      expect(count, key).toBeGreaterThanOrEqual(6 * units);
+      expect(count, key).toBeLessThanOrEqual(8 * units);
+    };
+    dailyBounds("freezer_temp");
+    dailyBounds("cold_storage_temp", 2);
+    dailyBounds("hot_holding_56", 2);
+    dailyBounds("cleaning_plan");
+    dailyBounds("personal_hygiene");
+    dailyBounds("separation_check");
     // per-event CPs exist but are never scheduled
     expect(counts.get("receiving_check")).toBeUndefined();
     expect(counts.get("heating_core_temp")).toBeUndefined();
