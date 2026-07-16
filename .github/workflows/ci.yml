@@ -44,6 +44,8 @@ jobs:
           EOF
           echo "ACTOR_SESSION_SECRET=$(openssl rand -base64 32)" >> .env.local
           echo "CRON_SECRET=$(openssl rand -hex 24)" >> .env.local
+          # §14: pipelines never call the real AI API — deterministic fixtures
+          echo "AI_PROVIDER=fixture" >> .env.local
 
       # RLS fail-closed proof (§17/§20 gate) + programme-flow integration
       - run: pnpm test:rls

@@ -8,10 +8,13 @@ type Client = SupabaseClient<Database>;
 const DEFAULT_WINDOW_DAYS = 7;
 
 /**
- * Materializes scheduled tasks for a site over [now, now + days). Idempotent:
- * duplicates are dropped on the (control_point_id, due_at) unique constraint.
- * Runs under the caller's RLS (manager on approve/edit paths; the nightly
- * cron lands in Phase 2 alongside reminders).
+ * Materializes scheduled tasks for a site over [now − 24h, now + days),
+ * keeping past occurrences only while their completion window is still open —
+ * approving a programme in the evening must still surface tonight's tasks
+ * (they show as due/overdue; §17 lateness flags apply on completion as usual).
+ * Idempotent: duplicates are dropped on the (control_point_id, due_at) unique
+ * constraint. Runs under the caller's RLS (manager on approve/edit paths;
+ * nightly cron since Phase 2).
  */
 export async function materializeSiteTasks(
   supabase: Client,
@@ -31,9 +34,16 @@ export async function materializeSiteTasks(
     .eq("site_id", siteId)
     .eq("active", true);
 
-  const from = new Date();
-  const to = new Date(from.getTime() + days * 24 * 60 * 60 * 1000);
-  const inserts = materializeTasks(cps ?? [], { from, to }, site.timezone);
+  const now = new Date();
+  const from = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const to = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
+  const inserts = materializeTasks(cps ?? [], { from, to }, site.timezone).filter(
+    (task) => {
+      const due = new Date(task.due_at).getTime();
+      const windowEnd = due + (task.due_window_minutes ?? 0) * 60 * 1000;
+      return due >= now.getTime() || windowEnd > now.getTime();
+    },
+  );
 
   if (inserts.length > 0) {
     const { error } = await supabase.from("tasks").upsert(inserts, {
