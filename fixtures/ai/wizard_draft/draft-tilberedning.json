@@ -1,0 +1,209 @@
+{
+ "sectionKey": "tilberedning",
+ "rows": [
+  {
+   "activityKey": "tilberedning.hot_prep",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Pizzaer bages i ovn; kødsaucer og pasta koges gennemvarmet.",
+   "whatYouDo_en": "Pizzas are oven-baked; meat sauces and pasta are cooked through.",
+   "whatCanGoWrong_da": "Utilstrækkelig opvarmning dræber ikke bakterier i kød og fjerkræ.",
+   "whatCanGoWrong_en": "Insufficient heating fails to kill bacteria in meat and poultry.",
+   "controlMeasures_da": "Centrumtemperatur mindst 75 °C kontrolleres ved risikoretter.",
+   "controlMeasures_en": "Core temperature of at least 75 °C checked for risk dishes.",
+   "ifItGoesWrong_da": "Retten varmes videre til centrumtemperaturen er nået.",
+   "ifItGoesWrong_en": "Continue heating until core temperature is reached.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Overlevende salmonella/campylobacter ved utilstrækkelig opvarmning.",
+     "description_en": "Surviving salmonella/campylobacter from insufficient heating.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": true,
+     "controlMeasure_da": "Centrumtemperatur måles med indstikstermometer.",
+     "controlMeasure_en": "Core temperature measured with a probe.",
+     "justification_da": "Kødsaucer laves i store portioner, hvor centrum opvarmes langsomt.",
+     "justification_en": "Meat sauces are made in large batches where the core heats slowly."
+    }
+   ],
+   "controlPointKeys": [
+    "heating_core_temp"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "tilberedning.cold_prep",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Salater og kold pynt tilberedes på separat bord med rene redskaber.",
+   "whatYouDo_en": "Salads and cold garnishes prepared on a separate bench with clean utensils.",
+   "whatCanGoWrong_da": "Krydskontaminering fra råt kød til spiseklar mad.",
+   "whatCanGoWrong_en": "Cross-contamination from raw meat to ready-to-eat food.",
+   "controlMeasures_da": "Adskilte skærebrætter og redskaber; håndhygiejne mellem opgaver.",
+   "controlMeasures_en": "Separate boards and utensils; hand hygiene between tasks.",
+   "ifItGoesWrong_da": "Berørt mad kasseres; bord og redskaber rengøres.",
+   "ifItGoesWrong_en": "Discard affected food; clean bench and utensils.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Overførsel af bakterier fra råvarer til spiseklar mad.",
+     "description_en": "Transfer of bacteria from raw ingredients to ready-to-eat food.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Adskillelse i tid og sted; separate redskaber.",
+     "controlMeasure_en": "Separation in time and place; separate utensils.",
+     "justification_da": "Salater varmebehandles ikke, så kontaminering fjernes ikke senere.",
+     "justification_en": "Salads get no heat step, so contamination is never removed."
+    }
+   ],
+   "controlPointKeys": [
+    "separation_check"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "tilberedning.hot_holding",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Kødsauce og suppe varmholdes i gryde/bain-marie under service.",
+   "whatYouDo_en": "Meat sauce and soup are hot-held in a pot/bain-marie during service.",
+   "whatCanGoWrong_da": "Temperatur under 56 °C tillader bakterievækst i timerne under service.",
+   "whatCanGoWrong_en": "Temperature below 56 °C allows growth during service hours.",
+   "controlMeasures_da": "Varmholdelse ved mindst 56 °C; temperatur kontrolleres under service.",
+   "controlMeasures_en": "Hot-holding at 56 °C minimum; temperature checked during service.",
+   "ifItGoesWrong_da": "Under grænsen: genopvarm til over 75 °C eller kassér.",
+   "ifItGoesWrong_en": "Below the limit: reheat above 75 °C or discard.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Vækst af sporedannende bakterier (Bacillus, Clostridium) ved lav varmholdelsestemperatur.",
+     "description_en": "Growth of spore-formers (Bacillus, Clostridium) at low hot-holding temperature.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": true,
+     "controlMeasure_da": "Temperaturkontrol af varmholdte retter.",
+     "controlMeasure_en": "Temperature checks on hot-held dishes.",
+     "justification_da": "Saucer varmholdes over hele aftenen.",
+     "justification_en": "Sauces are hot-held across the whole evening."
+    }
+   ],
+   "controlPointKeys": [
+    "hot_holding_56"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "tilberedning.cooling",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Ragù og saucer laves i store portioner og nedkøles til næste dag.",
+   "whatYouDo_en": "Ragù and sauces are made in large batches and cooled for the next day.",
+   "whatCanGoWrong_da": "Langsom nedkøling giver sporedannende bakterier mulighed for vækst.",
+   "whatCanGoWrong_en": "Slow cooling lets spore-forming bacteria grow.",
+   "controlMeasures_da": "Nedkøling fra 56 °C til 10 °C på højst 4 timer; portioner deles i lave beholdere.",
+   "controlMeasures_en": "Cooling from 56 °C to 10 °C within 4 hours; batches split into shallow containers.",
+   "ifItGoesWrong_da": "For langsom nedkøling: genopvarm straks eller kassér.",
+   "ifItGoesWrong_en": "Too slow: reheat immediately or discard.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Vækst af Clostridium perfringens ved langsom nedkøling af store portioner.",
+     "description_en": "Growth of Clostridium perfringens during slow cooling of large batches.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": true,
+     "controlMeasure_da": "Nedkølingstid og temperatur registreres pr. portion.",
+     "controlMeasure_en": "Cooling time and temperature logged per batch.",
+     "justification_da": "Store gryder ragù nedkøles dagligt.",
+     "justification_en": "Large pots of ragù are cooled daily."
+    }
+   ],
+   "controlPointKeys": [
+    "cooling_56_10_4h"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "tilberedning.separation",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Råt kød håndteres adskilt fra spiseklar mad i tid og med separate redskaber.",
+   "whatYouDo_en": "Raw meat handled separately from ready-to-eat food in time and with separate utensils.",
+   "whatCanGoWrong_da": "Krydskontaminering via hænder, brætter og knive.",
+   "whatCanGoWrong_en": "Cross-contamination via hands, boards and knives.",
+   "controlMeasures_da": "Farvekodede skærebrætter; rengøring mellem opgaver.",
+   "controlMeasures_en": "Colour-coded boards; cleaning between tasks.",
+   "ifItGoesWrong_da": "Berørt mad kasseres; flader rengøres og desinficeres.",
+   "ifItGoesWrong_en": "Discard affected food; clean and disinfect surfaces.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Bakterieoverførsel fra råt til spiseklart.",
+     "description_en": "Bacterial transfer from raw to ready-to-eat.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Adskillelse og mellemrengøring.",
+     "controlMeasure_en": "Separation and interim cleaning.",
+     "justification_da": "Åbent køkken med begrænset plads øger risikoen.",
+     "justification_en": "An open kitchen with limited space raises the risk."
+    }
+   ],
+   "controlPointKeys": [
+    "separation_check"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "tilberedning.allergen",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Mel (gluten) bruges overalt; nødder kun i enkelte desserter.",
+   "whatYouDo_en": "Flour (gluten) is used everywhere; nuts only in a few desserts.",
+   "whatCanGoWrong_da": "Allergen krydskontakt til retter bestilt uden allergenet.",
+   "whatCanGoWrong_en": "Allergen cross-contact into dishes ordered without the allergen.",
+   "controlMeasures_da": "Desserter med nødder tilberedes adskilt; personalet kender allergenlisten.",
+   "controlMeasures_en": "Nut desserts prepared separately; staff know the allergen list.",
+   "ifItGoesWrong_da": "Retten laves om; gæsten informeres.",
+   "ifItGoesWrong_en": "Remake the dish; inform the guest.",
+   "hazards": [
+    {
+     "category": "allergen",
+     "description_da": "Krydskontakt med gluten/nødder til allergikergæster.",
+     "description_en": "Cross-contact with gluten/nuts for allergic guests.",
+     "likelihood": 1,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Adskilt tilberedning og opdateret allergenoversigt.",
+     "controlMeasure_en": "Separate preparation and an up-to-date allergen list.",
+     "justification_da": "Melstøv i luften gør glutenfri tilberedning svær — gæster informeres ærligt.",
+     "justification_en": "Airborne flour makes gluten-free preparation hard — guests are informed honestly."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  }
+ ],
+ "tighterLimits": [
+  {
+   "templateKey": "hot_holding_56",
+   "max": null,
+   "min": 50,
+   "reason_da": "Varmholdelse ved 50 °C er lettere at holde i praksis."
+  }
+ ]
+}

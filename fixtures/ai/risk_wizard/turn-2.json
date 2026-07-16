@@ -1,0 +1,33 @@
+{
+ "done": false,
+ "question": {
+  "id": "fridge_count",
+  "text_da": "Hvor mange køleskabe/kølerum har I?",
+  "text_en": "How many fridges/cold rooms do you have?",
+  "chips": [
+   {
+    "id": "1",
+    "label_da": "1",
+    "label_en": "1"
+   },
+   {
+    "id": "2",
+    "label_da": "2",
+    "label_en": "2"
+   },
+   {
+    "id": "3",
+    "label_da": "3",
+    "label_en": "3"
+   },
+   {
+    "id": "4",
+    "label_da": "4",
+    "label_en": "4"
+   }
+  ],
+  "allowFreeText": false,
+  "multiSelect": false
+ },
+ "summary_da": null
+}

@@ -21,6 +21,8 @@ import {
   startTemplateSchema,
   toggleControlPointSchema,
 } from "@/lib/schemas/programme";
+import { editRaRowSchema } from "@/lib/schemas/wizard";
+import { markAiOutcome } from "@/lib/ai/run";
 import type { Json } from "@/lib/supabase/database.types";
 
 export type ProgrammeActionState = { ok: true } | { error: string } | null;
@@ -175,6 +177,22 @@ export async function approveProgramme(
     entityTable: "risk_analyses",
     entityId: parsed.data.riskAnalysisId,
   });
+
+  // §14 rule 2: approving an AI-drafted programme marks the run accepted
+  const { data: aiRow } = await sc.supabase
+    .from("ra_activity_rows")
+    .select("id")
+    .eq("risk_analysis_id", parsed.data.riskAnalysisId)
+    .eq("ai_suggested", true)
+    .limit(1)
+    .maybeSingle();
+  if (aiRow) {
+    await markAiOutcome(
+      sc.supabase,
+      { orgId: sc.site.org_id, feature: "wizard_draft", inputRef: `draft:${sc.site.id}` },
+      { accepted: true, edited: false },
+    );
+  }
 
   // the daily task schedule goes live only after approval (§7.4)
   const result = await materializeSiteTasks(sc.supabase, sc.site.id);
@@ -409,6 +427,82 @@ export async function createControlPoint(
   });
 
   await materializeSiteTasks(sc.supabase, sc.site.id);
+  revalidatePath(`/app/${sc.site.id}/programme`);
+  return { ok: true };
+}
+
+/**
+ * Review editor (§7.3): manager edits an AI-suggested (or template) skema row.
+ * Origin stays auditable — ai_suggested is never cleared; human_edited marks
+ * the human review. RLS restricts writes to draft analyses.
+ */
+export async function editRaRow(
+  _prev: ProgrammeActionState,
+  formData: FormData,
+): Promise<ProgrammeActionState> {
+  const parsed = editRaRowSchema.safeParse({
+    siteId: formData.get("siteId"),
+    rowId: formData.get("rowId"),
+    applies: formData.get("applies"),
+    critical: formData.get("critical"),
+    whatYouDo: formData.get("whatYouDo") ?? "",
+    whatCanGoWrong: formData.get("whatCanGoWrong") ?? "",
+    controlMeasures: formData.get("controlMeasures") ?? "",
+    ifItGoesWrong: formData.get("ifItGoesWrong") ?? "",
+  });
+  if (!parsed.success) return { error: "error" };
+  const sc = await siteContext(parsed.data.siteId);
+  if (!sc) return { error: "error" };
+
+  const { data: row } = await sc.supabase
+    .from("ra_activity_rows")
+    .select(
+      "id, ai_suggested, what_you_do_i18n, what_can_go_wrong_i18n, control_measures_i18n, if_it_goes_wrong_i18n",
+    )
+    .eq("id", parsed.data.rowId)
+    .maybeSingle();
+  if (!row) return { error: "error" };
+
+  // merge the edited locale text into the i18n value, keeping the other locale
+  const merge = (existing: Json | null, text: string): Json | null => {
+    if (!text) return existing;
+    const prev = (existing ?? {}) as Record<string, string>;
+    return { ...prev, da: text, en: prev.en ?? text } as Json;
+  };
+
+  const { error } = await sc.supabase
+    .from("ra_activity_rows")
+    .update({
+      applies: parsed.data.applies,
+      is_critical: parsed.data.critical,
+      what_you_do_i18n: merge(row.what_you_do_i18n, parsed.data.whatYouDo),
+      what_can_go_wrong_i18n: merge(row.what_can_go_wrong_i18n, parsed.data.whatCanGoWrong),
+      control_measures_i18n: merge(row.control_measures_i18n, parsed.data.controlMeasures),
+      if_it_goes_wrong_i18n: merge(row.if_it_goes_wrong_i18n, parsed.data.ifItGoesWrong),
+      human_edited: true,
+    })
+    .eq("id", row.id);
+  if (error) return { error: "error" };
+
+  await writeAudit(sc.supabase, {
+    orgId: sc.site.org_id,
+    siteId: sc.site.id,
+    actorId: sc.ctx.user.id,
+    actorRole: sc.ctx.role,
+    action: "ra_row.updated",
+    entityTable: "ra_activity_rows",
+    entityId: row.id,
+    diff: { applies: parsed.data.applies, critical: parsed.data.critical },
+  });
+
+  if (row.ai_suggested) {
+    await markAiOutcome(
+      sc.supabase,
+      { orgId: sc.site.org_id, feature: "wizard_draft", inputRef: `draft:${sc.site.id}` },
+      { accepted: true, edited: true },
+    );
+  }
+
   revalidatePath(`/app/${sc.site.id}/programme`);
   return { ok: true };
 }

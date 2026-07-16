@@ -1,0 +1,23 @@
+{
+ "done": false,
+ "question": {
+  "id": "delivery",
+  "text_da": "Leverer I mad ud af huset (takeaway/udbringning)?",
+  "text_en": "Do you deliver food (takeaway/delivery)?",
+  "chips": [
+   {
+    "id": "yes",
+    "label_da": "Ja, varm mad ud af huset",
+    "label_en": "Yes, hot food out of the house"
+   },
+   {
+    "id": "no",
+    "label_da": "Nej, kun servering",
+    "label_en": "No, dine-in only"
+   }
+  ],
+  "allowFreeText": false,
+  "multiSelect": false
+ },
+ "summary_da": null
+}

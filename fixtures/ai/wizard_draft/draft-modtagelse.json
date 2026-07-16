@@ -1,0 +1,121 @@
+{
+ "sectionKey": "modtagelse",
+ "rows": [
+  {
+   "activityKey": "modtagelse.chilled",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Vi modtager kølevarer (mozzarella, skinke, grønt) to gange om ugen fra grossist.",
+   "whatYouDo_en": "We receive chilled goods (mozzarella, ham, vegetables) twice a week from a wholesaler.",
+   "whatCanGoWrong_da": "Varerne kan være for varme eller emballagen beskadiget ved levering.",
+   "whatCanGoWrong_en": "Goods may arrive too warm or with damaged packaging.",
+   "controlMeasures_da": "Modtagekontrol: temperatur stikprøves med termometer, emballage og holdbarhed tjekkes.",
+   "controlMeasures_en": "Receiving check: spot-check temperature with a thermometer, inspect packaging and dates.",
+   "ifItGoesWrong_da": "Varen afvises og leverandøren kontaktes; afvigelsen registreres.",
+   "ifItGoesWrong_en": "Reject the goods and contact the supplier; record the deviation.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Sygdomsfremkaldende bakterier i varer leveret over 5 °C.",
+     "description_en": "Pathogenic bacteria in goods delivered above 5 °C.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Modtagekontrol med termometer ved hver levering.",
+     "controlMeasure_en": "Receiving temperature check at every delivery.",
+     "justification_da": "Brudt kølekæde ved levering er en kendt risiko for friske mejeri- og kødvarer.",
+     "justification_en": "A broken cold chain at delivery is a known risk for fresh dairy and meat."
+    }
+   ],
+   "controlPointKeys": [
+    "receiving_check"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "modtagelse.frozen",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Frostvarer (skaldyr, grøntsager) modtages og lægges straks på frost.",
+   "whatYouDo_en": "Frozen goods (seafood, vegetables) are received and moved straight to the freezer.",
+   "whatCanGoWrong_da": "Optøede varer ved levering; genfrysning giver bakterievækst.",
+   "whatCanGoWrong_en": "Goods thawed on arrival; refreezing enables bacterial growth.",
+   "controlMeasures_da": "Tjek at varerne er hårdfrosne ved modtagelse; direkte på frost.",
+   "controlMeasures_en": "Check goods are solidly frozen at receipt; straight to the freezer.",
+   "ifItGoesWrong_da": "Optøede varer afvises.",
+   "ifItGoesWrong_en": "Thawed goods are rejected.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Bakterievækst i delvist optøede frostvarer.",
+     "description_en": "Bacterial growth in partially thawed frozen goods.",
+     "likelihood": 1,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Kontrol af frostvarer ved modtagelse.",
+     "controlMeasure_en": "Frozen-goods check at receipt.",
+     "justification_da": "Optøning under transport kan ikke ses efter genindfrysning.",
+     "justification_en": "Thawing in transit is invisible after refreezing."
+    }
+   ],
+   "controlPointKeys": [
+    "receiving_check"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "modtagelse.ambient_allergen",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Mel, tomat på dåse og tørvarer modtages og lagres på tørlager.",
+   "whatYouDo_en": "Flour, canned tomatoes and dry goods are received and stored in the dry store.",
+   "whatCanGoWrong_da": "Beskadiget emballage; forkert allergenmærkning.",
+   "whatCanGoWrong_en": "Damaged packaging; wrong allergen labelling.",
+   "controlMeasures_da": "Emballage og mærkning tjekkes ved modtagelse.",
+   "controlMeasures_en": "Packaging and labelling are checked at receipt.",
+   "ifItGoesWrong_da": "Varen afvises eller mærkes korrekt før brug.",
+   "ifItGoesWrong_en": "Reject the goods or re-label correctly before use.",
+   "hazards": [
+    {
+     "category": "allergen",
+     "description_da": "Udeklarerede allergener i tørvarer (gluten, nødder).",
+     "description_en": "Undeclared allergens in dry goods (gluten, nuts).",
+     "likelihood": 1,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Mærkning kontrolleres mod følgeseddel ved modtagelse.",
+     "controlMeasure_en": "Labelling is checked against the delivery note at receipt.",
+     "justification_da": "Pizzadej og pasta indeholder gluten; korrekt information til gæster kræver korrekt mærkning.",
+     "justification_en": "Pizza dough and pasta contain gluten; correct guest information requires correct labelling."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "modtagelse.other",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Vi modtager ikke andre varetyper."
+  }
+ ],
+ "tighterLimits": []
+}

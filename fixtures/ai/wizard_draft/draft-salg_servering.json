@@ -1,0 +1,153 @@
+{
+ "sectionKey": "salg_servering",
+ "rows": [
+  {
+   "activityKey": "salg_servering.packaged_chilled_frozen",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Vi sælger ikke emballerede køle-/frostvarer."
+  },
+  {
+   "activityKey": "salg_servering.packaged_ambient",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Vi sælger ikke emballerede kolonialvarer."
+  },
+  {
+   "activityKey": "salg_servering.unpackaged_chilled",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Desserter og salater står på køl i montre indtil servering.",
+   "whatYouDo_en": "Desserts and salads are kept chilled in a display until serving.",
+   "whatCanGoWrong_da": "For høj montretemperatur giver bakterievækst.",
+   "whatCanGoWrong_en": "Too-warm display allows bacterial growth.",
+   "controlMeasures_da": "Montren indgår i den daglige køletemperaturkontrol.",
+   "controlMeasures_en": "The display is part of the daily fridge temperature check.",
+   "ifItGoesWrong_da": "Varer vurderes og kasseres ved tvivl.",
+   "ifItGoesWrong_en": "Assess and discard when in doubt.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Bakterievækst i uindpakkede kølevarer i montre.",
+     "description_en": "Bacterial growth in unpackaged chilled goods in the display.",
+     "likelihood": 1,
+     "severity": 2,
+     "isCcp": false,
+     "controlMeasure_da": "Daglig temperaturkontrol af montren.",
+     "controlMeasure_en": "Daily display temperature check.",
+     "justification_da": "Desserter med fløde er følsomme.",
+     "justification_en": "Cream desserts are sensitive."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "salg_servering.unpackaged_ambient",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Brød og focaccia serveres ved stuetemperatur samme dag.",
+   "whatYouDo_en": "Bread and focaccia are served at room temperature the same day.",
+   "whatCanGoWrong_da": "Begrænset risiko — tørt brød uden risikoingredienser.",
+   "whatCanGoWrong_en": "Limited risk — dry bread with no risk ingredients.",
+   "controlMeasures_da": "Rester kasseres ved lukketid.",
+   "controlMeasures_en": "Leftovers discarded at closing.",
+   "ifItGoesWrong_da": "Tvivlsomt brød kasseres.",
+   "ifItGoesWrong_en": "Doubtful bread is discarded.",
+   "hazards": [
+    {
+     "category": "physical",
+     "description_da": "Fremmedlegemer i brød fra åben servering.",
+     "description_en": "Foreign bodies in openly served bread.",
+     "likelihood": 1,
+     "severity": 1,
+     "isCcp": false,
+     "controlMeasure_da": "Afdækning og daglig kassation.",
+     "controlMeasure_en": "Covering and daily disposal.",
+     "justification_da": "Lav risiko, men medtaget for fuldstændighed.",
+     "justification_en": "Low risk, included for completeness."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "salg_servering.allergen_sales",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Gæster informeres om allergener mundtligt ud fra opdateret allergenoversigt.",
+   "whatYouDo_en": "Guests are informed about allergens verbally from an up-to-date allergen list.",
+   "whatCanGoWrong_da": "Forkert eller manglende allergeninformation til gæsten.",
+   "whatCanGoWrong_en": "Wrong or missing allergen information for the guest.",
+   "controlMeasures_da": "Allergenoversigt opdateres ved menuændringer; personale instrueres.",
+   "controlMeasures_en": "Allergen list updated on menu changes; staff briefed.",
+   "ifItGoesWrong_da": "Gæsten informeres straks; retten byttes.",
+   "ifItGoesWrong_en": "Inform the guest immediately; replace the dish.",
+   "hazards": [
+    {
+     "category": "allergen",
+     "description_da": "Allergisk reaktion pga. forkert information.",
+     "description_en": "Allergic reaction due to wrong information.",
+     "likelihood": 1,
+     "severity": 3,
+     "isCcp": false,
+     "controlMeasure_da": "Skriftlig allergenoversigt som fast reference.",
+     "controlMeasure_en": "A written allergen list as fixed reference.",
+     "justification_da": "Mundtlig information kræver et pålideligt opslagsværk.",
+     "justification_en": "Verbal information needs a reliable reference."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "salg_servering.other",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Ingen øvrige salgsformer."
+  }
+ ],
+ "tighterLimits": []
+}

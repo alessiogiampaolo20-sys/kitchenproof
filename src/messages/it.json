@@ -110,7 +110,18 @@
     "equipmentTarget": "Attrezzatura (opzionale)",
     "noEquipment": "Non legato ad attrezzatura",
     "saved": "Salvato",
-    "tasksTitle": "Attività pianificate (7 giorni)"
+    "tasksTitle": "Attività pianificate (7 giorni)",
+    "startWizardButton": "Crea con la guida AI",
+    "startWizardHint": "La guida AI ti intervista sulle vostre procedure e prepara una bozza dell'analisi dei rischi. Rivedi e approvi tutto prima che qualcosa entri in vigore.",
+    "aiSuggested": "Suggerimento AI",
+    "save": "Salva",
+    "rowEdit": {
+      "applies": "Attività pertinente",
+      "whatYouDo": "Descrivi cosa fai?",
+      "whatCanGoWrong": "Cosa può andare storto e qual è il rischio?",
+      "controlMeasures": "Come controlli il processo per garantire alimenti sicuri?",
+      "ifItGoesWrong": "Cosa fai se qualcosa va storto?"
+    }
   },
   "equipment": {
     "title": "Attrezzature",
@@ -364,5 +375,24 @@
     "due": "Un controllo è in scadenza adesso",
     "overdue": "Un controllo è in ritardo (30+ min)",
     "summary": "{missed} controlli non eseguiti oggi"
+  },
+  "wizard": {
+    "title": "Guida AI all'autocontrollo",
+    "hint": "Rispondi ad alcune domande sulle vostre procedure — la guida prepara la bozza dell'analisi dei rischi e dei punti di controllo. Tutto resta contrassegnato come suggerimento AI finché non lo rivedi.",
+    "thinking": "Sto pensando …",
+    "generating": "Sto preparando la bozza — può richiedere fino a un minuto …",
+    "send": "Invia",
+    "freeTextPlaceholder": "Scrivi tu (facoltativo)",
+    "summaryBadge": "Riepilogo",
+    "generateButton": "Genera bozza del programma",
+    "generateHint": "La bozza va rivista e approvata prima che il piano attività si attivi. L'AI non può mai allentare i limiti.",
+    "draftReady": "Bozza pronta — rivedi e approva",
+    "fallbackApplied": "AI non disponibile — è stato applicato il modello standard",
+    "limitsClamped": "{count} proposte AI sui limiti respinte (mai più permissive del pacchetto)",
+    "aiUnavailable": "La guida AI non è disponibile al momento. Puoi partire dal modello standard — stesso risultato, adattato da te.",
+    "genericError": "Qualcosa è andato storto. Riprova o parti dal modello.",
+    "useTemplateInstead": "Vai al programma e usa il modello",
+    "equipmentPhotoHint": "Suggerimento: aggiungi foto di frigoriferi e congelatori in Attrezzature — saranno pronti con i QR quando il programma sarà approvato.",
+    "equipmentPhotoLink": "Apri Attrezzature e aggiungi foto"
   }
 }

@@ -1,0 +1,24 @@
+{
+ "sectionKey": "andet",
+ "rows": [
+  {
+   "activityKey": "andet.custom",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Ingen øvrige aktiviteter ud over de beskrevne."
+  }
+ ],
+ "tighterLimits": []
+}

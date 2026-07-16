@@ -1,0 +1,91 @@
+{
+ "sectionKey": "transport",
+ "rows": [
+  {
+   "activityKey": "transport.chilled_frozen",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Vi transporterer ikke køle- eller frostvarer."
+  },
+  {
+   "activityKey": "transport.ambient",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Ingen transport af kolonialvarer."
+  },
+  {
+   "activityKey": "transport.hot_takeaway",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Pizzaer og varme retter udbringes i isolerede tasker inden for 30 minutter.",
+   "whatYouDo_en": "Pizzas and hot dishes are delivered in insulated bags within 30 minutes.",
+   "whatCanGoWrong_da": "Maden falder i temperatur under lang udbringning.",
+   "whatCanGoWrong_en": "Food temperature drops during long deliveries.",
+   "controlMeasures_da": "Isolerede tasker; ruter planlægges så levering sker under 30 minutter.",
+   "controlMeasures_en": "Insulated bags; routes planned so delivery stays under 30 minutes.",
+   "ifItGoesWrong_da": "Forsinket mad ombages/erstattes frem for at blive leveret lunken.",
+   "ifItGoesWrong_en": "Delayed food is re-made/replaced rather than delivered lukewarm.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Bakterievækst i varm mad, der køler langsomt under udbringning.",
+     "description_en": "Bacterial growth in hot food cooling slowly during delivery.",
+     "likelihood": 1,
+     "severity": 2,
+     "isCcp": false,
+     "controlMeasure_da": "Kort leveringstid og isolerede tasker.",
+     "controlMeasure_en": "Short delivery time and insulated bags.",
+     "justification_da": "Udbringning sker i nærområdet.",
+     "justification_en": "Deliveries stay in the local area."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "transport.other",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Ingen øvrig transport."
+  }
+ ],
+ "tighterLimits": []
+}

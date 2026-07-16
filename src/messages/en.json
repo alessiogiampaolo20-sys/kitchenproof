@@ -110,7 +110,18 @@
     "equipmentTarget": "Equipment (optional)",
     "noEquipment": "Not tied to equipment",
     "saved": "Saved",
-    "tasksTitle": "Scheduled tasks (7 days)"
+    "tasksTitle": "Scheduled tasks (7 days)",
+    "startWizardButton": "Build with the AI guide",
+    "startWizardHint": "The AI guide interviews you about your routines and drafts the risk analysis. You review and approve everything before anything goes live.",
+    "aiSuggested": "AI suggestion",
+    "save": "Save",
+    "rowEdit": {
+      "applies": "Activity is relevant",
+      "whatYouDo": "Explain what you do/make?",
+      "whatCanGoWrong": "What could go wrong and what is the associated risk?",
+      "controlMeasures": "What process controls do you have to ensure food safety?",
+      "ifItGoesWrong": "What do you do if something goes wrong?"
+    }
   },
   "equipment": {
     "title": "Equipment",
@@ -364,5 +375,24 @@
     "due": "A check is due now",
     "overdue": "A check is overdue (30+ min)",
     "summary": "{missed} checks were not done today"
+  },
+  "wizard": {
+    "title": "AI self-control guide",
+    "hint": "Answer a few questions about your routines — the guide drafts your risk analysis and control points. Everything is marked as an AI suggestion until you have reviewed it.",
+    "thinking": "Thinking …",
+    "generating": "Drafting — this can take up to a minute …",
+    "send": "Send",
+    "freeTextPlaceholder": "Type your own answer (optional)",
+    "summaryBadge": "Summary",
+    "generateButton": "Generate draft programme",
+    "generateHint": "The draft must be reviewed and approved before the task schedule goes live. AI can never loosen limits.",
+    "draftReady": "Draft ready — review and approve",
+    "fallbackApplied": "AI was unavailable — the standard template was applied instead",
+    "limitsClamped": "{count} AI limit proposals were rejected (never looser than the pack)",
+    "aiUnavailable": "The AI guide is unavailable right now. You can start from the standard template instead — same result, adjusted by you.",
+    "genericError": "Something went wrong. Try again or start from the template.",
+    "useTemplateInstead": "Go to the programme and use the template",
+    "equipmentPhotoHint": "Tip: add photos of your fridges and freezers under Equipment — they'll be ready with QR codes once the programme is approved.",
+    "equipmentPhotoLink": "Open Equipment and add photos"
   }
 }

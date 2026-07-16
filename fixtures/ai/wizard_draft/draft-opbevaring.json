@@ -1,0 +1,128 @@
+{
+ "sectionKey": "opbevaring",
+ "rows": [
+  {
+   "activityKey": "opbevaring.chilled",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Kølevarer opbevares i 2 køleskabe; kød og grønt adskilt på faste hylder.",
+   "whatYouDo_en": "Chilled goods are stored in 2 fridges; meat and vegetables on separate fixed shelves.",
+   "whatCanGoWrong_da": "For høj temperatur giver vækst af sygdomsfremkaldende bakterier.",
+   "whatCanGoWrong_en": "Too-high temperature enables growth of pathogenic bacteria.",
+   "controlMeasures_da": "Daglig temperaturkontrol af alle køleenheder; registreres i egenkontrollen.",
+   "controlMeasures_en": "Daily temperature check of all fridges; recorded in the self-control programme.",
+   "ifItGoesWrong_da": "Varer vurderes og kasseres ved tvivl; køleskab tilses/repareres.",
+   "ifItGoesWrong_en": "Assess and discard goods when in doubt; service the fridge.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Vækst af Listeria og andre bakterier ved opbevaring over 5 °C.",
+     "description_en": "Growth of Listeria and other bacteria when stored above 5 °C.",
+     "likelihood": 2,
+     "severity": 3,
+     "isCcp": true,
+     "controlMeasure_da": "Køletemperatur måles og registreres dagligt.",
+     "controlMeasure_en": "Fridge temperature measured and logged daily.",
+     "justification_da": "Frisk mozzarella og kødpålæg er følsomme varer med lang opbevaringstid.",
+     "justification_en": "Fresh mozzarella and cured meats are sensitive goods stored for days."
+    }
+   ],
+   "controlPointKeys": [
+    "cold_storage_temp"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "opbevaring.frozen",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": true,
+   "whatYouDo_da": "Frostvarer opbevares i fryser ved -18 °C eller koldere.",
+   "whatYouDo_en": "Frozen goods are stored in the freezer at -18 °C or colder.",
+   "whatCanGoWrong_da": "Temperaturstigning forringer kvalitet og kan tillade bakterievækst ved optøning.",
+   "whatCanGoWrong_en": "Temperature rise degrades quality and can allow growth on thawing.",
+   "controlMeasures_da": "Frysertemperatur kontrolleres dagligt.",
+   "controlMeasures_en": "Freezer temperature checked daily.",
+   "ifItGoesWrong_da": "Ved havari flyttes varer eller kasseres.",
+   "ifItGoesWrong_en": "On failure, move or discard goods.",
+   "hazards": [
+    {
+     "category": "micro",
+     "description_da": "Bakterievækst i optøede varer ved fryserhavari.",
+     "description_en": "Bacterial growth in thawed goods after freezer failure.",
+     "likelihood": 1,
+     "severity": 2,
+     "isCcp": false,
+     "controlMeasure_da": "Daglig aflæsning af frysertemperatur.",
+     "controlMeasure_en": "Daily freezer temperature reading.",
+     "justification_da": "Fryseren rummer skaldyr, som er særligt følsomme.",
+     "justification_en": "The freezer holds seafood, which is particularly sensitive."
+    }
+   ],
+   "controlPointKeys": [
+    "freezer_temp"
+   ],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "opbevaring.ambient",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": true,
+   "critical": false,
+   "whatYouDo_da": "Mel og tørvarer opbevares på tørlager i lukkede beholdere, hævet fra gulv.",
+   "whatYouDo_en": "Flour and dry goods stored in the dry store in closed containers, off the floor.",
+   "whatCanGoWrong_da": "Skadedyr og fremmedlegemer i åbne beholdere.",
+   "whatCanGoWrong_en": "Pests and foreign bodies in open containers.",
+   "controlMeasures_da": "Lukkede beholdere; lager holdes rent og efterses for skadedyr.",
+   "controlMeasures_en": "Closed containers; store kept clean and inspected for pests.",
+   "ifItGoesWrong_da": "Angrebne varer kasseres; skadedyrsbekæmpelse tilkaldes.",
+   "ifItGoesWrong_en": "Discard affected goods; call pest control.",
+   "hazards": [
+    {
+     "category": "physical",
+     "description_da": "Fremmedlegemer eller skadedyr i mel og tørvarer.",
+     "description_en": "Foreign bodies or pests in flour and dry goods.",
+     "likelihood": 1,
+     "severity": 2,
+     "isCcp": false,
+     "controlMeasure_da": "Lukkede beholdere og regelmæssigt eftersyn.",
+     "controlMeasure_en": "Closed containers and regular inspection.",
+     "justification_da": "Melopbevaring i større mængder tiltrækker skadedyr.",
+     "justification_en": "Bulk flour storage attracts pests."
+    }
+   ],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": null
+  },
+  {
+   "activityKey": "opbevaring.other",
+   "customName_da": null,
+   "customName_en": null,
+   "applies": false,
+   "critical": false,
+   "whatYouDo_da": null,
+   "whatYouDo_en": null,
+   "whatCanGoWrong_da": null,
+   "whatCanGoWrong_en": null,
+   "controlMeasures_da": null,
+   "controlMeasures_en": null,
+   "ifItGoesWrong_da": null,
+   "ifItGoesWrong_en": null,
+   "hazards": [],
+   "controlPointKeys": [],
+   "notRelevantBecause_da": "Ingen øvrige opbevaringsformer."
+  }
+ ],
+ "tighterLimits": [
+  {
+   "templateKey": "cold_storage_temp",
+   "max": 4,
+   "min": null,
+   "reason_da": "Frisk mozzarella og kødpålæg opbevares i samme køleskab — en strammere grænse på 4 °C giver sikkerhedsmargin."
+  }
+ ]
+}

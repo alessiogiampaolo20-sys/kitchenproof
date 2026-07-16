@@ -110,7 +110,18 @@
     "equipmentTarget": "Udstyr (valgfrit)",
     "noEquipment": "Ikke knyttet til udstyr",
     "saved": "Gemt",
-    "tasksTitle": "Planlagte opgaver (7 dage)"
+    "tasksTitle": "Planlagte opgaver (7 dage)",
+    "startWizardButton": "Byg med AI-guiden",
+    "startWizardHint": "AI-guiden interviewer dig om jeres arbejdsgange og laver et udkast til risikoanalysen. Du gennemgår og godkender alt, før noget træder i kraft.",
+    "aiSuggested": "AI-forslag",
+    "save": "Gem",
+    "rowEdit": {
+      "applies": "Aktiviteten er relevant",
+      "whatYouDo": "Uddyb hvad du laver/gør?",
+      "whatCanGoWrong": "Hvad kan der ske/gå galt, og hvad er risikoen ved det?",
+      "controlMeasures": "Hvad gør du for at styre processen og opnå sikre fødevarer?",
+      "ifItGoesWrong": "Hvad gør du hvis det går galt?"
+    }
   },
   "equipment": {
     "title": "Udstyr",
@@ -364,5 +375,24 @@
     "due": "En kontrol forfalder nu",
     "overdue": "En kontrol er forsinket (30+ min)",
     "summary": "{missed} kontroller blev ikke udført i dag"
+  },
+  "wizard": {
+    "title": "AI-guide til egenkontrol",
+    "hint": "Svar på et par spørgsmål om jeres arbejdsgange — så laver guiden et udkast til risikoanalyse og kontrolpunkter. Alt markeres som AI-forslag, indtil du har gennemgået det.",
+    "thinking": "Tænker …",
+    "generating": "Laver udkast — det tager op til et minut …",
+    "send": "Send",
+    "freeTextPlaceholder": "Skriv selv (valgfrit)",
+    "summaryBadge": "Opsummering",
+    "generateButton": "Lav udkast til program",
+    "generateHint": "Udkastet skal gennemgås og godkendes, før opgaveplanen aktiveres. Grænser kan aldrig lempes af AI.",
+    "draftReady": "Udkastet er klar — gennemgå og godkend",
+    "fallbackApplied": "AI var ikke tilgængelig — standardskabelonen er brugt i stedet",
+    "limitsClamped": "{count} AI-forslag til grænser blev afvist (aldrig lempeligere end pakken)",
+    "aiUnavailable": "AI-guiden er ikke tilgængelig lige nu. Du kan starte fra standardskabelonen i stedet — det giver samme resultat, som du selv tilpasser.",
+    "genericError": "Noget gik galt. Prøv igen, eller start fra skabelonen.",
+    "useTemplateInstead": "Gå til programmet og brug skabelonen",
+    "equipmentPhotoHint": "Tip: Tag billeder af jeres køleskabe og frysere under Udstyr — så er de klar med QR-koder, når programmet er godkendt.",
+    "equipmentPhotoLink": "Åbn Udstyr og tilføj billeder"
   }
 }

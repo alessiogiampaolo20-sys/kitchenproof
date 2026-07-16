@@ -1,0 +1,23 @@
+{
+ "done": false,
+ "question": {
+  "id": "cooling",
+  "text_da": "Nedkøler I større portioner (fx ragù eller saucer) til senere brug?",
+  "text_en": "Do you cool down larger batches (e.g. ragù or sauces) for later use?",
+  "chips": [
+   {
+    "id": "yes",
+    "label_da": "Ja, vi nedkøler portioner",
+    "label_en": "Yes, we cool batches"
+   },
+   {
+    "id": "no",
+    "label_da": "Nej, alt laves til bestilling",
+    "label_en": "No, everything is made to order"
+   }
+  ],
+  "allowFreeText": false,
+  "multiSelect": false
+ },
+ "summary_da": null
+}

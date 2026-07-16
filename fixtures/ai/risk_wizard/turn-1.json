@@ -1,0 +1,33 @@
+{
+ "done": false,
+ "question": {
+  "id": "products",
+  "text_da": "Hvad laver I i køkkenet? Vælg alt, der passer.",
+  "text_en": "What do you make in the kitchen? Pick everything that applies.",
+  "chips": [
+   {
+    "id": "pizza",
+    "label_da": "Pizza",
+    "label_en": "Pizza"
+   },
+   {
+    "id": "pasta",
+    "label_da": "Pasta og saucer",
+    "label_en": "Pasta and sauces"
+   },
+   {
+    "id": "salads",
+    "label_da": "Salater",
+    "label_en": "Salads"
+   },
+   {
+    "id": "desserts",
+    "label_da": "Desserter",
+    "label_en": "Desserts"
+   }
+  ],
+  "allowFreeText": true,
+  "multiSelect": true
+ },
+ "summary_da": null
+}

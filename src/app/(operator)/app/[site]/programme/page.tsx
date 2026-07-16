@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { BookOpenCheck, FileCheck2 } from "lucide-react";
+import { BookOpenCheck, FileCheck2, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { pickText } from "@/lib/i18n/pick";
@@ -9,6 +10,8 @@ import { frequencySchema } from "@/lib/compliance/pack-schema";
 import { SiteNav } from "../site-nav";
 import { ApproveButton, StartTemplateButton } from "./programme-buttons";
 import { CreateCpDialog, EditCpDialog, ToggleCpButton, type CpLimitShape } from "./cp-dialogs";
+import { RowEditDialog } from "./row-edit-dialog";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -73,8 +76,21 @@ export default async function ProgrammePage({
             </CardTitle>
             <CardDescription>{t("programme.startHint")}</CardDescription>
           </CardHeader>
-          <CardContent>
-            {isManager ? <StartTemplateButton siteId={siteId} /> : null}
+          <CardContent className="grid gap-3">
+            {isManager ? (
+              <>
+                <Button asChild size="lg" className="min-h-14" data-testid="start-wizard">
+                  <Link href={`/app/${siteId}/programme/wizard`}>
+                    <Sparkles className="size-4" />
+                    {t("programme.startWizardButton")}
+                  </Link>
+                </Button>
+                <p className="text-xs text-muted-foreground">
+                  {t("programme.startWizardHint")}
+                </p>
+                <StartTemplateButton siteId={siteId} />
+              </>
+            ) : null}
           </CardContent>
         </Card>
       </main>
@@ -90,7 +106,9 @@ export default async function ProgrammePage({
         .order("position"),
       supabase
         .from("ra_activity_rows")
-        .select("id, process_step_id, position, activity_key, applies, is_critical, what_you_do_i18n")
+        .select(
+          "id, process_step_id, position, activity_key, applies, is_critical, ai_suggested, human_edited, what_you_do_i18n, what_can_go_wrong_i18n, control_measures_i18n, if_it_goes_wrong_i18n",
+        )
         .eq("risk_analysis_id", ra.id)
         .order("position"),
       supabase
@@ -241,10 +259,31 @@ export default async function ProgrammePage({
                     <span className="min-w-0 flex-1">
                       {pickText(row.what_you_do_i18n, locale) || row.activity_key}
                     </span>
+                    {/* §7.3: AI origin stays visible until a human has edited */}
+                    {row.ai_suggested && !row.human_edited ? (
+                      <Badge variant="secondary" className="shrink-0" data-testid="ai-badge">
+                        {t("programme.aiSuggested")}
+                      </Badge>
+                    ) : null}
                     {row.is_critical ? (
                       <Badge variant="destructive" className="shrink-0">
                         {t("programme.critical")}
                       </Badge>
+                    ) : null}
+                    {isManager && ra.status === "draft" ? (
+                      <RowEditDialog
+                        siteId={siteId}
+                        rowId={row.id}
+                        rowName={pickText(row.what_you_do_i18n, locale) || row.activity_key}
+                        applies={row.applies}
+                        critical={row.is_critical}
+                        texts={{
+                          whatYouDo: pickText(row.what_you_do_i18n, locale),
+                          whatCanGoWrong: pickText(row.what_can_go_wrong_i18n, locale),
+                          controlMeasures: pickText(row.control_measures_i18n, locale),
+                          ifItGoesWrong: pickText(row.if_it_goes_wrong_i18n, locale),
+                        }}
+                      />
                     ) : null}
                   </div>
                 ))}
