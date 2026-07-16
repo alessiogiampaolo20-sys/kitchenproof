@@ -121,7 +121,9 @@
       "whatCanGoWrong": "Hvad kan der ske/gå galt, og hvad er risikoen ved det?",
       "controlMeasures": "Hvad gør du for at styre processen og opnå sikre fødevarer?",
       "ifItGoesWrong": "Hvad gør du hvis det går galt?"
-    }
+    },
+    "startImportButton": "Importér eksisterende risikoanalyse",
+    "startImportHint": "Har I allerede en risikoanalyse på papir, i Word eller PDF? Importér den — originalen gemmes, og indholdet overføres til det officielle skema."
   },
   "equipment": {
     "title": "Udstyr",
@@ -394,5 +396,63 @@
     "useTemplateInstead": "Gå til programmet og brug skabelonen",
     "equipmentPhotoHint": "Tip: Tag billeder af jeres køleskabe og frysere under Udstyr — så er de klar med QR-koder, når programmet er godkendt.",
     "equipmentPhotoLink": "Åbn Udstyr og tilføj billeder"
+  },
+  "importRa": {
+    "title": "Importér risikoanalyse",
+    "hint": "Tag billeder af papirskemaet eller upload PDF/Word/Excel. Indholdet aflæses til det officielle skema — tomme felter forbliver tomme, og du gennemgår alt før noget gemmes.",
+    "acceptHint": "Accepterede filer: fotos (JPG/PNG), PDF, DOCX, XLSX — højst 20 MB pr. fil.",
+    "uploadButton": "Upload og aflæs",
+    "uploading": "Uploader …",
+    "extracting": "Aflæser dokumentet …",
+    "previousTitle": "Tidligere importer",
+    "filesSuffix": "fil(er)",
+    "reviewLink": "Gennemgå",
+    "kinds": {
+      "photo_set": "Fotos",
+      "pdf": "PDF",
+      "docx": "Word",
+      "xlsx": "Excel",
+      "paper_scan": "Scanning"
+    },
+    "status": {
+      "uploaded": "Uploadet",
+      "extracting": "Aflæser",
+      "mapped": "Aflæst",
+      "needs_review": "Til gennemsyn",
+      "confirmed": "Bekræftet",
+      "failed": "Fejlet"
+    },
+    "reviewTitle": "Gennemgå det aflæste indhold",
+    "reviewHint": "Sammenlign hver celle med originalen (side-tal vises pr. række). Tomme felter er IKKE udfyldt automatisk — udfyld dem selv, hvis de mangler. Ret direkte i felterne.",
+    "gapsTitle": "Mangler fundet: {count}",
+    "noGaps": "Ingen mangler fundet — gennemgå alligevel indholdet, før du bekræfter.",
+    "gapMissingSection": "Afsnittet \"{section}\" mangler — forventet for jeres aktivitetstype",
+    "gapEmptyCritical": "Kritisk række \"{row}\" mangler styring/korrigerende handling",
+    "gapLowConfidence": "Usikker aflæsning af \"{row}\" (side {page}) — tjek mod originalen",
+    "gapUnreadable": "Afkrydsning i \"{row}\" kunne ikke aflæses — vælg selv",
+    "pageBadge": "s. {page}",
+    "manualBadge": "Tilføjet manuelt",
+    "confidenceBadge": "{pct} % sikkerhed",
+    "applies": "Relevant",
+    "critical": "Kritisk",
+    "unreadable": "ulæselig",
+    "emptyCell": "tom i originalen",
+    "emptyCellPlaceholder": "Tomt felt — udfyld kun, hvis det skal stå her",
+    "cells": {
+      "whatYouDo": "Uddyb hvad du laver/gør?",
+      "whatCanGoWrong": "Hvad kan der ske/gå galt, og hvad er risikoen ved det?",
+      "controlMeasures": "Hvad gør du for at styre processen og opnå sikre fødevarer?",
+      "ifItGoesWrong": "Hvad gør du hvis det går galt?"
+    },
+    "missingSectionPrompt": "Laver I noget under \"{section}\"? Tilføj selv en række — vi udfylder aldrig for dig.",
+    "addRowButton": "Tilføj række",
+    "confirmButton": "Bekræft og opret kladde",
+    "confirmHint": "Opretter en kladde til risikoanalysen med sporbarhed til originalen (import, side, område). Godkendelse sker bagefter som normalt.",
+    "confirmedToast": "Import bekræftet — kladden er klar til gennemsyn",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "aiUnavailable": "Aflæsningen er ikke tilgængelig lige nu — prøv igen senere, eller byg programmet med guiden/skabelonen.",
+      "badFile": "Filen kunne ikke bruges — tjek filtype og størrelse (højst 20 MB)."
+    }
   }
 }

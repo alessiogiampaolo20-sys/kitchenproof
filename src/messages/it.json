@@ -121,7 +121,9 @@
       "whatCanGoWrong": "Cosa può andare storto e qual è il rischio?",
       "controlMeasures": "Come controlli il processo per garantire alimenti sicuri?",
       "ifItGoesWrong": "Cosa fai se qualcosa va storto?"
-    }
+    },
+    "startImportButton": "Importa un'analisi dei rischi esistente",
+    "startImportHint": "Avete già un'analisi dei rischi su carta, Word o PDF? Importatela — l'originale viene conservato e il contenuto trasferito nel modulo ufficiale."
   },
   "equipment": {
     "title": "Attrezzature",
@@ -394,5 +396,63 @@
     "useTemplateInstead": "Vai al programma e usa il modello",
     "equipmentPhotoHint": "Suggerimento: aggiungi foto di frigoriferi e congelatori in Attrezzature — saranno pronti con i QR quando il programma sarà approvato.",
     "equipmentPhotoLink": "Apri Attrezzature e aggiungi foto"
+  },
+  "importRa": {
+    "title": "Importa analisi dei rischi",
+    "hint": "Fotografa il modulo cartaceo o carica PDF/Word/Excel. Il contenuto viene letto nel modulo ufficiale — le celle vuote restano vuote e rivedi tutto prima del salvataggio.",
+    "acceptHint": "File accettati: foto (JPG/PNG), PDF, DOCX, XLSX — max 20 MB per file.",
+    "uploadButton": "Carica ed estrai",
+    "uploading": "Caricamento …",
+    "extracting": "Lettura del documento …",
+    "previousTitle": "Import precedenti",
+    "filesSuffix": "file",
+    "reviewLink": "Rivedi",
+    "kinds": {
+      "photo_set": "Foto",
+      "pdf": "PDF",
+      "docx": "Word",
+      "xlsx": "Excel",
+      "paper_scan": "Scansione"
+    },
+    "status": {
+      "uploaded": "Caricato",
+      "extracting": "In lettura",
+      "mapped": "Estratto",
+      "needs_review": "Da rivedere",
+      "confirmed": "Confermato",
+      "failed": "Fallito"
+    },
+    "reviewTitle": "Rivedi il contenuto estratto",
+    "reviewHint": "Confronta ogni cella con l'originale (numero di pagina per riga). Le celle vuote NON vengono riempite automaticamente — compilale tu se mancano. Modifica direttamente nei campi.",
+    "gapsTitle": "Lacune trovate: {count}",
+    "noGaps": "Nessuna lacuna trovata — rivedi comunque il contenuto prima di confermare.",
+    "gapMissingSection": "Manca la sezione \"{section}\" — attesa per il vostro tipo di attività",
+    "gapEmptyCritical": "Alla riga critica \"{row}\" mancano controllo/azione correttiva",
+    "gapLowConfidence": "Lettura incerta di \"{row}\" (pagina {page}) — verifica con l'originale",
+    "gapUnreadable": "La casella in \"{row}\" non è leggibile — impostala tu",
+    "pageBadge": "p. {page}",
+    "manualBadge": "Aggiunta manualmente",
+    "confidenceBadge": "{pct}% di sicurezza",
+    "applies": "Pertinente",
+    "critical": "Critica",
+    "unreadable": "illeggibile",
+    "emptyCell": "vuota nell'originale",
+    "emptyCellPlaceholder": "Cella vuota — compila solo se deve esserci",
+    "cells": {
+      "whatYouDo": "Descrivi cosa fai?",
+      "whatCanGoWrong": "Cosa può andare storto e qual è il rischio?",
+      "controlMeasures": "Come controlli il processo per garantire alimenti sicuri?",
+      "ifItGoesWrong": "Cosa fai se qualcosa va storto?"
+    },
+    "missingSectionPrompt": "Fate qualcosa in \"{section}\"? Aggiungi tu una riga — non la compiliamo mai al posto tuo.",
+    "addRowButton": "Aggiungi riga",
+    "confirmButton": "Conferma e crea bozza",
+    "confirmHint": "Crea una bozza dell'analisi dei rischi con tracciabilità all'originale (import, pagina, area). L'approvazione segue come di consueto.",
+    "confirmedToast": "Import confermato — la bozza è pronta per la revisione",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "aiUnavailable": "L'estrazione non è disponibile al momento — riprova più tardi o costruisci il programma con la guida/il modello.",
+      "badFile": "File non utilizzabile — controlla tipo e dimensione (max 20 MB)."
+    }
   }
 }

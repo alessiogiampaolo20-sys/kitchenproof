@@ -1,0 +1,140 @@
+{
+ "documentLanguage": "da",
+ "looksLikeOfficialSkema": true,
+ "rows": [
+  {
+   "sectionKey": "modtagelse",
+   "activityKey": "modtagelse.chilled",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Kølevarer leveres mandag og torsdag fra Dansk Cater.",
+   "whatCanGoWrong": "For høj temperatur ved levering.",
+   "controlMeasures": "Temperaturen kontrolleres med termometer ved hver levering.",
+   "ifItGoesWrong": "Varen afvises og noteres.",
+   "confidence": 0.98,
+   "page": 1,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "modtagelse",
+   "activityKey": "modtagelse.frozen",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Frostvarer leveres samme dage.",
+   "whatCanGoWrong": "Optøede varer.",
+   "controlMeasures": "Varerne tjekkes for hårdfrossenhed.",
+   "ifItGoesWrong": null,
+   "confidence": 0.97,
+   "page": 1,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "opbevaring",
+   "activityKey": "opbevaring.chilled",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Opbevaring i køleskab 1 og 2 ved højst 5 grader.",
+   "whatCanGoWrong": "Bakterievækst ved for høj temperatur.",
+   "controlMeasures": "Daglig aflæsning af termometer morgen.",
+   "ifItGoesWrong": "Varer kasseres ved tvivl, tekniker tilkaldes.",
+   "confidence": 0.99,
+   "page": 2,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "opbevaring",
+   "activityKey": "opbevaring.frozen",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Fryser ved -18.",
+   "whatCanGoWrong": null,
+   "controlMeasures": "Ugentlig kontrol.",
+   "ifItGoesWrong": "Omplacering af varer.",
+   "confidence": 0.92,
+   "page": 2,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "tilberedning",
+   "activityKey": "tilberedning.hot_prep",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Retter gennemsteges/koges.",
+   "whatCanGoWrong": "Utilstrækkelig opvarmning.",
+   "controlMeasures": "Centrumtemperatur 75 grader måles ved samlede retter.",
+   "ifItGoesWrong": "Videre opvarmning.",
+   "confidence": 0.96,
+   "page": 3,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "tilberedning",
+   "activityKey": "tilberedning.cooling",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Store portioner nedkøles i lave bakker.",
+   "whatCanGoWrong": "For langsom nedkøling.",
+   "controlMeasures": "Fra 56 til 10 grader på under 4 timer.",
+   "ifItGoesWrong": "Kasseres.",
+   "confidence": 0.95,
+   "page": 3,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "salg_servering",
+   "activityKey": "salg_servering.unpackaged_chilled",
+   "customName": null,
+   "applies": true,
+   "isCritical": false,
+   "whatYouDo": "Salatbar i kølemontre.",
+   "whatCanGoWrong": "Temperatur i montren stiger.",
+   "controlMeasures": "Montren aflæses sammen med køleskabene.",
+   "ifItGoesWrong": "Varerne kasseres efter frokost.",
+   "confidence": 0.94,
+   "page": 4,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  }
+ ],
+ "unreadableNotes": []
+}

@@ -89,6 +89,20 @@ export default async function ProgrammePage({
                   {t("programme.startWizardHint")}
                 </p>
                 <StartTemplateButton siteId={siteId} />
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="min-h-14"
+                  data-testid="start-import"
+                >
+                  <Link href={`/app/${siteId}/programme/import`}>
+                    {t("programme.startImportButton")}
+                  </Link>
+                </Button>
+                <p className="text-xs text-muted-foreground">
+                  {t("programme.startImportHint")}
+                </p>
               </>
             ) : null}
           </CardContent>

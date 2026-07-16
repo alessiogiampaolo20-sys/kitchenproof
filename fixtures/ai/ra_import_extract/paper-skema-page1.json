@@ -1,0 +1,66 @@
+{
+ "documentLanguage": "mixed",
+ "looksLikeOfficialSkema": true,
+ "rows": [
+  {
+   "sectionKey": "modtagelse",
+   "activityKey": "modtagelse.chilled",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "Varer fra Inco tirsdag",
+   "whatCanGoWrong": "for varmt",
+   "controlMeasures": "føler i kassen",
+   "ifItGoesWrong": "sendes retur",
+   "confidence": 0.72,
+   "page": 1,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "opbevaring",
+   "activityKey": "opbevaring.chilled",
+   "customName": null,
+   "applies": null,
+   "isCritical": true,
+   "whatYouDo": "køl 1+2",
+   "whatCanGoWrong": null,
+   "controlMeasures": "termometer hver dag",
+   "ifItGoesWrong": null,
+   "confidence": 0.55,
+   "page": 1,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  },
+  {
+   "sectionKey": "tilberedning",
+   "activityKey": "tilberedning.cooling",
+   "customName": null,
+   "applies": true,
+   "isCritical": true,
+   "whatYouDo": "suppe køles ned i baljer",
+   "whatCanGoWrong": "står natten over?",
+   "controlMeasures": null,
+   "ifItGoesWrong": null,
+   "confidence": 0.4,
+   "page": 2,
+   "region": {
+    "x": 40,
+    "y": 120,
+    "w": 500,
+    "h": 60
+   }
+  }
+ ],
+ "unreadableNotes": [
+  "Side 2 nederste række er overstreget og kunne ikke læses."
+ ]
+}

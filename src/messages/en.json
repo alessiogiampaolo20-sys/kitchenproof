@@ -121,7 +121,9 @@
       "whatCanGoWrong": "What could go wrong and what is the associated risk?",
       "controlMeasures": "What process controls do you have to ensure food safety?",
       "ifItGoesWrong": "What do you do if something goes wrong?"
-    }
+    },
+    "startImportButton": "Import an existing risk analysis",
+    "startImportHint": "Already have a risk analysis on paper, in Word or PDF? Import it — the original is stored and the content is transferred to the official form."
   },
   "equipment": {
     "title": "Equipment",
@@ -394,5 +396,63 @@
     "useTemplateInstead": "Go to the programme and use the template",
     "equipmentPhotoHint": "Tip: add photos of your fridges and freezers under Equipment — they'll be ready with QR codes once the programme is approved.",
     "equipmentPhotoLink": "Open Equipment and add photos"
+  },
+  "importRa": {
+    "title": "Import risk analysis",
+    "hint": "Photograph the paper form or upload PDF/Word/Excel. Content is read into the official form — empty cells stay empty, and you review everything before anything is saved.",
+    "acceptHint": "Accepted files: photos (JPG/PNG), PDF, DOCX, XLSX — max 20 MB per file.",
+    "uploadButton": "Upload and extract",
+    "uploading": "Uploading …",
+    "extracting": "Reading the document …",
+    "previousTitle": "Previous imports",
+    "filesSuffix": "file(s)",
+    "reviewLink": "Review",
+    "kinds": {
+      "photo_set": "Photos",
+      "pdf": "PDF",
+      "docx": "Word",
+      "xlsx": "Excel",
+      "paper_scan": "Scan"
+    },
+    "status": {
+      "uploaded": "Uploaded",
+      "extracting": "Extracting",
+      "mapped": "Extracted",
+      "needs_review": "Needs review",
+      "confirmed": "Confirmed",
+      "failed": "Failed"
+    },
+    "reviewTitle": "Review the extracted content",
+    "reviewHint": "Compare each cell with the original (page number shown per row). Empty cells are NOT filled in automatically — add content yourself if it's missing. Edit directly in the fields.",
+    "gapsTitle": "Gaps found: {count}",
+    "noGaps": "No gaps found — still review the content before confirming.",
+    "gapMissingSection": "Section \"{section}\" is missing — expected for your activity type",
+    "gapEmptyCritical": "Critical row \"{row}\" is missing control/corrective content",
+    "gapLowConfidence": "Uncertain reading of \"{row}\" (page {page}) — check against the original",
+    "gapUnreadable": "Checkbox in \"{row}\" could not be read — set it yourself",
+    "pageBadge": "p. {page}",
+    "manualBadge": "Added manually",
+    "confidenceBadge": "{pct}% confidence",
+    "applies": "Relevant",
+    "critical": "Critical",
+    "unreadable": "unreadable",
+    "emptyCell": "empty in the original",
+    "emptyCellPlaceholder": "Empty cell — only fill in if it belongs here",
+    "cells": {
+      "whatYouDo": "Explain what you do/make?",
+      "whatCanGoWrong": "What could go wrong and what is the associated risk?",
+      "controlMeasures": "What process controls do you have to ensure food safety?",
+      "ifItGoesWrong": "What do you do if something goes wrong?"
+    },
+    "missingSectionPrompt": "Do you do anything under \"{section}\"? Add a row yourself — we never fill it in for you.",
+    "addRowButton": "Add row",
+    "confirmButton": "Confirm and create draft",
+    "confirmHint": "Creates a draft risk analysis with provenance to the original (import, page, region). Approval follows as normal.",
+    "confirmedToast": "Import confirmed — the draft is ready for review",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "aiUnavailable": "Extraction is unavailable right now — try again later, or build the programme with the guide/template.",
+      "badFile": "The file could not be used — check the type and size (max 20 MB)."
+    }
   }
 }

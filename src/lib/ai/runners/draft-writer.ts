@@ -3,7 +3,8 @@
 // generated row/hazard, pack-grounded control points only.
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
-import type { CompliancePack, PackLimit } from "@/lib/compliance/pack-schema";
+import type { CompliancePack } from "@/lib/compliance/pack-schema";
+import { insertControlPointsForKeys } from "@/lib/compliance/cp-writer";
 import type { DraftSection } from "../schemas";
 import { clampTighterLimits } from "./wizard";
 import type { WizardAnswer } from "./wizard";
@@ -164,45 +165,13 @@ export async function writeDraftToRiskAnalysis(args: {
 
   // 4 — control points from pack templates (per-equipment fan-out), with
   // clamped tighter limits where accepted
-  const cpInserts: Database["public"]["Tables"]["control_points"]["Insert"][] = [];
-  for (const key of cpKeys) {
-    const tpl = pack.controlPointTemplates.find((t) => t.key === key);
-    if (!tpl) continue;
-    const limit: PackLimit = tightened.get(key) ?? tpl.defaultLimit;
-    const equipmentKinds = tpl.appliesTo
-      .filter((a) => a.startsWith("equipment:"))
-      .map((a) => a.slice("equipment:".length));
-    const targets = equipment.filter((e) => equipmentKinds.includes(e.kind));
-    const base = {
-      site_id: args.siteId,
-      risk_analysis_id: args.riskAnalysisId,
-      template_key: tpl.key,
-      name_i18n: tpl.name as unknown as Json,
-      category: tpl.category,
-      limit_json: limit as unknown as Json,
-      frequency_json: tpl.defaultFrequency as unknown as Json,
-      monitoring_method: tpl.monitoringMethod,
-      instructions_i18n: tpl.instructions as unknown as Json,
-      corrective_guidance_i18n: tpl.correctiveGuidance as unknown as Json,
-      source_ref: tpl.sourceRef as unknown as Json,
-    };
-    if (targets.length > 0) {
-      for (const unit of targets) {
-        cpInserts.push({ ...base, target_kind: "equipment", equipment_id: unit.id });
-      }
-    } else {
-      const targetKind = tpl.appliesTo[0]?.startsWith("area:")
-        ? "area"
-        : tpl.appliesTo[0]?.startsWith("supplier:")
-          ? "supplier"
-          : "process";
-      cpInserts.push({ ...base, target_kind: targetKind });
-    }
-  }
-  if (cpInserts.length > 0) {
-    const { error } = await supabase.from("control_points").insert(cpInserts);
-    if (error) throw new Error(`control points: ${error.message}`);
-  }
+  await insertControlPointsForKeys(supabase, {
+    siteId: args.siteId,
+    riskAnalysisId: args.riskAnalysisId,
+    pack,
+    keys: cpKeys,
+    tightened,
+  });
 
   // 5 — default cleaning areas + pack pin (parity with the template path)
   const { data: areas } = await supabase
