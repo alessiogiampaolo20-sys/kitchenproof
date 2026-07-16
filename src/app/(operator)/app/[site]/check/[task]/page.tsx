@@ -110,14 +110,21 @@ export default async function CheckPage({
             <CoolingCheck
               siteId={siteId}
               taskId={task.id}
+              limitJson={cp.limit_json}
               limitLabel={formatLimit(cp.limit_json)}
             />
           ) : isChecklist ? (
-            <ChecklistCheck siteId={siteId} taskId={task.id} items={checklistItems} />
+            <ChecklistCheck
+              siteId={siteId}
+              taskId={task.id}
+              limitJson={cp.limit_json}
+              items={checklistItems}
+            />
           ) : (
             <TempCheck
               siteId={siteId}
               taskId={task.id}
+              limitJson={cp.limit_json}
               limitLabel={formatLimit(cp.limit_json)}
             />
           )}

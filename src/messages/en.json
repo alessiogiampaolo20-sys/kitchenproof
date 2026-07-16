@@ -176,7 +176,9 @@
       "readingTemp": "Temperature now (°C)"
     },
     "verification": "Follow-up check",
-    "verificationHint": "This check verifies an earlier deviation."
+    "verificationHint": "This check verifies an earlier deviation.",
+    "photoAttach": "Attach photo",
+    "offlineSynced": "Recorded offline — synced {time}"
   },
   "todayScreen": {
     "overdue": "Overdue",
@@ -344,5 +346,23 @@
     "actingAs": "Active user",
     "nobodyActive": "No active user",
     "switched": "User switched"
+  },
+  "offline": {
+    "offline": "Offline",
+    "offlineQueued": "Offline · {count} queued",
+    "syncing": "Syncing {count}…",
+    "queuedToast": "Saved offline — will sync automatically",
+    "fallbackTitle": "Offline mode",
+    "fallbackHint": "No connection. You can still do today's checks — they sync when you're back online.",
+    "noCache": "No cached tasks on this device yet. Open 'Today' while online.",
+    "updateReady": "New version ready — reload to update",
+    "reload": "Reload"
+  },
+  "push": {
+    "enable": "Enable reminders",
+    "enabled": "Reminders enabled",
+    "due": "A check is due now",
+    "overdue": "A check is overdue (30+ min)",
+    "summary": "{missed} checks were not done today"
   }
 }

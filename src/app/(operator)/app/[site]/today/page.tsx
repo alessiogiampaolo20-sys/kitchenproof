@@ -1,37 +1,25 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
-import {
-  AlertTriangle,
-  Bug,
-  CalendarCheck,
-  ChevronRight,
-  ClipboardCheck,
-  HandHeart,
-  PackageCheck,
-  Sparkles,
-  Thermometer,
-} from "lucide-react";
+import { CalendarCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getActorSession, getDeviceSession } from "@/lib/actor/session";
 import { pickText } from "@/lib/i18n/pick";
 import { wallTimeToUtc } from "@/lib/compliance/materializer";
+import { formatLimit, parseLimit } from "@/lib/compliance/limits";
 import { SiteNav } from "../site-nav";
 import { PinSwitcher, type SwitcherMember } from "./pin-switcher";
 import { RegisterDeviceForm } from "./register-device-form";
 import { AdHocLauncher } from "./adhoc-launcher";
+import { PushSubscribe } from "./push-subscribe";
+import {
+  OfflineCacheMirror,
+  OverdueHeader,
+  TaskRowClient,
+  type TaskRowData,
+} from "./task-row-client";
+import { OfflinePill } from "@/lib/offline/sync-provider";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-
-const CATEGORY_ICONS = {
-  temperature: Thermometer,
-  cleaning: Sparkles,
-  receiving: PackageCheck,
-  pest: Bug,
-  hygiene: HandHeart,
-  other: ClipboardCheck,
-} as const;
 
 function localDate(now: Date, timeZone: string): { y: number; m: number; d: number } {
   const [y, m, d] = new Intl.DateTimeFormat("en-CA", {
@@ -79,12 +67,12 @@ export default async function TodayPage({
   const timeZone = site.timezone;
   const now = new Date();
   const { y, m, d } = localDate(now, timeZone);
-  const dayStart = wallTimeToUtc(y, m, d, 0, 0, site.timezone);
+  const dayStart = wallTimeToUtc(y, m, d, 0, 0, timeZone);
   const dayEnd = new Date(dayStart.getTime() + 24 * 3_600_000);
   const yesterdayStart = new Date(dayStart.getTime() - 24 * 3_600_000);
 
   const taskSelect =
-    "id, due_at, due_window_minutes, status, verifies_deviation_id, control_point:control_points(name_i18n, category, equipment:equipment(name))";
+    "id, due_at, due_window_minutes, status, verifies_deviation_id, control_point:control_points(name_i18n, category, limit_json, equipment:equipment(name))";
 
   const [
     { data: pendingTasks },
@@ -93,6 +81,7 @@ export default async function TodayPage({
     { data: members },
     { data: pinStatus },
     { data: equipment },
+    { data: cleaningAreas },
   ] = await Promise.all([
     supabase
       .from("tasks")
@@ -127,6 +116,12 @@ export default async function TodayPage({
       .select("id, name")
       .eq("site_id", site.id)
       .eq("active", true),
+    supabase
+      .from("cleaning_areas")
+      .select("id, name_i18n")
+      .eq("site_id", site.id)
+      .eq("active", true)
+      .order("position"),
   ]);
 
   const pinById = new Map((pinStatus ?? []).map((p) => [p.membership_id, p]));
@@ -148,10 +143,56 @@ export default async function TodayPage({
     weekday: "long",
     day: "numeric",
     month: "long",
-    timeZone: site.timezone,
+    timeZone,
   });
 
-  const overdue = [
+  const cleaningItems = (cleaningAreas ?? []).map((area) => ({
+    key: area.id,
+    label: pickText(area.name_i18n, locale),
+  }));
+
+  type RawTask = NonNullable<typeof pendingTasks>[number];
+  function toRowData(task: RawTask, tone: TaskRowData["tone"]): TaskRowData {
+    const limitJson = task.control_point?.limit_json ?? { checklist: true };
+    let flow: TaskRowData["flow"] = "temp";
+    try {
+      const limit = parseLimit(limitJson);
+      flow = "coolFrom" in limit ? "cooling" : "checklist" in limit ? "checklist" : "temp";
+    } catch {
+      flow = "temp";
+    }
+    const isCleaning = task.control_point?.category === "cleaning";
+    const checklistItems =
+      flow === "checklist"
+        ? isCleaning && cleaningItems.length > 0
+          ? cleaningItems
+          : [{ key: "main", label: pickText(task.control_point?.name_i18n, locale) }]
+        : [];
+    return {
+      taskId: task.id,
+      siteId: site!.id,
+      name: `${pickText(task.control_point?.name_i18n, locale)}${
+        task.control_point?.equipment ? ` — ${task.control_point.equipment.name}` : ""
+      }`,
+      dueLabel: t("todayScreen.dueAt", {
+        time: format.dateTime(new Date(task.due_at), {
+          hour: "2-digit",
+          minute: "2-digit",
+          timeZone,
+        }),
+      }),
+      tone,
+      category: task.control_point?.category ?? "other",
+      isVerification: task.verifies_deviation_id !== null,
+      isMissed: task.status === "missed",
+      flow,
+      limitJson,
+      limitLabel: formatLimit(limitJson),
+      checklistItems,
+    };
+  }
+
+  const overdueRaw = [
     ...(missedTasks ?? []),
     ...(pendingTasks ?? []).filter(
       (task) =>
@@ -159,76 +200,29 @@ export default async function TodayPage({
         new Date(task.due_at).getTime() + task.due_window_minutes * 60_000,
     ),
   ];
-  const dueNow = (pendingTasks ?? []).filter((task) => {
+  const dueNowRaw = (pendingTasks ?? []).filter((task) => {
     const due = new Date(task.due_at).getTime();
     return (
       now.getTime() >= due - 30 * 60_000 &&
       now.getTime() <= due + task.due_window_minutes * 60_000
     );
   });
-  const later = (pendingTasks ?? []).filter(
+  const laterRaw = (pendingTasks ?? []).filter(
     (task) =>
       new Date(task.due_at).getTime() - 30 * 60_000 > now.getTime() &&
       new Date(task.due_at) < dayEnd,
   );
-  const doneCount = (doneTasks ?? []).length;
+
+  const overdue = overdueRaw.map((task) => toRowData(task, "overdue"));
+  const dueNow = dueNowRaw.map((task) => toRowData(task, "now"));
+  const later = laterRaw.map((task) => toRowData(task, "later"));
+  const done = (doneTasks ?? []).map((task) => toRowData(task, "done"));
+
+  const doneCount = done.length;
   const totalToday =
     doneCount +
     (pendingTasks ?? []).filter((task) => new Date(task.due_at) >= dayStart).length;
   const progress = totalToday > 0 ? doneCount / totalToday : 0;
-
-  function TaskRow({
-    task,
-    tone,
-  }: {
-    task: NonNullable<typeof pendingTasks>[number];
-    tone: "overdue" | "now" | "later" | "done";
-  }) {
-    const category = (task.control_point?.category ?? "other") as keyof typeof CATEGORY_ICONS;
-    const Icon = CATEGORY_ICONS[category] ?? ClipboardCheck;
-    const time = format.dateTime(new Date(task.due_at), {
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZone,
-    });
-    const row = (
-      <Card
-        className={cn(
-          "transition-colors",
-          tone === "overdue" && "border-destructive/50",
-          tone === "done" ? "opacity-60" : "hover:border-primary",
-        )}
-        data-testid={`task-${tone}`}
-      >
-        <CardContent className="flex min-h-14 items-center gap-3 py-3">
-          <Icon
-            className={cn(
-              "size-6 shrink-0",
-              tone === "overdue" ? "text-destructive" : "text-primary",
-            )}
-          />
-          <div className="min-w-0 flex-1">
-            <p className="truncate font-medium">
-              {pickText(task.control_point?.name_i18n, locale)}
-              {task.control_point?.equipment ? (
-                <span className="text-muted-foreground">
-                  {" "}
-                  — {task.control_point.equipment.name}
-                </span>
-              ) : null}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {t("todayScreen.dueAt", { time })}
-              {task.verifies_deviation_id ? ` · ${t("check.verification")}` : ""}
-              {task.status === "missed" ? ` · ${t("todayScreen.logLate")}` : ""}
-            </p>
-          </div>
-          {tone !== "done" ? <ChevronRight className="size-5 text-muted-foreground" /> : null}
-        </CardContent>
-      </Card>
-    );
-    return tone === "done" ? row : <Link href={`/app/${siteId}/check/${task.id}`}>{row}</Link>;
-  }
 
   const ringRadius = 26;
   const ringCircumference = 2 * Math.PI * ringRadius;
@@ -237,6 +231,22 @@ export default async function TodayPage({
     // Kitchen mode (§15.1): base font 18px, ≥56px touch targets.
     <main className="mx-auto w-full max-w-xl flex-1 p-4 text-[18px]">
       <SiteNav siteId={site.id} active="today" />
+      <OfflineCacheMirror
+        siteId={site.id}
+        checks={[...overdue, ...dueNow, ...later].map((row) => ({
+          taskId: row.taskId,
+          siteId: row.siteId,
+          dueAt: "",
+          dueWindowMinutes: 0,
+          status: "pending",
+          verifiesDeviation: row.isVerification,
+          cpName: row.name,
+          category: row.category,
+          limitJson: row.limitJson,
+          equipmentName: null,
+          checklistItems: row.checklistItems,
+        }))}
+      />
       <header className="mb-6 grid gap-3">
         <div className="flex items-center justify-between gap-2">
           <div>
@@ -271,6 +281,8 @@ export default async function TodayPage({
             ) : (
               <Badge variant="outline">{t("pin.nobodyActive")}</Badge>
             )}
+            <OfflinePill />
+            <PushSubscribe siteId={site.id} />
             <span className="ml-auto text-sm text-muted-foreground" data-testid="progress-label">
               {t("todayScreen.progress", { done: doneCount, total: totalToday })}
             </span>
@@ -284,11 +296,9 @@ export default async function TodayPage({
         <div className="grid gap-6">
           {overdue.length > 0 ? (
             <section className="grid gap-2">
-              <h2 className="flex items-center gap-2 font-medium text-destructive">
-                <AlertTriangle className="size-5" /> {t("todayScreen.overdue")}
-              </h2>
+              <OverdueHeader />
               {overdue.map((task) => (
-                <TaskRow key={task.id} task={task} tone="overdue" />
+                <TaskRowClient key={task.taskId} task={task} />
               ))}
             </section>
           ) : null}
@@ -297,7 +307,7 @@ export default async function TodayPage({
             <section className="grid gap-2">
               <h2 className="font-medium">{t("todayScreen.dueNow")}</h2>
               {dueNow.map((task) => (
-                <TaskRow key={task.id} task={task} tone="now" />
+                <TaskRowClient key={task.taskId} task={task} />
               ))}
             </section>
           ) : null}
@@ -306,7 +316,7 @@ export default async function TodayPage({
             <section className="grid gap-2">
               <h2 className="font-medium text-muted-foreground">{t("todayScreen.later")}</h2>
               {later.map((task) => (
-                <TaskRow key={task.id} task={task} tone="later" />
+                <TaskRowClient key={task.taskId} task={task} />
               ))}
             </section>
           ) : null}
@@ -322,13 +332,13 @@ export default async function TodayPage({
 
           <AdHocLauncher siteId={site.id} equipment={equipment ?? []} />
 
-          {(doneTasks ?? []).length > 0 ? (
+          {done.length > 0 ? (
             <section className="grid gap-2">
               <h2 className="font-medium text-muted-foreground">
                 {t("todayScreen.doneSection")} ({doneCount})
               </h2>
-              {(doneTasks ?? []).map((task) => (
-                <TaskRow key={task.id} task={task} tone="done" />
+              {done.map((task) => (
+                <TaskRowClient key={task.taskId} task={task} />
               ))}
             </section>
           ) : null}

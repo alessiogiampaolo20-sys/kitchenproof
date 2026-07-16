@@ -4,8 +4,22 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { materializeSiteTasks } from "@/lib/compliance/materialize-runner";
+import { sendPushToSite } from "@/lib/push";
+import daMessages from "@/messages/da.json";
+import enMessages from "@/messages/en.json";
+import itMessages from "@/messages/it.json";
 
 type Client = SupabaseClient<Database>;
+
+const MESSAGES: Record<string, typeof daMessages> = {
+  da: daMessages,
+  en: enMessages,
+  it: itMessages,
+};
+
+function pushTexts(locale: string | null | undefined) {
+  return (MESSAGES[locale ?? "da"] ?? daMessages).push;
+}
 
 export type CronReport = {
   sitesMaterialized: number;
@@ -47,10 +61,12 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
 
   const { data: sites } = await supabase
     .from("sites")
-    .select("id, name, timezone")
+    .select("id, name, timezone, org:organizations(default_locale)")
     .eq("status", "active");
 
   for (const site of sites ?? []) {
+    const texts = pushTexts(site.org?.default_locale);
+    const todayUrl = `/app/${site.id}/today`;
     // 1 — rolling 7-day materialization (idempotent)
     await materializeSiteTasks(supabase, site.id);
     report.sitesMaterialized += 1;
@@ -95,6 +111,11 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
           })
         ) {
           report.overdueReminders += 1;
+          await sendPushToSite(supabase, site.id, {
+            title: "KitchenProof",
+            body: texts.overdue,
+            url: todayUrl,
+          });
         }
       } else if (
         await notifyOnce(supabase, {
@@ -105,6 +126,11 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
         })
       ) {
         report.dueReminders += 1;
+        await sendPushToSite(supabase, site.id, {
+          title: "KitchenProof",
+          body: texts.due,
+          url: todayUrl,
+        });
       }
     }
 
@@ -137,9 +163,14 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
             site_id: site.id,
             kind: "daily_summary",
             payload: { date: dateKey, missed: missedToday } as Json,
-            channels: ["in_app", "email"],
+            channels: ["in_app", "email", "push"],
           });
           report.summaries += 1;
+          await sendPushToSite(supabase, site.id, {
+            title: "KitchenProof",
+            body: texts.summary.replace("{missed}", String(missedToday ?? 0)),
+            url: todayUrl,
+          });
         }
       }
     }

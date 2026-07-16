@@ -5,185 +5,127 @@ import { createClient } from "@/lib/supabase/server";
 import { getActorSession } from "@/lib/actor/session";
 import { writeAudit } from "@/lib/audit/log";
 import {
-  describeValue,
-  evaluateCheck,
-  suggestSeverity,
-  type CheckValue,
-} from "@/lib/compliance/checks";
+  applyDeviationSteps,
+  recordCompletion,
+  type AuditFn,
+} from "@/lib/compliance/record-completion";
+import { evaluateCheck, type CheckValue } from "@/lib/compliance/checks";
 import {
   adHocSchema,
   completeTaskSchema,
   deviationStepsSchema,
 } from "@/lib/schemas/checks";
 import { notifySiteManagers } from "@/lib/notifications";
-import { pickText } from "@/lib/i18n/pick";
 import type { Json } from "@/lib/supabase/database.types";
 
-export type CompleteTaskResult =
+export type SyncResult =
   | {
       ok: true;
       passed: boolean;
       deviationId?: string;
       correctiveGuidance?: string;
     }
-  | { error: "noActor" | "alreadyDone" | "error" };
+  | { error: "retry" | "drop" | "noActor" };
+
+function makeAudit(supabase: Awaited<ReturnType<typeof createClient>>): AuditFn {
+  return (entry) =>
+    writeAudit(supabase, {
+      orgId: entry.orgId,
+      siteId: entry.siteId,
+      actorId: entry.actorId,
+      actorRole: entry.actorRole,
+      action: entry.action,
+      entityTable: entry.entityTable,
+      entityId: entry.entityId,
+      diff: entry.diff,
+    });
+}
 
 /**
- * §8.2 check execution. Requires an ACTIVE PIN actor (§4.2) — the completion
- * is attributed to the person, not the device session. Pass/fail is computed
- * server-side; late completions are flagged, never back-dated (§17).
+ * §8.2/§16: the single completion entry point — used directly when online and
+ * by the outbox flush when draining. Idempotent on clientUuid, so flaky-wifi
+ * retries and offline replays can never double-record.
  */
-export async function completeTask(input: {
+export async function syncCompleteTask(input: {
   siteId: string;
   taskId: string;
   value: CheckValue;
   note?: string;
-}): Promise<CompleteTaskResult> {
+  clientUuid: string;
+  clientCreatedAt: string;
+  photoPaths?: string[];
+  deviationSteps?: {
+    foodAssessment: string;
+    correctiveAction: string;
+    followUpHours: number;
+    skipFollowUp: boolean;
+  };
+}): Promise<SyncResult> {
   const parsed = completeTaskSchema.safeParse(input);
-  if (!parsed.success) return { error: "error" };
-
-  const actor = await getActorSession(parsed.data.siteId);
-  if (!actor) return { error: "noActor" };
-
-  const supabase = await createClient();
-  const { data: site } = await supabase
-    .from("sites")
-    .select("id, org_id")
-    .eq("id", parsed.data.siteId)
-    .maybeSingle();
-  if (!site) return { error: "error" };
-
-  const { data: task } = await supabase
-    .from("tasks")
-    .select(
-      "id, status, due_at, due_window_minutes, verifies_deviation_id, control_point:control_points(id, name_i18n, category, limit_json, equipment_id, corrective_guidance_i18n)",
-    )
-    .eq("id", parsed.data.taskId)
-    .eq("site_id", parsed.data.siteId)
-    .maybeSingle();
-  if (!task || !task.control_point) return { error: "error" };
-  if (task.status === "done") return { error: "alreadyDone" };
-
-  let passed: boolean;
-  try {
-    passed = evaluateCheck(task.control_point.limit_json, parsed.data.value);
-  } catch {
-    return { error: "error" };
+  if (!parsed.success) return { error: "drop" };
+  // storage paths must live under this site's prefix (RLS-aligned)
+  if (parsed.data.photoPaths.some((p) => !p.startsWith(`${parsed.data.siteId}/`))) {
+    return { error: "drop" };
   }
 
-  const now = new Date();
-  const isLate =
-    now.getTime() >
-    new Date(task.due_at).getTime() + task.due_window_minutes * 60_000;
+  const actor = await getActorSession(parsed.data.siteId);
+  if (!actor) return { error: "noActor" }; // queued entries wait for a re-PIN
 
-  // failed check → deviation first, so the completion can reference it (§8.3)
-  let deviationId: string | undefined;
-  if (!passed) {
-    const severity = suggestSeverity(task.control_point.limit_json, parsed.data.value);
-    const description = `${pickText(task.control_point.name_i18n, "da")}: ${describeValue(parsed.data.value)}`;
-    const { data: deviation, error } = await supabase
+  const supabase = await createClient();
+  const result = await recordCompletion(
+    supabase,
+    {
+      siteId: parsed.data.siteId,
+      taskId: parsed.data.taskId,
+      actor: { profileId: actor.profileId, role: actor.role },
+      value: parsed.data.value,
+      note: parsed.data.note,
+      clientUuid: parsed.data.clientUuid,
+      clientCreatedAt: parsed.data.clientCreatedAt,
+      photoPaths: parsed.data.photoPaths,
+      deviationSteps: parsed.data.deviationSteps,
+    },
+    makeAudit(supabase),
+  );
+
+  if ("error" in result) {
+    if (result.error === "alreadyDone") return { ok: true, passed: true };
+    if (result.error === "invalid") return { error: "drop" };
+    return { error: "retry" };
+  }
+
+  if (!result.passed && result.deviationId) {
+    const { data: deviation } = await supabase
       .from("deviations")
-      .insert({
-        site_id: site.id,
-        control_point_id: task.control_point.id,
-        source: "task",
-        detected_by: actor.profileId,
-        description,
-        severity,
-      })
-      .select("id, severity")
-      .single();
-    if (error || !deviation) return { error: "error" };
-    deviationId = deviation.id;
-
-    if (severity !== "minor") {
+      .select("severity, description")
+      .eq("id", result.deviationId)
+      .maybeSingle();
+    if (deviation && deviation.severity !== "minor") {
       await notifySiteManagers(supabase, {
-        siteId: site.id,
+        siteId: parsed.data.siteId,
         kind: "deviation_major",
-        payload: { deviation_id: deviation.id, severity, description } as Json,
-        emailSubject: `KitchenProof: ${severity} afvigelse`,
-        emailText: description,
+        payload: {
+          deviation_id: result.deviationId,
+          severity: deviation.severity,
+          description: deviation.description,
+        } as Json,
+        emailSubject: `KitchenProof: ${deviation.severity} afvigelse`,
+        emailText: deviation.description,
       });
     }
   }
 
-  const { data: completion, error: completionError } = await supabase
-    .from("task_completions")
-    .insert({
-      task_id: task.id,
-      site_id: site.id,
-      control_point_id: task.control_point.id,
-      equipment_id: task.control_point.equipment_id,
-      performed_by: actor.profileId,
-      value_json: parsed.data.value as unknown as Json,
-      passed,
-      is_late: isLate,
-      note: parsed.data.note ?? null,
-      deviation_id: deviationId ?? null,
-    })
-    .select("id")
-    .single();
-  if (completionError || !completion) return { error: "error" };
-
-  await supabase.from("tasks").update({ status: "done" }).eq("id", task.id);
-
-  await writeAudit(supabase, {
-    orgId: site.org_id,
-    siteId: site.id,
-    actorId: actor.profileId,
-    actorRole: actor.role,
-    action: passed ? "task.completed" : "task.completed_failed",
-    entityTable: "task_completions",
-    entityId: completion.id,
-    diff: {
-      task_id: task.id,
-      passed,
-      is_late: isLate,
-      value: parsed.data.value as unknown as Json,
-    },
-  });
-
-  // follow-up verification task closing the §8.3 loop
-  if (task.verifies_deviation_id && passed) {
-    await supabase
-      .from("deviations")
-      .update({
-        verification_text: `OK: ${describeValue(parsed.data.value)}`,
-        verified_by: actor.profileId,
-        status: "verified",
-      })
-      .eq("id", task.verifies_deviation_id)
-      .in("status", ["open", "corrected"]);
-    await writeAudit(supabase, {
-      orgId: site.org_id,
-      siteId: site.id,
-      actorId: actor.profileId,
-      actorRole: actor.role,
-      action: "deviation.verified",
-      entityTable: "deviations",
-      entityId: task.verifies_deviation_id,
-    });
+  // on failure the deviation sheet must stay mounted (see Phase 2 note);
+  // recordDeviationSteps / the composite path revalidates afterwards
+  if (result.passed || parsed.data.deviationSteps) {
+    revalidatePath(`/app/${parsed.data.siteId}/today`);
   }
-
-  // On failure the deviation sheet must stay mounted on the check page:
-  // revalidating here would re-render it (task now done → redirect) and kill
-  // the sheet. recordDeviationSteps() revalidates when the flow completes.
-  if (passed) {
-    revalidatePath(`/app/${site.id}/today`);
-  }
-  return {
-    ok: true,
-    passed,
-    deviationId,
-    correctiveGuidance: deviationId
-      ? pickText(task.control_point.corrective_guidance_i18n, "da")
-      : undefined,
-  };
+  return result;
 }
 
 export type DeviationStepsResult = { ok: true } | { error: "noActor" | "error" };
 
-/** §8.3 steps 1–3: food assessment, corrective action, follow-up verification task. */
+/** §8.3 steps recorded from the ONLINE sheet (deviation already exists server-side). */
 export async function recordDeviationSteps(input: {
   siteId: string;
   deviationId: string;
@@ -214,58 +156,24 @@ export async function recordDeviationSteps(input: {
     .maybeSingle();
   if (!deviation || deviation.status !== "open") return { error: "error" };
 
-  const { error: updateError } = await supabase
-    .from("deviations")
-    .update({
-      food_assessment: parsed.data.foodAssessment as never,
-      corrective_action_text: parsed.data.correctiveAction,
-      corrective_action_by: actor.profileId,
-      status: "corrected",
-    })
-    .eq("id", deviation.id);
-  if (updateError) return { error: "error" };
-
-  await writeAudit(supabase, {
-    orgId: site.org_id,
-    siteId: site.id,
-    actorId: actor.profileId,
-    actorRole: actor.role,
-    action: "deviation.corrected",
-    entityTable: "deviations",
-    entityId: deviation.id,
-    diff: {
-      food_assessment: parsed.data.foodAssessment,
-      corrective_action: parsed.data.correctiveAction,
+  const result = await applyDeviationSteps(
+    supabase,
+    {
+      siteId: site.id,
+      orgId: site.org_id,
+      deviationId: deviation.id,
+      controlPointId: deviation.control_point_id,
+      actor: { profileId: actor.profileId, role: actor.role },
+      steps: {
+        foodAssessment: parsed.data.foodAssessment,
+        correctiveAction: parsed.data.correctiveAction,
+        followUpHours: parsed.data.followUpHours,
+        skipFollowUp: parsed.data.skipFollowUp,
+      },
     },
-  });
-
-  // step 3: verify later (only when the deviation is tied to a control point)
-  if (!parsed.data.skipFollowUp && deviation.control_point_id) {
-    const dueAt = new Date(Date.now() + parsed.data.followUpHours * 3_600_000);
-    const { data: followUp } = await supabase
-      .from("tasks")
-      .insert({
-        site_id: site.id,
-        control_point_id: deviation.control_point_id,
-        due_at: dueAt.toISOString(),
-        due_window_minutes: 60,
-        verifies_deviation_id: deviation.id,
-      })
-      .select("id")
-      .single();
-    if (followUp) {
-      await writeAudit(supabase, {
-        orgId: site.org_id,
-        siteId: site.id,
-        actorId: actor.profileId,
-        actorRole: actor.role,
-        action: "deviation.followup_created",
-        entityTable: "tasks",
-        entityId: followUp.id,
-        diff: { deviation_id: deviation.id, due_at: dueAt.toISOString() },
-      });
-    }
-  }
+    makeAudit(supabase),
+  );
+  if ("error" in result) return { error: "error" };
 
   revalidatePath(`/app/${site.id}/today`);
   revalidatePath(`/app/${site.id}/deviations`);
@@ -274,7 +182,7 @@ export async function recordDeviationSteps(input: {
 
 export type AdHocResult = { ok: true } | { error: "noActor" | "error" };
 
-/** §8.5 ad-hoc records: unscheduled temperature, note, or spotted deviation. */
+/** §8.5 ad-hoc records (online path). */
 export async function adHocRecord(input: {
   siteId: string;
   kind: string;
@@ -282,8 +190,39 @@ export async function adHocRecord(input: {
   tempC?: number;
   text?: string;
 }): Promise<AdHocResult> {
+  const result = await adHocCore({ ...input, clientUuid: undefined });
+  if ("ok" in result) return { ok: true };
+  return { error: result.error === "noActor" ? "noActor" : "error" };
+}
+
+/** Outbox variant: idempotent on clientUuid (temp/note only). */
+export async function syncAdHocRecord(input: {
+  siteId: string;
+  kind: string;
+  equipmentId?: string;
+  tempC?: number;
+  text?: string;
+  clientUuid: string;
+  clientCreatedAt: string;
+}): Promise<SyncResult> {
+  const result = await adHocCore(input);
+  if ("ok" in result) return { ok: true, passed: true };
+  if (result.error === "invalid") return { error: "drop" };
+  if (result.error === "noActor") return { error: "noActor" };
+  return { error: "retry" };
+}
+
+async function adHocCore(input: {
+  siteId: string;
+  kind: string;
+  equipmentId?: string;
+  tempC?: number;
+  text?: string;
+  clientUuid?: string;
+  clientCreatedAt?: string;
+}): Promise<{ ok: true } | { error: "noActor" | "invalid" | "error" }> {
   const parsed = adHocSchema.safeParse(input);
-  if (!parsed.success) return { error: "error" };
+  if (!parsed.success) return { error: "invalid" };
 
   const actor = await getActorSession(parsed.data.siteId);
   if (!actor) return { error: "noActor" };
@@ -294,10 +233,20 @@ export async function adHocRecord(input: {
     .select("id, org_id")
     .eq("id", parsed.data.siteId)
     .maybeSingle();
-  if (!site) return { error: "error" };
+  if (!site) return { error: "invalid" };
+  const audit = makeAudit(supabase);
+
+  if (parsed.data.clientUuid) {
+    const { data: existing } = await supabase
+      .from("task_completions")
+      .select("id")
+      .eq("client_uuid", parsed.data.clientUuid)
+      .maybeSingle();
+    if (existing) return { ok: true };
+  }
 
   if (parsed.data.kind === "deviation") {
-    if (!parsed.data.text) return { error: "error" };
+    if (!parsed.data.text) return { error: "invalid" };
     const { data: deviation, error } = await supabase
       .from("deviations")
       .insert({
@@ -310,7 +259,7 @@ export async function adHocRecord(input: {
       .select("id")
       .single();
     if (error || !deviation) return { error: "error" };
-    await writeAudit(supabase, {
+    await audit({
       orgId: site.org_id,
       siteId: site.id,
       actorId: actor.profileId,
@@ -329,7 +278,6 @@ export async function adHocRecord(input: {
       ? ({ temp_c: parsed.data.tempC ?? 0 } as Json)
       : ({ note_text: parsed.data.text ?? "" } as Json);
 
-  // ad-hoc temps evaluate against the equipment's active temperature CP if any
   let passed: boolean | null = null;
   let controlPointId: string | null = null;
   if (parsed.data.kind === "temp" && parsed.data.equipmentId) {
@@ -360,12 +308,14 @@ export async function adHocRecord(input: {
       performed_by: actor.profileId,
       value_json: value,
       passed,
+      client_created_at: parsed.data.clientCreatedAt ?? null,
+      ...(parsed.data.clientUuid ? { client_uuid: parsed.data.clientUuid } : {}),
     })
     .select("id")
     .single();
   if (error || !completion) return { error: "error" };
 
-  await writeAudit(supabase, {
+  await audit({
     orgId: site.org_id,
     siteId: site.id,
     actorId: actor.profileId,

@@ -176,7 +176,9 @@
       "readingTemp": "Temperatur nu (°C)"
     },
     "verification": "Opfølgende kontrol",
-    "verificationHint": "Denne kontrol verificerer en tidligere afvigelse."
+    "verificationHint": "Denne kontrol verificerer en tidligere afvigelse.",
+    "photoAttach": "Vedhæft foto",
+    "offlineSynced": "Registreret offline — synk. {time}"
   },
   "todayScreen": {
     "overdue": "Forsinket",
@@ -344,5 +346,23 @@
     "actingAs": "Aktiv bruger",
     "nobodyActive": "Ingen aktiv bruger",
     "switched": "Bruger skiftet"
+  },
+  "offline": {
+    "offline": "Offline",
+    "offlineQueued": "Offline · {count} i kø",
+    "syncing": "Synkroniserer {count}…",
+    "queuedToast": "Gemt offline — synkroniseres automatisk",
+    "fallbackTitle": "Offline-tilstand",
+    "fallbackHint": "Ingen forbindelse. Du kan stadig udføre dagens kontroller — de synkroniseres, når forbindelsen er tilbage.",
+    "noCache": "Ingen gemte opgaver på denne enhed endnu. Åbn 'I dag', mens du er online.",
+    "updateReady": "Ny version klar — genindlæs for at opdatere",
+    "reload": "Genindlæs"
+  },
+  "push": {
+    "enable": "Aktivér påmindelser",
+    "enabled": "Påmindelser aktiveret",
+    "due": "En kontrol forfalder nu",
+    "overdue": "En kontrol er forsinket (30+ min)",
+    "summary": "{missed} kontroller blev ikke udført i dag"
   }
 }

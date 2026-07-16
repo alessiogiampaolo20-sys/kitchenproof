@@ -98,7 +98,7 @@ export default async function ReportsPage({
     supabase
       .from("task_completions")
       .select(
-        "id, value_json, passed, is_late, server_received_at, performer:profiles!task_completions_performed_by_fkey(full_name), control_point:control_points(name_i18n), equipment:equipment(name)",
+        "id, value_json, passed, is_late, client_created_at, server_received_at, performer:profiles!task_completions_performed_by_fkey(full_name), control_point:control_points(name_i18n), equipment:equipment(name)",
       )
       .eq("site_id", siteId)
       .order("server_received_at", { ascending: false })
@@ -201,6 +201,21 @@ export default async function ReportsPage({
                 ) : null}
                 {record.is_late ? (
                   <Badge variant="outline">{t("check.lateBadge")}</Badge>
+                ) : null}
+                {/* §16 clock-integrity flag: performed offline, synced later */}
+                {record.client_created_at &&
+                new Date(record.server_received_at).getTime() -
+                  new Date(record.client_created_at).getTime() >
+                  10 * 60_000 ? (
+                  <Badge variant="secondary" data-testid="offline-synced-badge">
+                    {t("check.offlineSynced", {
+                      time: format.dateTime(new Date(record.server_received_at), {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        timeZone: site.timezone,
+                      }),
+                    })}
+                  </Badge>
                 ) : null}
                 <span className="text-muted-foreground" data-testid="record-by">
                   {t("reports.recordBy", { name: record.performer?.full_name ?? "—" })}

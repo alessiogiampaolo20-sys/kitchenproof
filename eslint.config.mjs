@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated bundles (service worker via scripts/build-sw.mjs).
+    "public/sw.js",
   ]),
 ]);
 

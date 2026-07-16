@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 import { verify as argonVerify } from "@node-rs/argon2";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -71,6 +72,43 @@ export async function registerDevice(
 
   await setDeviceCookie({ deviceSessionId: device.id, siteId: site.id });
   revalidatePath(`/app/${site.id}/today`);
+  return { ok: true };
+}
+
+const pushSubscriptionSchema = z.object({
+  siteId: z.uuid(),
+  endpoint: z.url(),
+  p256dh: z.string().min(1),
+  auth: z.string().min(1),
+});
+
+/** §8.4 push channel: stores the device-user's subscription for this site. */
+export async function savePushSubscription(input: {
+  siteId: string;
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+}): Promise<{ ok: true } | { error: "error" }> {
+  const parsed = pushSubscriptionSchema.safeParse(input);
+  if (!parsed.success) return { error: "error" };
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "error" };
+
+  const { error } = await supabase.from("push_subscriptions").upsert(
+    {
+      user_id: user.id,
+      site_id: parsed.data.siteId,
+      endpoint: parsed.data.endpoint,
+      p256dh: parsed.data.p256dh,
+      auth: parsed.data.auth,
+    },
+    { onConflict: "endpoint" },
+  );
+  if (error) return { error: "error" };
   return { ok: true };
 }
 

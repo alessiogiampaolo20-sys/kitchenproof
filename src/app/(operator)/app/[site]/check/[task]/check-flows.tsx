@@ -1,17 +1,18 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { Check, Delete, Minus, Snowflake } from "lucide-react";
+import { Camera, Check, Delete, Minus, Snowflake } from "lucide-react";
 import {
   adHocRecord,
-  completeTask,
   recordDeviationSteps,
-  type CompleteTaskResult,
+  syncCompleteTask,
 } from "../_actions";
-import type { CheckValue } from "@/lib/compliance/checks";
+import { evaluateCheck, type CheckValue } from "@/lib/compliance/checks";
+import { attachDeviationSteps, enqueue } from "@/lib/offline/outbox";
+import { createClient } from "@/lib/supabase/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,7 +23,7 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
-/* ── Deviation 3-step sheet (§8.3) — opens immediately on any failed check ── */
+/* ── Deviation 3-step sheet (§8.3) — works online and from the outbox ──────── */
 
 const FOOD_OPTIONS = ["moved", "discarded", "kept", "na"] as const;
 const FIX_OPTIONS = [
@@ -34,15 +35,20 @@ const FIX_OPTIONS = [
   "other",
 ] as const;
 
+export type DeviationStepsInput = {
+  foodAssessment: string;
+  correctiveAction: string;
+  followUpHours: number;
+  skipFollowUp: boolean;
+};
+
 export function DeviationSheet({
-  siteId,
-  deviationId,
   guidance,
+  onSubmitSteps,
   onClosed,
 }: {
-  siteId: string;
-  deviationId: string;
   guidance?: string;
+  onSubmitSteps: (steps: DeviationStepsInput) => Promise<boolean>;
   onClosed: () => void;
 }) {
   const t = useTranslations("deviation");
@@ -62,15 +68,13 @@ export function DeviationSheet({
   function submit() {
     if (!food || correctiveText.length === 0) return;
     startTransition(async () => {
-      const result = await recordDeviationSteps({
-        siteId,
-        deviationId,
+      const ok = await onSubmitSteps({
         foodAssessment: food,
         correctiveAction: correctiveText,
         followUpHours: 2,
-        skipFollowUp: skipFollowUp ? "true" : "false",
+        skipFollowUp,
       });
-      if (result && "ok" in result) {
+      if (ok) {
         toast.success(t("saved"));
         onClosed();
       }
@@ -164,75 +168,182 @@ export function DeviationSheet({
   );
 }
 
-/* ── Shared submit plumbing ────────────────────────────────────────────────── */
+/* ── Shared submit plumbing: online-first, outbox fallback (§16) ───────────── */
 
-function useCheckSubmit(siteId: string, taskId: string) {
+type SheetState =
+  | { mode: "online"; deviationId: string; guidance?: string }
+  | { mode: "offline"; outboxId: number; guidance?: string };
+
+async function uploadRecordPhotos(
+  siteId: string,
+  clientUuid: string,
+  photos: File[],
+): Promise<string[]> {
+  const supabase = createClient();
+  const paths: string[] = [];
+  for (let i = 0; i < photos.length; i++) {
+    const photo = photos[i]!;
+    const ext = photo.type === "image/png" ? "png" : photo.type === "image/webp" ? "webp" : "jpg";
+    const path = `${siteId}/records/${clientUuid}-${i}.${ext}`;
+    const { error } = await supabase.storage
+      .from("photos")
+      .upload(path, photo, { contentType: photo.type, upsert: true });
+    if (error) throw new Error(error.message);
+    paths.push(path);
+  }
+  return paths;
+}
+
+export function useCheckSubmit(args: {
+  siteId: string;
+  taskId: string;
+  limitJson: unknown;
+  onDone?: () => void; // defaults to router.push(today)
+}) {
   const t = useTranslations("check");
+  const tOffline = useTranslations("offline");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
-  const [deviation, setDeviation] = useState<{
-    deviationId: string;
-    guidance?: string;
-  } | null>(null);
+  const [sheet, setSheet] = useState<SheetState | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  function submit(value: CheckValue, note?: string) {
+  const goDone =
+    args.onDone ?? (() => router.push(`/app/${args.siteId}/today`));
+
+  async function enqueueOffline(
+    value: CheckValue,
+    note: string | undefined,
+    photos: File[],
+    clientUuid: string,
+    clientCreatedAt: string,
+  ) {
+    let passed = true;
+    try {
+      passed = evaluateCheck(args.limitJson, value);
+    } catch {
+      passed = true;
+    }
+    const outboxId = await enqueue({
+      clientUuid,
+      siteId: args.siteId,
+      kind: "completion",
+      payload: { taskId: args.taskId, value, note },
+      photos: photos.map((p) => ({ name: p.name, type: p.type, blob: p })),
+      clientCreatedAt,
+    });
+    if (passed) {
+      toast.success(tOffline("queuedToast"));
+      goDone();
+    } else {
+      setSheet({ mode: "offline", outboxId });
+    }
+  }
+
+  function submit(value: CheckValue, note?: string, photos: File[] = []) {
+    setError(null);
     startTransition(async () => {
-      const result: CompleteTaskResult = await completeTask({
-        siteId,
-        taskId,
-        value,
-        note,
-      });
-      if ("error" in result) {
-        setError(t(result.error === "error" ? "alreadyDone" : result.error));
+      const clientUuid = crypto.randomUUID();
+      const clientCreatedAt = new Date().toISOString();
+
+      if (!navigator.onLine) {
+        await enqueueOffline(value, note, photos, clientUuid, clientCreatedAt);
         return;
       }
-      if (result.passed) {
-        toast.success(t("saved"));
-        router.push(`/app/${siteId}/today`);
-      } else if (result.deviationId) {
-        setDeviation({
-          deviationId: result.deviationId,
-          guidance: result.correctiveGuidance,
+
+      try {
+        const photoPaths =
+          photos.length > 0
+            ? await uploadRecordPhotos(args.siteId, clientUuid, photos)
+            : [];
+        const result = await syncCompleteTask({
+          siteId: args.siteId,
+          taskId: args.taskId,
+          value,
+          note,
+          clientUuid,
+          clientCreatedAt,
+          photoPaths,
         });
+        if ("ok" in result) {
+          if (result.passed) {
+            toast.success(t("saved"));
+            goDone();
+          } else if (result.deviationId) {
+            setSheet({
+              mode: "online",
+              deviationId: result.deviationId,
+              guidance: result.correctiveGuidance,
+            });
+          }
+        } else if (result.error === "noActor") {
+          setError(t("noActor"));
+        } else {
+          setError(t("alreadyDone"));
+        }
+      } catch {
+        // network dropped mid-request: fall back to the outbox (§16)
+        await enqueueOffline(value, note, photos, clientUuid, clientCreatedAt);
       }
     });
   }
 
-  const sheet = deviation ? (
+  const sheetElement = sheet ? (
     <DeviationSheet
-      siteId={siteId}
-      deviationId={deviation.deviationId}
-      guidance={deviation.guidance}
+      guidance={sheet.guidance}
+      onSubmitSteps={async (steps) => {
+        if (sheet.mode === "online") {
+          const result = await recordDeviationSteps({
+            siteId: args.siteId,
+            deviationId: sheet.deviationId,
+            foodAssessment: steps.foodAssessment,
+            correctiveAction: steps.correctiveAction,
+            followUpHours: steps.followUpHours,
+            skipFollowUp: steps.skipFollowUp ? "true" : "false",
+          });
+          return result !== null && "ok" in result;
+        }
+        await attachDeviationSteps(sheet.outboxId, steps);
+        return true;
+      }}
       onClosed={() => {
-        setDeviation(null);
-        router.push(`/app/${siteId}/today`);
+        setSheet(null);
+        goDone();
       }}
     />
   ) : null;
 
-  return { submit, pending, error, sheet };
+  return { submit, pending, error, sheet: sheetElement };
 }
 
-/* ── Temperature check: giant keypad, never the OS keyboard (§15.1) ────────── */
+/* ── Temperature check: giant keypad + optional photo evidence (§8.2) ──────── */
 
 export function TempCheck({
   siteId,
   taskId,
+  limitJson,
   limitLabel,
+  onDone,
 }: {
   siteId: string;
   taskId: string;
+  limitJson: unknown;
   limitLabel: string;
+  onDone?: () => void;
 }) {
   const t = useTranslations("check");
   const [display, setDisplay] = useState("");
-  const { submit, pending, error, sheet } = useCheckSubmit(siteId, taskId);
+  const [photo, setPhoto] = useState<File | null>(null);
+  const photoInput = useRef<HTMLInputElement>(null);
+  const { submit, pending, error, sheet } = useCheckSubmit({
+    siteId,
+    taskId,
+    limitJson,
+    onDone,
+  });
 
   function press(ch: string) {
     setDisplay((d) => {
-      if (ch === "-" ) return d.startsWith("-") ? d : `-${d}`;
+      if (ch === "-") return d.startsWith("-") ? d : `-${d}`;
       if (ch === "." && (d.includes(".") || d === "" || d === "-")) return d;
       if (d.replace(/[-.]/g, "").length >= 4) return d;
       return d + ch;
@@ -287,10 +398,27 @@ export function TempCheck({
         </Button>
         <Button
           type="button"
+          variant={photo ? "default" : "ghost"}
+          className="h-16"
+          onClick={() => photoInput.current?.click()}
+          aria-label={t("photoAttach")}
+        >
+          <Camera className="size-6" />
+        </Button>
+        <input
+          ref={photoInput}
+          type="file"
+          accept="image/*"
+          capture="environment"
+          className="hidden"
+          onChange={(e) => setPhoto(e.target.files?.[0] ?? null)}
+        />
+        <Button
+          type="button"
           size="lg"
-          className="col-span-3 h-16 text-lg"
+          className="col-span-2 h-16 text-lg"
           disabled={!valid || pending}
-          onClick={() => submit({ temp_c: value })}
+          onClick={() => submit({ temp_c: value }, undefined, photo ? [photo] : [])}
           data-testid="temp-confirm"
         >
           <Check /> {t("confirm")}
@@ -302,7 +430,7 @@ export function TempCheck({
   );
 }
 
-/* ── Checklist check: ✓/✗/N.A. rows; every ✗ needs a reason chip (§8.2) ────── */
+/* ── Checklist check (§8.2) ────────────────────────────────────────────────── */
 
 export type ChecklistItemDef = { key: string; label: string };
 
@@ -311,17 +439,26 @@ const REASONS = ["dirty", "broken", "missing", "other"] as const;
 export function ChecklistCheck({
   siteId,
   taskId,
+  limitJson,
   items,
+  onDone,
 }: {
   siteId: string;
   taskId: string;
+  limitJson: unknown;
   items: ChecklistItemDef[];
+  onDone?: () => void;
 }) {
   const t = useTranslations("check");
   const [state, setState] = useState<
     Record<string, { status: "ok" | "fail" | "na"; reason?: string }>
   >(Object.fromEntries(items.map((i) => [i.key, { status: "ok" as const }])));
-  const { submit, pending, error, sheet } = useCheckSubmit(siteId, taskId);
+  const { submit, pending, error, sheet } = useCheckSubmit({
+    siteId,
+    taskId,
+    limitJson,
+    onDone,
+  });
 
   const missingReason = Object.values(state).some(
     (s) => s.status === "fail" && !s.reason,
@@ -402,21 +539,30 @@ export function ChecklistCheck({
   );
 }
 
-/* ── Cooling log (56→10 °C/4h) with blast-chiller shortcut (§8.2) ──────────── */
+/* ── Cooling log (§8.2) ────────────────────────────────────────────────────── */
 
 export function CoolingCheck({
   siteId,
   taskId,
+  limitJson,
   limitLabel,
+  onDone,
 }: {
   siteId: string;
   taskId: string;
+  limitJson: unknown;
   limitLabel: string;
+  onDone?: () => void;
 }) {
   const t = useTranslations("check");
   const [log, setLog] = useState<{ at: string; temp_c: number }[]>([]);
   const [tempInput, setTempInput] = useState("");
-  const { submit, pending, error, sheet } = useCheckSubmit(siteId, taskId);
+  const { submit, pending, error, sheet } = useCheckSubmit({
+    siteId,
+    taskId,
+    limitJson,
+    onDone,
+  });
 
   const temp = Number.parseFloat(tempInput.replace(",", "."));
   const validTemp = tempInput !== "" && !Number.isNaN(temp);
@@ -534,7 +680,7 @@ export function CoolingCheck({
   );
 }
 
-/* ── Ad-hoc record dialog (§8.5) — used from the Today screen ──────────────── */
+/* ── Ad-hoc record dialog (§8.5): online-first, temp/note queue offline ────── */
 
 export function AdHocDialog({
   siteId,
@@ -548,6 +694,7 @@ export function AdHocDialog({
   onOpenChange: (v: boolean) => void;
 }) {
   const t = useTranslations("todayScreen");
+  const tOffline = useTranslations("offline");
   const router = useRouter();
   const [kind, setKind] = useState<"temp" | "note" | "deviation">("temp");
   const [tempInput, setTempInput] = useState("");
@@ -559,21 +706,67 @@ export function AdHocDialog({
   const valid =
     kind === "temp" ? tempInput !== "" && !Number.isNaN(temp) : text.trim().length > 0;
 
+  function reset() {
+    setTempInput("");
+    setText("");
+  }
+
   function submit() {
     startTransition(async () => {
-      const result = await adHocRecord({
+      const input = {
         siteId,
         kind,
         equipmentId: equipmentId || undefined,
         tempC: kind === "temp" ? temp : undefined,
         text: text || undefined,
-      });
-      if (result && "ok" in result) {
-        toast.success(t("adHoc"));
+      };
+      const offlineCapable = kind !== "deviation";
+      if (!navigator.onLine && offlineCapable) {
+        await enqueue({
+          clientUuid: crypto.randomUUID(),
+          siteId,
+          kind: "adhoc",
+          payload: {
+            adHocKind: kind as "temp" | "note",
+            equipmentId: input.equipmentId,
+            tempC: input.tempC,
+            text: input.text,
+          },
+          photos: [],
+          clientCreatedAt: new Date().toISOString(),
+        });
+        toast.success(tOffline("queuedToast"));
         onOpenChange(false);
-        setTempInput("");
-        setText("");
-        router.refresh();
+        reset();
+        return;
+      }
+      try {
+        const result = await adHocRecord(input);
+        if (result && "ok" in result) {
+          toast.success(t("adHoc"));
+          onOpenChange(false);
+          reset();
+          router.refresh();
+        }
+      } catch {
+        if (offlineCapable) {
+          await enqueue({
+            clientUuid: crypto.randomUUID(),
+            siteId,
+            kind: "adhoc",
+            payload: {
+              adHocKind: kind as "temp" | "note",
+              equipmentId: input.equipmentId,
+              tempC: input.tempC,
+              text: input.text,
+            },
+            photos: [],
+            clientCreatedAt: new Date().toISOString(),
+          });
+          toast.success(tOffline("queuedToast"));
+          onOpenChange(false);
+          reset();
+        }
       }
     });
   }

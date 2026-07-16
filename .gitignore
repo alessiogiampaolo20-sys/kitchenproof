@@ -45,6 +45,9 @@ next-env.d.ts
 supabase/.branches
 supabase/.temp
 
+# generated service worker (scripts/build-sw.mjs)
+public/sw.js
+
 # playwright
 /test-results/
 /playwright-report/

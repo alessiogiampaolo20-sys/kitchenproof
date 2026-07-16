@@ -176,7 +176,9 @@
       "readingTemp": "Temperatura ora (°C)"
     },
     "verification": "Controllo di verifica",
-    "verificationHint": "Questo controllo verifica una deviazione precedente."
+    "verificationHint": "Questo controllo verifica una deviazione precedente.",
+    "photoAttach": "Allega foto",
+    "offlineSynced": "Registrato offline — sinc. {time}"
   },
   "todayScreen": {
     "overdue": "In ritardo",
@@ -344,5 +346,23 @@
     "actingAs": "Utente attivo",
     "nobodyActive": "Nessun utente attivo",
     "switched": "Utente cambiato"
+  },
+  "offline": {
+    "offline": "Offline",
+    "offlineQueued": "Offline · {count} in coda",
+    "syncing": "Sincronizzo {count}…",
+    "queuedToast": "Salvato offline — si sincronizza da solo",
+    "fallbackTitle": "Modalità offline",
+    "fallbackHint": "Nessuna connessione. Puoi comunque fare i controlli di oggi — si sincronizzano al ritorno online.",
+    "noCache": "Nessuna attività in cache su questo dispositivo. Apri 'Oggi' mentre sei online.",
+    "updateReady": "Nuova versione pronta — ricarica per aggiornare",
+    "reload": "Ricarica"
+  },
+  "push": {
+    "enable": "Attiva promemoria",
+    "enabled": "Promemoria attivati",
+    "due": "Un controllo è in scadenza adesso",
+    "overdue": "Un controllo è in ritardo (30+ min)",
+    "summary": "{missed} controlli non eseguiti oggi"
   }
 }
