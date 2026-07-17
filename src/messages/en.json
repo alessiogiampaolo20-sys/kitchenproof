@@ -270,7 +270,9 @@
   },
   "nav2": {
     "deviations": "Deviations",
-    "reports": "Reports"
+    "reports": "Reports",
+    "receive": "Goods in",
+    "stock": "Stock"
   },
   "sites": {
     "title": "Sites",
@@ -453,6 +455,66 @@
       "error": "Something went wrong. Try again.",
       "aiUnavailable": "Extraction is unavailable right now — try again later, or build the programme with the guide/template.",
       "badFile": "The file could not be used — check the type and size (max 20 MB)."
+    }
+  },
+  "receive": {
+    "title": "Receive goods",
+    "hint": "Photograph the invoice or delivery note — the goods are read automatically and stocked with full traceability. You review everything before anything is saved.",
+    "uploadButton": "Photograph / upload invoice",
+    "uploading": "Uploading …",
+    "extracting": "Reading the invoice …",
+    "quickButton": "Quick receive without invoice",
+    "quickTitle": "Quick receive",
+    "quickHint": "For market purchases and deliveries without an invoice — pick supplier and products, still 100% traceable.",
+    "recentTitle": "Recent documents",
+    "unknownSupplier": "Unknown supplier",
+    "kinds": {
+      "invoice": "Invoice",
+      "delivery_note": "Delivery note",
+      "credit_note": "Credit note",
+      "receipt": "Receipt"
+    },
+    "status": {
+      "uploaded": "Uploaded",
+      "extracting": "Extracting",
+      "needs_review": "Needs review",
+      "confirmed": "Confirmed",
+      "failed": "Failed"
+    },
+    "reviewLink": "Review",
+    "duplicateBadge": "Possible duplicate",
+    "duplicateWarning": "This invoice looks like one already registered (same supplier and invoice number). Check before confirming — otherwise the goods are counted twice.",
+    "totalMismatchWarning": "The lines don't add up to the printed total (about {pct}% off). Check quantities and prices against the original.",
+    "reviewSummary": "{total} product lines — {problems} need a look",
+    "newProduct": "New product",
+    "pageBadge": "p. {page}",
+    "allergensSuggested": "AI-suggested allergens (confirm on the product): {list}",
+    "noProduct": "No product selected",
+    "excludeLine": "Exclude",
+    "includeLine": "Include",
+    "excludedGroup": "Excluded ({count}) — non-food",
+    "receivingTitle": "Receiving check (5 seconds)",
+    "receivingTemp": "Chilled goods temperature (°C)",
+    "transportOk": "Transport OK",
+    "transportNotOk": "Transport not OK",
+    "packagingOk": "Packaging OK",
+    "packagingNotOk": "Packaging not OK",
+    "receivingHint": "One entry — recorded both as the receiving check (self-control) and on the goods receipt (traceability).",
+    "confirmButton": "Confirm all",
+    "confirmedToast": "Received — {count} batches stocked",
+    "supplierLabel": "Supplier",
+    "newSupplier": "+ New supplier",
+    "newSupplierPlaceholder": "Supplier name",
+    "addProductLabel": "Add product",
+    "addProductPlaceholder": "Pick a product from the catalog",
+    "noProductsHint": "The catalog is empty — it grows automatically when you confirm your first invoice.",
+    "quickSubmit": "Register receipt",
+    "quickDoneToast": "Receipt registered",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "aiUnavailable": "Extraction is unavailable right now — use quick receive, or try again later.",
+      "badFile": "The file could not be used — check type and size (max 20 MB).",
+      "noActor": "First choose who you are (PIN) — receipts are person-attributed."
     }
   }
 }

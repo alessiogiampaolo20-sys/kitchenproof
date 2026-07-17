@@ -270,7 +270,9 @@
   },
   "nav2": {
     "deviations": "Afvigelser",
-    "reports": "Rapporter"
+    "reports": "Rapporter",
+    "receive": "Varer ind",
+    "stock": "Lager"
   },
   "sites": {
     "title": "Steder",
@@ -453,6 +455,66 @@
       "error": "Noget gik galt. Prøv igen.",
       "aiUnavailable": "Aflæsningen er ikke tilgængelig lige nu — prøv igen senere, eller byg programmet med guiden/skabelonen.",
       "badFile": "Filen kunne ikke bruges — tjek filtype og størrelse (højst 20 MB)."
+    }
+  },
+  "receive": {
+    "title": "Modtag varer",
+    "hint": "Tag et billede af fakturaen eller følgesedlen — varerne aflæses automatisk og lægges på lager med fuld sporbarhed. Du gennemgår alt, før noget gemmes.",
+    "uploadButton": "Fotografér / upload faktura",
+    "uploading": "Uploader …",
+    "extracting": "Aflæser fakturaen …",
+    "quickButton": "Hurtig modtagelse uden faktura",
+    "quickTitle": "Hurtig modtagelse",
+    "quickHint": "Til torvekøb og leveringer uden faktura — vælg leverandør og varer, stadig 100 % sporbart.",
+    "recentTitle": "Seneste dokumenter",
+    "unknownSupplier": "Ukendt leverandør",
+    "kinds": {
+      "invoice": "Faktura",
+      "delivery_note": "Følgeseddel",
+      "credit_note": "Kreditnota",
+      "receipt": "Bon"
+    },
+    "status": {
+      "uploaded": "Uploadet",
+      "extracting": "Aflæser",
+      "needs_review": "Til gennemsyn",
+      "confirmed": "Bekræftet",
+      "failed": "Fejlet"
+    },
+    "reviewLink": "Gennemgå",
+    "duplicateBadge": "Muligt dublet",
+    "duplicateWarning": "Denne faktura ligner en, der allerede er registreret (samme leverandør og fakturanummer). Tjek, før du bekræfter — ellers tælles varerne dobbelt.",
+    "totalMismatchWarning": "Linjerne stemmer ikke med totalen (afvigelse ca. {pct} %). Tjek mængder og priser mod originalen.",
+    "reviewSummary": "{total} varelinjer — {problems} kræver et kig",
+    "newProduct": "Ny vare",
+    "pageBadge": "s. {page}",
+    "allergensSuggested": "AI-foreslåede allergener (bekræft på varen): {list}",
+    "noProduct": "Ingen vare valgt",
+    "excludeLine": "Udelad",
+    "includeLine": "Medtag",
+    "excludedGroup": "Udeladt ({count}) — ikke fødevarer",
+    "receivingTitle": "Modtagekontrol (5 sekunder)",
+    "receivingTemp": "Temperatur på kølevarer (°C)",
+    "transportOk": "Transport OK",
+    "transportNotOk": "Transport ikke OK",
+    "packagingOk": "Emballage OK",
+    "packagingNotOk": "Emballage ikke OK",
+    "receivingHint": "Udfyldes ét sted — registreres både som modtagekontrol (egenkontrol) og på varemodtagelsen (sporbarhed).",
+    "confirmButton": "Bekræft alle",
+    "confirmedToast": "Modtaget — {count} partier lagt på lager",
+    "supplierLabel": "Leverandør",
+    "newSupplier": "+ Ny leverandør",
+    "newSupplierPlaceholder": "Leverandørens navn",
+    "addProductLabel": "Tilføj vare",
+    "addProductPlaceholder": "Vælg vare fra kataloget",
+    "noProductsHint": "Kataloget er tomt — det vokser automatisk, når du bekræfter din første faktura.",
+    "quickSubmit": "Registrér modtagelse",
+    "quickDoneToast": "Modtagelsen er registreret",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "aiUnavailable": "Aflæsningen er ikke tilgængelig lige nu — brug hurtig modtagelse, eller prøv igen senere.",
+      "badFile": "Filen kunne ikke bruges — tjek filtype og størrelse (højst 20 MB).",
+      "noActor": "Vælg først, hvem du er (PIN) — modtagelser registreres på person."
     }
   }
 }

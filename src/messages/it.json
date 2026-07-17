@@ -270,7 +270,9 @@
   },
   "nav2": {
     "deviations": "Deviazioni",
-    "reports": "Report"
+    "reports": "Report",
+    "receive": "Merci in",
+    "stock": "Magazzino"
   },
   "sites": {
     "title": "Sedi",
@@ -453,6 +455,66 @@
       "error": "Qualcosa è andato storto. Riprova.",
       "aiUnavailable": "L'estrazione non è disponibile al momento — riprova più tardi o costruisci il programma con la guida/il modello.",
       "badFile": "File non utilizzabile — controlla tipo e dimensione (max 20 MB)."
+    }
+  },
+  "receive": {
+    "title": "Ricevi merci",
+    "hint": "Fotografa la fattura o la bolla — le merci vengono lette automaticamente e messe a magazzino con tracciabilità completa. Rivedi tutto prima del salvataggio.",
+    "uploadButton": "Fotografa / carica fattura",
+    "uploading": "Caricamento …",
+    "extracting": "Lettura della fattura …",
+    "quickButton": "Ricezione rapida senza fattura",
+    "quickTitle": "Ricezione rapida",
+    "quickHint": "Per acquisti al mercato e consegne senza fattura — scegli fornitore e prodotti, sempre 100% tracciabile.",
+    "recentTitle": "Documenti recenti",
+    "unknownSupplier": "Fornitore sconosciuto",
+    "kinds": {
+      "invoice": "Fattura",
+      "delivery_note": "Bolla",
+      "credit_note": "Nota di credito",
+      "receipt": "Scontrino"
+    },
+    "status": {
+      "uploaded": "Caricato",
+      "extracting": "In lettura",
+      "needs_review": "Da rivedere",
+      "confirmed": "Confermato",
+      "failed": "Fallito"
+    },
+    "reviewLink": "Rivedi",
+    "duplicateBadge": "Possibile duplicato",
+    "duplicateWarning": "Questa fattura somiglia a una già registrata (stesso fornitore e numero). Controlla prima di confermare — altrimenti le merci vengono contate due volte.",
+    "totalMismatchWarning": "Le righe non tornano col totale stampato (circa {pct}% di scarto). Controlla quantità e prezzi sull'originale.",
+    "reviewSummary": "{total} righe prodotto — {problems} da controllare",
+    "newProduct": "Nuovo prodotto",
+    "pageBadge": "p. {page}",
+    "allergensSuggested": "Allergeni suggeriti dall'AI (conferma sul prodotto): {list}",
+    "noProduct": "Nessun prodotto selezionato",
+    "excludeLine": "Escludi",
+    "includeLine": "Includi",
+    "excludedGroup": "Escluse ({count}) — non alimentari",
+    "receivingTitle": "Controllo al ricevimento (5 secondi)",
+    "receivingTemp": "Temperatura merci refrigerate (°C)",
+    "transportOk": "Trasporto OK",
+    "transportNotOk": "Trasporto non OK",
+    "packagingOk": "Imballaggio OK",
+    "packagingNotOk": "Imballaggio non OK",
+    "receivingHint": "Una sola compilazione — registrata sia come controllo al ricevimento (autocontrollo) sia sulla ricezione merci (tracciabilità).",
+    "confirmButton": "Conferma tutto",
+    "confirmedToast": "Ricevuto — {count} lotti a magazzino",
+    "supplierLabel": "Fornitore",
+    "newSupplier": "+ Nuovo fornitore",
+    "newSupplierPlaceholder": "Nome del fornitore",
+    "addProductLabel": "Aggiungi prodotto",
+    "addProductPlaceholder": "Scegli un prodotto dal catalogo",
+    "noProductsHint": "Il catalogo è vuoto — cresce automaticamente quando confermi la prima fattura.",
+    "quickSubmit": "Registra ricezione",
+    "quickDoneToast": "Ricezione registrata",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "aiUnavailable": "La lettura non è disponibile al momento — usa la ricezione rapida o riprova più tardi.",
+      "badFile": "File non utilizzabile — controlla tipo e dimensione (max 20 MB).",
+      "noActor": "Prima scegli chi sei (PIN) — le ricezioni sono attribuite alla persona."
     }
   }
 }

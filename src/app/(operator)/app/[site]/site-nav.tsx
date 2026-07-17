@@ -3,8 +3,10 @@ import { getTranslations } from "next-intl/server";
 import {
   AlertTriangle,
   BarChart3,
+  Boxes,
   CalendarCheck,
   ClipboardList,
+  PackagePlus,
   Refrigerator,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,11 +16,20 @@ export async function SiteNav({
   active,
 }: {
   siteId: string;
-  active: "today" | "programme" | "equipment" | "deviations" | "reports";
+  active:
+    | "today"
+    | "programme"
+    | "equipment"
+    | "deviations"
+    | "reports"
+    | "receive"
+    | "stock";
 }) {
   const t = await getTranslations();
   const tabs = [
     { key: "today" as const, href: `/app/${siteId}/today`, label: t("nav.today"), icon: CalendarCheck },
+    { key: "receive" as const, href: `/app/${siteId}/receive`, label: t("nav2.receive"), icon: PackagePlus },
+    { key: "stock" as const, href: `/app/${siteId}/stock`, label: t("nav2.stock"), icon: Boxes },
     { key: "deviations" as const, href: `/app/${siteId}/deviations`, label: t("nav2.deviations"), icon: AlertTriangle },
     { key: "reports" as const, href: `/app/${siteId}/reports`, label: t("nav2.reports"), icon: BarChart3 },
     { key: "programme" as const, href: `/app/${siteId}/programme`, label: t("nav.programme"), icon: ClipboardList },
