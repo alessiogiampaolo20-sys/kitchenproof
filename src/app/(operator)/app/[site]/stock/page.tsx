@@ -72,7 +72,7 @@ export default async function StockPage({
       <header className="mb-4 flex flex-wrap items-center gap-2">
         <Boxes className="size-5 text-primary" />
         <h1 className="text-xl font-semibold">{t("title")}</h1>
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex flex-wrap gap-2">
           <Button asChild variant="outline" size="sm">
             <Link href={`/app/${siteId}/stock/prep`} data-testid="prep-link">
               {t("prepLink")}
@@ -81,6 +81,16 @@ export default async function StockPage({
           <Button asChild variant="outline" size="sm">
             <Link href={`/app/${siteId}/leftovers`} data-testid="leftovers-link">
               {t("leftoversLink")}
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/app/${siteId}/trace`} data-testid="trace-link">
+              {t("traceLink")}
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/app/${siteId}/stock/outbound`} data-testid="outbound-link">
+              {t("outboundLink")}
             </Link>
           </Button>
           {isManager ? (

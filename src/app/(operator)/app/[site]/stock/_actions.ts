@@ -1,13 +1,17 @@
 "use server";
 
+import React from "react";
+import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { writeAudit } from "@/lib/audit/log";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { getActorSession } from "@/lib/actor/session";
 import { EU_ALLERGENS } from "@/lib/ai/schemas";
 import { normalizeName } from "@/lib/inventory/similarity";
+import { DeliveryNotePdf, type DeliveryNotePdfData } from "@/lib/pdf/trace-docs";
 import type { Json } from "@/lib/supabase/database.types";
 
 export type StockActionState = { ok: true } | { error: "error" } | null;
@@ -268,4 +272,146 @@ export async function createPrepBatch(input: unknown): Promise<PrepActionState> 
 
   revalidatePath(`/app/${sc.site.id}/stock`);
   return { ok: true, batchId: output.id };
+}
+
+const outboundSchema = z.object({
+  siteId: z.uuid(),
+  customerId: z.uuid().nullable(),
+  customerName: z.string().trim().min(1).max(200).nullable(),
+  lines: z
+    .array(z.object({ batchId: z.uuid(), quantity: z.number().positive() }))
+    .min(1)
+    .max(40),
+});
+
+export type OutboundState =
+  | { ok: true; url: string }
+  | { error: "error" | "noActor" }
+  | null;
+
+/** §9.7 one step forward: outbound B2B delivery + delivery-note PDF. */
+export async function createOutbound(input: unknown): Promise<OutboundState> {
+  const parsed = outboundSchema.safeParse(input);
+  if (!parsed.success) return { error: "error" };
+  const sc = await siteContext(parsed.data.siteId);
+  if (!sc) return { error: "error" };
+  const actor = await getActorSession(parsed.data.siteId);
+  if (!actor) return { error: "noActor" };
+
+  const { data: site } = await sc.supabase
+    .from("sites")
+    .select("name, address, city, postal_code, cvr_p_number")
+    .eq("id", sc.site.id)
+    .single();
+  if (!site) return { error: "error" };
+
+  // customer: existing or created on the fly
+  let customerId = parsed.data.customerId;
+  let customer: { name: string; address: string | null } | null = null;
+  if (customerId) {
+    const { data } = await sc.supabase
+      .from("b2b_customers")
+      .select("name, address")
+      .eq("id", customerId)
+      .eq("org_id", sc.site.org_id)
+      .maybeSingle();
+    if (!data) return { error: "error" };
+    customer = data;
+  } else if (parsed.data.customerName) {
+    const { data, error } = await sc.supabase
+      .from("b2b_customers")
+      .insert({ org_id: sc.site.org_id, name: parsed.data.customerName })
+      .select("id, name, address")
+      .single();
+    if (error || !data) return { error: "error" };
+    customerId = data.id;
+    customer = data;
+  } else {
+    return { error: "error" };
+  }
+
+  // moves + stock decrement per line (append-only ledger, §17)
+  const pdfLines: DeliveryNotePdfData["lines"] = [];
+  for (const line of parsed.data.lines) {
+    const { data: batch } = await sc.supabase
+      .from("batches")
+      .select("id, remaining, unit, lot_code, expiry_date, product:products(name)")
+      .eq("id", line.batchId)
+      .eq("site_id", sc.site.id)
+      .eq("status", "active")
+      .maybeSingle();
+    if (!batch) return { error: "error" };
+    const shipped = Math.min(Number(batch.remaining), line.quantity);
+    if (shipped <= 0) continue;
+    const { error: moveError } = await sc.supabase.from("inventory_moves").insert({
+      site_id: sc.site.id,
+      batch_id: batch.id,
+      kind: "sale_b2b",
+      quantity: shipped,
+      moved_by: actor.profileId,
+      b2b_customer_id: customerId,
+    });
+    if (moveError) return { error: "error" };
+    const remaining = Number(batch.remaining) - shipped;
+    await sc.supabase
+      .from("batches")
+      .update({ remaining, status: remaining === 0 ? "finished" : "active" })
+      .eq("id", batch.id);
+    pdfLines.push({
+      productName: batch.product?.name ?? "",
+      lotCode: batch.lot_code,
+      quantity: `${shipped} ${batch.unit}`,
+      expiry: batch.expiry_date ?? "",
+    });
+  }
+  if (pdfLines.length === 0) return { error: "error" };
+
+  const t = await getTranslations("outbound");
+  const noteNumber = `FS-${Date.now().toString(36).toUpperCase()}`;
+  const pdfData: DeliveryNotePdfData = {
+    siteName: site.name,
+    siteAddress: [site.address, site.postal_code, site.city].filter(Boolean).join(", "),
+    cvr: site.cvr_p_number ?? "",
+    customerName: customer.name,
+    customerAddress: customer.address ?? "",
+    date: new Date().toISOString().slice(0, 10),
+    noteNumber,
+    lines: pdfLines,
+    labels: {
+      title: t("pdf.title"),
+      from: t("pdf.from"),
+      to: t("pdf.to"),
+      date: t("pdf.date"),
+      colProduct: t("pdf.colProduct"),
+      colLot: t("pdf.colLot"),
+      colQty: t("pdf.colQty"),
+      colExpiry: t("pdf.colExpiry"),
+      footer: t("pdf.footer"),
+    },
+  };
+  const buffer = await renderToBuffer(
+    React.createElement(DeliveryNotePdf, { data: pdfData }) as React.ReactElement<DocumentProps>,
+  );
+  const path = `${sc.site.id}/outbound/${noteNumber}.pdf`;
+  const { error: uploadError } = await sc.supabase.storage
+    .from("exports")
+    .upload(path, buffer, { contentType: "application/pdf" });
+  if (uploadError) return { error: "error" };
+
+  await writeAudit(sc.supabase, {
+    orgId: sc.site.org_id,
+    siteId: sc.site.id,
+    actorId: actor.profileId,
+    actorRole: actor.role,
+    action: "outbound.delivered",
+    entityTable: "inventory_moves",
+    diff: { customer: customer.name, lines: pdfLines.length, note: noteNumber },
+  });
+
+  const { data: signed } = await sc.supabase.storage
+    .from("exports")
+    .createSignedUrl(path, 3600);
+  if (!signed) return { error: "error" };
+  revalidatePath(`/app/${sc.site.id}/stock`);
+  return { ok: true, url: signed.signedUrl };
 }

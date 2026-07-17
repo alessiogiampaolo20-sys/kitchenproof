@@ -613,7 +613,9 @@
     "mergeConfirm": "Flet varer",
     "mergedToast": "Varerne er flettet",
     "prepLink": "Ny tilberedning",
-    "leftoversLink": "Rester"
+    "leftoversLink": "Rester",
+    "traceLink": "Sporbarhed",
+    "outboundLink": "Levering ud"
   },
   "prep": {
     "title": "Ny tilberedning",
@@ -655,5 +657,96 @@
       "other": "Andet"
     },
     "doneToast": "Restetjek færdigt — {count} partier registreret"
+  },
+  "trace": {
+    "title": "Sporbarhed & tilbagekaldelse",
+    "searchPlaceholder": "Søg på vare, leverandør eller lotnummer …",
+    "searchButton": "Søg",
+    "emptyHint": "Søg på en vare, leverandør eller et lotnummer — resultatet viser, hvad der kom ind, hvad der er på lager, hvad der er brugt/kasseret, og hvem der har modtaget varen (B2B).",
+    "resultCount": "{batches} partier · {moves} bevægelser",
+    "inTitle": "Ind (partier)",
+    "outTitle": "Bevægelser (brugt / kasseret / leveret)",
+    "inHouse": "Egenproduktion",
+    "invoice": "faktura",
+    "status": {
+      "active": "Aktivt",
+      "finished": "Opbrugt",
+      "discarded": "Kasseret",
+      "recalled": "Tilbagekaldt"
+    },
+    "moves": {
+      "receive": "modtaget",
+      "use": "brugt",
+      "waste": "kasseret",
+      "leftover_in": "rest gemt",
+      "transfer_out": "overført",
+      "sale_b2b": "leveret",
+      "correction": "korrektion"
+    },
+    "wasteReasons": {
+      "expired": "udløbet",
+      "dropped": "tabt",
+      "overproduction": "overproduktion",
+      "deviation": "afvigelse",
+      "other": "andet"
+    },
+    "recallButton": "Tilbagekaldelsesrapport",
+    "recallTitle": "Opret tilbagekaldelsesrapport",
+    "recallHint": "Rapporten dækker det aktuelle søgeresultat for \"{query}\": ind, på lager, brugt, kasseret og leveret (B2B). Den gemmes permanent og kan fremvises straks.",
+    "recallReasonLabel": "Årsag til tilbagekaldelsen",
+    "recallGenerate": "Generér rapport (PDF)",
+    "recallDoneToast": "Rapporten er klar og gemt",
+    "recallError": "Noget gik galt. Prøv igen.",
+    "pdf": {
+      "title": "Tilbagekaldelsesrapport",
+      "scope": "Omfang",
+      "reason": "Årsag",
+      "initiatedBy": "Igangsat af",
+      "batchesTitle": "Partier (ind)",
+      "movesTitle": "Bevægelser (ud)",
+      "colProduct": "Vare",
+      "colLot": "Lot",
+      "colSupplier": "Leverandør",
+      "colInvoice": "Faktura",
+      "colReceived": "Modtaget",
+      "colQty": "Mængde",
+      "colRemaining": "Rest",
+      "colStatus": "Status",
+      "colKind": "Type",
+      "colWhen": "Tidspunkt",
+      "colDetail": "Detalje",
+      "from": "fra",
+      "to": "til",
+      "footer": "Genereret af KitchenProof — dokumentation for et-skridt-frem/tilbage sporbarhed (forordning (EF) nr. 178/2002, art. 18)."
+    },
+    "recallOpen": "Åbn rapporten (PDF)"
+  },
+  "outbound": {
+    "title": "Levering ud af huset (B2B)",
+    "hint": "Vælg kunde og partier — der oprettes sporbare bevægelser og en følgeseddel (PDF).",
+    "customerLabel": "Kunde",
+    "newCustomer": "+ Ny kunde",
+    "newCustomerPlaceholder": "Kundens navn",
+    "batchesLabel": "Partier",
+    "submit": "Registrér levering + følgeseddel",
+    "doneToast": "Leveringen er registreret — følgeseddel åbnet",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "noActor": "Vælg først, hvem du er (PIN)."
+    },
+    "pdf": {
+      "title": "Følgeseddel",
+      "from": "Fra",
+      "to": "Til",
+      "date": "Dato",
+      "colProduct": "Vare",
+      "colLot": "Lotnummer",
+      "colQty": "Mængde",
+      "colExpiry": "Holdbarhed",
+      "footer": "Genereret af KitchenProof — et skridt frem-sporbarhed."
+    },
+    "doneHint": "Leveringen er registreret med fuld sporbarhed.",
+    "openNote": "Åbn følgeseddel (PDF)",
+    "backToStock": "Tilbage til lager"
   }
 }

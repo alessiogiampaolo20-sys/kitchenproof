@@ -613,7 +613,9 @@
     "mergeConfirm": "Unisci prodotti",
     "mergedToast": "Prodotti uniti",
     "prepLink": "Nuova preparazione",
-    "leftoversLink": "Avanzi"
+    "leftoversLink": "Avanzi",
+    "traceLink": "Tracciabilità",
+    "outboundLink": "Consegne"
   },
   "prep": {
     "title": "Nuova preparazione",
@@ -655,5 +657,96 @@
       "other": "Altro"
     },
     "doneToast": "Controllo avanzi completato — {count} lotti registrati"
+  },
+  "trace": {
+    "title": "Tracciabilità e richiamo",
+    "searchPlaceholder": "Cerca prodotto, fornitore o lotto …",
+    "searchButton": "Cerca",
+    "emptyHint": "Cerca un prodotto, fornitore o numero di lotto — il risultato mostra cosa è entrato, cosa è a magazzino, cosa è stato usato/scartato e chi lo ha ricevuto (B2B).",
+    "resultCount": "{batches} lotti · {moves} movimenti",
+    "inTitle": "Entrate (lotti)",
+    "outTitle": "Movimenti (usato / scartato / consegnato)",
+    "inHouse": "Produzione propria",
+    "invoice": "fattura",
+    "status": {
+      "active": "Attivo",
+      "finished": "Esaurito",
+      "discarded": "Scartato",
+      "recalled": "Richiamato"
+    },
+    "moves": {
+      "receive": "ricevuto",
+      "use": "usato",
+      "waste": "scartato",
+      "leftover_in": "avanzo conservato",
+      "transfer_out": "trasferito",
+      "sale_b2b": "consegnato",
+      "correction": "correzione"
+    },
+    "wasteReasons": {
+      "expired": "scaduto",
+      "dropped": "caduto",
+      "overproduction": "sovrapproduzione",
+      "deviation": "deviazione",
+      "other": "altro"
+    },
+    "recallButton": "Report di richiamo",
+    "recallTitle": "Crea report di richiamo",
+    "recallHint": "Il report copre il risultato di ricerca per \"{query}\": entrate, a magazzino, usato, scartato e consegnato (B2B). Salvato in modo permanente, esibibile subito.",
+    "recallReasonLabel": "Motivo del richiamo",
+    "recallGenerate": "Genera report (PDF)",
+    "recallDoneToast": "Report pronto e salvato",
+    "recallError": "Qualcosa è andato storto. Riprova.",
+    "pdf": {
+      "title": "Report di richiamo",
+      "scope": "Ambito",
+      "reason": "Motivo",
+      "initiatedBy": "Avviato da",
+      "batchesTitle": "Lotti (entrate)",
+      "movesTitle": "Movimenti (uscite)",
+      "colProduct": "Prodotto",
+      "colLot": "Lotto",
+      "colSupplier": "Fornitore",
+      "colInvoice": "Fattura",
+      "colReceived": "Ricevuto",
+      "colQty": "Q.tà",
+      "colRemaining": "Residuo",
+      "colStatus": "Stato",
+      "colKind": "Tipo",
+      "colWhen": "Quando",
+      "colDetail": "Dettaglio",
+      "from": "dal",
+      "to": "al",
+      "footer": "Generato da KitchenProof — documentazione di tracciabilità un passo indietro/avanti (Reg. (CE) n. 178/2002, art. 18)."
+    },
+    "recallOpen": "Apri il report (PDF)"
+  },
+  "outbound": {
+    "title": "Consegna in uscita (B2B)",
+    "hint": "Scegli cliente e lotti — vengono creati movimenti tracciabili e una bolla di consegna (PDF).",
+    "customerLabel": "Cliente",
+    "newCustomer": "+ Nuovo cliente",
+    "newCustomerPlaceholder": "Nome del cliente",
+    "batchesLabel": "Lotti",
+    "submit": "Registra consegna + bolla",
+    "doneToast": "Consegna registrata — bolla aperta",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "noActor": "Prima scegli chi sei (PIN)."
+    },
+    "pdf": {
+      "title": "Bolla di consegna",
+      "from": "Da",
+      "to": "A",
+      "date": "Data",
+      "colProduct": "Prodotto",
+      "colLot": "Numero lotto",
+      "colQty": "Quantità",
+      "colExpiry": "Scadenza",
+      "footer": "Generato da KitchenProof — tracciabilità un passo avanti."
+    },
+    "doneHint": "La consegna è registrata con tracciabilità completa.",
+    "openNote": "Apri bolla (PDF)",
+    "backToStock": "Torna al magazzino"
   }
 }
