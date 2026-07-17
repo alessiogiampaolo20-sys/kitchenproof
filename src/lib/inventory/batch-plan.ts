@@ -4,6 +4,9 @@
 // expiry_kind='internal' when defaulted.
 import type { InvoiceLine } from "@/lib/ai/schemas";
 
+/** [DEFAULT] prepped-food internal expiry (days) — editable per prep batch (§9.4). */
+export const PREP_DEFAULT_EXPIRY_DAYS = 3;
+
 export type BatchPlan = {
   lotCode: string;
   quantity: number;

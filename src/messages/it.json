@@ -611,6 +611,49 @@
     "mergeHint": "Il duplicato viene nascosto da selezioni e matching; i lotti attivi passano al prodotto di destinazione. La storia delle fatture confermate resta.",
     "mergeTargetPlaceholder": "Scegli prodotto di destinazione",
     "mergeConfirm": "Unisci prodotti",
-    "mergedToast": "Prodotti uniti"
+    "mergedToast": "Prodotti uniti",
+    "prepLink": "Nuova preparazione",
+    "leftoversLink": "Avanzi"
+  },
+  "prep": {
+    "title": "Nuova preparazione",
+    "hint": "Scegli i lotti in ingresso e dai un nome al risultato — tracciabilità completa in entrambe le direzioni. Scadenza interna predefinita: 3 giorni.",
+    "inputsLabel": "Ingredienti (lotti)",
+    "outputLabel": "Cosa hai preparato?",
+    "outputPlaceholder": "es. Ragù 15 L",
+    "quantityLabel": "Quantità",
+    "expiryLabel": "Scadenza interna",
+    "days": "giorni",
+    "submit": "Crea lotto",
+    "doneToast": "Lotto creato con tracciabilità completa",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "noActor": "Prima scegli chi sei (PIN)."
+    }
+  },
+  "leftovers": {
+    "title": "Avanzi a fine servizio",
+    "hint": "Una decisione col pollice per carta: finito, conservato, scartato o salta. Obiettivo: meno di 2 minuti.",
+    "missedSession": "Il controllo avanzi di ieri non è stato completato — includilo oggi.",
+    "empty": "Nessun lotto aperto da rivedere al momento.",
+    "noActor": "Prima scegli chi sei (PIN) — il controllo avanzi è attribuito alla persona.",
+    "startHint": "{count} lotti da rivedere stasera.",
+    "startButton": "Inizia controllo avanzi",
+    "progress": "{current} di {total}",
+    "produced": "Produzione propria",
+    "expires": "scade",
+    "usedUp": "Finito",
+    "kept": "Conservato",
+    "discarded": "Scartato",
+    "skip": "Salta",
+    "keepConfirm": "Conserva con questa quantità",
+    "reasons": {
+      "expired": "Scaduto",
+      "overproduction": "Sovrapproduzione",
+      "deviation": "Deviazione",
+      "dropped": "Caduto/rovesciato",
+      "other": "Altro"
+    },
+    "doneToast": "Controllo avanzi completato — {count} lotti registrati"
   }
 }

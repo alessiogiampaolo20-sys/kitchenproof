@@ -34,6 +34,7 @@ export function QuickReceiveForm({
   const [supplierId, setSupplierId] = useState<string>("new");
   const [supplierName, setSupplierName] = useState("");
   const [lines, setLines] = useState<LineDraft[]>([]);
+  const [filter, setFilter] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -107,51 +108,69 @@ export function QuickReceiveForm({
         ) : null}
       </div>
 
-      <div className="grid gap-1">
+      <div className="grid gap-2">
         <Label>{t("addProductLabel")}</Label>
-        <Select value="" onValueChange={addLine}>
-          <SelectTrigger className="min-h-12" data-testid="quick-add-product">
-            <SelectValue placeholder={t("addProductPlaceholder")} />
-          </SelectTrigger>
-          <SelectContent>
-            {products.map((product) => (
-              <SelectItem key={product.id} value={product.id}>
+        {products.length > 8 ? (
+          <Input
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder={t("addProductPlaceholder")}
+            className="min-h-12"
+            data-testid="quick-filter"
+          />
+        ) : null}
+        {/* big-touch chips instead of a dropdown (§15 kitchen mode) */}
+        <div className="flex max-h-56 flex-wrap gap-2 overflow-y-auto">
+          {products
+            .filter((product) =>
+              product.name.toLowerCase().includes(filter.toLowerCase()),
+            )
+            .map((product) => (
+              <Button
+                key={product.id}
+                type="button"
+                variant="outline"
+                className="min-h-12"
+                onClick={() => addLine(product.id)}
+                data-testid={`quick-product-${product.id}`}
+              >
                 {product.name}
-              </SelectItem>
+              </Button>
             ))}
-          </SelectContent>
-        </Select>
+        </div>
         {products.length === 0 ? (
           <p className="text-xs text-muted-foreground">{t("noProductsHint")}</p>
         ) : null}
       </div>
 
-      <div className="grid gap-2">
+      {/* min-w-0 everywhere: grid/flex children must shrink, or the rows
+          overflow the mobile viewport and break touch hit-testing */}
+      <div className="grid min-w-0 gap-2">
         {lines.map((line, index) => {
           const product = products.find((p) => p.id === line.productId);
           return (
             <div
               key={`${line.productId}-${index}`}
-              className="flex items-center gap-2 rounded-lg border p-2"
+              className="flex min-w-0 items-center gap-1 rounded-lg border p-2"
               data-testid={`quick-line-${index}`}
             >
               <span className="min-w-0 flex-1 truncate text-sm font-medium">
                 {product?.name}
               </span>
-              <Button type="button" variant="outline" size="icon" className="size-12" onClick={() => step(index, -1)}>
+              <Button type="button" variant="outline" size="icon" className="size-12 shrink-0" onClick={() => step(index, -1)}>
                 <Minus className="size-4" />
               </Button>
-              <span className="w-16 text-center font-mono" data-testid={`quick-qty-${index}`}>
+              <span className="w-14 shrink-0 text-center font-mono text-sm" data-testid={`quick-qty-${index}`}>
                 {line.quantity} {line.unit}
               </span>
-              <Button type="button" variant="outline" size="icon" className="size-12" onClick={() => step(index, 1)} data-testid={`quick-plus-${index}`}>
+              <Button type="button" variant="outline" size="icon" className="size-12 shrink-0" onClick={() => step(index, 1)} data-testid={`quick-plus-${index}`}>
                 <Plus className="size-4" />
               </Button>
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="size-12"
+                className="size-12 shrink-0"
                 onClick={() => setLines((prev) => prev.filter((_, i) => i !== index))}
               >
                 <Trash2 className="size-4" />

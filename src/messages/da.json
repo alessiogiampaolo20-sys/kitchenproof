@@ -611,6 +611,49 @@
     "mergeHint": "Dubletten skjules fra valg og matching; aktive partier flyttes til målvaren. Historikken på bekræftede fakturaer bevares.",
     "mergeTargetPlaceholder": "Vælg målvare",
     "mergeConfirm": "Flet varer",
-    "mergedToast": "Varerne er flettet"
+    "mergedToast": "Varerne er flettet",
+    "prepLink": "Ny tilberedning",
+    "leftoversLink": "Rester"
+  },
+  "prep": {
+    "title": "Ny tilberedning",
+    "hint": "Vælg de partier, der indgår, og navngiv resultatet — fuld sporbarhed i begge retninger. Intern holdbarhed er som standard 3 dage.",
+    "inputsLabel": "Ingredienser (partier)",
+    "outputLabel": "Hvad har du lavet?",
+    "outputPlaceholder": "fx Ragù 15 L",
+    "quantityLabel": "Mængde",
+    "expiryLabel": "Intern holdbarhed",
+    "days": "dage",
+    "submit": "Opret parti",
+    "doneToast": "Partiet er oprettet med sporbarhed",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "noActor": "Vælg først, hvem du er (PIN)."
+    }
+  },
+  "leftovers": {
+    "title": "Rester ved lukketid",
+    "hint": "Én tommelfinger-beslutning pr. kort: brugt op, gemt, kasseret eller spring over. Målet er under 2 minutter.",
+    "missedSession": "Gårsdagens restetjek blev ikke gennemført — tag det med i dag.",
+    "empty": "Ingen åbne partier at gennemgå lige nu.",
+    "noActor": "Vælg først, hvem du er (PIN) — restetjekket registreres på person.",
+    "startHint": "{count} partier til gennemsyn i aften.",
+    "startButton": "Start restetjek",
+    "progress": "{current} af {total}",
+    "produced": "Egenproduktion",
+    "expires": "udløber",
+    "usedUp": "Brugt op",
+    "kept": "Gemt",
+    "discarded": "Kasseret",
+    "skip": "Spring over",
+    "keepConfirm": "Gem med denne mængde",
+    "reasons": {
+      "expired": "Udløbet",
+      "overproduction": "Overproduktion",
+      "deviation": "Afvigelse",
+      "dropped": "Tabt/spildt",
+      "other": "Andet"
+    },
+    "doneToast": "Restetjek færdigt — {count} partier registreret"
   }
 }

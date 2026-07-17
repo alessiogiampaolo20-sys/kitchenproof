@@ -611,6 +611,49 @@
     "mergeHint": "The duplicate is hidden from pickers and matching; active batches move to the target. Confirmed invoice history is preserved.",
     "mergeTargetPlaceholder": "Pick target product",
     "mergeConfirm": "Merge products",
-    "mergedToast": "Products merged"
+    "mergedToast": "Products merged",
+    "prepLink": "New prep",
+    "leftoversLink": "Leftovers"
+  },
+  "prep": {
+    "title": "New prep batch",
+    "hint": "Pick the input batches and name the result — full trace in both directions. Internal shelf life defaults to 3 days.",
+    "inputsLabel": "Ingredients (batches)",
+    "outputLabel": "What did you make?",
+    "outputPlaceholder": "e.g. Ragù 15 L",
+    "quantityLabel": "Quantity",
+    "expiryLabel": "Internal shelf life",
+    "days": "days",
+    "submit": "Create batch",
+    "doneToast": "Batch created with full trace",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "noActor": "First choose who you are (PIN)."
+    }
+  },
+  "leftovers": {
+    "title": "End-of-service leftovers",
+    "hint": "One thumb decision per card: used up, kept, discarded or skip. Target: under 2 minutes.",
+    "missedSession": "Yesterday's leftover check wasn't completed — include it today.",
+    "empty": "No open batches to review right now.",
+    "noActor": "First choose who you are (PIN) — the leftover check is person-attributed.",
+    "startHint": "{count} batches to review tonight.",
+    "startButton": "Start leftover check",
+    "progress": "{current} of {total}",
+    "produced": "In-house",
+    "expires": "expires",
+    "usedUp": "Used up",
+    "kept": "Kept",
+    "discarded": "Discarded",
+    "skip": "Skip",
+    "keepConfirm": "Keep with this quantity",
+    "reasons": {
+      "expired": "Expired",
+      "overproduction": "Overproduction",
+      "deviation": "Deviation",
+      "dropped": "Dropped/spilled",
+      "other": "Other"
+    },
+    "doneToast": "Leftover check done — {count} batches recorded"
   }
 }

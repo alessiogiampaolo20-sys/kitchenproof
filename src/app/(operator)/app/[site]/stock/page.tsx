@@ -69,16 +69,28 @@ export default async function StockPage({
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
       <SiteNav siteId={siteId} active="stock" />
 
-      <header className="mb-4 flex items-center gap-2">
+      <header className="mb-4 flex flex-wrap items-center gap-2">
         <Boxes className="size-5 text-primary" />
         <h1 className="text-xl font-semibold">{t("title")}</h1>
-        {isManager ? (
-          <Button asChild variant="outline" size="sm" className="ml-auto">
-            <Link href={`/app/${siteId}/stock/products`} data-testid="catalog-link">
-              {t("catalogLink")}
+        <div className="ml-auto flex gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/app/${siteId}/stock/prep`} data-testid="prep-link">
+              {t("prepLink")}
             </Link>
           </Button>
-        ) : null}
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/app/${siteId}/leftovers`} data-testid="leftovers-link">
+              {t("leftoversLink")}
+            </Link>
+          </Button>
+          {isManager ? (
+            <Button asChild variant="outline" size="sm">
+              <Link href={`/app/${siteId}/stock/products`} data-testid="catalog-link">
+                {t("catalogLink")}
+              </Link>
+            </Button>
+          ) : null}
+        </div>
       </header>
 
       {/* §9.6 expiring-soon rail with FIFO nudge */}
