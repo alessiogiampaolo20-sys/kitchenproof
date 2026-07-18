@@ -2161,6 +2161,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "risk_analyses_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "risk_analyses_site_id_fkey"
             columns: ["site_id"]
             isOneToOne: false
@@ -2804,6 +2811,7 @@ export type Database = {
         Args: { p_membership_id: string; p_pin_hash: string }
         Returns: undefined
       }
+      site_has_manager_pin: { Args: { p_site_id: string }; Returns: boolean }
       site_pin_status: {
         Args: { p_site_id: string }
         Returns: {

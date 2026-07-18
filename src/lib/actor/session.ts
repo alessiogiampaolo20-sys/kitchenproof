@@ -76,3 +76,39 @@ export async function getDeviceSession(
   if (siteId && session.siteId !== siteId) return null;
   return session;
 }
+
+/* ── Inspection guest lock (§10.1) ────────────────────────────────────────── */
+
+export const INSPECTION_COOKIE = "kp_inspection";
+const INSPECTION_TTL_SECONDS = 60 * 60 * 8; // an inspection never outlasts a day
+
+export type InspectionSession = {
+  siteId: string;
+  startedAt: string;
+};
+
+export async function setInspectionCookie(session: InspectionSession): Promise<void> {
+  const store = await cookies();
+  store.set(
+    INSPECTION_COOKIE,
+    await signSession(session, INSPECTION_TTL_SECONDS, secret()),
+    { httpOnly: true, sameSite: "lax", path: "/", maxAge: INSPECTION_TTL_SECONDS },
+  );
+}
+
+export async function getInspectionSession(
+  siteId?: string,
+): Promise<InspectionSession | null> {
+  const store = await cookies();
+  const token = store.get(INSPECTION_COOKIE)?.value;
+  if (!token) return null;
+  const session = await verifySession<InspectionSession>(token, secret());
+  if (!session) return null;
+  if (siteId && session.siteId !== siteId) return null;
+  return session;
+}
+
+export async function clearInspectionCookie(): Promise<void> {
+  const store = await cookies();
+  store.delete(INSPECTION_COOKIE);
+}

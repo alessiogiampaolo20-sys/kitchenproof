@@ -748,5 +748,129 @@
     "doneHint": "Leveringen er registreret med fuld sporbarhed.",
     "openNote": "Åbn følgeseddel (PDF)",
     "backToStock": "Tilbage til lager"
+  },
+  "inspection": {
+    "entryLink": "Kontrolbesøg",
+    "title": "Kontrolbesøg",
+    "hint": "Ræk tabletten til den tilsynsførende — enheden låses i skrivebeskyttet tilstand, og alle svar er højst 30 sekunder væk. Alternativt kan du dele et tidsbegrænset link til inspektørens egen enhed.",
+    "startButton": "Start kontrolbesøg (lås enheden)",
+    "confirmHint": "Enheden låses i skrivebeskyttet gæstetilstand, og din organisation får besked. Kun en leders PIN kan låse op igen.",
+    "confirmButton": "Ja, start kontrolbesøg",
+    "cancel": "Fortryd",
+    "startedToast": "Kontrolbesøg startet — enheden er låst",
+    "lockedBanner": "Kontrolbesøg i gang — enheden er skrivebeskyttet",
+    "exitButton": "Afslut",
+    "exitTitle": "Afslut kontrolbesøg",
+    "exitHint": "Kun en leders PIN kan låse enheden op.",
+    "exitConfirm": "Lås op",
+    "endedToast": "Kontrolbesøget er afsluttet",
+    "exitErrors": {
+      "error": "Noget gik galt.",
+      "wrongPin": "Forkert PIN.",
+      "locked": "PIN er låst efter for mange forsøg.",
+      "noPin": "Denne leder har ingen PIN.",
+      "notManager": "Kun ledere kan låse op."
+    },
+    "magicLinkButton": "Del link til inspektørens enhed (4 timer)",
+    "magicLinkExpiry": "Gyldigt til kl. {time} — skrivebeskyttet",
+    "guestBanner": "Skrivebeskyttet inspektørvisning · gyldig til kl. {time}",
+    "linkInvalid": "Linket er udløbet eller ugyldigt. Bed virksomheden om et nyt.",
+    "error": "Noget gik galt. Prøv igen.",
+    "exportPdf": "Eksportér PDF",
+    "tabs": {
+      "programme": "Egenkontrolprogram",
+      "records": "Registreringer",
+      "deviations": "Afvigelser",
+      "trace": "Sporbarhed",
+      "documents": "Dokumenter"
+    },
+    "programme": {
+      "approvalTitle": "Godkendt program",
+      "version": "Version",
+      "approvedBy": "Godkendt af",
+      "pack": "Regelpakke",
+      "none": "Intet godkendt program endnu.",
+      "cpTitle": "Kontrolpunkter og grænser",
+      "loosened": "Lempet grænse",
+      "perEvent": "Hver gang",
+      "historyTitle": "Versionshistorik",
+      "status": {
+        "draft": "Kladde",
+        "in_review": "Til gennemsyn",
+        "approved": "Godkendt",
+        "superseded": "Erstattet"
+      },
+      "aiAssisted": "AI-assisteret udkast",
+      "docKinds": {
+        "egenkontrolprogram": "Egenkontrolprogram (PDF)",
+        "annex": "Risikoanalyse (officielt skema)"
+      }
+    },
+    "records": {
+      "presets": {
+        "7": "7 dage",
+        "30": "30 dage",
+        "90": "3 måneder"
+      },
+      "categories": {
+        "temperature": "Temperatur",
+        "cleaning": "Rengøring",
+        "receiving": "Modtagelse",
+        "pest": "Skadedyr",
+        "hygiene": "Hygiejne",
+        "other": "Andet"
+      },
+      "heatmapLegend": "Grøn: udført · Gul: mistet · Rød: afvigelse · Grå: ingen opgaver",
+      "adhoc": "Ad hoc-registrering",
+      "failed": "Uden for grænsen",
+      "late": "Sen registrering",
+      "photo": "Foto"
+    },
+    "deviations": {
+      "none": "Ingen afvigelser registreret.",
+      "status": {
+        "open": "Åben",
+        "corrected": "Korrigeret",
+        "verified": "Verificeret",
+        "closed": "Lukket"
+      },
+      "repeat": "{count}× på dette kontrolpunkt",
+      "corrective": "Korrigerende handling",
+      "verification": "Verifikation"
+    },
+    "trace": {
+      "placeholder": "Vare, leverandør eller lotnummer …",
+      "search": "Søg",
+      "hint": "Søg for at se hele kæden: ind, på lager, brugt, kasseret og leveret.",
+      "inHouse": "Egenproduktion",
+      "moves": {
+        "receive": "modtaget",
+        "use": "brugt",
+        "waste": "kasseret",
+        "leftover_in": "rest gemt",
+        "transfer_out": "overført",
+        "sale_b2b": "leveret",
+        "correction": "korrektion"
+      }
+    },
+    "documents": {
+      "none": "Ingen dokumenter uploadet endnu.",
+      "kinds": {
+        "pest_control": "Skadedyrsaftale",
+        "training_certificate": "Kursusbevis",
+        "water_test": "Vandprøve",
+        "smiley_report": "Smiley-rapport",
+        "other": "Andet"
+      },
+      "validUntil": "Gyldig til",
+      "open": "Åbn",
+      "kindLabel": "Type",
+      "titleLabel": "Titel",
+      "upload": "Upload"
+    },
+    "uploadDocumentButton": "Upload dokument (aftaler, beviser …)",
+    "uploadDocumentTitle": "Upload dokument",
+    "documentUploadedToast": "Dokumentet er gemt",
+    "noManagerPin": "Ingen leder har en PIN endnu — sæt en PIN under Medlemmer, før enheden kan låses."
   }
 }

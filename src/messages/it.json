@@ -748,5 +748,129 @@
     "doneHint": "La consegna è registrata con tracciabilità completa.",
     "openNote": "Apri bolla (PDF)",
     "backToStock": "Torna al magazzino"
+  },
+  "inspection": {
+    "entryLink": "Visita di controllo",
+    "title": "Visita di controllo",
+    "hint": "Consegna il tablet all'ispettore — il dispositivo si blocca in sola lettura e ogni risposta è a massimo 30 secondi. Oppure condividi un link a tempo per il dispositivo dell'ispettore.",
+    "startButton": "Avvia visita (blocca dispositivo)",
+    "confirmHint": "Il dispositivo si blocca in modalità ospite di sola lettura e l'organizzazione viene avvisata. Solo il PIN di un responsabile può sbloccarlo.",
+    "confirmButton": "Sì, avvia la visita",
+    "cancel": "Annulla",
+    "startedToast": "Visita avviata — dispositivo bloccato",
+    "lockedBanner": "Visita in corso — questo dispositivo è in sola lettura",
+    "exitButton": "Termina",
+    "exitTitle": "Termina la visita",
+    "exitHint": "Solo il PIN di un responsabile può sbloccare il dispositivo.",
+    "exitConfirm": "Sblocca",
+    "endedToast": "Visita terminata",
+    "exitErrors": {
+      "error": "Qualcosa è andato storto.",
+      "wrongPin": "PIN errato.",
+      "locked": "PIN bloccato per troppi tentativi.",
+      "noPin": "Questo responsabile non ha un PIN.",
+      "notManager": "Solo i responsabili possono sbloccare."
+    },
+    "magicLinkButton": "Condividi link per il dispositivo dell'ispettore (4 ore)",
+    "magicLinkExpiry": "Valido fino alle {time} — sola lettura",
+    "guestBanner": "Vista ispettore in sola lettura · valida fino alle {time}",
+    "linkInvalid": "Il link è scaduto o non valido. Chiedi all'azienda un nuovo link.",
+    "error": "Qualcosa è andato storto. Riprova.",
+    "exportPdf": "Esporta PDF",
+    "tabs": {
+      "programme": "Programma di autocontrollo",
+      "records": "Registrazioni",
+      "deviations": "Deviazioni",
+      "trace": "Tracciabilità",
+      "documents": "Documenti"
+    },
+    "programme": {
+      "approvalTitle": "Approved programme",
+      "version": "Version",
+      "approvedBy": "Approved by",
+      "pack": "Rule pack",
+      "none": "No approved programme yet.",
+      "cpTitle": "Control points and limits",
+      "loosened": "Loosened limit",
+      "perEvent": "Every time",
+      "historyTitle": "Version history",
+      "status": {
+        "draft": "Draft",
+        "in_review": "In review",
+        "approved": "Approved",
+        "superseded": "Superseded"
+      },
+      "aiAssisted": "AI-assisted draft",
+      "docKinds": {
+        "egenkontrolprogram": "Self-control programme (PDF)",
+        "annex": "Risk analysis (official form)"
+      }
+    },
+    "records": {
+      "presets": {
+        "7": "7 days",
+        "30": "30 days",
+        "90": "3 months"
+      },
+      "categories": {
+        "temperature": "Temperature",
+        "cleaning": "Cleaning",
+        "receiving": "Receiving",
+        "pest": "Pest control",
+        "hygiene": "Hygiene",
+        "other": "Other"
+      },
+      "heatmapLegend": "Green: done · Amber: missed · Red: deviation · Grey: no tasks",
+      "adhoc": "Ad-hoc record",
+      "failed": "Out of limit",
+      "late": "Late entry",
+      "photo": "Photo"
+    },
+    "deviations": {
+      "none": "No deviations recorded.",
+      "status": {
+        "open": "Open",
+        "corrected": "Corrected",
+        "verified": "Verified",
+        "closed": "Closed"
+      },
+      "repeat": "{count}× on this control point",
+      "corrective": "Corrective action",
+      "verification": "Verification"
+    },
+    "trace": {
+      "placeholder": "Product, supplier or lot number …",
+      "search": "Search",
+      "hint": "Search to see the whole chain: in, in stock, used, discarded and delivered.",
+      "inHouse": "In-house",
+      "moves": {
+        "receive": "received",
+        "use": "used",
+        "waste": "discarded",
+        "leftover_in": "leftover kept",
+        "transfer_out": "transferred",
+        "sale_b2b": "delivered",
+        "correction": "correction"
+      }
+    },
+    "documents": {
+      "none": "No documents uploaded yet.",
+      "kinds": {
+        "pest_control": "Pest-control contract",
+        "training_certificate": "Training certificate",
+        "water_test": "Water test",
+        "smiley_report": "Smiley report",
+        "other": "Other"
+      },
+      "validUntil": "Valid until",
+      "open": "Open",
+      "kindLabel": "Kind",
+      "titleLabel": "Title",
+      "upload": "Upload"
+    },
+    "uploadDocumentButton": "Carica documento (contratti, attestati …)",
+    "uploadDocumentTitle": "Carica documento",
+    "documentUploadedToast": "Documento salvato",
+    "noManagerPin": "Nessun responsabile ha un PIN — impostane uno in Membri prima di bloccare il dispositivo."
   }
 }

@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
-import { CalendarCheck } from "lucide-react";
+import { CalendarCheck, ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getActorSession, getDeviceSession } from "@/lib/actor/session";
 import { pickText } from "@/lib/i18n/pick";
@@ -252,6 +253,15 @@ export default async function TodayPage({
           <div>
             <h1 className="text-xl font-semibold">{site.name}</h1>
             <p className="text-sm capitalize text-muted-foreground">{today}</p>
+            {/* §10.1 persistent Kontrolbesøg entry (shield) */}
+            <Link
+              href={`/app/${site.id}/inspection`}
+              className="mt-1 inline-flex min-h-10 items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline"
+              data-testid="kontrolbesog-button"
+            >
+              <ShieldCheck className="size-4" />
+              {t("inspection.entryLink")}
+            </Link>
           </div>
           {deviceActive ? (
             <div className="flex items-center gap-3">

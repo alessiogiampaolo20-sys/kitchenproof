@@ -748,5 +748,129 @@
     "doneHint": "The delivery is registered with full traceability.",
     "openNote": "Open delivery note (PDF)",
     "backToStock": "Back to stock"
+  },
+  "inspection": {
+    "entryLink": "Inspection visit",
+    "title": "Inspection visit",
+    "hint": "Hand the tablet to the inspector — the device locks read-only and every answer is at most 30 seconds away. Or share a time-boxed link for the inspector's own device.",
+    "startButton": "Start inspection (lock device)",
+    "confirmHint": "The device locks into read-only guest mode and your organisation is notified. Only a manager's PIN can unlock it.",
+    "confirmButton": "Yes, start inspection",
+    "cancel": "Cancel",
+    "startedToast": "Inspection started — device locked",
+    "lockedBanner": "Inspection in progress — this device is read-only",
+    "exitButton": "End",
+    "exitTitle": "End inspection",
+    "exitHint": "Only a manager's PIN can unlock the device.",
+    "exitConfirm": "Unlock",
+    "endedToast": "Inspection ended",
+    "exitErrors": {
+      "error": "Something went wrong.",
+      "wrongPin": "Wrong PIN.",
+      "locked": "PIN locked after too many attempts.",
+      "noPin": "This manager has no PIN.",
+      "notManager": "Only managers can unlock."
+    },
+    "magicLinkButton": "Share link for the inspector's device (4 hours)",
+    "magicLinkExpiry": "Valid until {time} — read-only",
+    "guestBanner": "Read-only inspector view · valid until {time}",
+    "linkInvalid": "The link has expired or is invalid. Ask the business for a new one.",
+    "error": "Something went wrong. Try again.",
+    "exportPdf": "Export PDF",
+    "tabs": {
+      "programme": "Self-control programme",
+      "records": "Records",
+      "deviations": "Deviations",
+      "trace": "Traceability",
+      "documents": "Documents"
+    },
+    "programme": {
+      "approvalTitle": "Approved programme",
+      "version": "Version",
+      "approvedBy": "Approved by",
+      "pack": "Rule pack",
+      "none": "No approved programme yet.",
+      "cpTitle": "Control points and limits",
+      "loosened": "Loosened limit",
+      "perEvent": "Every time",
+      "historyTitle": "Version history",
+      "status": {
+        "draft": "Draft",
+        "in_review": "In review",
+        "approved": "Approved",
+        "superseded": "Superseded"
+      },
+      "aiAssisted": "AI-assisted draft",
+      "docKinds": {
+        "egenkontrolprogram": "Self-control programme (PDF)",
+        "annex": "Risk analysis (official form)"
+      }
+    },
+    "records": {
+      "presets": {
+        "7": "7 days",
+        "30": "30 days",
+        "90": "3 months"
+      },
+      "categories": {
+        "temperature": "Temperature",
+        "cleaning": "Cleaning",
+        "receiving": "Receiving",
+        "pest": "Pest control",
+        "hygiene": "Hygiene",
+        "other": "Other"
+      },
+      "heatmapLegend": "Green: done · Amber: missed · Red: deviation · Grey: no tasks",
+      "adhoc": "Ad-hoc record",
+      "failed": "Out of limit",
+      "late": "Late entry",
+      "photo": "Photo"
+    },
+    "deviations": {
+      "none": "No deviations recorded.",
+      "status": {
+        "open": "Open",
+        "corrected": "Corrected",
+        "verified": "Verified",
+        "closed": "Closed"
+      },
+      "repeat": "{count}× on this control point",
+      "corrective": "Corrective action",
+      "verification": "Verification"
+    },
+    "trace": {
+      "placeholder": "Product, supplier or lot number …",
+      "search": "Search",
+      "hint": "Search to see the whole chain: in, in stock, used, discarded and delivered.",
+      "inHouse": "In-house",
+      "moves": {
+        "receive": "received",
+        "use": "used",
+        "waste": "discarded",
+        "leftover_in": "leftover kept",
+        "transfer_out": "transferred",
+        "sale_b2b": "delivered",
+        "correction": "correction"
+      }
+    },
+    "documents": {
+      "none": "No documents uploaded yet.",
+      "kinds": {
+        "pest_control": "Pest-control contract",
+        "training_certificate": "Training certificate",
+        "water_test": "Water test",
+        "smiley_report": "Smiley report",
+        "other": "Other"
+      },
+      "validUntil": "Valid until",
+      "open": "Open",
+      "kindLabel": "Kind",
+      "titleLabel": "Title",
+      "upload": "Upload"
+    },
+    "uploadDocumentButton": "Upload document (contracts, certificates …)",
+    "uploadDocumentTitle": "Upload document",
+    "documentUploadedToast": "Document saved",
+    "noManagerPin": "No manager has a PIN yet — set one under Members before the device can be locked."
   }
 }
