@@ -2183,6 +2183,64 @@ export type Database = {
           },
         ]
       }
+      site_documents: {
+        Row: {
+          created_at: string
+          file_path: string
+          id: string
+          kind: Database["public"]["Enums"]["site_document_kind"]
+          site_id: string
+          title: string
+          updated_at: string
+          uploaded_by: string
+          valid_until: string | null
+        }
+        Insert: {
+          created_at?: string
+          file_path: string
+          id?: string
+          kind?: Database["public"]["Enums"]["site_document_kind"]
+          site_id: string
+          title: string
+          updated_at?: string
+          uploaded_by: string
+          valid_until?: string | null
+        }
+        Update: {
+          created_at?: string
+          file_path?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["site_document_kind"]
+          site_id?: string
+          title?: string
+          updated_at?: string
+          uploaded_by?: string
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_documents_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_documents_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "site_documents_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sites: {
         Row: {
           activity_type: Database["public"]["Enums"]["activity_type"]
@@ -2734,6 +2792,14 @@ export type Database = {
           remaining_attempts: number
         }[]
       }
+      resolve_inspector_link: {
+        Args: { p_token: string }
+        Returns: {
+          expires_at: string
+          site_id: string
+          site_name: string
+        }[]
+      }
       set_member_pin: {
         Args: { p_membership_id: string; p_pin_hash: string }
         Returns: undefined
@@ -2834,6 +2900,12 @@ export type Database = {
         | "confirmed"
         | "failed"
       ra_status: "draft" | "in_review" | "approved" | "superseded"
+      site_document_kind:
+        | "pest_control"
+        | "training_certificate"
+        | "water_test"
+        | "smiley_report"
+        | "other"
       site_status: "active" | "paused" | "archived"
       storage_type: "fridge" | "freezer" | "dry" | "ambient"
       task_status: "pending" | "done" | "missed" | "skipped_justified"
@@ -3062,6 +3134,13 @@ export const Constants = {
         "failed",
       ],
       ra_status: ["draft", "in_review", "approved", "superseded"],
+      site_document_kind: [
+        "pest_control",
+        "training_certificate",
+        "water_test",
+        "smiley_report",
+        "other",
+      ],
       site_status: ["active", "paused", "archived"],
       storage_type: ["fridge", "freezer", "dry", "ambient"],
       task_status: ["pending", "done", "missed", "skipped_justified"],
