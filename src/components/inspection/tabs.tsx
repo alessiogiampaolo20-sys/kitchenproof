@@ -77,6 +77,15 @@ export async function ExportBar({ ctx, tab }: { ctx: TabContext; tab: Inspection
           {t("exportPdf")}
         </a>
       </Button>
+      <Button asChild variant="outline" size="sm">
+        {/* §10.3 one-click full inspection bundle (ZIP) */}
+        <a
+          href={ctx.exportHref("bundle" as InspectionTab)}
+          data-testid="export-bundle"
+        >
+          {t("exportBundle")}
+        </a>
+      </Button>
     </div>
   );
 }

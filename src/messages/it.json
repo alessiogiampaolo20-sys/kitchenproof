@@ -871,6 +871,33 @@
     "uploadDocumentButton": "Carica documento (contratti, attestati …)",
     "uploadDocumentTitle": "Carica documento",
     "documentUploadedToast": "Documento salvato",
-    "noManagerPin": "Nessun responsabile ha un PIN — impostane uno in Membri prima di bloccare il dispositivo."
+    "noManagerPin": "Nessun responsabile ha un PIN — impostane uno in Membri prima di bloccare il dispositivo.",
+    "exportBundle": "Pacchetto ispezione completo (ZIP)",
+    "export": {
+      "generated": "Generato",
+      "page": "Pagina",
+      "integrityFooter": "Le registrazioni sono concatenate con hash per sede (§17) — ultimo hash e numero di voci",
+      "summary": "Riepilogo",
+      "recordTotals": "{done} eseguiti · {missed} mancati · {deviations} deviazioni nel periodo",
+      "traceIn": "Entrate (lotti)",
+      "traceOut": "Movimenti",
+      "colName": "Nome",
+      "colLimit": "Limite",
+      "colFrequency": "Frequenza",
+      "colSource": "Fonte",
+      "colWhen": "Quando",
+      "colValue": "Valore",
+      "colResult": "Esito",
+      "colWho": "Persona",
+      "colFlags": "Flag",
+      "colDescription": "Descrizione",
+      "colStatus": "Stato",
+      "colLot": "Lotto",
+      "colSupplier": "Fornitore",
+      "colInvoice": "Fattura",
+      "colQty": "Q.tà",
+      "colKind": "Tipo",
+      "colDetail": "Dettaglio"
+    }
   }
 }

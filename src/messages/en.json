@@ -871,6 +871,33 @@
     "uploadDocumentButton": "Upload document (contracts, certificates …)",
     "uploadDocumentTitle": "Upload document",
     "documentUploadedToast": "Document saved",
-    "noManagerPin": "No manager has a PIN yet — set one under Members before the device can be locked."
+    "noManagerPin": "No manager has a PIN yet — set one under Members before the device can be locked.",
+    "exportBundle": "Full inspection bundle (ZIP)",
+    "export": {
+      "generated": "Generated",
+      "page": "Page",
+      "integrityFooter": "Records are hash-chained per site (§17) — latest chain hash and entry count",
+      "summary": "Summary",
+      "recordTotals": "{done} done · {missed} missed · {deviations} deviations in the period",
+      "traceIn": "In (batches)",
+      "traceOut": "Movements",
+      "colName": "Name",
+      "colLimit": "Limit",
+      "colFrequency": "Frequency",
+      "colSource": "Source",
+      "colWhen": "When",
+      "colValue": "Value",
+      "colResult": "Result",
+      "colWho": "Person",
+      "colFlags": "Flags",
+      "colDescription": "Description",
+      "colStatus": "Status",
+      "colLot": "Lot",
+      "colSupplier": "Supplier",
+      "colInvoice": "Invoice",
+      "colQty": "Qty",
+      "colKind": "Kind",
+      "colDetail": "Detail"
+    }
   }
 }

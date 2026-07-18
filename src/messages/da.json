@@ -871,6 +871,33 @@
     "uploadDocumentButton": "Upload dokument (aftaler, beviser …)",
     "uploadDocumentTitle": "Upload dokument",
     "documentUploadedToast": "Dokumentet er gemt",
-    "noManagerPin": "Ingen leder har en PIN endnu — sæt en PIN under Medlemmer, før enheden kan låses."
+    "noManagerPin": "Ingen leder har en PIN endnu — sæt en PIN under Medlemmer, før enheden kan låses.",
+    "exportBundle": "Fuld inspektionspakke (ZIP)",
+    "export": {
+      "generated": "Genereret",
+      "page": "Side",
+      "integrityFooter": "Registreringer er hash-kædede pr. sted (§17) — seneste kædehash og antal poster",
+      "summary": "Sammendrag",
+      "recordTotals": "{done} udført · {missed} mistet · {deviations} afvigelser i perioden",
+      "traceIn": "Ind (partier)",
+      "traceOut": "Bevægelser",
+      "colName": "Navn",
+      "colLimit": "Grænse",
+      "colFrequency": "Frekvens",
+      "colSource": "Kilde",
+      "colWhen": "Tidspunkt",
+      "colValue": "Værdi",
+      "colResult": "Resultat",
+      "colWho": "Person",
+      "colFlags": "Flag",
+      "colDescription": "Beskrivelse",
+      "colStatus": "Status",
+      "colLot": "Lot",
+      "colSupplier": "Leverandør",
+      "colInvoice": "Faktura",
+      "colQty": "Mængde",
+      "colKind": "Type",
+      "colDetail": "Detalje"
+    }
   }
 }
