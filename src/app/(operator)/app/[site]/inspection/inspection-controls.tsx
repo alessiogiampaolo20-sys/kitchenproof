@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { LockOpen, Play, QrCode, Upload } from "lucide-react";
+import { GraduationCap, LockOpen, Play, QrCode, Upload } from "lucide-react";
 import QRCode from "qrcode";
 import {
   createInspectorLink,
@@ -15,6 +15,7 @@ import {
   type InspectionActionState,
   type InspectorLinkState,
 } from "./_actions";
+import { addTrainingRecord } from "../reports/_actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -297,6 +298,67 @@ export function UploadDocumentForm({ siteId }: { siteId: string }) {
           <DialogFooter>
             <Button type="submit" className="min-h-12" disabled={pending} data-testid="document-submit">
               {t("documents.upload")}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+/** §13 training log entry (who, what, when, certificate photo). */
+export function TrainingForm({ siteId }: { siteId: string }) {
+  const t = useTranslations("training");
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [pending, startTransition] = useTransition();
+
+  function handleSubmit(formData: FormData) {
+    startTransition(async () => {
+      const result = await addTrainingRecord(null, formData);
+      if (result && "ok" in result) {
+        toast.success(t("addedToast"));
+        setOpen(false);
+        router.refresh();
+      } else {
+        toast.error(t("error"));
+      }
+    });
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="lg" className="min-h-14" data-testid="add-training">
+          <GraduationCap className="size-4" />
+          {t("addButton")}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-sm">
+        <DialogHeader>
+          <DialogTitle>{t("title")}</DialogTitle>
+        </DialogHeader>
+        <form action={handleSubmit} className="grid gap-3">
+          <input type="hidden" name="siteId" value={siteId} />
+          <div className="grid gap-1">
+            <Label htmlFor="training-person">{t("personLabel")}</Label>
+            <Input id="training-person" name="personName" required className="min-h-12" data-testid="training-person" />
+          </div>
+          <div className="grid gap-1">
+            <Label htmlFor="training-course">{t("courseLabel")}</Label>
+            <Input id="training-course" name="course" required className="min-h-12" data-testid="training-course" />
+          </div>
+          <div className="grid gap-1">
+            <Label htmlFor="training-date">{t("dateLabel")}</Label>
+            <Input id="training-date" name="trainedOn" type="date" required className="min-h-12" data-testid="training-date" />
+          </div>
+          <div className="grid gap-1">
+            <Label htmlFor="training-cert">{t("certificateLabel")}</Label>
+            <Input id="training-cert" name="certificate" type="file" accept="image/*,.pdf" className="min-h-12" />
+          </div>
+          <DialogFooter>
+            <Button type="submit" className="min-h-12" disabled={pending} data-testid="training-submit">
+              {t("saveButton")}
             </Button>
           </DialogFooter>
         </form>

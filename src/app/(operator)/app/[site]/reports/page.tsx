@@ -4,7 +4,9 @@ import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { pickText } from "@/lib/i18n/pick";
 import { parseLimit } from "@/lib/compliance/limits";
+import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { SiteNav } from "../site-nav";
+import { SmileySection } from "./smiley-section";
 import { TempChart, type TempPoint } from "./temp-chart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -28,10 +30,19 @@ export default async function ReportsPage({
   const supabase = await createClient();
   const { data: site } = await supabase
     .from("sites")
-    .select("id, timezone")
+    .select("id, org_id, timezone")
     .eq("id", siteId)
     .maybeSingle();
   if (!site) redirect("/");
+  const orgCtx = await getOrgContext(supabase, site.org_id);
+  const isManager = orgCtx !== null && MANAGER_ROLES.includes(orgCtx.role);
+
+  // §13 smiley history (manual entry v1)
+  const { data: smileys } = await supabase
+    .from("smiley_inspections")
+    .select("id, inspected_on, result, note")
+    .eq("site_id", siteId)
+    .order("inspected_on", { ascending: false });
 
   const { data: units } = await supabase
     .from("equipment")
@@ -228,6 +239,17 @@ export default async function ReportsPage({
           ) : null}
         </CardContent>
       </Card>
+
+      <SmileySection
+        siteId={siteId}
+        isManager={isManager}
+        records={(smileys ?? []).map((row) => ({
+          id: row.id,
+          inspectedOn: row.inspected_on,
+          result: row.result,
+          note: row.note,
+        }))}
+      />
     </main>
   );
 }

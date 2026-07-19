@@ -53,4 +53,28 @@ test("assistant: cited answer in scope, refusal out of scope", async ({ page }) 
   await expect(second.getByTestId("assistant-refusal")).toBeVisible({ timeout: 30_000 });
   await expect(second.getByTestId("assistant-answer")).toContainText("uden for");
   await expect(second.getByTestId("assistant-citation")).toHaveCount(0);
+
+  // ── §13 smiley tracking: manual result + Elite progress ───────────────────
+  await page.goto(`/app/${siteId}/reports`);
+  const today = new Date().toISOString().slice(0, 10);
+  await page.getByTestId("smiley-date").fill(today);
+  await page.getByTestId("smiley-add").click();
+  await expect(page.getByText("Resultatet er gemt")).toBeVisible({ timeout: 15_000 });
+  await page.reload(); // dev-mode RSC refresh can lag behind the toast
+  await expect(page.getByTestId("smiley-row").first()).toContainText("Glad smiley", {
+    timeout: 15_000,
+  });
+  await expect(page.getByTestId("elite-progress")).toContainText("1 af 4");
+
+  // ── §13 training log: record → visible in the inspection Documents tab ────
+  await page.goto(`/app/${siteId}/inspection`);
+  await page.getByTestId("add-training").click();
+  await page.getByTestId("training-person").fill("Maria Hansen");
+  await page.getByTestId("training-course").fill("Hygiejnebevis — grundkursus");
+  await page.getByTestId("training-date").fill(today);
+  await page.getByTestId("training-submit").click();
+  await expect(page.getByRole("dialog")).toBeHidden({ timeout: 15_000 });
+  await page.getByTestId("inspection-tab-documents").click();
+  await expect(page.getByTestId("training-row").first()).toContainText("Maria Hansen");
+  await expect(page.getByTestId("training-row").first()).toContainText("Hygiejnebevis");
 });

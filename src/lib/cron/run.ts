@@ -5,6 +5,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { materializeSiteTasks } from "@/lib/compliance/materialize-runner";
 import { processPackUpdates } from "@/lib/compliance/pack-update";
+import { sendWeeklyDigests } from "./digest";
 import { sendPushToSite } from "@/lib/push";
 import daMessages from "@/messages/da.json";
 import enMessages from "@/messages/en.json";
@@ -30,6 +31,7 @@ export type CronReport = {
   summaries: number;
   packUpdates: number;
   reviewTasks: number;
+  digests: number;
 };
 
 async function notifyOnce(
@@ -62,6 +64,7 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
     summaries: 0,
     packUpdates: 0,
     reviewTasks: 0,
+    digests: 0,
   };
 
   // §13: fan out newly published pack versions as review tasks (idempotent)
@@ -71,6 +74,14 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
     report.reviewTasks = fanOut.reviewTasks;
   } catch {
     // pack fan-out must never block reminders/materialization
+  }
+
+  // §11 weekly digest (Mondays, one per org per ISO week)
+  try {
+    const digest = await sendWeeklyDigests(supabase, now);
+    report.digests = digest.digests;
+  } catch {
+    // digest failures never block operational reminders
   }
 
   const { data: sites } = await supabase

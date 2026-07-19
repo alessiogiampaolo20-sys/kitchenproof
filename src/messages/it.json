@@ -876,7 +876,9 @@
       "open": "Open",
       "kindLabel": "Kind",
       "titleLabel": "Title",
-      "upload": "Upload"
+      "upload": "Upload",
+      "trainingTitle": "Formazione igiene",
+      "certificate": "Attestato"
     },
     "uploadDocumentButton": "Carica documento (contratti, attestati …)",
     "uploadDocumentTitle": "Carica documento",
@@ -1013,5 +1015,31 @@
       "error": "Qualcosa è andato storto. Riprova.",
       "justificationRequired": "Serve una giustificazione scritta."
     }
+  },
+  "smiley": {
+    "title": "Storico smiley",
+    "elite": "Smiley Elite 🏆",
+    "eliteProgress": "{count} di 4 verso Elite",
+    "results": {
+      "1": "Smiley felice",
+      "2": "Smiley neutro",
+      "3": "Smiley triste",
+      "4": "Smiley molto triste"
+    },
+    "empty": "Nessun esito di controllo registrato.",
+    "addButton": "Registra esito",
+    "addedToast": "Esito salvato",
+    "error": "Qualcosa è andato storto. Riprova."
+  },
+  "training": {
+    "title": "Registra formazione igiene",
+    "addButton": "Registra formazione (chi, cosa, quando)",
+    "personLabel": "Dipendente",
+    "courseLabel": "Corso/argomento",
+    "dateLabel": "Data",
+    "certificateLabel": "Attestato (foto/PDF, opzionale)",
+    "saveButton": "Salva",
+    "addedToast": "Formazione registrata",
+    "error": "Qualcosa è andato storto. Riprova."
   }
 }

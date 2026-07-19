@@ -876,7 +876,9 @@
       "open": "Open",
       "kindLabel": "Kind",
       "titleLabel": "Title",
-      "upload": "Upload"
+      "upload": "Upload",
+      "trainingTitle": "Hygiene training",
+      "certificate": "Certificate"
     },
     "uploadDocumentButton": "Upload document (contracts, certificates …)",
     "uploadDocumentTitle": "Upload document",
@@ -1013,5 +1015,31 @@
       "error": "Something went wrong. Try again.",
       "justificationRequired": "A written justification is required."
     }
+  },
+  "smiley": {
+    "title": "Smiley history",
+    "elite": "Elite smiley 🏆",
+    "eliteProgress": "{count} of 4 towards Elite",
+    "results": {
+      "1": "Happy smiley",
+      "2": "Neutral smiley",
+      "3": "Sour smiley",
+      "4": "Very sour smiley"
+    },
+    "empty": "No inspection results recorded yet.",
+    "addButton": "Record result",
+    "addedToast": "Result saved",
+    "error": "Something went wrong. Try again."
+  },
+  "training": {
+    "title": "Record hygiene training",
+    "addButton": "Record training (who, what, when)",
+    "personLabel": "Employee",
+    "courseLabel": "Course/topic",
+    "dateLabel": "Date",
+    "certificateLabel": "Certificate (photo/PDF, optional)",
+    "saveButton": "Save",
+    "addedToast": "Training recorded",
+    "error": "Something went wrong. Try again."
   }
 }

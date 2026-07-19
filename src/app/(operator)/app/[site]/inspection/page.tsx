@@ -22,7 +22,7 @@ import {
   type InspectionTab,
   type TabContext,
 } from "@/components/inspection/tabs";
-import { EntryControls, ExitLockDialog, UploadDocumentForm } from "./inspection-controls";
+import { EntryControls, ExitLockDialog, TrainingForm, UploadDocumentForm } from "./inspection-controls";
 import { SiteNav } from "../site-nav";
 import {
   Card,
@@ -114,6 +114,7 @@ export default async function InspectionPage({
           <CardContent className="grid gap-3">
             <EntryControls siteId={siteId} isManager={isManager} />
             {isManager ? <UploadDocumentForm siteId={siteId} /> : null}
+            {isManager ? <TrainingForm siteId={siteId} /> : null}
           </CardContent>
         </Card>
       ) : null}

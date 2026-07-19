@@ -487,7 +487,37 @@ export async function DocumentsTab({
   const t = await getTranslations("inspection");
   return (
     <div className="grid gap-2">
-      {data.documents.length === 0 ? (
+      {/* §13 hygiene-training log (inspectors ask for it) */}
+      {data.training.length > 0 ? (
+        <Card data-testid="training-log">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">{t("documents.trainingTitle")}</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-1 text-sm">
+            {data.training.map((record) => (
+              <p key={record.id} data-testid="training-row">
+                {record.trained_on} — <strong>{record.person_name}</strong>:{" "}
+                {record.course}
+                {record.certificate_path ? (
+                  <>
+                    {" · "}
+                    <a
+                      className="text-primary underline-offset-4 hover:underline"
+                      href={ctx.fileHref("documents", record.certificate_path)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {t("documents.certificate")}
+                    </a>
+                  </>
+                ) : null}
+              </p>
+            ))}
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {data.documents.length === 0 && data.training.length === 0 ? (
         <p className="text-sm text-muted-foreground">{t("documents.none")}</p>
       ) : null}
       {data.documents.map((doc) => (

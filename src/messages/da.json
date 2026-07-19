@@ -876,7 +876,9 @@
       "open": "Åbn",
       "kindLabel": "Type",
       "titleLabel": "Titel",
-      "upload": "Upload"
+      "upload": "Upload",
+      "trainingTitle": "Hygiejnetræning",
+      "certificate": "Bevis"
     },
     "uploadDocumentButton": "Upload dokument (aftaler, beviser …)",
     "uploadDocumentTitle": "Upload dokument",
@@ -1013,5 +1015,31 @@
       "error": "Noget gik galt. Prøv igen.",
       "justificationRequired": "En skriftlig begrundelse kræves."
     }
+  },
+  "smiley": {
+    "title": "Smiley-historik",
+    "elite": "Elite-smiley 🏆",
+    "eliteProgress": "{count} af 4 mod Elite",
+    "results": {
+      "1": "Glad smiley",
+      "2": "Lige smiley",
+      "3": "Sur smiley",
+      "4": "Meget sur smiley"
+    },
+    "empty": "Ingen kontrolresultater registreret endnu.",
+    "addButton": "Registrér resultat",
+    "addedToast": "Resultatet er gemt",
+    "error": "Noget gik galt. Prøv igen."
+  },
+  "training": {
+    "title": "Registrér hygiejnetræning",
+    "addButton": "Registrér træning (hvem, hvad, hvornår)",
+    "personLabel": "Medarbejder",
+    "courseLabel": "Kursus/emne",
+    "dateLabel": "Dato",
+    "certificateLabel": "Bevis (foto/PDF, valgfrit)",
+    "saveButton": "Gem",
+    "addedToast": "Træningen er registreret",
+    "error": "Noget gik galt. Prøv igen."
   }
 }

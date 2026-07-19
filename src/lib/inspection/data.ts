@@ -168,12 +168,20 @@ export async function getDeviationsData(supabase: Client, siteId: string) {
 /* ── 5. Dokumenter ─────────────────────────────────────────────────────────── */
 
 export async function getDocumentsData(supabase: Client, siteId: string) {
-  const { data: documents } = await supabase
-    .from("site_documents")
-    .select("id, kind, title, file_path, valid_until, created_at, uploader:profiles!site_documents_uploaded_by_fkey(full_name)")
-    .eq("site_id", siteId)
-    .order("created_at", { ascending: false });
-  return { documents: documents ?? [] };
+  const [{ data: documents }, { data: training }] = await Promise.all([
+    supabase
+      .from("site_documents")
+      .select("id, kind, title, file_path, valid_until, created_at, uploader:profiles!site_documents_uploaded_by_fkey(full_name)")
+      .eq("site_id", siteId)
+      .order("created_at", { ascending: false }),
+    // §13 training log lives in the Documents tab (inspectors ask for it)
+    supabase
+      .from("training_records")
+      .select("id, person_name, course, trained_on, certificate_path")
+      .eq("site_id", siteId)
+      .order("trained_on", { ascending: false }),
+  ]);
+  return { documents: documents ?? [], training: training ?? [] };
 }
 
 /* ── §17 integrity footer ──────────────────────────────────────────────────── */
