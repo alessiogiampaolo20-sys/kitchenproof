@@ -44,7 +44,8 @@
     "chooseSite": "Choose site",
     "today": "Today",
     "programme": "Programme",
-    "equipment": "Equipment"
+    "equipment": "Equipment",
+    "dashboard": "Overview"
   },
   "programme": {
     "title": "Own-check programme",
@@ -898,6 +899,25 @@
       "colQty": "Qty",
       "colKind": "Kind",
       "colDetail": "Detail"
+    }
+  },
+  "orgDashboard": {
+    "title": "Portfolio overview",
+    "siteCount": "{count} sites",
+    "todayProgress": "{done}/{due} today",
+    "openDeviations": "{count} open deviations",
+    "scoreHint": "Compliance score 0–100: task completion 40%, open major deviations 25%, resolution time 15%, programme age 10%, traceability hygiene 10%.",
+    "flags": {
+      "noProgramme": "No approved programme",
+      "openMajor": "Major deviation open",
+      "lowScore": "Low score",
+      "missedTasks": "Missed tasks"
+    },
+    "smiley": {
+      "1": "Happy smiley",
+      "2": "Neutral smiley",
+      "3": "Sour smiley",
+      "4": "Very sour"
     }
   }
 }

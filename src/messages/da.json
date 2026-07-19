@@ -44,7 +44,8 @@
     "chooseSite": "Vælg sted",
     "today": "I dag",
     "programme": "Program",
-    "equipment": "Udstyr"
+    "equipment": "Udstyr",
+    "dashboard": "Overblik"
   },
   "programme": {
     "title": "Egenkontrolprogram",
@@ -898,6 +899,25 @@
       "colQty": "Mængde",
       "colKind": "Type",
       "colDetail": "Detalje"
+    }
+  },
+  "orgDashboard": {
+    "title": "Porteføljeoverblik",
+    "siteCount": "{count} steder",
+    "todayProgress": "{done}/{due} i dag",
+    "openDeviations": "{count} åbne afvigelser",
+    "scoreHint": "Compliance-score 0–100: opgaveudførelse 40 %, åbne væsentlige afvigelser 25 %, løsningstid 15 %, programmets alder 10 %, sporbarhedshygiejne 10 %.",
+    "flags": {
+      "noProgramme": "Intet godkendt program",
+      "openMajor": "Væsentlig afvigelse åben",
+      "lowScore": "Lav score",
+      "missedTasks": "Mistede opgaver"
+    },
+    "smiley": {
+      "1": "Glad smiley",
+      "2": "Lige smiley",
+      "3": "Sur smiley",
+      "4": "Meget sur"
     }
   }
 }

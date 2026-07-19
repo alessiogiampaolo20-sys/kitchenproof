@@ -41,6 +41,9 @@ export default async function OrgLayout({
           <span className="font-medium">{org.name}</span>
           <nav className="ml-auto flex items-center gap-1">
             <Button asChild variant="ghost" size="sm">
+              <Link href="/org/dashboard">{t("nav.dashboard")}</Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
               <Link href="/org/sites">{t("nav.sites")}</Link>
             </Button>
             <Button asChild variant="ghost" size="sm">

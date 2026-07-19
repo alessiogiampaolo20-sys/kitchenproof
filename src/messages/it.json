@@ -44,7 +44,8 @@
     "chooseSite": "Scegli sede",
     "today": "Oggi",
     "programme": "Programma",
-    "equipment": "Attrezzature"
+    "equipment": "Attrezzature",
+    "dashboard": "Panoramica"
   },
   "programme": {
     "title": "Programma di autocontrollo",
@@ -898,6 +899,25 @@
       "colQty": "Q.tà",
       "colKind": "Tipo",
       "colDetail": "Dettaglio"
+    }
+  },
+  "orgDashboard": {
+    "title": "Panoramica sedi",
+    "siteCount": "{count} sedi",
+    "todayProgress": "{done}/{due} oggi",
+    "openDeviations": "{count} deviazioni aperte",
+    "scoreHint": "Punteggio compliance 0–100: completamento attività 40%, deviazioni gravi aperte 25%, tempo di risoluzione 15%, età del programma 10%, igiene tracciabilità 10%.",
+    "flags": {
+      "noProgramme": "Nessun programma approvato",
+      "openMajor": "Deviazione grave aperta",
+      "lowScore": "Punteggio basso",
+      "missedTasks": "Attività mancate"
+    },
+    "smiley": {
+      "1": "Smiley felice",
+      "2": "Smiley neutro",
+      "3": "Smiley triste",
+      "4": "Molto triste"
     }
   }
 }
