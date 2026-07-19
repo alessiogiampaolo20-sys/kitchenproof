@@ -1561,6 +1561,68 @@ export type Database = {
           },
         ]
       }
+      org_programme_templates: {
+        Row: {
+          content: Json
+          created_at: string
+          created_by: string
+          id: string
+          name: string
+          org_id: string
+          source_site_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          created_by: string
+          id?: string
+          name: string
+          org_id: string
+          source_site_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          created_by?: string
+          id?: string
+          name?: string
+          org_id?: string
+          source_site_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "org_programme_templates_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "org_programme_templates_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "org_programme_templates_source_site_id_fkey"
+            columns: ["source_site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "org_programme_templates_source_site_id_fkey"
+            columns: ["source_site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           billing_email: string | null
@@ -1817,6 +1879,84 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      programme_change_proposals: {
+        Row: {
+          created_at: string
+          decided_at: string | null
+          decided_by: string | null
+          diff_json: Json
+          id: string
+          justification: string | null
+          proposed_by: string
+          site_id: string
+          status: Database["public"]["Enums"]["proposal_status"]
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          diff_json: Json
+          id?: string
+          justification?: string | null
+          proposed_by: string
+          site_id: string
+          status?: Database["public"]["Enums"]["proposal_status"]
+          template_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          diff_json?: Json
+          id?: string
+          justification?: string | null
+          proposed_by?: string
+          site_id?: string
+          status?: Database["public"]["Enums"]["proposal_status"]
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programme_change_proposals_decided_by_fkey"
+            columns: ["decided_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "programme_change_proposals_proposed_by_fkey"
+            columns: ["proposed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "programme_change_proposals_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "programme_change_proposals_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+          {
+            foreignKeyName: "programme_change_proposals_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "org_programme_templates"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       programme_documents: {
         Row: {
@@ -2122,6 +2262,41 @@ export type Database = {
           },
         ]
       }
+      regulatory_updates: {
+        Row: {
+          created_at: string
+          from_version: string
+          id: string
+          pack_code: string
+          summary_i18n: Json
+          to_version: string
+        }
+        Insert: {
+          created_at?: string
+          from_version: string
+          id?: string
+          pack_code: string
+          summary_i18n: Json
+          to_version: string
+        }
+        Update: {
+          created_at?: string
+          from_version?: string
+          id?: string
+          pack_code?: string
+          summary_i18n?: Json
+          to_version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "regulatory_updates_pack_code_fkey"
+            columns: ["pack_code"]
+            isOneToOne: false
+            referencedRelation: "compliance_packs"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       risk_analyses: {
         Row: {
           approved_at: string | null
@@ -2248,6 +2423,77 @@ export type Database = {
           },
         ]
       }
+      site_review_tasks: {
+        Row: {
+          created_at: string
+          diff_json: Json | null
+          due_at: string | null
+          id: string
+          regulatory_update_id: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          site_id: string
+          status: Database["public"]["Enums"]["review_status"]
+          trigger: Database["public"]["Enums"]["review_trigger"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          diff_json?: Json | null
+          due_at?: string | null
+          id?: string
+          regulatory_update_id?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          site_id: string
+          status?: Database["public"]["Enums"]["review_status"]
+          trigger: Database["public"]["Enums"]["review_trigger"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          diff_json?: Json | null
+          due_at?: string | null
+          id?: string
+          regulatory_update_id?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          site_id?: string
+          status?: Database["public"]["Enums"]["review_status"]
+          trigger?: Database["public"]["Enums"]["review_trigger"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_review_tasks_regulatory_update_id_fkey"
+            columns: ["regulatory_update_id"]
+            isOneToOne: false
+            referencedRelation: "regulatory_updates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_review_tasks_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_review_tasks_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_review_tasks_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       sites: {
         Row: {
           activity_type: Database["public"]["Enums"]["activity_type"]
@@ -2310,6 +2556,58 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organizations"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      smiley_inspections: {
+        Row: {
+          created_at: string
+          id: string
+          inspected_on: string
+          note: string | null
+          recorded_by: string
+          result: number
+          site_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          inspected_on: string
+          note?: string | null
+          recorded_by: string
+          result: number
+          site_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          inspected_on?: string
+          note?: string | null
+          recorded_by?: string
+          result?: number
+          site_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "smiley_inspections_recorded_by_fkey"
+            columns: ["recorded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "smiley_inspections_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "smiley_inspections_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
           },
         ]
       }
@@ -2581,6 +2879,61 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "deviations"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      training_records: {
+        Row: {
+          certificate_path: string | null
+          course: string
+          created_at: string
+          id: string
+          person_name: string
+          recorded_by: string
+          site_id: string
+          trained_on: string
+        }
+        Insert: {
+          certificate_path?: string | null
+          course: string
+          created_at?: string
+          id?: string
+          person_name: string
+          recorded_by: string
+          site_id: string
+          trained_on: string
+        }
+        Update: {
+          certificate_path?: string | null
+          course?: string
+          created_at?: string
+          id?: string
+          person_name?: string
+          recorded_by?: string
+          site_id?: string
+          trained_on?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "training_records_recorded_by_fkey"
+            columns: ["recorded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "training_records_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "training_records_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
           },
         ]
       }
@@ -2899,6 +3252,7 @@ export type Database = {
         | "packaging"
         | "nonfood"
         | "other"
+      proposal_status: "pending" | "applied" | "rejected"
       ra_import_kind: "photo_set" | "pdf" | "docx" | "xlsx" | "paper_scan"
       ra_import_status:
         | "uploaded"
@@ -2908,6 +3262,12 @@ export type Database = {
         | "confirmed"
         | "failed"
       ra_status: "draft" | "in_review" | "approved" | "superseded"
+      review_status: "open" | "resolved" | "dismissed"
+      review_trigger:
+        | "pack_update"
+        | "repeated_deviation"
+        | "activity_change"
+        | "annual"
       site_document_kind:
         | "pest_control"
         | "training_certificate"
@@ -3132,6 +3492,7 @@ export const Constants = {
         "nonfood",
         "other",
       ],
+      proposal_status: ["pending", "applied", "rejected"],
       ra_import_kind: ["photo_set", "pdf", "docx", "xlsx", "paper_scan"],
       ra_import_status: [
         "uploaded",
@@ -3142,6 +3503,13 @@ export const Constants = {
         "failed",
       ],
       ra_status: ["draft", "in_review", "approved", "superseded"],
+      review_status: ["open", "resolved", "dismissed"],
+      review_trigger: [
+        "pack_update",
+        "repeated_deviation",
+        "activity_change",
+        "annual",
+      ],
       site_document_kind: [
         "pest_control",
         "training_certificate",
