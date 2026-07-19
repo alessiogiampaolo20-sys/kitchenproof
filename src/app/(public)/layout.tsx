@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 
 export default async function PublicLayout({
   children,
@@ -10,6 +11,7 @@ export default async function PublicLayout({
         {t("appName")}
       </h1>
       <div className="w-full max-w-sm">{children}</div>
+      <LocaleSwitcher />
     </main>
   );
 }

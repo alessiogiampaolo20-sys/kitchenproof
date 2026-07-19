@@ -10,6 +10,7 @@ import {
   Refrigerator,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 
 export async function SiteNav({
   siteId,
@@ -52,6 +53,7 @@ export async function SiteNav({
           {tab.label}
         </Link>
       ))}
+      <LocaleSwitcher className="ml-auto shrink-0" />
     </nav>
   );
 }

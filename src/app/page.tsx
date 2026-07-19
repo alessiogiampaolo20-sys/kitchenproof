@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Building2, MapPin, Users } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { setActiveOrg, signOut } from "./_actions";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -43,11 +44,14 @@ export default async function RootPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-primary">
           {t("common.appName")}
         </h1>
+        <div className="flex items-center gap-2">
+        <LocaleSwitcher />
         <form action={signOut}>
           <Button variant="ghost" size="sm" type="submit">
             {t("auth.signOut")}
           </Button>
         </form>
+        </div>
       </header>
 
       <div className="grid gap-8">

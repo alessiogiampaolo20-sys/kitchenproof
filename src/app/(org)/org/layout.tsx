@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveOrgId } from "@/lib/org-context";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { signOut } from "@/app/_actions";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import { Button } from "@/components/ui/button";
 
 export default async function OrgLayout({
@@ -53,6 +54,7 @@ export default async function OrgLayout({
             <Button asChild variant="ghost" size="sm">
               <Link href="/org/members">{t("nav.members")}</Link>
             </Button>
+            <LocaleSwitcher />
             <form action={signOut}>
               <Button variant="ghost" size="sm" type="submit">
                 {t("auth.signOut")}
