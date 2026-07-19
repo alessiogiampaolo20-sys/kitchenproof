@@ -4,6 +4,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { materializeSiteTasks } from "@/lib/compliance/materialize-runner";
+import { processPackUpdates } from "@/lib/compliance/pack-update";
 import { sendPushToSite } from "@/lib/push";
 import daMessages from "@/messages/da.json";
 import enMessages from "@/messages/en.json";
@@ -27,6 +28,8 @@ export type CronReport = {
   dueReminders: number;
   overdueReminders: number;
   summaries: number;
+  packUpdates: number;
+  reviewTasks: number;
 };
 
 async function notifyOnce(
@@ -57,7 +60,18 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
     dueReminders: 0,
     overdueReminders: 0,
     summaries: 0,
+    packUpdates: 0,
+    reviewTasks: 0,
   };
+
+  // §13: fan out newly published pack versions as review tasks (idempotent)
+  try {
+    const fanOut = await processPackUpdates(supabase);
+    report.packUpdates = fanOut.updates;
+    report.reviewTasks = fanOut.reviewTasks;
+  } catch {
+    // pack fan-out must never block reminders/materialization
+  }
 
   const { data: sites } = await supabase
     .from("sites")

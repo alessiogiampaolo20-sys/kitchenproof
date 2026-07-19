@@ -124,7 +124,14 @@
       "ifItGoesWrong": "Hvad gør du hvis det går galt?"
     },
     "startImportButton": "Importér eksisterende risikoanalyse",
-    "startImportHint": "Har I allerede en risikoanalyse på papir, i Word eller PDF? Importér den — originalen gemmes, og indholdet overføres til det officielle skema."
+    "startImportHint": "Har I allerede en risikoanalyse på papir, i Word eller PDF? Importér den — originalen gemmes, og indholdet overføres til det officielle skema.",
+    "reviewTriggers": {
+      "pack_update": "Reglerne er ændret — gennemgå dit program",
+      "repeated_deviation": "Gentagne afvigelser — gennemgå kontrolpunktet",
+      "activity_change": "Aktiviteten er ændret — gennemgå programmet",
+      "annual": "Årlig gennemgang"
+    },
+    "reviewDue": "Frist {date}"
   },
   "equipment": {
     "title": "Udstyr",
@@ -919,5 +926,40 @@
       "3": "Sur smiley",
       "4": "Meget sur"
     }
+  },
+  "review": {
+    "title": "Regelændringer {from} → {to}",
+    "status": {
+      "open": "Åben",
+      "resolved": "Gennemgået",
+      "dismissed": "Afvist"
+    },
+    "dueBy": "frist {date}",
+    "kinds": {
+      "limit_changed": "Grænse ændret",
+      "frequency_changed": "Frekvens ændret",
+      "template_added": "Nyt krav",
+      "template_removed": "Krav udgået"
+    },
+    "decisions": {
+      "applied": "Anvendt",
+      "kept": "Beholdt (begrundet)"
+    },
+    "packBefore": "Pakke før",
+    "packAfter": "Pakke nu",
+    "siteCurrent": "Jeres værdi",
+    "applyButton": "Anvend foreslået ændring",
+    "keepButton": "Behold min",
+    "keepConfirm": "Behold med begrundelse",
+    "cancel": "Fortryd",
+    "justificationPlaceholder": "Hvorfor beholder I jeres egen værdi? (kræves)",
+    "justificationLabel": "Begrundelse",
+    "decidedToast": "Beslutning gemt",
+    "resolvedToast": "Alle ændringer er gennemgået",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "justificationRequired": "En skriftlig begrundelse kræves for at beholde jeres værdi."
+    },
+    "r9Hint": "Intet ændres automatisk i et godkendt program — hver ændring kræver jeres beslutning her (R9)."
   }
 }

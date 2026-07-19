@@ -64,10 +64,45 @@ export default async function ProgrammePage({
 
   const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
 
+  // §13: open regulatory review tasks surface above everything
+  const { data: reviewTasks } = await supabase
+    .from("site_review_tasks")
+    .select("id, trigger, due_at")
+    .eq("site_id", siteId)
+    .eq("status", "open")
+    .order("created_at", { ascending: false });
+
+  const reviewBanner =
+    (reviewTasks ?? []).length > 0 ? (
+      <div className="mb-4 grid gap-2">
+        {(reviewTasks ?? []).map((reviewTask) => (
+          <Link
+            key={reviewTask.id}
+            href={`/app/${siteId}/programme/review/${reviewTask.id}`}
+            data-testid="review-task-banner"
+          >
+            <Card className="border-amber-400">
+              <CardContent className="flex items-center gap-2 py-3 text-sm">
+                <span className="min-w-0 flex-1 font-medium">
+                  {t(`programme.reviewTriggers.${reviewTask.trigger}`)}
+                </span>
+                {reviewTask.due_at ? (
+                  <Badge variant="secondary">
+                    {t("programme.reviewDue", { date: reviewTask.due_at.slice(0, 10) })}
+                  </Badge>
+                ) : null}
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    ) : null;
+
   if (!ra) {
     return (
       <main className="mx-auto w-full max-w-2xl flex-1 p-4">
         <SiteNav siteId={siteId} active="programme" />
+        {reviewBanner}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -145,6 +180,7 @@ export default async function ProgrammePage({
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 p-4">
       <SiteNav siteId={siteId} active="programme" />
+        {reviewBanner}
 
       <header className="mb-6 flex flex-wrap items-center gap-2">
         <h1 className="text-xl font-semibold">{t("programme.title")}</h1>

@@ -124,7 +124,14 @@
       "ifItGoesWrong": "Cosa fai se qualcosa va storto?"
     },
     "startImportButton": "Importa un'analisi dei rischi esistente",
-    "startImportHint": "Avete già un'analisi dei rischi su carta, Word o PDF? Importatela — l'originale viene conservato e il contenuto trasferito nel modulo ufficiale."
+    "startImportHint": "Avete già un'analisi dei rischi su carta, Word o PDF? Importatela — l'originale viene conservato e il contenuto trasferito nel modulo ufficiale.",
+    "reviewTriggers": {
+      "pack_update": "Le regole sono cambiate — rivedi il programma",
+      "repeated_deviation": "Deviazioni ripetute — rivedi il punto di controllo",
+      "activity_change": "Attività cambiata — rivedi il programma",
+      "annual": "Revisione annuale"
+    },
+    "reviewDue": "Scadenza {date}"
   },
   "equipment": {
     "title": "Attrezzature",
@@ -919,5 +926,40 @@
       "3": "Smiley triste",
       "4": "Molto triste"
     }
+  },
+  "review": {
+    "title": "Modifiche normative {from} → {to}",
+    "status": {
+      "open": "Aperta",
+      "resolved": "Rivista",
+      "dismissed": "Respinta"
+    },
+    "dueBy": "scadenza {date}",
+    "kinds": {
+      "limit_changed": "Limite cambiato",
+      "frequency_changed": "Frequenza cambiata",
+      "template_added": "Nuovo requisito",
+      "template_removed": "Requisito rimosso"
+    },
+    "decisions": {
+      "applied": "Applicato",
+      "kept": "Mantenuto (giustificato)"
+    },
+    "packBefore": "Pacchetto prima",
+    "packAfter": "Pacchetto ora",
+    "siteCurrent": "Il vostro valore",
+    "applyButton": "Applica modifica suggerita",
+    "keepButton": "Tieni il mio",
+    "keepConfirm": "Mantieni con giustificazione",
+    "cancel": "Annulla",
+    "justificationPlaceholder": "Perché mantenete il vostro valore? (obbligatorio)",
+    "justificationLabel": "Giustificazione",
+    "decidedToast": "Decisione salvata",
+    "resolvedToast": "Tutte le modifiche riviste",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "justificationRequired": "Serve una giustificazione scritta per mantenere il vostro valore."
+    },
+    "r9Hint": "Nulla cambia automaticamente in un programma approvato — ogni modifica richiede la vostra decisione qui (R9)."
   }
 }

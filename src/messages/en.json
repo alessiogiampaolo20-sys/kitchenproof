@@ -124,7 +124,14 @@
       "ifItGoesWrong": "What do you do if something goes wrong?"
     },
     "startImportButton": "Import an existing risk analysis",
-    "startImportHint": "Already have a risk analysis on paper, in Word or PDF? Import it — the original is stored and the content is transferred to the official form."
+    "startImportHint": "Already have a risk analysis on paper, in Word or PDF? Import it — the original is stored and the content is transferred to the official form.",
+    "reviewTriggers": {
+      "pack_update": "Rules changed — review your programme",
+      "repeated_deviation": "Repeated deviations — review the control point",
+      "activity_change": "Activity changed — review the programme",
+      "annual": "Annual review"
+    },
+    "reviewDue": "Due {date}"
   },
   "equipment": {
     "title": "Equipment",
@@ -919,5 +926,40 @@
       "3": "Sour smiley",
       "4": "Very sour"
     }
+  },
+  "review": {
+    "title": "Rule changes {from} → {to}",
+    "status": {
+      "open": "Open",
+      "resolved": "Reviewed",
+      "dismissed": "Dismissed"
+    },
+    "dueBy": "due {date}",
+    "kinds": {
+      "limit_changed": "Limit changed",
+      "frequency_changed": "Frequency changed",
+      "template_added": "New requirement",
+      "template_removed": "Requirement removed"
+    },
+    "decisions": {
+      "applied": "Applied",
+      "kept": "Kept (justified)"
+    },
+    "packBefore": "Pack before",
+    "packAfter": "Pack now",
+    "siteCurrent": "Your value",
+    "applyButton": "Apply suggested change",
+    "keepButton": "Keep mine",
+    "keepConfirm": "Keep with justification",
+    "cancel": "Cancel",
+    "justificationPlaceholder": "Why do you keep your own value? (required)",
+    "justificationLabel": "Justification",
+    "decidedToast": "Decision saved",
+    "resolvedToast": "All changes reviewed",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "justificationRequired": "A written justification is required to keep your value."
+    },
+    "r9Hint": "Nothing changes automatically in an approved programme — every change requires your decision here (R9)."
   }
 }
