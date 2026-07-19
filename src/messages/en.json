@@ -131,7 +131,8 @@
       "activity_change": "Activity changed — review the programme",
       "annual": "Annual review"
     },
-    "reviewDue": "Due {date}"
+    "reviewDue": "Due {date}",
+    "assistantLink": "Ask the assistant"
   },
   "equipment": {
     "title": "Equipment",
@@ -961,5 +962,17 @@
       "justificationRequired": "A written justification is required to keep your value."
     },
     "r9Hint": "Nothing changes automatically in an approved programme — every change requires your decision here (R9)."
+  },
+  "assistant": {
+    "title": "Compliance assistant",
+    "hint": "Ask about hygiene, temperatures, self-control and traceability. Answers come exclusively from the official sources and your own programme — always with citations.",
+    "disclaimer": "Guidance, not legal advice. Responsibility for self-control stays with the business.",
+    "placeholder": "e.g.: How fast must food be cooled down?",
+    "thinking": "Looking it up in the sources …",
+    "outOfScope": "Outside the assistant's scope — contact a consultant or the DVFA",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "aiUnavailable": "The assistant is unavailable right now. See the guidance on control points, or contact a consultant."
+    }
   }
 }

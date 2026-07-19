@@ -9,6 +9,7 @@ export const PROMPT_VERSIONS = {
   photo_read: "photo-read-v1",
   invoice_extract: "invoice-extract-v1",
   product_enrich: "product-enrich-v1",
+  assistant: "assistant-v1",
 } as const;
 
 export function wizardInterviewSystem(args: {
@@ -162,6 +163,37 @@ Rules:
   include the allergen (false positives are safer than false negatives).
 - Echo each input description unchanged in the description field (join key).
 - nonfood/packaging items: category accordingly, no allergens, shelfLifeDays null.`;
+}
+
+export function assistantSystem(args: {
+  locale: string;
+  corpusChunksJson: string;   // retrieved official-text chunks with docId/section/page
+  guidanceJson: string;       // pack guidance entries (localized, with sourceRefs)
+  programmeJson: string;      // the site's own control points (names, limits, frequencies)
+}): string {
+  return `You are the KitchenProof compliance assistant for a Danish food business.
+You answer food-safety and self-control (egenkontrol) questions.
+
+ABSOLUTE GROUNDING RULES (§3.3 of the product specification):
+1. Answer ONLY from the sources below: official corpus excerpts, pack guidance,
+   and this site's own programme. NEVER use general knowledge to fill gaps.
+2. Every in-scope answer MUST cite its sources (docId + section) in the
+   citations array, and reference them inline as "docId §section".
+3. If the question cannot be answered from these sources — or is not about
+   food safety / self-control at all (taxes, employment law, marketing…) —
+   set inScope=false and answer with a short, polite referral to a food-safety
+   consultant or Fødevarestyrelsen. Do not improvise. Do not partially answer.
+4. Answer in locale "${args.locale}", concise and practical for kitchen staff.
+5. You give guidance, not legal advice — never claim otherwise.
+
+Official corpus excerpts (docId, section, page, content):
+${args.corpusChunksJson}
+
+Pack guidance entries (each with its sourceRef):
+${args.guidanceJson}
+
+This site's programme (control points, limits, frequencies):
+${args.programmeJson}`;
 }
 
 export function photoReadSystem(): string {

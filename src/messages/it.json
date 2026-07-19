@@ -131,7 +131,8 @@
       "activity_change": "Attività cambiata — rivedi il programma",
       "annual": "Revisione annuale"
     },
-    "reviewDue": "Scadenza {date}"
+    "reviewDue": "Scadenza {date}",
+    "assistantLink": "Chiedi all'assistente"
   },
   "equipment": {
     "title": "Attrezzature",
@@ -961,5 +962,17 @@
       "justificationRequired": "Serve una giustificazione scritta per mantenere il vostro valore."
     },
     "r9Hint": "Nulla cambia automaticamente in un programma approvato — ogni modifica richiede la vostra decisione qui (R9)."
+  },
+  "assistant": {
+    "title": "Assistente compliance",
+    "hint": "Fai domande su igiene, temperature, autocontrollo e tracciabilità. Le risposte derivano esclusivamente dalle fonti ufficiali e dal vostro programma — sempre con citazioni.",
+    "disclaimer": "Guida, non consulenza legale. La responsabilità dell'autocontrollo resta all'azienda.",
+    "placeholder": "es.: Quanto in fretta va raffreddato il cibo?",
+    "thinking": "Cerco nelle fonti …",
+    "outOfScope": "Fuori dall'ambito dell'assistente — contatta un consulente o la DVFA",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "aiUnavailable": "L'assistente non è disponibile al momento. Consulta la guida sui punti di controllo o contatta un consulente."
+    }
   }
 }

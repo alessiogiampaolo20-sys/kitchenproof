@@ -1,0 +1,10 @@
+{
+ "inScope": true,
+ "answer": "Varmebehandlet mad, der skal gemmes, skal nedkøles hurtigst muligt: fra 56 °C til 10 °C på højst 4 timer (DK-HYGIEJNE §kap. 26.7). Jeres eget program har kontrolpunktet \"Nedkøling 56→10 °C / 240 min\", som dækker netop dette. Del maden i lave beholdere, så den køler hurtigere. Andre tid/temperatur-kombinationer kan bruges, hvis I kan dokumentere, at de er sikre.",
+ "citations": [
+  {
+   "docId": "DK-HYGIEJNE",
+   "section": "kap. 26.7"
+  }
+ ]
+}

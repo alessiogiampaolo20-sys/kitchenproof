@@ -184,6 +184,11 @@ export default async function ProgrammePage({
 
       <header className="mb-6 flex flex-wrap items-center gap-2">
         <h1 className="text-xl font-semibold">{t("programme.title")}</h1>
+        <Button asChild variant="outline" size="sm" data-testid="assistant-link">
+          <Link href={`/app/${siteId}/assistant`}>
+            {t("programme.assistantLink")}
+          </Link>
+        </Button>
         <Badge variant={statusVariant} data-testid="ra-status">
           {t(`programme.status.${ra.status}`)}
         </Badge>

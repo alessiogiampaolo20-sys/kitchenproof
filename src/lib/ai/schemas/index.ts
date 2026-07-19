@@ -228,6 +228,32 @@ export const productEnrichSchema = z
   .strict();
 export type ProductEnrichment = z.infer<typeof productEnrichSchema>;
 
+/* ── Compliance assistant (§13/§14): RAG with mandatory citations ──────────── */
+
+export const assistantAnswerSchema = z
+  .object({
+    inScope: z.boolean(),
+    /** answer in the requested locale; when out of scope: a short referral */
+    answer: z.string().min(1),
+    citations: z
+      .array(
+        z
+          .object({
+            docId: z.string().min(1),
+            section: z.string().min(1),
+          })
+          .strict(),
+      )
+      .max(8),
+  })
+  .strict()
+  // §13 [DECISION]: an in-scope answer without sources is INVALID — the
+  // provider retry loop turns this into "cite or refuse".
+  .refine((value) => !value.inScope || value.citations.length > 0, {
+    message: "in-scope answers must cite at least one source",
+  });
+export type AssistantAnswer = z.infer<typeof assistantAnswerSchema>;
+
 /* ── Thermometer/display photo reading (§8.2/§14) ──────────────────────────── */
 
 export const photoReadSchema = z

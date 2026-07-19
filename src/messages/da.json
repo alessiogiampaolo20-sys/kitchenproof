@@ -131,7 +131,8 @@
       "activity_change": "Aktiviteten er ændret — gennemgå programmet",
       "annual": "Årlig gennemgang"
     },
-    "reviewDue": "Frist {date}"
+    "reviewDue": "Frist {date}",
+    "assistantLink": "Spørg assistenten"
   },
   "equipment": {
     "title": "Udstyr",
@@ -961,5 +962,17 @@
       "justificationRequired": "En skriftlig begrundelse kræves for at beholde jeres værdi."
     },
     "r9Hint": "Intet ændres automatisk i et godkendt program — hver ændring kræver jeres beslutning her (R9)."
+  },
+  "assistant": {
+    "title": "Compliance-assistent",
+    "hint": "Stil spørgsmål om hygiejne, temperaturer, egenkontrol og sporbarhed. Svarene bygger udelukkende på de officielle kilder og jeres eget program — altid med kildehenvisning.",
+    "disclaimer": "Vejledning, ikke juridisk rådgivning. Ansvaret for egenkontrollen ligger hos virksomheden.",
+    "placeholder": "fx: Hvor hurtigt skal maden køles ned?",
+    "thinking": "Slår op i kilderne …",
+    "outOfScope": "Uden for assistentens område — kontakt en konsulent eller Fødevarestyrelsen",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "aiUnavailable": "Assistenten er ikke tilgængelig lige nu. Se vejledningen på kontrolpunkterne, eller kontakt en konsulent."
+    }
   }
 }
