@@ -3,7 +3,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { getPortfolio } from "@/lib/compliance/score-data";
-import { sendEmail } from "@/lib/email/provider";
 import { isoWeek } from "./iso-week";
 
 type Client = SupabaseClient<Database>;
@@ -103,6 +102,8 @@ export async function sendWeeklyDigests(
       .select("id")
       .in("id", adminIds);
     // e-mail addresses live in auth; the service client can read them
+    // (dynamic import: the provider is server-only, runCron stays vitest-able)
+    const { sendEmail } = await import("@/lib/email/provider");
     for (const user of users ?? []) {
       const { data: authUser } = await supabase.auth.admin.getUserById(user.id);
       if (authUser?.user?.email) {
