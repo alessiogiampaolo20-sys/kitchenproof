@@ -4,17 +4,10 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { getPortfolio } from "@/lib/compliance/score-data";
 import { sendEmail } from "@/lib/email/provider";
+import { isoWeek } from "./iso-week";
 
 type Client = SupabaseClient<Database>;
 
-export function isoWeek(date: Date): string {
-  const utc = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
-  const day = utc.getUTCDay() || 7;
-  utc.setUTCDate(utc.getUTCDate() + 4 - day);
-  const yearStart = new Date(Date.UTC(utc.getUTCFullYear(), 0, 1));
-  const week = Math.ceil(((utc.getTime() - yearStart.getTime()) / 86_400_000 + 1) / 7);
-  return `${utc.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
-}
 
 export async function sendWeeklyDigests(
   supabase: Client,

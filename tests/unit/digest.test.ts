@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isoWeek } from "@/lib/cron/digest";
+import { isoWeek } from "@/lib/cron/iso-week";
 
 describe("isoWeek (weekly digest dedupe key)", () => {
   it("computes ISO week ids across year boundaries", () => {
