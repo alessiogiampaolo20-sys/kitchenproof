@@ -233,7 +233,12 @@ async function demoFixture(): Promise<void> {
 async function main() {
   await publishPack();
   await ingestCorpusChunks();
-  await demoFixture();
+  // production seeding: pack + corpus only (SEED_DEMO=0 skips the demo org)
+  if (process.env.SEED_DEMO !== "0") {
+    await demoFixture();
+  } else {
+    console.info("SEED_DEMO=0 — demo fixture skipped (production seed)");
+  }
 }
 
 main().catch((err) => {
