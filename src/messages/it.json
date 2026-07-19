@@ -45,7 +45,8 @@
     "today": "Oggi",
     "programme": "Programma",
     "equipment": "Attrezzature",
-    "dashboard": "Panoramica"
+    "dashboard": "Panoramica",
+    "templates": "Modelli"
   },
   "programme": {
     "title": "Programma di autocontrollo",
@@ -973,6 +974,44 @@
     "errors": {
       "error": "Qualcosa è andato storto. Riprova.",
       "aiUnavailable": "L'assistente non è disponibile al momento. Consulta la guida sui punti di controllo o contatta un consulente."
+    }
+  },
+  "templates": {
+    "title": "Modelli di programma",
+    "hint": "Crea un modello dal programma di una sede e distribuiscilo a sedi nuove o esistenti. I programmi esistenti non vengono MAI modificati direttamente — la sede riceve una proposta da approvare localmente.",
+    "createTitle": "Nuovo modello",
+    "namePlaceholder": "es. Ristorante standard",
+    "createButton": "Crea modello",
+    "createdToast": "Modello creato",
+    "sourceLabel": "Da {site}",
+    "targetPlaceholder": "Scegli sede di destinazione",
+    "deployButton": "Distribuisci",
+    "deployedDraftToast": "Bozza creata sulla sede — rivedi e approva localmente",
+    "deployedProposalToast": "Proposta inviata alla sede — richiede approvazione locale",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "noProgramme": "La sede sorgente non ha ancora un programma.",
+      "noChanges": "Nessuna differenza — la sede corrisponde già al modello."
+    },
+    "r9Hint": "Il programma di ogni sede deve corrispondere a quella sede — le modifiche centrali diventano proposte, mai cambi automatici (R9)."
+  },
+  "proposals": {
+    "title": "Modifiche proposte da \"{template}\"",
+    "changeCount": "{count} modifiche",
+    "fields": {
+      "limit": "limite",
+      "frequency": "frequenza"
+    },
+    "applyButton": "Approva e applica",
+    "rejectButton": "Rifiuta",
+    "rejectConfirm": "Rifiuta con giustificazione",
+    "cancel": "Annulla",
+    "justificationPlaceholder": "Perché la modifica non va bene per questa sede? (obbligatorio)",
+    "appliedToast": "Modifiche applicate",
+    "rejectedToast": "Proposta rifiutata con giustificazione",
+    "errors": {
+      "error": "Qualcosa è andato storto. Riprova.",
+      "justificationRequired": "Serve una giustificazione scritta."
     }
   }
 }

@@ -11,6 +11,7 @@ import { SiteNav } from "../site-nav";
 import { ApproveButton, StartTemplateButton } from "./programme-buttons";
 import { CreateCpDialog, EditCpDialog, ToggleCpButton, type CpLimitShape } from "./cp-dialogs";
 import { RowEditDialog } from "./row-edit-dialog";
+import { ProposalCard } from "./proposal-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -72,6 +73,29 @@ export default async function ProgrammePage({
     .eq("status", "open")
     .order("created_at", { ascending: false });
 
+  // §11: pending central-template proposals need a local decision
+  const { data: proposals } = await supabase
+    .from("programme_change_proposals")
+    .select("id, diff_json, template:org_programme_templates(name)")
+    .eq("site_id", siteId)
+    .eq("status", "pending")
+    .order("created_at", { ascending: false });
+
+  const proposalCards =
+    isManager && (proposals ?? []).length > 0 ? (
+      <div className="mb-4 grid gap-2">
+        {(proposals ?? []).map((proposal) => (
+          <ProposalCard
+            key={proposal.id}
+            siteId={siteId}
+            proposalId={proposal.id}
+            templateName={proposal.template?.name ?? ""}
+            items={(proposal.diff_json ?? []) as never}
+          />
+        ))}
+      </div>
+    ) : null;
+
   const reviewBanner =
     (reviewTasks ?? []).length > 0 ? (
       <div className="mb-4 grid gap-2">
@@ -103,6 +127,7 @@ export default async function ProgrammePage({
       <main className="mx-auto w-full max-w-2xl flex-1 p-4">
         <SiteNav siteId={siteId} active="programme" />
         {reviewBanner}
+        {proposalCards}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -181,6 +206,7 @@ export default async function ProgrammePage({
     <main className="mx-auto w-full max-w-3xl flex-1 p-4">
       <SiteNav siteId={siteId} active="programme" />
         {reviewBanner}
+        {proposalCards}
 
       <header className="mb-6 flex flex-wrap items-center gap-2">
         <h1 className="text-xl font-semibold">{t("programme.title")}</h1>

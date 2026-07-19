@@ -38,13 +38,17 @@ export default async function OrgLayout({
             <ArrowLeft className="size-4" />
             {t("nav.chooseSite")}
           </Link>
-          <span className="font-medium">{org.name}</span>
-          <nav className="ml-auto flex items-center gap-1">
+          <span className="min-w-0 flex-1 truncate font-medium">{org.name}</span>
+          {/* wraps on narrow screens — overflow breaks mobile hit-testing */}
+          <nav className="ml-auto flex flex-wrap items-center justify-end gap-1">
             <Button asChild variant="ghost" size="sm">
               <Link href="/org/dashboard">{t("nav.dashboard")}</Link>
             </Button>
             <Button asChild variant="ghost" size="sm">
               <Link href="/org/sites">{t("nav.sites")}</Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/org/templates">{t("nav.templates")}</Link>
             </Button>
             <Button asChild variant="ghost" size="sm">
               <Link href="/org/members">{t("nav.members")}</Link>

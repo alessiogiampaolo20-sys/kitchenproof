@@ -45,7 +45,8 @@
     "today": "I dag",
     "programme": "Program",
     "equipment": "Udstyr",
-    "dashboard": "Overblik"
+    "dashboard": "Overblik",
+    "templates": "Skabeloner"
   },
   "programme": {
     "title": "Egenkontrolprogram",
@@ -973,6 +974,44 @@
     "errors": {
       "error": "Noget gik galt. Prøv igen.",
       "aiUnavailable": "Assistenten er ikke tilgængelig lige nu. Se vejledningen på kontrolpunkterne, eller kontakt en konsulent."
+    }
+  },
+  "templates": {
+    "title": "Programskabeloner",
+    "hint": "Lav en skabelon ud fra ét steds program og rul den ud til nye eller eksisterende steder. Eksisterende programmer ændres ALDRIG direkte — stedet modtager et forslag til lokal godkendelse.",
+    "createTitle": "Ny skabelon",
+    "namePlaceholder": "fx Standard restaurant",
+    "createButton": "Opret skabelon",
+    "createdToast": "Skabelonen er oprettet",
+    "sourceLabel": "Fra {site}",
+    "targetPlaceholder": "Vælg målsted",
+    "deployButton": "Rul ud",
+    "deployedDraftToast": "Kladde oprettet på stedet — gennemgå og godkend lokalt",
+    "deployedProposalToast": "Forslag sendt til stedet — kræver lokal godkendelse",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "noProgramme": "Kildestedet har intet program endnu.",
+      "noChanges": "Ingen forskelle — stedet matcher allerede skabelonen."
+    },
+    "r9Hint": "Hvert steds program skal svare til netop dét sted — centrale ændringer bliver forslag, aldrig automatiske ændringer (R9)."
+  },
+  "proposals": {
+    "title": "Foreslåede ændringer fra \"{template}\"",
+    "changeCount": "{count} ændringer",
+    "fields": {
+      "limit": "grænse",
+      "frequency": "frekvens"
+    },
+    "applyButton": "Godkend og anvend",
+    "rejectButton": "Afvis",
+    "rejectConfirm": "Afvis med begrundelse",
+    "cancel": "Fortryd",
+    "justificationPlaceholder": "Hvorfor passer ændringen ikke til dette sted? (kræves)",
+    "appliedToast": "Ændringerne er anvendt",
+    "rejectedToast": "Forslaget er afvist med begrundelse",
+    "errors": {
+      "error": "Noget gik galt. Prøv igen.",
+      "justificationRequired": "En skriftlig begrundelse kræves."
     }
   }
 }

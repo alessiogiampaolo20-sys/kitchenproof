@@ -45,7 +45,8 @@
     "today": "Today",
     "programme": "Programme",
     "equipment": "Equipment",
-    "dashboard": "Overview"
+    "dashboard": "Overview",
+    "templates": "Templates"
   },
   "programme": {
     "title": "Own-check programme",
@@ -973,6 +974,44 @@
     "errors": {
       "error": "Something went wrong. Try again.",
       "aiUnavailable": "The assistant is unavailable right now. See the guidance on control points, or contact a consultant."
+    }
+  },
+  "templates": {
+    "title": "Programme templates",
+    "hint": "Create a template from one site's programme and roll it out to new or existing sites. Existing programmes are NEVER changed directly — the site receives a proposal for local approval.",
+    "createTitle": "New template",
+    "namePlaceholder": "e.g. Standard restaurant",
+    "createButton": "Create template",
+    "createdToast": "Template created",
+    "sourceLabel": "From {site}",
+    "targetPlaceholder": "Pick target site",
+    "deployButton": "Roll out",
+    "deployedDraftToast": "Draft created on the site — review and approve locally",
+    "deployedProposalToast": "Proposal sent to the site — requires local approval",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "noProgramme": "The source site has no programme yet.",
+      "noChanges": "No differences — the site already matches the template."
+    },
+    "r9Hint": "Each site's programme must match that specific site — central edits become proposals, never automatic changes (R9)."
+  },
+  "proposals": {
+    "title": "Proposed changes from \"{template}\"",
+    "changeCount": "{count} changes",
+    "fields": {
+      "limit": "limit",
+      "frequency": "frequency"
+    },
+    "applyButton": "Approve and apply",
+    "rejectButton": "Reject",
+    "rejectConfirm": "Reject with justification",
+    "cancel": "Cancel",
+    "justificationPlaceholder": "Why doesn't the change fit this site? (required)",
+    "appliedToast": "Changes applied",
+    "rejectedToast": "Proposal rejected with justification",
+    "errors": {
+      "error": "Something went wrong. Try again.",
+      "justificationRequired": "A written justification is required."
     }
   }
 }

@@ -10,6 +10,7 @@ import { insertControlPointsForKeys } from "@/lib/compliance/cp-writer";
 import { rescheduleControlPoint } from "@/lib/compliance/materialize-runner";
 import { compareStrictness, parseLimit } from "@/lib/compliance/limits";
 import type { PackDiffItem } from "@/lib/compliance/pack-update";
+import type { TemplateDiffItem } from "@/lib/compliance/template";
 import type { Json } from "@/lib/supabase/database.types";
 
 async function managerSiteContext(siteId: string) {
@@ -182,4 +183,115 @@ export async function decideReviewItem(input: unknown): Promise<ReviewDecisionSt
   revalidatePath(`/app/${sc.site.id}/programme`);
   revalidatePath(`/app/${sc.site.id}/programme/review/${task.id}`);
   return { ok: true, resolved: allDecided };
+}
+
+/* ── §11 template push proposals: local approval on the site ───────────────── */
+
+const proposalSchema = z.object({
+  siteId: z.uuid(),
+  proposalId: z.uuid(),
+  action: z.enum(["apply", "reject"]),
+  justification: z.string().trim().max(2000).nullable(),
+});
+
+export type ProposalDecisionState =
+  | { ok: true }
+  | { error: "error" | "justificationRequired" }
+  | null;
+
+export async function decideProposal(input: unknown): Promise<ProposalDecisionState> {
+  const parsed = proposalSchema.safeParse(input);
+  if (!parsed.success) return { error: "error" };
+  const sc = await managerSiteContext(parsed.data.siteId);
+  if (!sc) return { error: "error" };
+
+  const { data: proposal } = await sc.supabase
+    .from("programme_change_proposals")
+    .select("id, status, diff_json")
+    .eq("id", parsed.data.proposalId)
+    .eq("site_id", sc.site.id)
+    .maybeSingle();
+  if (!proposal || proposal.status !== "pending") return { error: "error" };
+  const items = proposal.diff_json as unknown as TemplateDiffItem[];
+
+  if (parsed.data.action === "reject" && !parsed.data.justification) {
+    return { error: "justificationRequired" }; // rejecting central policy explains why
+  }
+
+  if (parsed.data.action === "apply") {
+    // §7.3 still applies: template values looser than PACK defaults need a
+    // written justification even when pushed centrally
+    const { pack } = await loadPackVersion(sc.supabase, sc.site.compliance_pack);
+    let loosensAny = false;
+    for (const item of items) {
+      if (item.field !== "limit") continue;
+      const tpl = pack.controlPointTemplates.find(
+        (candidate) => candidate.key === item.templateKey,
+      );
+      if (!tpl) continue;
+      try {
+        if (
+          compareStrictness(tpl.defaultLimit, parseLimit(item.templateValue)) ===
+          "looser"
+        ) {
+          loosensAny = true;
+        }
+      } catch {
+        // incomparable — not a loosening
+      }
+    }
+    if (loosensAny && !parsed.data.justification) {
+      return { error: "justificationRequired" };
+    }
+
+    for (const item of items) {
+      if (item.field === "limit") {
+        await sc.supabase
+          .from("control_points")
+          .update({ limit_json: item.templateValue })
+          .eq("site_id", sc.site.id)
+          .eq("template_key", item.templateKey)
+          .eq("active", true);
+      } else {
+        const { data: cps } = await sc.supabase
+          .from("control_points")
+          .update({ frequency_json: item.templateValue })
+          .eq("site_id", sc.site.id)
+          .eq("template_key", item.templateKey)
+          .eq("active", true)
+          .select("id");
+        for (const cp of cps ?? []) {
+          await rescheduleControlPoint(sc.supabase, cp.id, sc.site.id);
+        }
+      }
+    }
+  }
+
+  const { error } = await sc.supabase
+    .from("programme_change_proposals")
+    .update({
+      status: parsed.data.action === "apply" ? "applied" : "rejected",
+      decided_by: sc.ctx.user.id,
+      decided_at: new Date().toISOString(),
+      justification: parsed.data.justification,
+    })
+    .eq("id", proposal.id);
+  if (error) return { error: "error" };
+
+  await writeAudit(sc.supabase, {
+    orgId: sc.site.org_id,
+    siteId: sc.site.id,
+    actorId: sc.ctx.user.id,
+    actorRole: sc.ctx.role,
+    action:
+      parsed.data.action === "apply"
+        ? "programme_proposal.applied"
+        : "programme_proposal.rejected",
+    entityTable: "programme_change_proposals",
+    entityId: proposal.id,
+    diff: { changes: items.length, justification: parsed.data.justification },
+  });
+
+  revalidatePath(`/app/${sc.site.id}/programme`);
+  return { ok: true };
 }
