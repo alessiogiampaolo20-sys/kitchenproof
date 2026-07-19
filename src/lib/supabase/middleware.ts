@@ -2,7 +2,8 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "./database.types";
 
-const PUBLIC_PATHS = ["/login", "/signup", "/invite", "/offline", "/inspect"];
+// /api/cron carries its own auth (CRON_SECRET) — Vercel Cron has no session
+const PUBLIC_PATHS = ["/login", "/signup", "/invite", "/offline", "/inspect", "/api/cron"];
 
 function isPublicPath(pathname: string): boolean {
   return PUBLIC_PATHS.some(
