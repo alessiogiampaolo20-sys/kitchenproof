@@ -96,7 +96,9 @@ export class ClaudeProvider implements AiProvider {
               },
             ];
       try {
-        const response = await this.client.messages.parse({
+        // Streaming is mandatory here: with large max_tokens (vision extraction)
+        // the SDK rejects non-streaming requests that could exceed 10 minutes.
+        const stream = this.client.messages.stream({
           model,
           max_tokens: request.maxTokens ?? 8000,
           system: request.system,
@@ -105,12 +107,29 @@ export class ClaudeProvider implements AiProvider {
             format: zodOutputFormat(request.schema),
           },
         });
-        if (response.parsed_output == null) {
-          lastError = `stop_reason=${response.stop_reason}, no parsed output`;
+        const response = await stream.finalMessage();
+        const text = response.content
+          .filter((block): block is Anthropic.TextBlock => block.type === "text")
+          .map((block) => block.text)
+          .join("");
+        if (!text) {
+          lastError = `stop_reason=${response.stop_reason}, empty output`;
+          continue;
+        }
+        let json: unknown;
+        try {
+          json = JSON.parse(text);
+        } catch {
+          lastError = "output was not valid JSON";
+          continue;
+        }
+        const parsed = request.schema.safeParse(json);
+        if (!parsed.success) {
+          lastError = parsed.error.message.slice(0, 2000);
           continue;
         }
         return {
-          output: response.parsed_output,
+          output: parsed.data,
           model,
           tokensIn: response.usage.input_tokens,
           tokensOut: response.usage.output_tokens,
@@ -122,12 +141,14 @@ export class ClaudeProvider implements AiProvider {
           const retryable = err.status === 429 || (err.status ?? 500) >= 500;
           if (!retryable) throw new AiError(`${err.status}: ${err.message}`, false);
           lastError = err.message;
+          // overloaded/rate-limited: give the API room before retrying
+          await new Promise((r) => setTimeout(r, attempt * 5000));
         } else {
           lastError = err instanceof Error ? err.message : "unknown";
         }
       }
     }
-    throw new AiError(`AI output failed validation after retries: ${lastError}`, true);
+    throw new AiError(`AI call failed after 3 attempts: ${lastError}`, true);
   }
 }
 
