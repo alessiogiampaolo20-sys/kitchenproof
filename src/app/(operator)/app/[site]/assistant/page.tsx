@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import { MessageCircleQuestion } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext } from "@/lib/tenancy";
-import { SiteNav } from "../site-nav";
 import { AssistantChat } from "./assistant-chat";
 import {
   Card,
@@ -34,7 +33,6 @@ export default async function AssistantPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="programme" />
       <Card className="mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -54,3 +52,6 @@ export default async function AssistantPage({
     </main>
   );
 }
+
+// AI extractions can run long — lift the Vercel function limit (fluid compute).
+export const maxDuration = 300;

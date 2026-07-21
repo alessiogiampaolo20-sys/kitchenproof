@@ -5,7 +5,6 @@ import { createClient } from "@/lib/supabase/server";
 import { getOrgContext } from "@/lib/tenancy";
 import { totalMismatch } from "@/lib/inventory/matching";
 import { invoiceExtractionSchema } from "@/lib/ai/schemas";
-import { SiteNav } from "../../../site-nav";
 import { InvoiceReview } from "./review-client";
 import {
   Card,
@@ -72,7 +71,6 @@ export default async function InvoiceReviewPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="receive" />
       <Card className="mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -119,3 +117,6 @@ export default async function InvoiceReviewPage({
     </main>
   );
 }
+
+// AI extractions can run long — lift the Vercel function limit (fluid compute).
+export const maxDuration = 300;

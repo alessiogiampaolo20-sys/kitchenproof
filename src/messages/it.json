@@ -29,14 +29,21 @@
     "signOut": "Esci",
     "invalidCredentials": "Email o password errata.",
     "signupFailed": "Impossibile creare l'account. Riprova.",
-    "passwordHint": "Almeno 8 caratteri"
+    "passwordHint": "Almeno 8 caratteri",
+    "checkEmailTitle": "Controlla la tua email",
+    "checkEmailBody": "Ti abbiamo inviato un link di conferma. Clicca il link nell'email per attivare l'account, poi accedi.",
+    "emailNotConfirmed": "La tua email non è ancora confermata. Prima clicca il link nell'email di conferma."
   },
   "welcome": {
     "title": "Benvenuto in KitchenProof",
     "subtitle": "Crea la tua azienda per iniziare.",
     "orgName": "Nome dell'azienda",
     "locale": "Lingua preferita",
-    "createButton": "Crea azienda"
+    "createButton": "Crea azienda",
+    "orgNameHint": "Il nome legale dell'azienda — usato nei report per le autorità.",
+    "cvr": "Numero CVR",
+    "cvrHint": "8 cifre — il numero di registrazione dell'azienda (lo trovi su virk.dk).",
+    "billingEmail": "Email di fatturazione (opzionale)"
   },
   "nav": {
     "sites": "Sedi",
@@ -309,7 +316,9 @@
       "hotel_breakfast": "Colazione hotel / buffet",
       "small_producer": "Piccolo produttore / dark kitchen",
       "wholesale_small": "Piccolo ingrosso"
-    }
+    },
+    "newSiteHint": "Un locale è un indirizzo fisico (un'unità produttiva) registrato presso l'autorità alimentare danese. L'autocontrollo si tiene per locale.",
+    "cvrPNumberHint": "P-nummer (10 cifre): il numero dell'unità produttiva per questo indirizzo nel registro CVR. Può essere aggiunto dopo."
   },
   "members": {
     "title": "Membri",
@@ -625,7 +634,9 @@
     "prepLink": "Nuova preparazione",
     "leftoversLink": "Avanzi",
     "traceLink": "Tracciabilità",
-    "outboundLink": "Consegne"
+    "outboundLink": "Consegne",
+    "openingStockHint": "Attività già avviata? Registra il magazzino attuale come stock di apertura con la Ricezione rapida — la tracciabilità parte da oggi. Fatture e analisi dei rischi si importano da Merci in entrata e Programma.",
+    "openingStockButton": "Registra stock di apertura"
   },
   "prep": {
     "title": "Nuova preparazione",
@@ -1029,7 +1040,15 @@
     "empty": "Nessun esito di controllo registrato.",
     "addButton": "Registra esito",
     "addedToast": "Esito salvato",
-    "error": "Qualcosa è andato storto. Riprova."
+    "error": "Qualcosa è andato storto. Riprova.",
+    "eliteHint": "Lo smiley Elite richiede 4 ispezioni consecutive con il risultato migliore (smiley felice). Il contatore mostra a che punto siete.",
+    "linkLabel": "Vedi la vostra pagina su findsmiley.dk",
+    "linkFallbackLabel": "Apri findsmiley.dk (trova la tua attività)",
+    "linkAdd": "Aggiungi il link alla vostra pagina findsmiley",
+    "linkChange": "Cambia link findsmiley",
+    "linkSave": "Salva link",
+    "linkSavedToast": "Link salvato",
+    "linkError": "Il link deve puntare a findsmiley.dk"
   },
   "training": {
     "title": "Registra formazione igiene",
@@ -1041,5 +1060,15 @@
     "saveButton": "Salva",
     "addedToast": "Formazione registrata",
     "error": "Qualcosa è andato storto. Riprova."
+  },
+  "profile": {
+    "title": "Profilo"
+  },
+  "quickAdd": {
+    "label": "Aggiunta rapida",
+    "invoice": "Nuova fattura",
+    "quickReceive": "Ricezione rapida",
+    "prep": "Nuova preparazione",
+    "outbound": "Consegna in uscita (B2B)"
   }
 }

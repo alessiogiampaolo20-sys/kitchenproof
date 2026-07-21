@@ -6,7 +6,6 @@ import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { loadPackVersion } from "@/lib/compliance/pack";
 import { pickText } from "@/lib/i18n/pick";
 import type { PackDiffItem } from "@/lib/compliance/pack-update";
-import { SiteNav } from "../../../site-nav";
 import { ReviewItemCard } from "./review-item";
 import {
   Card,
@@ -58,7 +57,6 @@ export default async function ReviewTaskPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="programme" />
       <Card className="mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

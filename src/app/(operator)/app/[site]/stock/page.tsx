@@ -4,7 +4,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { AlarmClock, Boxes, Package } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
-import { SiteNav } from "../site-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -67,7 +66,6 @@ export default async function StockPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="stock" />
 
       <header className="mb-4 flex flex-wrap items-center gap-2">
         <Boxes className="size-5 text-primary" />
@@ -134,9 +132,20 @@ export default async function StockPage({
 
       {groups.length === 0 ? (
         <Card>
-          <CardContent className="flex items-center gap-2 py-6 text-sm text-muted-foreground">
-            <Package className="size-4" />
-            {t("empty")}
+          <CardContent className="grid gap-3 py-6 text-sm text-muted-foreground">
+            <p className="flex items-center gap-2">
+              <Package className="size-4" />
+              {t("empty")}
+            </p>
+            {/* existing businesses don't start from zero: point to the opening-stock path */}
+            <p>{t("openingStockHint")}</p>
+            <Link
+              href={`/app/${siteId}/receive/quick`}
+              className="inline-flex min-h-12 w-fit items-center rounded-xl bg-primary px-4 font-medium text-primary-foreground"
+              data-testid="opening-stock-link"
+            >
+              {t("openingStockButton")}
+            </Link>
           </CardContent>
         </Card>
       ) : null}

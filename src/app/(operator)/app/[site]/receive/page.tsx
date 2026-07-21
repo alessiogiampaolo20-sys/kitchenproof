@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { Camera, PackagePlus } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext } from "@/lib/tenancy";
-import { SiteNav } from "../site-nav";
 import { InvoiceUpload } from "./invoice-upload";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -44,7 +43,6 @@ export default async function ReceivePage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="receive" />
 
       <Card className="mb-4">
         <CardHeader>
@@ -116,3 +114,6 @@ export default async function ReceivePage({
     </main>
   );
 }
+
+// AI extractions can run long — lift the Vercel function limit (fluid compute).
+export const maxDuration = 300;

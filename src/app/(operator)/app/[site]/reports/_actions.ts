@@ -65,6 +65,56 @@ export async function addSmileyInspection(
   return { ok: true };
 }
 
+const smileyUrlSchema = z.object({
+  siteId: z.uuid(),
+  // only the official findsmiley.dk site is a valid target
+  url: z
+    .url()
+    .refine((value) => new URL(value).hostname.endsWith("findsmiley.dk"))
+    .or(z.literal("")),
+});
+
+/** Saves the site's own findsmiley.dk page link (shown next to smiley history). */
+export async function setSmileyUrl(
+  _prev: SmileyState,
+  formData: FormData,
+): Promise<SmileyState> {
+  const parsed = smileyUrlSchema.safeParse({
+    siteId: formData.get("siteId"),
+    url: (formData.get("url") as string)?.trim() ?? "",
+  });
+  if (!parsed.success) return { error: "error" };
+
+  const supabase = await createClient();
+  const { data: site } = await supabase
+    .from("sites")
+    .select("id, org_id")
+    .eq("id", parsed.data.siteId)
+    .maybeSingle();
+  if (!site) return { error: "error" };
+  const ctx = await getOrgContext(supabase, site.org_id);
+  if (!ctx || !MANAGER_ROLES.includes(ctx.role)) return { error: "error" };
+
+  const { error } = await supabase
+    .from("sites")
+    .update({ smiley_url: parsed.data.url || null })
+    .eq("id", site.id);
+  if (error) return { error: "error" };
+
+  await writeAudit(supabase, {
+    orgId: site.org_id,
+    siteId: site.id,
+    actorId: ctx.user.id,
+    actorRole: ctx.role,
+    action: "site.smiley_url_set",
+    entityTable: "sites",
+    entityId: site.id,
+    diff: { smiley_url: parsed.data.url || null },
+  });
+  revalidatePath(`/app/${site.id}/reports`);
+  return { ok: true };
+}
+
 const trainingSchema = z.object({
   siteId: z.uuid(),
   personName: z.string().trim().min(1).max(200),

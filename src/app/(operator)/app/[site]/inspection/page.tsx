@@ -23,7 +23,6 @@ import {
   type TabContext,
 } from "@/components/inspection/tabs";
 import { EntryControls, ExitLockDialog, TrainingForm, UploadDocumentForm } from "./inspection-controls";
-import { SiteNav } from "../site-nav";
 import {
   Card,
   CardContent,
@@ -98,9 +97,7 @@ export default async function InspectionPage({
           <p className="min-w-0 flex-1 text-sm font-medium">{t("lockedBanner")}</p>
           <ExitLockDialog siteId={siteId} managers={unlockers} />
         </div>
-      ) : (
-        <SiteNav siteId={siteId} active="today" />
-      )}
+      ) : null}
 
       {!locked ? (
         <Card className="mb-4">

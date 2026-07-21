@@ -5,7 +5,6 @@ import { createClient } from "@/lib/supabase/server";
 import { pickText } from "@/lib/i18n/pick";
 import { parseLimit } from "@/lib/compliance/limits";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
-import { SiteNav } from "../site-nav";
 import { SmileySection } from "./smiley-section";
 import { TempChart, type TempPoint } from "./temp-chart";
 import { Badge } from "@/components/ui/badge";
@@ -30,7 +29,7 @@ export default async function ReportsPage({
   const supabase = await createClient();
   const { data: site } = await supabase
     .from("sites")
-    .select("id, org_id, timezone")
+    .select("id, org_id, timezone, smiley_url")
     .eq("id", siteId)
     .maybeSingle();
   if (!site) redirect("/");
@@ -118,7 +117,6 @@ export default async function ReportsPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="reports" />
       <h1 className="mb-4 text-xl font-semibold">{t("reports.title")}</h1>
 
       <Card className="mb-6">
@@ -243,6 +241,7 @@ export default async function ReportsPage({
       <SmileySection
         siteId={siteId}
         isManager={isManager}
+        smileyUrl={site.smiley_url}
         records={(smileys ?? []).map((row) => ({
           id: row.id,
           inspectedOn: row.inspected_on,

@@ -29,6 +29,7 @@ test("import: official PDF + consultant DOCX → gaps, review, draft", async ({ 
   await page.getByRole("button", { name: "Opret konto" }).click();
   await page.waitForURL("**/welcome");
   await page.fill("#name", `Trattoria Import ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
   await page.fill("#site-name", "Trattoria Nørrebro");

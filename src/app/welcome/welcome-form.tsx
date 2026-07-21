@@ -39,6 +39,24 @@ export function WelcomeForm() {
           <div className="grid gap-2">
             <Label htmlFor="name">{t("welcome.orgName")}</Label>
             <Input id="name" name="name" required maxLength={200} />
+            <p className="text-xs text-muted-foreground">{t("welcome.orgNameHint")}</p>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="cvr">{t("welcome.cvr")}</Label>
+            <Input
+              id="cvr"
+              name="cvr"
+              required
+              inputMode="numeric"
+              pattern="[0-9]{8}"
+              maxLength={8}
+              placeholder="12345678"
+            />
+            <p className="text-xs text-muted-foreground">{t("welcome.cvrHint")}</p>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="billingEmail">{t("welcome.billingEmail")}</Label>
+            <Input id="billingEmail" name="billingEmail" type="email" />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="locale">{t("welcome.locale")}</Label>

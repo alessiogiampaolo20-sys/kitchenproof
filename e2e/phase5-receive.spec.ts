@@ -30,6 +30,7 @@ test("invoices: clean, multipage, duplicate, credit note, handwritten", async ({
   await page.getByRole("button", { name: "Opret konto" }).click();
   await page.waitForURL("**/welcome");
   await page.fill("#name", `Trattoria Lager ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
   await page.fill("#site-name", "Lagerkøkkenet");

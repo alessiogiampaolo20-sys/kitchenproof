@@ -29,6 +29,14 @@ export const INVITABLE_ROLES = [
 export const createOrgSchema = z.object({
   name: z.string().trim().min(1).max(200),
   locale: z.enum(LOCALES).default("da"),
+  // Danish CVR: 8 digits — the legal entity's registration number (virk.dk)
+  cvr: z
+    .string()
+    .trim()
+    .regex(/^\d{8}$/)
+    .optional()
+    .or(z.literal("")),
+  billingEmail: z.email().optional().or(z.literal("")),
 });
 
 export const createSiteSchema = z.object({

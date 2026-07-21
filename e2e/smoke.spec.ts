@@ -29,6 +29,7 @@ test("full tenancy + PIN switch flow", async ({ page, browser }) => {
   await page.waitForURL("**/welcome");
 
   await page.fill("#name", `Lasagne Hub ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
 

@@ -7,7 +7,6 @@ import { loadPackVersion } from "@/lib/compliance/pack";
 import { importExtractionSchema } from "@/lib/ai/schemas";
 import type { ImportGapReport } from "@/lib/compliance/import-mapper";
 import { pickText } from "@/lib/i18n/pick";
-import { SiteNav } from "../../../../site-nav";
 import { ImportReview } from "./review-client";
 import {
   Card,
@@ -71,7 +70,6 @@ export default async function ImportReviewPage({
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="programme" />
       <Card className="mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -92,3 +90,6 @@ export default async function ImportReviewPage({
     </main>
   );
 }
+
+// AI extractions can run long — lift the Vercel function limit (fluid compute).
+export const maxDuration = 300;

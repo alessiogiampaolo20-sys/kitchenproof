@@ -7,7 +7,6 @@ import { getActorSession, getDeviceSession } from "@/lib/actor/session";
 import { pickText } from "@/lib/i18n/pick";
 import { wallTimeToUtc } from "@/lib/compliance/materializer";
 import { formatLimit, parseLimit } from "@/lib/compliance/limits";
-import { SiteNav } from "../site-nav";
 import { PinSwitcher, type SwitcherMember } from "./pin-switcher";
 import { RegisterDeviceForm } from "./register-device-form";
 import { AdHocLauncher } from "./adhoc-launcher";
@@ -231,7 +230,6 @@ export default async function TodayPage({
   return (
     // Kitchen mode (§15.1): base font 18px, ≥56px touch targets.
     <main className="mx-auto w-full max-w-xl flex-1 p-4 text-[18px]">
-      <SiteNav siteId={site.id} active="today" />
       <OfflineCacheMirror
         siteId={site.id}
         checks={[...overdue, ...dueNow, ...later].map((row) => ({

@@ -42,6 +42,7 @@ export function NewSiteForm({ orgId }: { orgId: string }) {
     <Card>
       <CardHeader>
         <CardTitle className="text-base">{t("sites.newSite")}</CardTitle>
+        <p className="text-sm text-muted-foreground">{t("sites.newSiteHint")}</p>
       </CardHeader>
       <form ref={formRef} action={formAction}>
         <CardContent className="grid gap-4 sm:grid-cols-2">
@@ -79,7 +80,16 @@ export function NewSiteForm({ orgId }: { orgId: string }) {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="site-cvr">{t("sites.cvrPNumber")}</Label>
-            <Input id="site-cvr" name="cvrPNumber" maxLength={20} />
+            <Input
+              id="site-cvr"
+              name="cvrPNumber"
+              maxLength={20}
+              inputMode="numeric"
+              placeholder="1234567890"
+            />
+            <p className="text-xs text-muted-foreground">
+              {t("sites.cvrPNumberHint")}
+            </p>
           </div>
           {state && "error" in state ? (
             <p className="text-sm text-destructive sm:col-span-2" role="alert">

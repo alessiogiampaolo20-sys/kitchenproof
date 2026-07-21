@@ -27,6 +27,7 @@ test("trace search <2s, recall PDF, B2B outbound", async ({ page }) => {
   await page.getByRole("button", { name: "Opret konto" }).click();
   await page.waitForURL("**/welcome");
   await page.fill("#name", `Sporbar ApS ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
   await page.fill("#site-name", "Sporbar Køkken");

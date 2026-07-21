@@ -6,7 +6,6 @@ import QRCode from "qrcode";
 import { ExternalLink, PackageSearch } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext } from "@/lib/tenancy";
-import { SiteNav } from "../../../site-nav";
 import { PrintLabelButton } from "./print-label";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -96,7 +95,6 @@ export default async function BatchPage({
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
       <div className="print:hidden">
-        <SiteNav siteId={siteId} active="stock" />
 
         <Card className="mb-4" data-testid="batch-card">
           <CardHeader>

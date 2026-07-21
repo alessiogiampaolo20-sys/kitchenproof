@@ -29,14 +29,21 @@
     "signOut": "Sign out",
     "invalidCredentials": "Wrong email or password.",
     "signupFailed": "The account could not be created. Please try again.",
-    "passwordHint": "At least 8 characters"
+    "passwordHint": "At least 8 characters",
+    "checkEmailTitle": "Check your email",
+    "checkEmailBody": "We sent you a confirmation link. Click the link in the email to activate your account, then sign in.",
+    "emailNotConfirmed": "Your email is not confirmed yet. Click the link in the confirmation email first."
   },
   "welcome": {
     "title": "Welcome to KitchenProof",
     "subtitle": "Create your company to get started.",
     "orgName": "Company name",
     "locale": "Preferred language",
-    "createButton": "Create company"
+    "createButton": "Create company",
+    "orgNameHint": "The company's legal name — used in reports to the authorities.",
+    "cvr": "CVR number",
+    "cvrHint": "8 digits — the company's registration number (find it on virk.dk).",
+    "billingEmail": "Billing email (optional)"
   },
   "nav": {
     "sites": "Sites",
@@ -309,7 +316,9 @@
       "hotel_breakfast": "Hotel breakfast / buffet",
       "small_producer": "Small producer / dark kitchen",
       "wholesale_small": "Small wholesale"
-    }
+    },
+    "newSiteHint": "A site is one physical address (one production unit) registered with the Danish Food Authority. Self-control records are kept per site.",
+    "cvrPNumberHint": "P-number (10 digits): the CVR production-unit number for this address. Can be added later."
   },
   "members": {
     "title": "Members",
@@ -625,7 +634,9 @@
     "prepLink": "New prep",
     "leftoversLink": "Leftovers",
     "traceLink": "Traceability",
-    "outboundLink": "Outbound"
+    "outboundLink": "Outbound",
+    "openingStockHint": "Existing business? Register your current inventory as opening stock via Quick receive — traceability then starts from today. Invoices and your risk analysis can be imported under Goods in and Programme.",
+    "openingStockButton": "Register opening stock"
   },
   "prep": {
     "title": "New prep batch",
@@ -1029,7 +1040,15 @@
     "empty": "No inspection results recorded yet.",
     "addButton": "Record result",
     "addedToast": "Result saved",
-    "error": "Something went wrong. Try again."
+    "error": "Something went wrong. Try again.",
+    "eliteHint": "The Elite Smiley requires 4 consecutive inspections with the top result (happy smiley). The counter shows how far along you are.",
+    "linkLabel": "View your page on findsmiley.dk",
+    "linkFallbackLabel": "Open findsmiley.dk (find your business)",
+    "linkAdd": "Add a link to your findsmiley page",
+    "linkChange": "Change findsmiley link",
+    "linkSave": "Save link",
+    "linkSavedToast": "Link saved",
+    "linkError": "The link must point to findsmiley.dk"
   },
   "training": {
     "title": "Record hygiene training",
@@ -1041,5 +1060,15 @@
     "saveButton": "Save",
     "addedToast": "Training recorded",
     "error": "Something went wrong. Try again."
+  },
+  "profile": {
+    "title": "Profile"
+  },
+  "quickAdd": {
+    "label": "Quick add",
+    "invoice": "New invoice",
+    "quickReceive": "Quick receive",
+    "prep": "New prep batch",
+    "outbound": "Outbound delivery (B2B)"
   }
 }

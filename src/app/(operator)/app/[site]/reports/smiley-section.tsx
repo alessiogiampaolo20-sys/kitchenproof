@@ -4,8 +4,8 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { Smile } from "lucide-react";
-import { addSmileyInspection, type SmileyState } from "./_actions";
+import { ExternalLink, Smile } from "lucide-react";
+import { addSmileyInspection, setSmileyUrl, type SmileyState } from "./_actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,16 +30,36 @@ export function SmileySection({
   siteId,
   records,
   isManager,
+  smileyUrl,
 }: {
   siteId: string;
   records: SmileyRecord[];
   isManager: boolean;
+  smileyUrl: string | null;
 }) {
   const t = useTranslations("smiley");
   const router = useRouter();
   const [date, setDate] = useState("");
   const [result, setResult] = useState("1");
+  const [url, setUrl] = useState(smileyUrl ?? "");
+  const [editingUrl, setEditingUrl] = useState(false);
   const [pending, startTransition] = useTransition();
+
+  function saveUrl() {
+    const formData = new FormData();
+    formData.set("siteId", siteId);
+    formData.set("url", url);
+    startTransition(async () => {
+      const response: SmileyState = await setSmileyUrl(null, formData);
+      if (response && "ok" in response) {
+        toast.success(t("linkSavedToast"));
+        setEditingUrl(false);
+        router.refresh();
+      } else {
+        toast.error(t("linkError"));
+      }
+    });
+  }
 
   // streak of most-recent consecutive result=1 (records arrive newest-first)
   let streak = 0;
@@ -77,6 +97,51 @@ export function SmileySection({
         </CardTitle>
       </CardHeader>
       <CardContent className="grid gap-2">
+        {/* what the Elite badge means + the official register, always explained */}
+        <p className="text-sm text-muted-foreground">{t("eliteHint")}</p>
+        <p className="text-sm">
+          <a
+            href={smileyUrl ?? "https://www.findsmiley.dk"}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-10 items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
+            data-testid="findsmiley-link"
+          >
+            <ExternalLink className="size-4" />
+            {smileyUrl ? t("linkLabel") : t("linkFallbackLabel")}
+          </a>
+        </p>
+        {isManager ? (
+          editingUrl ? (
+            <div className="flex flex-wrap gap-2">
+              <Input
+                type="url"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="https://www.findsmiley.dk/…"
+                className="min-h-12 flex-1 basis-64"
+                data-testid="smiley-url-input"
+              />
+              <Button
+                className="min-h-12"
+                disabled={pending}
+                onClick={saveUrl}
+                data-testid="smiley-url-save"
+              >
+                {t("linkSave")}
+              </Button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setEditingUrl(true)}
+              className="justify-self-start text-sm text-muted-foreground underline-offset-4 hover:underline"
+              data-testid="smiley-url-edit"
+            >
+              {smileyUrl ? t("linkChange") : t("linkAdd")}
+            </button>
+          )
+        ) : null}
         {records.map((record) => (
           <p key={record.id} className="text-sm" data-testid="smiley-row">
             {record.inspectedOn} — {t(`results.${record.result}`)}

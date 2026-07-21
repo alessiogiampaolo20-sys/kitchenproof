@@ -7,7 +7,6 @@ import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { pickText } from "@/lib/i18n/pick";
 import { formatLimit, parseLimit } from "@/lib/compliance/limits";
 import { frequencySchema } from "@/lib/compliance/pack-schema";
-import { SiteNav } from "../site-nav";
 import { ApproveButton, StartTemplateButton } from "./programme-buttons";
 import { CreateCpDialog, EditCpDialog, ToggleCpButton, type CpLimitShape } from "./cp-dialogs";
 import { RowEditDialog } from "./row-edit-dialog";
@@ -125,7 +124,6 @@ export default async function ProgrammePage({
   if (!ra) {
     return (
       <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-        <SiteNav siteId={siteId} active="programme" />
         {reviewBanner}
         {proposalCards}
         <Card>
@@ -204,7 +202,6 @@ export default async function ProgrammePage({
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="programme" />
         {reviewBanner}
         {proposalCards}
 
@@ -376,3 +373,6 @@ export default async function ProgrammePage({
     </main>
   );
 }
+
+// AI extractions can run long — lift the Vercel function limit (fluid compute).
+export const maxDuration = 300;

@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { Printer, QrCode } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
-import { SiteNav } from "../site-nav";
 import { NewEquipmentForm } from "./equipment-forms";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -55,7 +54,6 @@ export default async function EquipmentPage({
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="equipment" />
 
       <header className="mb-6 flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-xl font-semibold">{t("equipment.title")}</h1>

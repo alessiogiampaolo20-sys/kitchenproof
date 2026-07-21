@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import { BookOpen } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
-import { SiteNav } from "../../site-nav";
 import { ProductRow } from "./product-row";
 import {
   Card,
@@ -43,7 +42,6 @@ export default async function ProductsPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="stock" />
       <Card className="mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -68,3 +66,6 @@ export default async function ProductsPage({
     </main>
   );
 }
+
+// AI extractions can run long — lift the Vercel function limit (fluid compute).
+export const maxDuration = 300;

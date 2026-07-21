@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import { Truck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext } from "@/lib/tenancy";
-import { SiteNav } from "../../site-nav";
 import { OutboundForm } from "./outbound-form";
 import {
   Card,
@@ -49,7 +48,6 @@ export default async function OutboundPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="stock" />
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

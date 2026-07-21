@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { AlertTriangle } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import { SiteNav } from "../site-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -55,7 +54,6 @@ export default async function DeviationsPage({
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="deviations" />
       <header className="mb-4 flex items-center justify-between gap-2">
         <h1 className="text-xl font-semibold">{t("deviation.listTitle")}</h1>
         <div className="flex gap-1">

@@ -68,6 +68,7 @@ test("pack update: fan-out with correct diffs, apply + keep-mine", async ({ page
   await page.getByRole("button", { name: "Opret konto" }).click();
   await page.waitForURL("**/welcome");
   await page.fill("#name", `Regelsen ApS ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
   await page.fill("#site-name", "Regelsen Køkken");

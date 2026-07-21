@@ -48,6 +48,7 @@ test("inspection: guest lock, magic link truth, exports, audit", async ({ page, 
   await page.getByRole("button", { name: "Opret konto" }).click();
   await page.waitForURL("**/welcome");
   await page.fill("#name", `Kontrolklar ApS ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
   await page.fill("#site-name", "Kontrolklar Køkken");

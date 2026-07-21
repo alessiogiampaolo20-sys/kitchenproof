@@ -23,6 +23,7 @@ test("assistant: cited answer in scope, refusal out of scope", async ({ page }) 
   await page.getByRole("button", { name: "Opret konto" }).click();
   await page.waitForURL("**/welcome");
   await page.fill("#name", `Assistent ApS ${run}`);
+  await page.fill("#cvr", "12345678");
   await page.getByRole("button", { name: "Opret virksomhed" }).click();
   await page.waitForURL("**/org/sites");
   await page.fill("#site-name", "Assistent Køkken");

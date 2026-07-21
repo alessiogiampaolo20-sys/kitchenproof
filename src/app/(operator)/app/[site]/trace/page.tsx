@@ -5,7 +5,6 @@ import { SearchCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { searchTrace } from "@/lib/inventory/trace";
-import { SiteNav } from "../site-nav";
 import { RecallButton } from "./recall-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -48,7 +47,6 @@ export default async function TracePage({
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 p-4">
-      <SiteNav siteId={siteId} active="stock" />
 
       <Card className="mb-4">
         <CardHeader className="pb-2">

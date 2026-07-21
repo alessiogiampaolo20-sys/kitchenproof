@@ -29,14 +29,21 @@
     "signOut": "Log ud",
     "invalidCredentials": "Forkert e-mail eller adgangskode.",
     "signupFailed": "Kontoen kunne ikke oprettes. Prøv igen.",
-    "passwordHint": "Mindst 8 tegn"
+    "passwordHint": "Mindst 8 tegn",
+    "checkEmailTitle": "Tjek din e-mail",
+    "checkEmailBody": "Vi har sendt dig et bekræftelseslink. Klik på linket i e-mailen for at aktivere din konto, og log derefter ind.",
+    "emailNotConfirmed": "Din e-mail er ikke bekræftet endnu. Klik på linket i bekræftelsesmailen først."
   },
   "welcome": {
     "title": "Velkommen til KitchenProof",
     "subtitle": "Opret din virksomhed for at komme i gang.",
     "orgName": "Virksomhedens navn",
     "locale": "Foretrukket sprog",
-    "createButton": "Opret virksomhed"
+    "createButton": "Opret virksomhed",
+    "orgNameHint": "Virksomhedens juridiske navn — bruges i rapporter til myndighederne.",
+    "cvr": "CVR-nummer",
+    "cvrHint": "8 cifre — virksomhedens registreringsnummer (find det på virk.dk).",
+    "billingEmail": "Faktura-e-mail (valgfri)"
   },
   "nav": {
     "sites": "Steder",
@@ -309,7 +316,9 @@
       "hotel_breakfast": "Hotelmorgenmad / buffet",
       "small_producer": "Mindre fødevareproducent",
       "wholesale_small": "Lille engrosvirksomhed"
-    }
+    },
+    "newSiteHint": "En lokation er én fysisk adresse (én produktionsenhed) registreret hos Fødevarestyrelsen. Egenkontrollen føres pr. lokation.",
+    "cvrPNumberHint": "P-nummer (10 cifre): produktionsenhedens nummer for denne adresse i CVR-registret. Kan tilføjes senere."
   },
   "members": {
     "title": "Medlemmer",
@@ -625,7 +634,9 @@
     "prepLink": "Ny tilberedning",
     "leftoversLink": "Rester",
     "traceLink": "Sporbarhed",
-    "outboundLink": "Levering ud"
+    "outboundLink": "Levering ud",
+    "openingStockHint": "Eksisterende virksomhed? Registrér jeres nuværende lager som åbningslager via Hurtig modtagelse — så starter sporbarheden fra i dag. Fakturaer og risikoanalyse kan importeres under Varer ind og Program.",
+    "openingStockButton": "Registrér åbningslager"
   },
   "prep": {
     "title": "Ny tilberedning",
@@ -1029,7 +1040,15 @@
     "empty": "Ingen kontrolresultater registreret endnu.",
     "addButton": "Registrér resultat",
     "addedToast": "Resultatet er gemt",
-    "error": "Noget gik galt. Prøv igen."
+    "error": "Noget gik galt. Prøv igen.",
+    "eliteHint": "Elite-smiley kræver 4 kontrolbesøg i træk med bedste resultat (glad smiley). Tælleren viser, hvor langt I er.",
+    "linkLabel": "Se jeres side på findsmiley.dk",
+    "linkFallbackLabel": "Åbn findsmiley.dk (find jeres virksomhed)",
+    "linkAdd": "Tilføj link til jeres findsmiley-side",
+    "linkChange": "Skift findsmiley-link",
+    "linkSave": "Gem link",
+    "linkSavedToast": "Link gemt",
+    "linkError": "Linket skal pege på findsmiley.dk"
   },
   "training": {
     "title": "Registrér hygiejnetræning",
@@ -1041,5 +1060,15 @@
     "saveButton": "Gem",
     "addedToast": "Træningen er registreret",
     "error": "Noget gik galt. Prøv igen."
+  },
+  "profile": {
+    "title": "Profil"
+  },
+  "quickAdd": {
+    "label": "Hurtig tilføjelse",
+    "invoice": "Ny faktura",
+    "quickReceive": "Hurtig modtagelse",
+    "prep": "Ny tilberedning",
+    "outbound": "Levering ud (B2B)"
   }
 }
