@@ -19,6 +19,19 @@ export function SignupForm({ next }: { next?: string }) {
   const t = useTranslations("auth");
   const [state, formAction, pending] = useActionState(signup, null);
 
+  if (state && "checkEmail" in state) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("checkEmailTitle")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">{t("checkEmailBody")}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -58,7 +71,7 @@ export function SignupForm({ next }: { next?: string }) {
             />
             <p className="text-xs text-muted-foreground">{t("passwordHint")}</p>
           </div>
-          {state?.error ? (
+          {state && "error" in state ? (
             <p className="text-sm text-destructive" role="alert">
               {t(state.error)}
             </p>

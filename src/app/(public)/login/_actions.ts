@@ -25,7 +25,12 @@ export async function login(
     password: parsed.data.password,
   });
   if (error) {
-    return { error: "invalidCredentials" };
+    return {
+      error:
+        error.code === "email_not_confirmed"
+          ? "emailNotConfirmed"
+          : "invalidCredentials",
+    };
   }
 
   redirect(parsed.data.next ?? "/");
