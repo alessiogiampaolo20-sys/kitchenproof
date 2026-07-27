@@ -449,7 +449,17 @@ support access is **read-write on configuration** (equipment, cleaning plan, con
 not become the exception that hollows that out; if a customer's record is wrong, the honest fix is a
 superseding entry made by them, not a silent correction made by us.
 
-Until you choose, I will not grant the role to any account.
+**Decided 2026-07-27:** (a) **consent-based, time-boxed** support access — the customer opens it
+from their settings, it expires, it names who holds it, it is revocable in one tap and it appears in
+their own audit trail; a separately-logged break-glass path stays for emergencies. (b) support
+access is **read-write on configuration, never on compliance records** — `task_completions`,
+`deviations`, `goods_receipts`, `inventory_moves` and `invoices` stay untouchable, so non-negotiable
+#12 keeps holding with no exception carved into it.
+
+This becomes workstream **P0-4** in §6: migration for the grant (`support_grants`: org, grantee,
+scope, expires_at, revoked_at, reason), RLS switched from unconditional `is_platform_staff()` reads
+to grant-checked reads, the mandatory banner while a grant is active, and an entry in the customer's
+audit trail for every session. No account is granted the role until that lands.
 
 ### 9.3 Reference files: two still unreachable
 
