@@ -7,6 +7,7 @@ import { verify as argonVerify } from "@node-rs/argon2";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { writeAudit } from "@/lib/audit/log";
+import { INSPECTOR_LINK_HOURS, type InspectorLinkHours } from "./link-options";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import {
   clearInspectionCookie,
@@ -153,14 +154,22 @@ export async function endInspection(input: unknown): Promise<EndInspectionState>
   return { ok: true };
 }
 
-const linkSchema = z.object({ siteId: z.uuid() });
+const linkSchema = z.object({
+  siteId: z.uuid(),
+  hours: z.coerce
+    .number()
+    .refine((h): h is InspectorLinkHours =>
+      (INSPECTOR_LINK_HOURS as readonly number[]).includes(h),
+    )
+    .default(INSPECTOR_LINK_TTL_HOURS),
+});
 
 export type InspectorLinkState =
   | { ok: true; url: string; expiresAt: string }
   | { error: "error" }
   | null;
 
-/** §10.1 magic link for the inspector's own device (4h, read-only). */
+/** §10.1 magic link for the inspector's own device (read-only, time-boxed). */
 export async function createInspectorLink(input: unknown): Promise<InspectorLinkState> {
   const parsed = linkSchema.safeParse(input);
   if (!parsed.success) return { error: "error" };
@@ -169,7 +178,7 @@ export async function createInspectorLink(input: unknown): Promise<InspectorLink
 
   const token = randomBytes(24).toString("base64url");
   const tokenHash = createHash("sha256").update(token).digest("hex");
-  const expiresAt = new Date(Date.now() + INSPECTOR_LINK_TTL_HOURS * 3_600_000);
+  const expiresAt = new Date(Date.now() + parsed.data.hours * 3_600_000);
 
   // RLS: site managers only — operators use the on-device mode
   const { data: link, error } = await sc.supabase
@@ -192,7 +201,7 @@ export async function createInspectorLink(input: unknown): Promise<InspectorLink
     action: "inspector_link.created",
     entityTable: "inspector_links",
     entityId: link.id,
-    diff: { expires_at: expiresAt.toISOString() },
+    diff: { expires_at: expiresAt.toISOString(), hours: parsed.data.hours },
   });
 
   const h = await headers();
@@ -203,6 +212,49 @@ export async function createInspectorLink(input: unknown): Promise<InspectorLink
     url: `${proto}://${host}/inspect/${token}`,
     expiresAt: expiresAt.toISOString(),
   };
+}
+
+const revokeSchema = z.object({ siteId: z.uuid(), linkId: z.uuid() });
+
+export type RevokeLinkState = { ok: true } | { error: "error" } | null;
+
+/**
+ * Ends an inspector's access before it expires. The link row stays — a revoked
+ * visit is evidence of control, not something to erase — and `resolve_inspector_link`
+ * refuses the token from this moment on.
+ */
+export async function revokeInspectorLink(input: unknown): Promise<RevokeLinkState> {
+  const parsed = revokeSchema.safeParse(input);
+  if (!parsed.success) return { error: "error" };
+  const sc = await siteContext(parsed.data.siteId);
+  if (!sc || !MANAGER_ROLES.includes(sc.ctx.role)) return { error: "error" };
+
+  // RLS keeps this to the site's managers; scoping by site_id too so a link id
+  // from another site cannot be revoked by guessing.
+  const { data: revoked, error } = await sc.supabase
+    .from("inspector_links")
+    .update({ revoked_at: new Date().toISOString(), revoked_by: sc.ctx.user.id })
+    .eq("id", parsed.data.linkId)
+    .eq("site_id", sc.site.id)
+    .is("revoked_at", null)
+    .select("id")
+    .maybeSingle();
+  if (error) return { error: "error" };
+  if (!revoked) return { ok: true }; // already revoked or expired — nothing to do
+
+  await writeAudit(sc.supabase, {
+    orgId: sc.site.org_id,
+    siteId: sc.site.id,
+    actorId: sc.ctx.user.id,
+    actorRole: sc.ctx.role,
+    action: "inspector_link.revoked",
+    entityTable: "inspector_links",
+    entityId: revoked.id,
+    diff: {},
+  });
+
+  revalidatePath(`/app/${sc.site.id}/inspection`);
+  return { ok: true };
 }
 
 const uploadDocumentSchema = z.object({

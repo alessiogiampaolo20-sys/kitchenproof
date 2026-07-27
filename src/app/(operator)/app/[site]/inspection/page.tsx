@@ -22,7 +22,14 @@ import {
   type InspectionTab,
   type TabContext,
 } from "@/components/inspection/tabs";
-import { EntryControls, ExitLockDialog, TrainingForm, UploadDocumentForm } from "./inspection-controls";
+import {
+  ActiveInspectorLinks,
+  EntryControls,
+  ExitLockDialog,
+  TrainingForm,
+  UploadDocumentForm,
+  type ActiveLink,
+} from "./inspection-controls";
 import {
   Card,
   CardContent,
@@ -60,6 +67,35 @@ export default async function InspectionPage({
   const locked = (await getInspectionSession(siteId)) !== null;
 
   const [t, locale] = await Promise.all([getTranslations("inspection"), getLocale()]);
+
+  // Outstanding links + how often each was actually opened (from the audit
+  // trail, so the owner sees the visit, not just the invitation).
+  let activeLinks: ActiveLink[] = [];
+  if (isManager && !locked) {
+    const { data: links } = await supabase
+      .from("inspector_links")
+      .select("id, created_at, expires_at, used_at")
+      .eq("site_id", siteId)
+      .is("revoked_at", null)
+      .gt("expires_at", new Date().toISOString())
+      .order("created_at", { ascending: false });
+    const { data: views } = await supabase
+      .from("audit_log")
+      .select("entity_id")
+      .eq("site_id", siteId)
+      .eq("action", "inspection.link_viewed");
+    const viewCount = new Map<string, number>();
+    for (const row of views ?? []) {
+      if (row.entity_id) viewCount.set(row.entity_id, (viewCount.get(row.entity_id) ?? 0) + 1);
+    }
+    activeLinks = (links ?? []).map((link) => ({
+      id: link.id,
+      createdAt: link.created_at,
+      expiresAt: link.expires_at,
+      openedAt: link.used_at,
+      views: viewCount.get(link.id) ?? 0,
+    }));
+  }
 
   const tab = ((sp.tab as InspectionTab) ?? "programme") as InspectionTab;
   const range = {
@@ -110,6 +146,7 @@ export default async function InspectionPage({
           </CardHeader>
           <CardContent className="grid gap-3">
             <EntryControls siteId={siteId} isManager={isManager} />
+            {isManager ? <ActiveInspectorLinks siteId={siteId} links={activeLinks} /> : null}
             {isManager ? <UploadDocumentForm siteId={siteId} /> : null}
             {isManager ? <TrainingForm siteId={siteId} /> : null}
           </CardContent>

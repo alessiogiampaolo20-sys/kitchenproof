@@ -4,18 +4,22 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { GraduationCap, LockOpen, Play, QrCode, Upload } from "lucide-react";
+import { Ban, GraduationCap, LockOpen, Play, QrCode, Upload } from "lucide-react";
 import QRCode from "qrcode";
 import {
   createInspectorLink,
   endInspection,
+  revokeInspectorLink,
   startInspection,
   uploadSiteDocument,
   type EndInspectionState,
   type InspectionActionState,
   type InspectorLinkState,
+  type RevokeLinkState,
 } from "./_actions";
+import { INSPECTOR_LINK_HOURS } from "./link-options";
 import { addTrainingRecord } from "../reports/_actions";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -47,6 +51,7 @@ export function EntryControls({
   const router = useRouter();
   const [confirming, setConfirming] = useState(false);
   const [link, setLink] = useState<{ url: string; qr: string; expiresAt: string } | null>(null);
+  const [hours, setHours] = useState<number>(INSPECTOR_LINK_HOURS[0]);
   const [pending, startTransition] = useTransition();
 
   function start() {
@@ -66,7 +71,7 @@ export function EntryControls({
 
   function generateLink() {
     startTransition(async () => {
-      const result: InspectorLinkState = await createInspectorLink({ siteId });
+      const result: InspectorLinkState = await createInspectorLink({ siteId, hours });
       if (result && "ok" in result) {
         const qr = await QRCode.toDataURL(result.url, { margin: 1, width: 220 });
         setLink({ url: result.url, qr, expiresAt: result.expiresAt });
@@ -115,6 +120,28 @@ export function EntryControls({
 
       {isManager ? (
         <div className="grid gap-2">
+          {/* the visit's length is the manager's call — chips, not a Radix
+              Select: dropdowns ghost-click on touch devices */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-sm text-muted-foreground">{t("magicLinkDuration")}</span>
+            {INSPECTOR_LINK_HOURS.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setHours(option)}
+                data-testid={`link-hours-${option}`}
+                aria-pressed={hours === option}
+                className={cn(
+                  "min-h-12 rounded-xl px-4 text-sm font-medium",
+                  hours === option
+                    ? "bg-primary text-primary-foreground"
+                    : "border text-muted-foreground",
+                )}
+              >
+                {t("magicLinkHours", { hours: option })}
+              </button>
+            ))}
+          </div>
           <Button
             variant="outline"
             size="lg"
@@ -145,6 +172,78 @@ export function EntryControls({
 }
 
 /** §10.1 exit: manager PIN unlocks the device. */
+export type ActiveLink = {
+  id: string;
+  expiresAt: string;
+  createdAt: string;
+  openedAt: string | null;
+  views: number;
+};
+
+/**
+ * Live inspector links: what is open right now, whether it was opened, and a
+ * way to end it early. An owner who cannot see or stop an outstanding link is
+ * trusting a URL they no longer control (§4.2).
+ */
+export function ActiveInspectorLinks({
+  siteId,
+  links,
+}: {
+  siteId: string;
+  links: ActiveLink[];
+}) {
+  const t = useTranslations("inspection");
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+
+  function revoke(linkId: string) {
+    startTransition(async () => {
+      const result: RevokeLinkState = await revokeInspectorLink({ siteId, linkId });
+      if (result && "ok" in result) {
+        toast.success(t("revokedToast"));
+        router.refresh();
+      } else {
+        toast.error(t("error"));
+      }
+    });
+  }
+
+  if (links.length === 0) return null;
+
+  return (
+    <div className="grid gap-2" data-testid="active-links">
+      <p className="text-sm font-medium">{t("activeLinksTitle")}</p>
+      {links.map((link) => (
+        <div
+          key={link.id}
+          className="flex flex-wrap items-center gap-2 rounded-lg border p-3"
+          data-testid="active-link-row"
+        >
+          <div className="min-w-0 flex-1 text-sm">
+            <p>{t("linkExpiresAt", { time: link.expiresAt.slice(11, 16) })}</p>
+            <p className="text-muted-foreground">
+              {link.openedAt
+                ? t("linkOpened", { time: link.openedAt.slice(11, 16), views: link.views })
+                : t("linkNotOpened")}
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="min-h-12 shrink-0"
+            disabled={pending}
+            onClick={() => revoke(link.id)}
+            data-testid="revoke-link"
+          >
+            <Ban className="size-4" />
+            {t("revokeButton")}
+          </Button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function ExitLockDialog({
   siteId,
   managers,

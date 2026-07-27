@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
@@ -22,6 +23,15 @@ import {
   type TabContext,
 } from "@/components/inspection/tabs";
 import { Card, CardContent } from "@/components/ui/card";
+
+/**
+ * Never prerendered, never cached: the inspector must see the kitchen as it is
+ * right now. The page is dynamic today only as a side effect of reading
+ * searchParams — this makes it explicit so a refactor cannot quietly freeze it
+ * (docs/audit.md §3.4d).
+ */
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function defaultRange(): { fromDate: string; toDate: string } {
   const today = new Date().toISOString().slice(0, 10);
@@ -63,22 +73,21 @@ export default async function InspectPage({
   const siteId = link.site_id;
   const service = createServiceClient();
 
-  // Audit the access (actor = the manager who issued the link, role = guest).
-  // Failures are logged, never swallowed: an unrecorded inspection is exactly
-  // what the owner must be able to see happened (docs/audit.md §3.4).
+  // Audit the access against the link that was ACTUALLY used — the id comes
+  // back from the token resolver, so two live links can no longer be confused
+  // (docs/audit.md §3.4a). Device details are recorded because the owner must
+  // be able to see that the inspection happened, and from where.
   try {
     const linkRow = unwrap(
       await service
         .from("inspector_links")
         .select("id, created_by, site:sites(org_id)")
-        .eq("site_id", siteId)
-        .gt("expires_at", new Date().toISOString())
-        .order("created_at", { ascending: false })
-        .limit(1)
+        .eq("id", link.link_id)
         .maybeSingle(),
       "inspect: load link for audit",
     );
     if (linkRow?.site) {
+      const h = await headers();
       unwrap(
         await service.from("audit_log").insert({
           org_id: linkRow.site.org_id,
@@ -88,7 +97,12 @@ export default async function InspectPage({
           action: "inspection.link_viewed",
           entity_table: "inspector_links",
           entity_id: linkRow.id,
-          diff: { tab: sp.tab ?? "programme" },
+          diff: {
+            tab: sp.tab ?? "programme",
+            // first hop is the client; the rest are proxies
+            ip: h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+            user_agent: h.get("user-agent") ?? null,
+          },
         }),
         "inspect: write view audit",
       );

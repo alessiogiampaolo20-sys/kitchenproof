@@ -921,7 +921,15 @@
       "colQty": "Q.tà",
       "colKind": "Tipo",
       "colDetail": "Dettaglio"
-    }
+    },
+    "magicLinkDuration": "Valido per:",
+    "magicLinkHours": "{hours} h",
+    "activeLinksTitle": "Link ispettore attivi",
+    "linkExpiresAt": "Scade alle {time}",
+    "linkOpened": "Aperto alle {time} · {views} visualizzazioni",
+    "linkNotOpened": "Non ancora aperto",
+    "revokeButton": "Revoca",
+    "revokedToast": "Link revocato"
   },
   "orgDashboard": {
     "title": "Panoramica sedi",

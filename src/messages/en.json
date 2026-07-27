@@ -921,7 +921,15 @@
       "colQty": "Qty",
       "colKind": "Kind",
       "colDetail": "Detail"
-    }
+    },
+    "magicLinkDuration": "Valid for:",
+    "magicLinkHours": "{hours} h",
+    "activeLinksTitle": "Active inspector links",
+    "linkExpiresAt": "Expires at {time}",
+    "linkOpened": "Opened at {time} · {views} views",
+    "linkNotOpened": "Not opened yet",
+    "revokeButton": "Revoke",
+    "revokedToast": "Link revoked"
   },
   "orgDashboard": {
     "title": "Portfolio overview",

@@ -149,6 +149,38 @@ test("inspection: guest lock, magic link truth, exports, audit", async ({ page, 
   // strictly read-only: no write affordances anywhere
   expect(await guest.getByRole("button", { name: /Godkend|Gem|Upload/ }).count()).toBe(0);
 
+  // ── LIVENESS: a record made AFTER the link was issued must appear ────────
+  // The assertions above only prove the link shows what already existed when
+  // it was created. This is the §4.2 criterion: no rebuild, no revalidation.
+  // a *different* due time, so this materialises a new pending task rather
+  // than re-finding the one already completed above
+  await page.goto(`/app/${siteId}/programme`);
+  const secondCp = page.getByTestId("cp-row").filter({ hasText: "Køleskab 1" }).first();
+  await secondCp.getByRole("button", { name: "Redigér" }).click();
+  await page.locator('input[name="times"]').fill(cphTimeIn(8));
+  await page.getByRole("dialog").getByRole("button", { name: "Redigér" }).click();
+  await expect(page.getByRole("dialog")).toBeHidden();
+
+  await page.goto(`/app/${siteId}/today`);
+  await page
+    .locator('[data-testid^="task-"]', { hasText: "Køleskab 1" })
+    .first()
+    .click();
+  await expect(page.getByTestId("temp-display")).toBeVisible();
+  await completeTemp(page, ["2", "dot", "1"]);
+  await page.waitForURL(`**/app/${siteId}/today`);
+
+  // same guest, same URL, plain reload — no rebuild anywhere
+  await guest.goto(`${inspectorUrl}?tab=records`);
+  await expect(guest.getByTestId("record-row").first()).toContainText("2.1 °C");
+
+  // and on an inspector's own fresh device
+  const laterContext = await browser.newContext();
+  const later = await laterContext.newPage();
+  await later.goto(`${inspectorUrl}?tab=records`);
+  await expect(later.getByTestId("record-row").first()).toContainText("2.1 °C");
+  await laterContext.close();
+
   // invalid token fails closed
   await guest.goto(inspectorUrl.replace(/[^/]+$/, "invalid-token-000"));
   await expect(guest.getByTestId("inspect-invalid")).toBeVisible();
@@ -180,6 +212,20 @@ test("inspection: guest lock, magic link truth, exports, audit", async ({ page, 
   expect(bundle.headers()["content-type"]).toContain("zip");
   expect((await bundle.body()).length).toBeGreaterThan(5000);
 
+  // ── REVOKE: the manager ends the visit and the token dies immediately ────
+  // Last, because it kills the token every assertion above depends on.
+  await page.goto(`/app/${siteId}/inspection`);
+  await expect(page.getByTestId("active-link-row").first()).toBeVisible();
+  // the owner sees the visit happened, not merely that a link was issued
+  await expect(page.getByTestId("active-link-row").first()).toContainText("visninger");
+  await page.getByTestId("revoke-link").first().click();
+  await expect(page.getByText("Linket er tilbagekaldt")).toBeVisible();
+
+  await guest.goto(inspectorUrl);
+  await expect(guest.getByTestId("inspect-invalid")).toBeVisible();
+  const afterRevoke = await guest.request.get(`/inspect/${token}/export?tab=programme`);
+  expect(afterRevoke.status(), "export must fail closed after revocation").not.toBe(200);
+
   await guestContext.close();
 
   // ── audit rows written (DoD) ──────────────────────────────────────────────
@@ -197,7 +243,25 @@ test("inspection: guest lock, magic link truth, exports, audit", async ({ page, 
     "inspector_link.created",
     "inspection.link_viewed",
     "inspection.exported",
+    "inspector_link.revoked",
   ]) {
     expect(actions.has(expected), expected).toBe(true);
+  }
+
+  // the view audit must name the link that was actually used, and say from where
+  const { data: viewRows } = await admin
+    .from("audit_log")
+    .select("entity_id, diff")
+    .eq("site_id", siteId)
+    .eq("action", "inspection.link_viewed");
+  expect((viewRows ?? []).length).toBeGreaterThan(0);
+  const { data: issuedLinks } = await admin
+    .from("inspector_links")
+    .select("id")
+    .eq("site_id", siteId);
+  const issuedIds = new Set((issuedLinks ?? []).map((l) => l.id));
+  for (const row of viewRows ?? []) {
+    expect(issuedIds.has(row.entity_id as string)).toBe(true);
+    expect((row.diff as { user_agent?: string }).user_agent).toBeTruthy();
   }
 });

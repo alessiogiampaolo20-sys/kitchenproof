@@ -1004,6 +1004,8 @@ export type Database = {
           created_by: string
           expires_at: string
           id: string
+          revoked_at: string | null
+          revoked_by: string | null
           site_id: string
           token_hash: string
           updated_at: string
@@ -1014,6 +1016,8 @@ export type Database = {
           created_by: string
           expires_at: string
           id?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
           site_id: string
           token_hash: string
           updated_at?: string
@@ -1024,12 +1028,21 @@ export type Database = {
           created_by?: string
           expires_at?: string
           id?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
           site_id?: string
           token_hash?: string
           updated_at?: string
           used_at?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "inspector_links_revoked_by_fkey"
+            columns: ["revoked_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "inspector_links_site_id_fkey"
             columns: ["site_id"]
@@ -3156,6 +3169,7 @@ export type Database = {
         Args: { p_token: string }
         Returns: {
           expires_at: string
+          link_id: string
           site_id: string
           site_name: string
         }[]

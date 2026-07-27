@@ -921,7 +921,15 @@
       "colQty": "Mængde",
       "colKind": "Type",
       "colDetail": "Detalje"
-    }
+    },
+    "magicLinkDuration": "Varighed:",
+    "magicLinkHours": "{hours} t",
+    "activeLinksTitle": "Aktive inspektørlinks",
+    "linkExpiresAt": "Udløber kl. {time}",
+    "linkOpened": "Åbnet kl. {time} · {views} visninger",
+    "linkNotOpened": "Endnu ikke åbnet",
+    "revokeButton": "Tilbagekald",
+    "revokedToast": "Linket er tilbagekaldt"
   },
   "orgDashboard": {
     "title": "Porteføljeoverblik",
