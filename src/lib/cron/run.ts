@@ -3,6 +3,7 @@
 // not a user request path (§17). Web-push channel joins in Phase 3 (Serwist SW).
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
+import { unwrap } from "@/lib/supabase/unwrap";
 import { materializeSiteTasks } from "@/lib/compliance/materialize-runner";
 import { processPackUpdates } from "@/lib/compliance/pack-update";
 import { sendWeeklyDigests } from "./digest";
@@ -32,7 +33,17 @@ export type CronReport = {
   packUpdates: number;
   reviewTasks: number;
   digests: number;
+  /**
+   * Steps that failed. A step may fail without blocking the others, but the run
+   * is NOT a success: the route turns a non-empty list into HTTP 500 so Vercel
+   * Cron surfaces it. Silence here is what hid five days of dead scheduling.
+   */
+  errors: string[];
 };
+
+function describe(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
+}
 
 async function notifyOnce(
   supabase: Client,
@@ -65,6 +76,7 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
     packUpdates: 0,
     reviewTasks: 0,
     digests: 0,
+    errors: [],
   };
 
   // §13: fan out newly published pack versions as review tasks (idempotent)
@@ -72,29 +84,43 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
     const fanOut = await processPackUpdates(supabase);
     report.packUpdates = fanOut.updates;
     report.reviewTasks = fanOut.reviewTasks;
-  } catch {
-    // pack fan-out must never block reminders/materialization
+  } catch (err) {
+    // pack fan-out must never block reminders/materialization — but it is reported
+    report.errors.push(`packUpdates: ${describe(err)}`);
   }
 
   // §11 weekly digest (Mondays, one per org per ISO week)
   try {
     const digest = await sendWeeklyDigests(supabase, now);
     report.digests = digest.digests;
-  } catch {
-    // digest failures never block operational reminders
+  } catch (err) {
+    // digest failures never block operational reminders — but they are reported
+    report.errors.push(`digests: ${describe(err)}`);
   }
 
-  const { data: sites } = await supabase
-    .from("sites")
-    .select("id, name, timezone, org:organizations(default_locale)")
-    .eq("status", "active");
+  // The site list is the run: if it fails, nothing below happens. Reading it
+  // without checking `error` is precisely how a broken service key looked like
+  // a healthy no-op run for five days (docs/audit.md §3.2).
+  const sites = unwrap(
+    await supabase
+      .from("sites")
+      .select("id, name, timezone, org:organizations(default_locale)")
+      .eq("status", "active"),
+    "cron: list active sites",
+  );
 
   for (const site of sites ?? []) {
     const texts = pushTexts(site.org?.default_locale);
     const todayUrl = `/app/${site.id}/today`;
-    // 1 — rolling 7-day materialization (idempotent)
-    await materializeSiteTasks(supabase, site.id);
-    report.sitesMaterialized += 1;
+    // 1 — rolling 7-day materialization (idempotent). One sick site must not
+    // stop the others, so it is caught per site and reported by name.
+    try {
+      await materializeSiteTasks(supabase, site.id);
+      report.sitesMaterialized += 1;
+    } catch (err) {
+      report.errors.push(`materialize ${site.name}: ${describe(err)}`);
+      continue;
+    }
 
     // 2 — mark pending tasks past their window as missed (§8.4: honesty is a
     // feature — misses are recorded, never fabricated away)

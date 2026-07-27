@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/service";
+import { unwrap } from "@/lib/supabase/unwrap";
 import {
   getDeviationsData,
   getDocumentsData,
@@ -62,26 +63,38 @@ export default async function InspectPage({
   const siteId = link.site_id;
   const service = createServiceClient();
 
-  // audit the access (actor = the manager who issued the link, role = guest)
-  const { data: linkRow } = await service
-    .from("inspector_links")
-    .select("id, created_by, site:sites(org_id)")
-    .eq("site_id", siteId)
-    .gt("expires_at", new Date().toISOString())
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (linkRow?.site) {
-    await service.from("audit_log").insert({
-      org_id: linkRow.site.org_id,
-      site_id: siteId,
-      actor_id: linkRow.created_by,
-      actor_role: "inspector_guest",
-      action: "inspection.link_viewed",
-      entity_table: "inspector_links",
-      entity_id: linkRow.id,
-      diff: { tab: sp.tab ?? "programme" },
-    });
+  // Audit the access (actor = the manager who issued the link, role = guest).
+  // Failures are logged, never swallowed: an unrecorded inspection is exactly
+  // what the owner must be able to see happened (docs/audit.md §3.4).
+  try {
+    const linkRow = unwrap(
+      await service
+        .from("inspector_links")
+        .select("id, created_by, site:sites(org_id)")
+        .eq("site_id", siteId)
+        .gt("expires_at", new Date().toISOString())
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      "inspect: load link for audit",
+    );
+    if (linkRow?.site) {
+      unwrap(
+        await service.from("audit_log").insert({
+          org_id: linkRow.site.org_id,
+          site_id: siteId,
+          actor_id: linkRow.created_by,
+          actor_role: "inspector_guest",
+          action: "inspection.link_viewed",
+          entity_table: "inspector_links",
+          entity_id: linkRow.id,
+          diff: { tab: sp.tab ?? "programme" },
+        }),
+        "inspect: write view audit",
+      );
+    }
+  } catch (err) {
+    console.error("[inspect] audit failed:", err instanceof Error ? err.message : err);
   }
 
   const tab = ((sp.tab as InspectionTab) ?? "programme") as InspectionTab;
