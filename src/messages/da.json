@@ -1070,5 +1070,52 @@
     "quickReceive": "Hurtig modtagelse",
     "prep": "Ny tilberedning",
     "outbound": "Levering ud (B2B)"
+  },
+  "setup": {
+    "title": "Kom godt i gang",
+    "subtitle": "Har I allerede en virksomhed i drift? Tag jeres nuværende situation med ind — I skal ikke starte forfra.",
+    "progress": "{done} af {total} trin klar",
+    "done": "Klar",
+    "basicsTitle": "Grundopsætning",
+    "basicsHint": "Disse tre gør jeres registreringer gyldige: et godkendt program, det udstyr der måles på, og en person bag hver registrering.",
+    "takeoverTitle": "Tag jeres nuværende situation med",
+    "takeoverHint": "En eksisterende virksomhed har allerede varer på lager, leverandører og dokumenter. Læg dem ind én gang, så er sporbarheden komplet fra i dag.",
+    "managerOnlyHint": "Nogle trin kan kun udføres af en leder.",
+    "bannerCount": "{count, plural, other {# trin mangler i opsætningen}}",
+    "bannerAction": "Fortsæt opsætning",
+    "steps": {
+      "programme": {
+        "title": "Egenkontrolprogram",
+        "description": "Importér jeres eksisterende risikoanalyse (PDF, Word, Excel eller et foto) — den bliver læst og lagt ind i det officielle skema. Ellers bygger guiden et nyt program.",
+        "action": "Importér dokument",
+        "altAction": "Brug guiden"
+      },
+      "equipment": {
+        "title": "Køle- og fryseudstyr",
+        "description": "Opret køleskabe, frysere og varmeskabe med deres grænser. Hvert stykke udstyr får en QR-kode, der åbner målingen direkte.",
+        "action": "Tilføj udstyr"
+      },
+      "pins": {
+        "title": "Personer og PIN",
+        "description": "Hver registrering skal kunne henføres til en person. Giv mindst én leder en PIN-kode.",
+        "action": "Åbn medlemmer"
+      },
+      "catalog": {
+        "title": "Leverandører og varer",
+        "description": "Upload en faktura, så oprettes leverandør og varer automatisk. I kan også oprette dem manuelt.",
+        "action": "Upload faktura",
+        "altAction": "Åbn varekatalog"
+      },
+      "stock": {
+        "title": "Åbningslager",
+        "description": "Registrér de varer, I har på lager lige nu, med lotnummer og holdbarhed. Så virker sporbarhed og tilbagetrækning fra i dag.",
+        "action": "Registrér åbningslager"
+      },
+      "documents": {
+        "title": "Eksisterende dokumenter",
+        "description": "Skadedyrsaftale, vandprøver, kursusbeviser og tidligere kontrolrapporter. De ligger klar, når kontrollen kommer.",
+        "action": "Upload dokumenter"
+      }
+    }
   }
 }

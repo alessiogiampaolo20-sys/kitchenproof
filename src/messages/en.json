@@ -1070,5 +1070,52 @@
     "quickReceive": "Quick receive",
     "prep": "New prep batch",
     "outbound": "Outbound delivery (B2B)"
+  },
+  "setup": {
+    "title": "Get started",
+    "subtitle": "Already running a business? Bring your current situation in — you don't have to start from scratch.",
+    "progress": "{done} of {total} steps ready",
+    "done": "Ready",
+    "basicsTitle": "Basic setup",
+    "basicsHint": "These three make your records valid: an approved programme, the equipment you measure, and a person behind every record.",
+    "takeoverTitle": "Bring your current situation in",
+    "takeoverHint": "An existing business already has stock, suppliers and documents. Enter them once and traceability is complete from today.",
+    "managerOnlyHint": "Some steps can only be done by a manager.",
+    "bannerCount": "{count, plural, one {# step left in setup} other {# steps left in setup}}",
+    "bannerAction": "Continue setup",
+    "steps": {
+      "programme": {
+        "title": "Self-control programme",
+        "description": "Import the risk analysis you already have (PDF, Word, Excel or a photo) — it is read and mapped onto the official skema. Otherwise the guide builds a new programme.",
+        "action": "Import document",
+        "altAction": "Use the guide"
+      },
+      "equipment": {
+        "title": "Fridges and freezers",
+        "description": "Register fridges, freezers and hot-holding units with their limits. Each one gets a QR code that opens its check directly.",
+        "action": "Add equipment"
+      },
+      "pins": {
+        "title": "People and PINs",
+        "description": "Every record must be attributable to a person. Give at least one manager a PIN.",
+        "action": "Open members"
+      },
+      "catalog": {
+        "title": "Suppliers and products",
+        "description": "Upload an invoice and suppliers and products are created automatically. You can also add them by hand.",
+        "action": "Upload invoice",
+        "altAction": "Open catalogue"
+      },
+      "stock": {
+        "title": "Opening stock",
+        "description": "Register the goods on your shelves right now with lot number and expiry. Traceability and recall then work from today.",
+        "action": "Register opening stock"
+      },
+      "documents": {
+        "title": "Existing documents",
+        "description": "Pest-control contract, water tests, training certificates and earlier inspection reports — ready when the inspector arrives.",
+        "action": "Upload documents"
+      }
+    }
   }
 }

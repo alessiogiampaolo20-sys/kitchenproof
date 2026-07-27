@@ -1070,5 +1070,52 @@
     "quickReceive": "Ricezione rapida",
     "prep": "Nuova preparazione",
     "outbound": "Consegna in uscita (B2B)"
+  },
+  "setup": {
+    "title": "Come iniziare",
+    "subtitle": "Attività già avviata? Porta dentro la situazione attuale — non devi ripartire da zero.",
+    "progress": "{done} di {total} passaggi pronti",
+    "done": "Pronto",
+    "basicsTitle": "Configurazione di base",
+    "basicsHint": "Questi tre rendono validi i registri: un programma approvato, le attrezzature che misuri e una persona dietro ogni registrazione.",
+    "takeoverTitle": "Porta dentro la situazione attuale",
+    "takeoverHint": "Un'attività esistente ha già merce, fornitori e documenti. Inseriscili una volta e la tracciabilità è completa da oggi.",
+    "managerOnlyHint": "Alcuni passaggi può farli solo un responsabile.",
+    "bannerCount": "{count, plural, one {# passaggio da completare} other {# passaggi da completare}}",
+    "bannerAction": "Continua configurazione",
+    "steps": {
+      "programme": {
+        "title": "Programma di autocontrollo",
+        "description": "Importa l'analisi dei rischi che avete già (PDF, Word, Excel o una foto) — viene letta e mappata sul modulo ufficiale. In alternativa la guida crea un programma nuovo.",
+        "action": "Importa documento",
+        "altAction": "Usa la guida"
+      },
+      "equipment": {
+        "title": "Frigoriferi e congelatori",
+        "description": "Registra frigoriferi, congelatori e mantenitori di caldo con i loro limiti. Ognuno riceve un QR che apre il controllo.",
+        "action": "Aggiungi attrezzatura"
+      },
+      "pins": {
+        "title": "Persone e PIN",
+        "description": "Ogni registrazione deve essere attribuibile a una persona. Assegna un PIN ad almeno un responsabile.",
+        "action": "Apri membri"
+      },
+      "catalog": {
+        "title": "Fornitori e prodotti",
+        "description": "Carica una fattura: fornitori e prodotti vengono creati in automatico. Puoi anche inserirli a mano.",
+        "action": "Carica fattura",
+        "altAction": "Apri catalogo"
+      },
+      "stock": {
+        "title": "Stock di apertura",
+        "description": "Registra la merce che avete adesso a magazzino, con lotto e scadenza. Tracciabilità e richiamo funzionano da oggi.",
+        "action": "Registra stock di apertura"
+      },
+      "documents": {
+        "title": "Documenti esistenti",
+        "description": "Contratto disinfestazione, analisi dell'acqua, attestati dei corsi e report di controlli precedenti: pronti quando arriva l'ispettore.",
+        "action": "Carica documenti"
+      }
+    }
   }
 }

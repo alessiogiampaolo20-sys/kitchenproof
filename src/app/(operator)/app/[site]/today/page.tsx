@@ -331,9 +331,21 @@ export default async function TodayPage({
 
           {overdue.length + dueNow.length + later.length === 0 ? (
             <Card>
-              <CardContent className="flex items-center gap-3 py-6 text-muted-foreground">
-                <CalendarCheck className="size-6 text-primary" />
-                {totalToday > 0 ? t("todayScreen.allDone") : t("todayScreen.noTasks")}
+              <CardContent className="grid gap-3 py-6 text-muted-foreground">
+                <p className="flex items-center gap-3">
+                  <CalendarCheck className="size-6 shrink-0 text-primary" />
+                  {totalToday > 0 ? t("todayScreen.allDone") : t("todayScreen.noTasks")}
+                </p>
+                {/* nothing scheduled at all = the site is still being set up */}
+                {totalToday === 0 ? (
+                  <Link
+                    href={`/app/${site.id}/setup`}
+                    className="inline-flex min-h-12 w-fit items-center rounded-xl bg-primary px-4 font-medium text-primary-foreground"
+                    data-testid="setup-link"
+                  >
+                    {t("setup.bannerAction")}
+                  </Link>
+                ) : null}
               </CardContent>
             </Card>
           ) : null}

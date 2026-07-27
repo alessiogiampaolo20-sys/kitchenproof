@@ -1,32 +1,38 @@
 "use client";
 
 // Who am I / what can I do: account identity, role and language, one tap away
-// on every site screen. Plain state toggle (no Radix popover — touch-safe).
-import { useState } from "react";
+// on every site screen. The identity itself is loaded on first open, so the
+// header costs nothing on page renders. Plain state toggle (touch-safe).
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { CircleUserRound, LogOut } from "lucide-react";
 import { signOut } from "@/app/_actions";
+import { loadSiteIdentity, type SiteIdentity } from "./_actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export function ProfileMenu({
-  name,
-  email,
-  roleLabel,
-  orgName,
-  siteName,
+  siteId,
   localeSwitcher,
 }: {
-  name: string;
-  email: string;
-  roleLabel: string;
-  orgName: string;
-  siteName: string;
+  siteId: string;
   localeSwitcher: React.ReactNode;
 }) {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
+  const [identity, setIdentity] = useState<SiteIdentity | null>(null);
+  const [, startTransition] = useTransition();
+
+  function toggle() {
+    const next = !open;
+    setOpen(next);
+    if (next && !identity) {
+      startTransition(async () => {
+        setIdentity(await loadSiteIdentity(siteId));
+      });
+    }
+  }
 
   return (
     <div className="relative shrink-0">
@@ -35,7 +41,7 @@ export function ProfileMenu({
         aria-label={t("profile.title")}
         aria-expanded={open}
         data-testid="profile-menu-button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggle}
         className="inline-flex size-12 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted"
       >
         <CircleUserRound className="size-6" />
@@ -53,16 +59,30 @@ export function ProfileMenu({
             data-testid="profile-menu-panel"
             className="absolute right-0 top-full z-50 mt-1 w-72 rounded-xl border bg-background p-4 shadow-lg"
           >
-            <p className="truncate font-medium">{name}</p>
-            <p className="truncate text-sm text-muted-foreground">{email}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              <Badge>{roleLabel}</Badge>
-              <span className="min-w-0 truncate text-sm text-muted-foreground">
-                {orgName} · {siteName}
-              </span>
-            </div>
+            {identity ? (
+              <>
+                <p className="truncate font-medium">{identity.name}</p>
+                <p className="truncate text-sm text-muted-foreground">{identity.email}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <Badge>{identity.roleLabel}</Badge>
+                  <span className="min-w-0 truncate text-sm text-muted-foreground">
+                    {identity.orgName} · {identity.siteName}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div className="grid gap-2" aria-hidden>
+                <span className="h-5 w-32 animate-pulse rounded bg-muted" />
+                <span className="h-4 w-44 animate-pulse rounded bg-muted" />
+              </div>
+            )}
             <div className="mt-3 border-t pt-3">{localeSwitcher}</div>
             <div className="mt-3 grid gap-2 border-t pt-3">
+              <Button asChild variant="outline" className="justify-start">
+                <Link href={`/app/${siteId}/setup`} onClick={() => setOpen(false)}>
+                  {t("setup.title")}
+                </Link>
+              </Button>
               <Button asChild variant="outline" className="justify-start">
                 <Link href="/" onClick={() => setOpen(false)}>
                   {t("nav.chooseSite")}

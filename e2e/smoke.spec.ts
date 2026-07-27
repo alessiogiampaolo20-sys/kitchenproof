@@ -41,8 +41,25 @@ test("full tenancy + PIN switch flow", async ({ page, browser }) => {
   const siteHref = await siteCard.getAttribute("href");
   expect(siteHref).toMatch(/^\/app\/.+\/today$/);
 
+  // 2b — A brand-new site shows the getting-started checklist with nothing done;
+  // the "bring your existing business in" steps are offered from the start.
+  const siteId = siteHref!.split("/")[2];
+  await page.goto(`/app/${siteId}/setup`);
+  await expect(page.getByTestId("setup-progress")).toHaveText("0 af 6 trin klar");
+  for (const step of ["programme", "equipment", "pins", "catalog", "stock", "documents"]) {
+    await expect(page.getByTestId(`setup-step-${step}`)).toHaveAttribute(
+      "data-done",
+      "false",
+    );
+  }
+  await expect(
+    page.getByTestId("setup-step-stock").getByRole("link", {
+      name: "Registrér åbningslager",
+    }),
+  ).toBeVisible();
+
   // 3 — Owner invites an operator and copies the invite link.
-  await page.getByRole("link", { name: "Medlemmer" }).click();
+  await page.goto("/org/members");
   await page.waitForURL("**/org/members");
   await page.fill("#invite-email", operator.email);
   await page.getByRole("button", { name: "Opret invitation" }).click();
