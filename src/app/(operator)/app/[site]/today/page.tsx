@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getActorSession, getDeviceSession } from "@/lib/actor/session";
 import { pickText } from "@/lib/i18n/pick";
 import { wallTimeToUtc } from "@/lib/compliance/materializer";
+import { loadSiteCalendar } from "@/lib/compliance/operating-runner";
+import { AskWorkingToday, ClosedDayBanner } from "../day-status";
 import { formatLimit, parseLimit } from "@/lib/compliance/limits";
 import { PinSwitcher, type SwitcherMember } from "./pin-switcher";
 import { RegisterDeviceForm } from "./register-device-form";
@@ -67,6 +69,17 @@ export default async function TodayPage({
   const timeZone = site.timezone;
   const now = new Date();
   const { y, m, d } = localDate(now, timeZone);
+  const todayIso = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+  // §3.5: is the kitchen even working today? A closed day shows nothing due;
+  // an uncertain one asks once, with one tap.
+  const calendar = await loadSiteCalendar(supabase, site.id, {
+    from: todayIso,
+    to: todayIso,
+  });
+  const todayStatus = calendar.status(todayIso);
+  const todayConfirmed = calendar.explicit.has(todayIso);
+
   const dayStart = wallTimeToUtc(y, m, d, 0, 0, timeZone);
   const dayEnd = new Date(dayStart.getTime() + 24 * 3_600_000);
   const yesterdayStart = new Date(dayStart.getTime() - 24 * 3_600_000);
@@ -298,8 +311,16 @@ export default async function TodayPage({
         ) : null}
       </header>
 
+      {todayStatus === "unknown" && deviceActive ? (
+        <AskWorkingToday siteId={site.id} day={todayIso} />
+      ) : null}
+
       {!deviceActive ? (
         <RegisterDeviceForm siteId={site.id} />
+      ) : todayStatus === "closed" ? (
+        // a closed day is an answer, not an empty screen — and it is what the
+        // inspector reads instead of a gap
+        <ClosedDayBanner siteId={site.id} day={todayIso} derived={!todayConfirmed} />
       ) : (
         <div className="grid gap-6">
           {overdue.length > 0 ? (

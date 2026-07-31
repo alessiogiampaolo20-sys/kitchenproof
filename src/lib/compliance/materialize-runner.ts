@@ -2,6 +2,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/database.types";
 import { materializeTasks } from "./materializer";
+import { loadSiteCalendar } from "./operating-runner";
 
 type Client = SupabaseClient<Database>;
 
@@ -37,7 +38,20 @@ export async function materializeSiteTasks(
   const now = new Date();
   const from = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   const to = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
-  const inserts = materializeTasks(cps ?? [], { from, to }, site.timezone).filter(
+
+  // §3.5: closed days produce no work, and weekly checks roll instead of
+  // vanishing. Looks a fortnight past the horizon so a roll has room to land.
+  const calendar = await loadSiteCalendar(supabase, siteId, {
+    from: from.toISOString().slice(0, 10),
+    to: new Date(to.getTime() + 14 * 86_400_000).toISOString().slice(0, 10),
+  });
+
+  const inserts = materializeTasks(
+    cps ?? [],
+    { from, to },
+    site.timezone,
+    calendar.status,
+  ).filter(
     (task) => {
       const due = new Date(task.due_at).getTime();
       const windowEnd = due + (task.due_window_minutes ?? 0) * 60 * 1000;

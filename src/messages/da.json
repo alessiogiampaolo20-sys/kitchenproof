@@ -845,7 +845,8 @@
       "adhoc": "Ad hoc-registrering",
       "failed": "Uden for grænsen",
       "late": "Sen registrering",
-      "photo": "Foto"
+      "photo": "Foto",
+      "closedDay": "Lukket — ingen produktion"
     },
     "deviations": {
       "none": "Ingen afvigelser registreret.",
@@ -1124,6 +1125,46 @@
         "description": "Skadedyrsaftale, vandprøver, kursusbeviser og tidligere kontrolrapporter. De ligger klar, når kontrollen kommer.",
         "action": "Upload dokumenter"
       }
+    }
+  },
+  "calendar": {
+    "askTitle": "Arbejder I i dag?",
+    "askHint": "Svar én gang, så ved appen om der skal føres egenkontrol i dag. En lukket dag registreres som lukket — over for kontrollen er det et fuldt svar, ikke et hul.",
+    "answerOpen": "Ja, vi arbejder",
+    "answerClosed": "Nej, lukket",
+    "closedTitle": "Lukket i dag — ingen produktion",
+    "closedByPattern": "Ifølge jeres normale ugerytme. Registreret som lukket dag.",
+    "closedConfirmed": "Bekræftet lukket. Dagen står i rapporten som lukket, ikke som en manglende registrering.",
+    "reopenButton": "Vi arbejder alligevel",
+    "reopenedToast": "Dagen er åbnet igen",
+    "patternTitle": "Åbningsrytme",
+    "patternHint": "Hvornår arbejder køkkenet normalt? Appen beder kun om egenkontrol på arbejdsdage.",
+    "savePattern": "Gem rytme",
+    "patternSaved": "Rytmen er gemt",
+    "pickAtLeastOneDay": "Vælg mindst én dag",
+    "error": "Noget gik galt",
+    "modes": {
+      "always": {
+        "title": "Åbent hver dag",
+        "hint": "Egenkontrol hver dag — som hidtil."
+      },
+      "weekdays": {
+        "title": "Faste ugedage",
+        "hint": "Vælg de dage, I normalt arbejder."
+      },
+      "scheduled_only": {
+        "title": "Kun når der er booket arbejde",
+        "hint": "Til catering og events: appen spørger, når der ikke er noget booket."
+      }
+    },
+    "weekdayShort": {
+      "1": "Man",
+      "2": "Tir",
+      "3": "Ons",
+      "4": "Tor",
+      "5": "Fre",
+      "6": "Lør",
+      "7": "Søn"
     }
   }
 }

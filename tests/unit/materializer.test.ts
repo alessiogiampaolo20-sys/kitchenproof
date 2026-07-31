@@ -4,6 +4,7 @@ import {
   materializeTasks,
   wallTimeToUtc,
 } from "@/lib/compliance/materializer";
+import { isoWeekday } from "@/lib/compliance/operating-days";
 
 const TZ = "Europe/Copenhagen";
 
@@ -151,5 +152,82 @@ describe("materializeTasks", () => {
     expect(a.every((t) => t.control_point_id === "cp-daily")).toBe(true);
     expect(a[0]!.assigned_role).toBe("operator");
     expect(a).toEqual(b); // deterministic → safe to upsert idempotently
+  });
+});
+
+describe("materializeTasks with an operating calendar (§3.5)", () => {
+  const tz = "Europe/Copenhagen";
+  const dailyCp = {
+    id: "cp-daily",
+    site_id: "site-1",
+    active: true,
+    responsible_role: null,
+    frequency_json: { rrule: "FREQ=DAILY", times: ["09:00"], dueWindowMinutes: 120 },
+  };
+  const weeklyCp = {
+    id: "cp-weekly",
+    site_id: "site-1",
+    active: true,
+    responsible_role: null,
+    // Saturdays
+    frequency_json: { rrule: "FREQ=WEEKLY;BYDAY=SA", times: ["09:00"], dueWindowMinutes: 120 },
+  };
+  // Mon 2026-08-03 → Mon 2026-08-10
+  const window = {
+    from: new Date("2026-08-03T00:00:00Z"),
+    to: new Date("2026-08-10T00:00:00Z"),
+  };
+  const closedWeekend = (day: string) =>
+    [6, 7].includes(isoWeekday(day)) ? ("closed" as const) : ("open" as const);
+
+  it("creates no daily task on a closed day", () => {
+    const all = materializeTasks([dailyCp], window, tz);
+    const open = materializeTasks([dailyCp], window, tz, closedWeekend);
+    expect(all.length).toBe(7);
+    expect(open.length).toBe(5); // weekend dropped
+    for (const task of open) {
+      const day = task.due_at.slice(0, 10);
+      expect([6, 7]).not.toContain(isoWeekday(day));
+    }
+  });
+
+  it("rolls a weekly check off a closed Saturday onto the next open day", () => {
+    // Saturday 08-08 is closed and so is Sunday, so the check rolls to Monday
+    // 08-10 — past this window's horizon, so nothing is scheduled rather than
+    // something being invented inside it
+    expect(materializeTasks([weeklyCp], window, tz, closedWeekend)).toHaveLength(0);
+
+    const wider = materializeTasks(
+      [weeklyCp],
+      { from: window.from, to: new Date("2026-08-12T00:00:00Z") },
+      tz,
+      closedWeekend,
+    );
+    const days = wider.map((t) => t.due_at.slice(0, 10));
+    expect(days).toContain("2026-08-10"); // Monday
+    expect(days).not.toContain("2026-08-08"); // the closed Saturday
+  });
+
+  it("keeps the original wall-clock time when it rolls", () => {
+    const wider = materializeTasks(
+      [weeklyCp],
+      { from: window.from, to: new Date("2026-08-12T00:00:00Z") },
+      tz,
+      closedWeekend,
+    );
+    const rolled = wider.find((t) => t.due_at.startsWith("2026-08-10"));
+    // 09:00 Copenhagen in August (CEST, UTC+2) = 07:00Z
+    expect(rolled?.due_at).toBe("2026-08-10T07:00:00.000Z");
+  });
+
+  it("never suppresses work on an uncertain day", () => {
+    const unknownEverywhere = materializeTasks([dailyCp], window, tz, () => "unknown");
+    expect(unknownEverywhere.length).toBe(7);
+  });
+
+  it("behaves exactly as before when no calendar is supplied", () => {
+    expect(materializeTasks([dailyCp, weeklyCp], window, tz).length).toBe(
+      materializeTasks([dailyCp, weeklyCp], window, tz, () => "open").length,
+    );
   });
 });

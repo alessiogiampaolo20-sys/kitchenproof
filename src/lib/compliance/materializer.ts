@@ -1,5 +1,6 @@
 import { RRule } from "rrule";
 import { frequencySchema, type PackFrequency } from "./pack-schema";
+import { nextOpenDay, type DayStatus } from "./operating-days";
 
 /**
  * Task materializer (§8.4, Phase 1 scope): expands control point frequencies
@@ -81,6 +82,23 @@ function localDateParts(
   return { year: year!, month: month!, day: day! };
 }
 
+/** Wall-clock hour/minute of an instant in a timezone. */
+function localTimeParts(instant: Date, timeZone: string): { hour: number; minute: number } {
+  const parts: Record<string, string> = {};
+  for (const p of new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(instant)) {
+    parts[p.type] = p.value;
+  }
+  return {
+    hour: parts.hour === "24" ? 0 : Number(parts.hour),
+    minute: Number(parts.minute),
+  };
+}
+
 /** Expand one frequency into UTC due instants within [from, to). */
 export function expandFrequency(
   rawFrequency: unknown,
@@ -124,24 +142,70 @@ export function expandFrequency(
   return out;
 }
 
-/** Expand all active scheduled control points into task inserts. */
+/** True when the frequency repeats more often than once a day. */
+function isDailyRule(rawFrequency: unknown): boolean {
+  const parsed = frequencySchema.safeParse(rawFrequency);
+  if (!parsed.success || "perEvent" in parsed.data) return false;
+  return /FREQ=(DAILY|HOURLY|MINUTELY|SECONDLY)/i.test(parsed.data.rrule);
+}
+
+/**
+ * Expand all active scheduled control points into task inserts.
+ *
+ * `dayStatus` brings in the operating calendar (§3.5). A closed day produces
+ * no tasks — the kitchen was not working, and nagging about it is how the app
+ * gets abandoned. A weekly or monthly check that lands on a closed day is not
+ * dropped but ROLLED to the next open day, so the cadence survives; a daily
+ * check simply skips, because tomorrow brings its own occurrence.
+ *
+ * Uncertainty never suppresses: only a day that is explicitly or patternly
+ * closed removes work. Anything unknown keeps its tasks.
+ */
 export function materializeTasks(
   controlPoints: MaterializableControlPoint[],
   window: { from: Date; to: Date },
   timeZone: string,
+  dayStatus?: (isoDay: string) => DayStatus,
 ): TaskInsert[] {
   const inserts: TaskInsert[] = [];
+  const statusOf = dayStatus ?? (() => "open" as DayStatus);
+
   for (const cp of controlPoints) {
     if (!cp.active) continue;
+    const daily = isDailyRule(cp.frequency_json);
+
     for (const occ of expandFrequency(cp.frequency_json, window, timeZone)) {
+      const parts = localDateParts(occ.dueAt, timeZone);
+      const isoDay = `${parts.year}-${String(parts.month).padStart(2, "0")}-${String(parts.day).padStart(2, "0")}`;
+
+      let dueAt = occ.dueAt;
+      if (statusOf(isoDay) === "closed") {
+        if (daily) continue; // tomorrow has its own occurrence
+        const rolled = nextOpenDay(isoDay, statusOf);
+        if (!rolled) continue;
+        // keep the original wall-clock time, move only the date
+        const { hour, minute } = localTimeParts(occ.dueAt, timeZone);
+        const [ry, rm, rd] = rolled.split("-").map(Number);
+        dueAt = wallTimeToUtc(ry!, rm!, rd!, hour, minute, timeZone);
+        if (dueAt >= window.to) continue; // rolled past the horizon
+      }
+
       inserts.push({
         control_point_id: cp.id,
         site_id: cp.site_id,
-        due_at: occ.dueAt.toISOString(),
+        due_at: dueAt.toISOString(),
         due_window_minutes: occ.dueWindowMinutes,
         assigned_role: cp.responsible_role,
       });
     }
   }
-  return inserts;
+
+  // rolling can collide with an occurrence already scheduled on the target day
+  const seen = new Set<string>();
+  return inserts.filter((task) => {
+    const key = `${task.control_point_id}|${task.due_at}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }

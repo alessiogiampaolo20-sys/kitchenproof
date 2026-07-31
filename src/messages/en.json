@@ -845,7 +845,8 @@
       "adhoc": "Ad-hoc record",
       "failed": "Out of limit",
       "late": "Late entry",
-      "photo": "Photo"
+      "photo": "Photo",
+      "closedDay": "Closed — no production"
     },
     "deviations": {
       "none": "No deviations recorded.",
@@ -1124,6 +1125,46 @@
         "description": "Pest-control contract, water tests, training certificates and earlier inspection reports — ready when the inspector arrives.",
         "action": "Upload documents"
       }
+    }
+  },
+  "calendar": {
+    "askTitle": "Are you working today?",
+    "askHint": "Answer once and the app knows whether checks are due. A closed day is recorded as closed — to an inspector that is a complete answer, not a gap.",
+    "answerOpen": "Yes, we're working",
+    "answerClosed": "No, closed",
+    "closedTitle": "Closed today — no production",
+    "closedByPattern": "According to your normal weekly rhythm. Recorded as a closed day.",
+    "closedConfirmed": "Confirmed closed. The day appears in the report as closed, not as a missing record.",
+    "reopenButton": "We're working after all",
+    "reopenedToast": "Day reopened",
+    "patternTitle": "Operating rhythm",
+    "patternHint": "When does the kitchen normally work? The app only asks for checks on working days.",
+    "savePattern": "Save rhythm",
+    "patternSaved": "Rhythm saved",
+    "pickAtLeastOneDay": "Pick at least one day",
+    "error": "Something went wrong",
+    "modes": {
+      "always": {
+        "title": "Open every day",
+        "hint": "Checks every day — as before."
+      },
+      "weekdays": {
+        "title": "Fixed weekdays",
+        "hint": "Pick the days you normally work."
+      },
+      "scheduled_only": {
+        "title": "Only when work is booked",
+        "hint": "For catering and events: the app asks when nothing is booked."
+      }
+    },
+    "weekdayShort": {
+      "1": "Mon",
+      "2": "Tue",
+      "3": "Wed",
+      "4": "Thu",
+      "5": "Fri",
+      "6": "Sat",
+      "7": "Sun"
     }
   }
 }

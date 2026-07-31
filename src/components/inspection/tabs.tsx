@@ -280,8 +280,11 @@ export async function RecordsTab({
         <CardContent className="pt-4">
           <div className="flex flex-wrap gap-1" data-testid="records-heatmap">
             {data.heatmap.map((day) => {
-              const tone =
-                day.deviations > 0
+              // a declared closed day reads as "closed", never as an empty
+              // square an inspector would take for a missing record (§3.5)
+              const tone = day.closed
+                ? "bg-slate-300 dark:bg-slate-600"
+                : day.deviations > 0
                   ? "bg-red-500"
                   : day.missed > 0
                     ? "bg-amber-400"
@@ -291,9 +294,14 @@ export async function RecordsTab({
               return (
                 <div
                   key={day.date}
-                  title={`${day.date}: ${day.done}✓ ${day.missed}✗ ${day.deviations}⚠`}
+                  title={
+                    day.closed
+                      ? `${day.date}: ${t("records.closedDay")}`
+                      : `${day.date}: ${day.done}✓ ${day.missed}✗ ${day.deviations}⚠`
+                  }
                   className={`size-4 rounded-sm ${tone}`}
                   data-testid={`heat-${day.date}`}
+                  data-closed={day.closed ? "true" : undefined}
                 />
               );
             })}

@@ -845,7 +845,8 @@
       "adhoc": "Ad-hoc record",
       "failed": "Out of limit",
       "late": "Late entry",
-      "photo": "Photo"
+      "photo": "Photo",
+      "closedDay": "Chiuso — nessuna produzione"
     },
     "deviations": {
       "none": "No deviations recorded.",
@@ -1124,6 +1125,46 @@
         "description": "Contratto disinfestazione, analisi dell'acqua, attestati dei corsi e report di controlli precedenti: pronti quando arriva l'ispettore.",
         "action": "Carica documenti"
       }
+    }
+  },
+  "calendar": {
+    "askTitle": "Oggi si lavora?",
+    "askHint": "Rispondi una volta e l'app sa se servono i controlli. Un giorno chiuso viene registrato come chiuso — per l'ispettore è una risposta completa, non un buco.",
+    "answerOpen": "Sì, si lavora",
+    "answerClosed": "No, chiuso",
+    "closedTitle": "Oggi chiuso — nessuna produzione",
+    "closedByPattern": "Secondo il vostro ritmo settimanale abituale. Registrato come giorno di chiusura.",
+    "closedConfirmed": "Chiusura confermata. Il giorno compare nel report come chiuso, non come registrazione mancante.",
+    "reopenButton": "In realtà lavoriamo",
+    "reopenedToast": "Giorno riaperto",
+    "patternTitle": "Ritmo di apertura",
+    "patternHint": "Quando lavora normalmente la cucina? L'app chiede i controlli solo nei giorni lavorativi.",
+    "savePattern": "Salva ritmo",
+    "patternSaved": "Ritmo salvato",
+    "pickAtLeastOneDay": "Scegli almeno un giorno",
+    "error": "Qualcosa è andato storto",
+    "modes": {
+      "always": {
+        "title": "Aperto tutti i giorni",
+        "hint": "Controlli ogni giorno — come prima."
+      },
+      "weekdays": {
+        "title": "Giorni fissi",
+        "hint": "Scegli i giorni in cui lavorate di solito."
+      },
+      "scheduled_only": {
+        "title": "Solo quando c'è lavoro prenotato",
+        "hint": "Per catering ed eventi: l'app chiede quando non c'è nulla in programma."
+      }
+    },
+    "weekdayShort": {
+      "1": "Lun",
+      "2": "Mar",
+      "3": "Mer",
+      "4": "Gio",
+      "5": "Ven",
+      "6": "Sab",
+      "7": "Dom"
     }
   }
 }

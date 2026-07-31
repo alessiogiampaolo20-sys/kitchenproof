@@ -2436,6 +2436,64 @@ export type Database = {
           },
         ]
       }
+      site_operating_days: {
+        Row: {
+          confirmed_at: string
+          confirmed_by: string | null
+          created_at: string
+          day: string
+          id: string
+          note: string | null
+          site_id: string
+          status: Database["public"]["Enums"]["operating_day_status"]
+          updated_at: string
+        }
+        Insert: {
+          confirmed_at?: string
+          confirmed_by?: string | null
+          created_at?: string
+          day: string
+          id?: string
+          note?: string | null
+          site_id: string
+          status: Database["public"]["Enums"]["operating_day_status"]
+          updated_at?: string
+        }
+        Update: {
+          confirmed_at?: string
+          confirmed_by?: string | null
+          created_at?: string
+          day?: string
+          id?: string
+          note?: string | null
+          site_id?: string
+          status?: Database["public"]["Enums"]["operating_day_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_operating_days_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_operating_days_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_operating_days_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       site_review_tasks: {
         Row: {
           created_at: string
@@ -2518,6 +2576,7 @@ export type Database = {
           cvr_p_number: string | null
           id: string
           name: string
+          operating_pattern: Json | null
           org_id: string
           pack_version_pinned: string | null
           postal_code: string | null
@@ -2536,6 +2595,7 @@ export type Database = {
           cvr_p_number?: string | null
           id?: string
           name: string
+          operating_pattern?: Json | null
           org_id: string
           pack_version_pinned?: string | null
           postal_code?: string | null
@@ -2554,6 +2614,7 @@ export type Database = {
           cvr_p_number?: string | null
           id?: string
           name?: string
+          operating_pattern?: Json | null
           org_id?: string
           pack_version_pinned?: string | null
           postal_code?: string | null
@@ -3247,6 +3308,7 @@ export type Database = {
         | "transfer_out"
         | "sale_b2b"
         | "correction"
+      operating_day_status: "open" | "closed"
       org_role:
         | "org_owner"
         | "org_admin"
@@ -3485,6 +3547,7 @@ export const Constants = {
         "sale_b2b",
         "correction",
       ],
+      operating_day_status: ["open", "closed"],
       org_role: [
         "org_owner",
         "org_admin",

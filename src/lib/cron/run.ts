@@ -5,6 +5,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/lib/supabase/database.types";
 import { unwrap } from "@/lib/supabase/unwrap";
 import { materializeSiteTasks } from "@/lib/compliance/materialize-runner";
+import { loadSiteCalendar } from "@/lib/compliance/operating-runner";
 import { processPackUpdates } from "@/lib/compliance/pack-update";
 import { sendWeeklyDigests } from "./digest";
 import { sendPushToSite } from "@/lib/push";
@@ -142,7 +143,20 @@ export async function runCron(supabase: Client, now = new Date()): Promise<CronR
       report.tasksMissed += missedIds.length;
     }
 
-    // 3 — reminders [DEFAULT]: at due time and +30 min if not done
+    // 3 — reminders [DEFAULT]: at due time and +30 min if not done.
+    // §3.5: never nag on a day the kitchen is closed.
+    const siteToday = new Intl.DateTimeFormat("en-CA", {
+      timeZone: site.timezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(now);
+    const calendar = await loadSiteCalendar(supabase, site.id, {
+      from: siteToday,
+      to: siteToday,
+    });
+    if (calendar.status(siteToday) === "closed") continue;
+
     const { data: dueTasks } = await supabase
       .from("tasks")
       .select("id, due_at")

@@ -13,6 +13,8 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import { getOrgContext, MANAGER_ROLES } from "@/lib/tenancy";
 import { computeOnboarding, type OnboardingKey } from "@/lib/onboarding/steps";
+import { parsePattern } from "@/lib/compliance/operating-days";
+import { OperatingPatternForm } from "./operating-pattern-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -44,7 +46,7 @@ export default async function SetupPage({
 
   const { data: site } = await supabase
     .from("sites")
-    .select("id, org_id, name")
+    .select("id, org_id, name, operating_pattern")
     .eq("id", siteId)
     .maybeSingle();
   if (!site) redirect("/");
@@ -182,6 +184,14 @@ export default async function SetupPage({
           {t("managerOnlyHint")}
         </p>
       )}
+
+      {/* §3.5: the rhythm shapes every schedule below it, so it comes first */}
+      {isManager ? (
+        <OperatingPatternForm
+          siteId={site.id}
+          pattern={parsePattern(site.operating_pattern)}
+        />
+      ) : null}
 
       <Card className="mb-6">
         <CardHeader className="pb-2">

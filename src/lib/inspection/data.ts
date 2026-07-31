@@ -56,6 +56,8 @@ export type DayCell = {
   done: number;
   missed: number;
   deviations: number;
+  /** §3.5: a declared closed day is an answer, never a gap in the records. */
+  closed?: boolean;
 };
 
 /** Pure aggregation for the calendar heat-map (unit-tested). */
@@ -65,6 +67,8 @@ export function aggregateDays(args: {
   completions: { created_at: string }[];
   missedTasks: { due_at: string }[];
   deviations: { detected_at: string }[];
+  /** Days the business declared closed, so the inspector reads them as such. */
+  closedDays?: string[];
 }): DayCell[] {
   const cells = new Map<string, DayCell>();
   const cursor = new Date(`${args.fromDate}T00:00:00Z`);
@@ -81,6 +85,10 @@ export function aggregateDays(args: {
   for (const completion of args.completions) bump(completion.created_at, "done");
   for (const task of args.missedTasks) bump(task.due_at, "missed");
   for (const deviation of args.deviations) bump(deviation.detected_at, "deviations");
+  for (const day of args.closedDays ?? []) {
+    const cell = cells.get(day);
+    if (cell) cell.closed = true;
+  }
   return [...cells.values()];
 }
 
@@ -105,6 +113,14 @@ export async function getRecordsData(
   if (range.category) {
     completionsQuery = completionsQuery.eq("control_point.category", range.category);
   }
+
+  const { data: closedDays } = await supabase
+    .from("site_operating_days")
+    .select("day")
+    .eq("site_id", siteId)
+    .eq("status", "closed")
+    .gte("day", range.fromDate)
+    .lte("day", range.toDate);
 
   const [{ data: completions }, { data: missedTasks }, { data: deviations }] =
     await Promise.all([
@@ -136,6 +152,7 @@ export async function getRecordsData(
       completions: filteredCompletions,
       missedTasks: missedTasks ?? [],
       deviations: deviations ?? [],
+      closedDays: (closedDays ?? []).map((row) => row.day),
     }),
   };
 }
