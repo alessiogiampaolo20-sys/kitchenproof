@@ -1,13 +1,24 @@
 import { z } from "zod";
-import { parseLimit } from "./limits";
-import type { PackLimit } from "./pack-schema";
+import { evaluateTempReading, parseLimit, type TempVerdict } from "./limits";
+import { measurementKindSchema, type PackLimit } from "./pack-schema";
 
 /**
  * Check value evaluation (§8.2) + severity suggestion (§8.3).
  * Pure and unit-tested — the server action is the only writer of `passed`.
  */
 
-export const tempValueSchema = z.object({ temp_c: z.number().min(-60).max(300) }).strict();
+export const tempValueSchema = z
+  .object({
+    temp_c: z.number().min(-60).max(300),
+    /**
+     * Which temperature this is (DK-HYGIEJNE kap. 26.2, p. 57). Optional in the
+     * schema so records written before the distinction still parse, but a
+     * reading is not scored against a limit of the other kind — see
+     * evaluateCheckVerdict.
+     */
+    measurement_kind: measurementKindSchema.optional(),
+  })
+  .strict();
 
 export const checklistItemSchema = z
   .object({
@@ -47,6 +58,24 @@ export const checkValueSchema = z.union([
   noteValueSchema,
 ]);
 export type CheckValue = z.infer<typeof checkValueSchema>;
+
+/**
+ * Verdict-returning evaluation. A temperature reading whose kind does not match
+ * the limit's — or is missing when the limit declares one — is NOT scored:
+ * judging a fridge's air against a food-core limit is wrong in both directions
+ * (DK-HYGIEJNE kap. 26.2), so the caller asks instead of guessing.
+ */
+export function evaluateCheckVerdict(rawLimit: unknown, value: CheckValue): TempVerdict {
+  const limit: PackLimit = parseLimit(rawLimit);
+
+  if ("temp_c" in value) {
+    if (!("max" in limit) && !("min" in limit)) {
+      throw new Error("temperature value against non-temperature limit");
+    }
+    return evaluateTempReading(limit, value.temp_c, value.measurement_kind ?? null);
+  }
+  return evaluateCheck(rawLimit, value) ? { verdict: "pass" } : { verdict: "fail" };
+}
 
 export function evaluateCheck(rawLimit: unknown, value: CheckValue): boolean {
   const limit: PackLimit = parseLimit(rawLimit);

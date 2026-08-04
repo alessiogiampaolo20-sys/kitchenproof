@@ -8,6 +8,7 @@ import { pickText } from "@/lib/i18n/pick";
 import {
   describeValue,
   evaluateCheck,
+  evaluateCheckVerdict,
   suggestSeverity,
   type CheckValue,
 } from "./checks";
@@ -44,11 +45,29 @@ export type RecordCompletionArgs = {
   clientCreatedAt?: string;
   photoPaths?: string[];
   deviationSteps?: DeviationSteps;
+  /**
+   * "interactive" = a person is at the screen and can answer a question.
+   * "replay" = the outbox draining work that already happened offline.
+   *
+   * It changes what an unstated measurement kind means. Interactively we
+   * refuse and ask (§3.3). On replay there is nobody to ask and the check was
+   * genuinely performed, so refusing would destroy real evidence: the record
+   * is kept with its kind left NULL — honestly "not stated" — and judged the
+   * pre-distinction way rather than being scored against the wrong thing.
+   */
+  source?: "interactive" | "replay";
 };
 
 export type RecordCompletionResult =
   | { ok: true; passed: boolean; deviationId?: string; correctiveGuidance?: string }
-  | { error: "alreadyDone" | "invalid" | "error" };
+  | { error: "alreadyDone" | "invalid" | "error" }
+  /**
+   * The reading cannot be judged because it does not say whether it is a
+   * product or an ambient temperature, or says the opposite of what the limit
+   * is about (DK-HYGIEJNE kap. 26.2). Nothing is written — the operator is
+   * asked, because a guessed verdict is worse than no record.
+   */
+  | { error: "measurementKind"; expected: "product" | "ambient" };
 
 export async function recordCompletion(
   supabase: Client,
@@ -91,7 +110,15 @@ export async function recordCompletion(
 
   let passed: boolean;
   try {
-    passed = evaluateCheck(task.control_point.limit_json, args.value);
+    const verdict = evaluateCheckVerdict(task.control_point.limit_json, args.value);
+    if (verdict.verdict === "unevaluable") {
+      if (args.source !== "replay") {
+        return { error: "measurementKind", expected: verdict.expected };
+      }
+      passed = evaluateCheck(task.control_point.limit_json, args.value);
+    } else {
+      passed = verdict.verdict === "pass";
+    }
   } catch {
     return { error: "invalid" };
   }
@@ -137,6 +164,10 @@ export async function recordCompletion(
       equipment_id: task.control_point.equipment_id,
       performed_by: args.actor.profileId,
       value_json: args.value as unknown as Json,
+      // denormalised out of value_json so reports and the inspector can filter
+      // and label readings without parsing every record
+      measurement_kind:
+        "measurement_kind" in args.value ? (args.value.measurement_kind ?? null) : null,
       passed,
       is_late: isLate,
       note: args.note ?? null,

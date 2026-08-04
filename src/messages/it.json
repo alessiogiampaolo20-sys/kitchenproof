@@ -208,7 +208,14 @@
     "verification": "Controllo di verifica",
     "verificationHint": "Questo controllo verifica una deviazione precedente.",
     "photoAttach": "Allega foto",
-    "offlineSynced": "Registrato offline — sinc. {time}"
+    "offlineSynced": "Registrato offline — sinc. {time}",
+    "measure": {
+      "product": "Misura la temperatura al cuore dell'alimento",
+      "ambient": "Misura la temperatura dell'aria attorno all'alimento",
+      "productShort": "Al cuore",
+      "ambientShort": "Aria",
+      "ask": "Cosa stai misurando?"
+    }
   },
   "todayScreen": {
     "overdue": "In ritardo",

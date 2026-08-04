@@ -208,7 +208,14 @@
     "verification": "Opfølgende kontrol",
     "verificationHint": "Denne kontrol verificerer en tidligere afvigelse.",
     "photoAttach": "Vedhæft foto",
-    "offlineSynced": "Registreret offline — synk. {time}"
+    "offlineSynced": "Registreret offline — synk. {time}",
+    "measure": {
+      "product": "Mål kernetemperaturen i selve fødevaren",
+      "ambient": "Mål lufttemperaturen omkring fødevaren",
+      "productShort": "Kernetemperatur",
+      "ambientShort": "Lufttemperatur",
+      "ask": "Hvad måler du?"
+    }
   },
   "todayScreen": {
     "overdue": "Forsinket",

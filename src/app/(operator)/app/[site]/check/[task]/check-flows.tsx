@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
+import { limitMeasurementKindOf } from "@/lib/compliance/limits";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -332,6 +333,7 @@ export function TempCheck({
 }) {
   const t = useTranslations("check");
   const [display, setDisplay] = useState("");
+  const [pickedKind, setPickedKind] = useState<"product" | "ambient" | null>(null);
   const [photo, setPhoto] = useState<File | null>(null);
   const photoInput = useRef<HTMLInputElement>(null);
   const { submit, pending, error, sheet } = useCheckSubmit({
@@ -353,9 +355,39 @@ export function TempCheck({
   const value = Number.parseFloat(display);
   const valid = display !== "" && !Number.isNaN(value);
 
+  // What the programme says to measure (DK-HYGIEJNE kap. 26.2): normally the
+  // limit already answers this, so the operator taps nothing extra — they are
+  // just told which thermometer reading is wanted. Only a custom limit that
+  // does not say leaves the choice open, and then it must be answered.
+  const declaredKind = limitMeasurementKindOf(limitJson);
+  const effectiveKind = declaredKind ?? pickedKind;
+
   return (
     <div className="grid gap-4">
       <p className="text-sm text-muted-foreground">{t("limitLabel", { limit: limitLabel })}</p>
+      {declaredKind ? (
+        <p className="rounded-xl bg-muted/60 p-3 text-sm font-medium" data-testid="measure-what">
+          {t(`measure.${declaredKind}`)}
+        </p>
+      ) : (
+        <div className="grid gap-2" data-testid="measure-picker">
+          <p className="text-sm font-medium">{t("measure.ask")}</p>
+          <div className="flex gap-2">
+            {(["product", "ambient"] as const).map((kind) => (
+              <Button
+                key={kind}
+                type="button"
+                variant={pickedKind === kind ? "default" : "outline"}
+                className="min-h-12 flex-1"
+                onClick={() => setPickedKind(kind)}
+                data-testid={`measure-${kind}`}
+              >
+                {t(`measure.${kind}Short`)}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
       <div
         className="flex min-h-20 items-center justify-center rounded-xl border bg-muted/40 text-5xl font-semibold tabular-nums"
         data-testid="temp-display"
@@ -417,8 +449,14 @@ export function TempCheck({
           type="button"
           size="lg"
           className="col-span-2 h-16 text-lg"
-          disabled={!valid || pending}
-          onClick={() => submit({ temp_c: value }, undefined, photo ? [photo] : [])}
+          disabled={!valid || pending || !effectiveKind}
+          onClick={() =>
+            submit(
+              { temp_c: value, measurement_kind: effectiveKind ?? undefined },
+              undefined,
+              photo ? [photo] : [],
+            )
+          }
           data-testid="temp-confirm"
         >
           <Check /> {t("confirm")}

@@ -208,7 +208,14 @@
     "verification": "Follow-up check",
     "verificationHint": "This check verifies an earlier deviation.",
     "photoAttach": "Attach photo",
-    "offlineSynced": "Recorded offline — synced {time}"
+    "offlineSynced": "Recorded offline — synced {time}",
+    "measure": {
+      "product": "Measure the core temperature of the food itself",
+      "ambient": "Measure the air temperature around the food",
+      "productShort": "Core temp",
+      "ambientShort": "Air temp",
+      "ask": "What are you measuring?"
+    }
   },
   "todayScreen": {
     "overdue": "Overdue",

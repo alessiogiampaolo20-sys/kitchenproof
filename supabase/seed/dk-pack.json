@@ -1,170 +1,498 @@
 {
   "pack": "DK",
-  "version": "2026.07",
+  "version": "2026.08",
   "authority": {
     "name": "Fødevarestyrelsen (DVFA)",
     "agencyNote": "Since 2026-01-01 part of Styrelsen for Fødevarer, Landbrug og Fiskeri; 'Fødevarestyrelsen' remains the user-facing term.",
     "inspectionScheme": "smiley",
     "publicRegistry": "findsmiley.dk"
   },
-  "locales": ["da", "en"],
+  "locales": [
+    "da",
+    "en"
+  ],
   "corpus": [
-    { "docId": "DK-RA-SKEMA", "title": "Risikoanalyse-skema (editerbar, uden hjælp)", "version": "003", "file": "corpus/DK/Risikoanalyse_skema_Editerbar-PDF_003_uden-hjælp-ua.pdf", "pages": 14, "lang": "da" },
-    { "docId": "DK-RA-SKEMA-EN", "title": "Risk analysis form (English)", "version": "002", "file": "corpus/DK/Risikoanalyse skema_eng_002 analisi di rischio.pdf", "pages": 14, "lang": "en" },
-    { "docId": "DK-EK-EXAMPLE", "title": "EXAMPLE OF Own-Check programme", "version": "2024", "file": "corpus/DK/Egenkontrol engelsk 2024.pdf", "pages": 25, "lang": "en" },
-    { "docId": "DK-HYGIEJNE", "title": "Hygiejnevejledningen, vejledning nr. 9700", "version": "nr. 9700 af 24-07-2025", "versionDate": "2025-07-24", "file": "corpus/DK/Hygiejnevejleningen, vejl nr 9700 af 24-07-2025.pdf", "pages": 230, "lang": "da" },
-    { "docId": "DK-AUTORISATION", "title": "Autorisationsvejledningen, nr. 9164", "version": "nr. 9164 af 27-02-2025", "versionDate": "2025-02-27", "file": "corpus/DK/Autorisationsvejledningen_9164_27_02_2025.pdf", "pages": 159, "lang": "da" },
-    { "docId": "DK-KONTROL-BILAG", "title": "Kontrolvejledningens bilag — samlet", "version": "rev. 2022+", "file": "corpus/DK/Bilag_kontrolvejl_samlet.pdf", "pages": 218, "lang": "da" },
-    { "docId": "DK-INSPECT-EN", "title": "Guidelines on Inspections in the Food Sector", "version": "2019-62-33-00056, applicable 22-06-2020", "versionDate": "2020-06-22", "file": "corpus/DK/Guidelines on Inspections in the Food Sector.pdf", "pages": 78, "lang": "en" }
+    {
+      "docId": "DK-RA-SKEMA",
+      "title": "Risikoanalyse-skema (editerbar, uden hjælp)",
+      "version": "003",
+      "file": "corpus/DK/Risikoanalyse_skema_Editerbar-PDF_003_uden-hjælp-ua.pdf",
+      "pages": 14,
+      "lang": "da"
+    },
+    {
+      "docId": "DK-RA-SKEMA-EN",
+      "title": "Risk analysis form (English)",
+      "version": "002",
+      "file": "corpus/DK/Risikoanalyse skema_eng_002 analisi di rischio.pdf",
+      "pages": 14,
+      "lang": "en"
+    },
+    {
+      "docId": "DK-EK-EXAMPLE",
+      "title": "EXAMPLE OF Own-Check programme",
+      "version": "2024",
+      "file": "corpus/DK/Egenkontrol engelsk 2024.pdf",
+      "pages": 25,
+      "lang": "en"
+    },
+    {
+      "docId": "DK-HYGIEJNE",
+      "title": "Hygiejnevejledningen, vejledning nr. 9700",
+      "version": "nr. 9700 af 24-07-2025",
+      "versionDate": "2025-07-24",
+      "file": "corpus/DK/Hygiejnevejleningen, vejl nr 9700 af 24-07-2025.pdf",
+      "pages": 230,
+      "lang": "da"
+    },
+    {
+      "docId": "DK-AUTORISATION",
+      "title": "Autorisationsvejledningen, nr. 9164",
+      "version": "nr. 9164 af 27-02-2025",
+      "versionDate": "2025-02-27",
+      "file": "corpus/DK/Autorisationsvejledningen_9164_27_02_2025.pdf",
+      "pages": 159,
+      "lang": "da"
+    },
+    {
+      "docId": "DK-KONTROL-BILAG",
+      "title": "Kontrolvejledningens bilag — samlet",
+      "version": "rev. 2022+",
+      "file": "corpus/DK/Bilag_kontrolvejl_samlet.pdf",
+      "pages": 218,
+      "lang": "da"
+    },
+    {
+      "docId": "DK-INSPECT-EN",
+      "title": "Guidelines on Inspections in the Food Sector",
+      "version": "2019-62-33-00056, applicable 22-06-2020",
+      "versionDate": "2020-06-22",
+      "file": "corpus/DK/Guidelines on Inspections in the Food Sector.pdf",
+      "pages": 78,
+      "lang": "en"
+    }
   ],
   "officialSkema": {
     "sections": [
       {
         "key": "modtagelse",
-        "name": { "da": "Modtagelse af varer", "en": "Receipt of goods" },
-        "sourceRef": { "docId": "DK-RA-SKEMA", "section": "Modtagelse af varer", "page": 2 },
+        "name": {
+          "da": "Modtagelse af varer",
+          "en": "Receipt of goods"
+        },
+        "sourceRef": {
+          "docId": "DK-RA-SKEMA",
+          "section": "Modtagelse af varer",
+          "page": 2
+        },
         "rows": [
           {
             "key": "modtagelse.chilled",
-            "name": { "da": "Modtagelse af kølevarer", "en": "Receipt of chilled goods" },
+            "name": {
+              "da": "Modtagelse af kølevarer",
+              "en": "Receipt of chilled goods"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi modtager kølevarer fra leverandører og kontrollerer temperatur og emballage ved levering.", "en": "We receive chilled goods from suppliers and check temperature and packaging on delivery." },
-              "whatCanGoWrong": { "da": "Varerne kan være for varme, eller emballagen kan være beskadiget, så bakterier kan vokse.", "en": "Goods may arrive too warm or with damaged packaging, allowing bacteria to grow." },
-              "controlMeasures": { "da": "Modtagekontrol: temperatur, emballage og holdbarhed kontrolleres, før varerne tages i brug.", "en": "Receiving check: temperature, packaging and shelf life are checked before goods are used." },
-              "ifItGoesWrong": { "da": "Afvis varen eller kassér den. Notér fejlen og kontakt leverandøren.", "en": "Reject or discard the goods. Record the error and contact the supplier." }
+              "whatYouDo": {
+                "da": "Vi modtager kølevarer fra leverandører og kontrollerer temperatur og emballage ved levering.",
+                "en": "We receive chilled goods from suppliers and check temperature and packaging on delivery."
+              },
+              "whatCanGoWrong": {
+                "da": "Varerne kan være for varme, eller emballagen kan være beskadiget, så bakterier kan vokse.",
+                "en": "Goods may arrive too warm or with damaged packaging, allowing bacteria to grow."
+              },
+              "controlMeasures": {
+                "da": "Modtagekontrol: temperatur, emballage og holdbarhed kontrolleres, før varerne tages i brug.",
+                "en": "Receiving check: temperature, packaging and shelf life are checked before goods are used."
+              },
+              "ifItGoesWrong": {
+                "da": "Afvis varen eller kassér den. Notér fejlen og kontakt leverandøren.",
+                "en": "Reject or discard the goods. Record the error and contact the supplier."
+              }
             }
           },
           {
             "key": "modtagelse.frozen",
-            "name": { "da": "Modtagelse af frostvarer", "en": "Receipt of frozen goods" },
+            "name": {
+              "da": "Modtagelse af frostvarer",
+              "en": "Receipt of frozen goods"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi modtager frostvarer og kontrollerer, at de er gennemfrosne ved levering.", "en": "We receive frozen goods and check they are fully frozen on delivery." },
-              "whatCanGoWrong": { "da": "Varerne kan være delvist optøet, så holdbarhed og sikkerhed forringes.", "en": "Goods may be partially thawed, reducing shelf life and safety." },
-              "controlMeasures": { "da": "Modtagekontrol: frostvarer skal være -18 °C (kortvarig stigning op til 3 °C accepteres ved lokal distribution).", "en": "Receiving check: frozen goods must be -18 °C (brief rise up to 3 °C accepted in local distribution)." },
-              "ifItGoesWrong": { "da": "Afvis varen eller kassér den. Notér fejlen og kontakt leverandøren.", "en": "Reject or discard the goods. Record the error and contact the supplier." }
+              "whatYouDo": {
+                "da": "Vi modtager frostvarer og kontrollerer, at de er gennemfrosne ved levering.",
+                "en": "We receive frozen goods and check they are fully frozen on delivery."
+              },
+              "whatCanGoWrong": {
+                "da": "Varerne kan være delvist optøet, så holdbarhed og sikkerhed forringes.",
+                "en": "Goods may be partially thawed, reducing shelf life and safety."
+              },
+              "controlMeasures": {
+                "da": "Modtagekontrol: frostvarer skal være -18 °C (kortvarig stigning op til 3 °C accepteres ved lokal distribution).",
+                "en": "Receiving check: frozen goods must be -18 °C (brief rise up to 3 °C accepted in local distribution)."
+              },
+              "ifItGoesWrong": {
+                "da": "Afvis varen eller kassér den. Notér fejlen og kontakt leverandøren.",
+                "en": "Reject or discard the goods. Record the error and contact the supplier."
+              }
             }
           },
-          { "key": "modtagelse.ambient_allergen", "name": { "da": "Modtagelse af kolonialvarer / varer med allergener", "en": "Receipt of ambient goods / allergen-relevant goods" } },
-          { "key": "modtagelse.other", "name": { "da": "Andet (modtagelse)", "en": "Other (receipt)" } }
+          {
+            "key": "modtagelse.ambient_allergen",
+            "name": {
+              "da": "Modtagelse af kolonialvarer / varer med allergener",
+              "en": "Receipt of ambient goods / allergen-relevant goods"
+            }
+          },
+          {
+            "key": "modtagelse.other",
+            "name": {
+              "da": "Andet (modtagelse)",
+              "en": "Other (receipt)"
+            }
+          }
         ]
       },
       {
         "key": "opbevaring",
-        "name": { "da": "Opbevaring/lager", "en": "Storage" },
-        "sourceRef": { "docId": "DK-RA-SKEMA", "section": "Opbevaring/lager", "page": 4 },
+        "name": {
+          "da": "Opbevaring/lager",
+          "en": "Storage"
+        },
+        "sourceRef": {
+          "docId": "DK-RA-SKEMA",
+          "section": "Opbevaring/lager",
+          "page": 4
+        },
         "rows": [
           {
             "key": "opbevaring.chilled",
-            "name": { "da": "Opbevaring på køl", "en": "Chilled storage" },
+            "name": {
+              "da": "Opbevaring på køl",
+              "en": "Chilled storage"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi opbevarer letfordærvelige fødevarer på køl.", "en": "We store perishable food refrigerated." },
-              "whatCanGoWrong": { "da": "For høj temperatur giver vækst af sygdomsfremkaldende bakterier.", "en": "Too high a temperature allows growth of pathogenic bacteria." },
-              "controlMeasures": { "da": "Køleskabe holdes på højst 5 °C (eller produktets mærkede temperatur). Temperaturen kontrolleres dagligt.", "en": "Fridges are kept at max 5 °C (or the product's labelled temperature). Temperature is checked daily." },
-              "ifItGoesWrong": { "da": "Vurdér varerne (flyt/kassér), find årsagen (fx defekt køleskab) og følg op med ny kontrol.", "en": "Assess the food (move/discard), find the cause (e.g. faulty fridge) and follow up with a re-check." }
+              "whatYouDo": {
+                "da": "Vi opbevarer letfordærvelige fødevarer på køl.",
+                "en": "We store perishable food refrigerated."
+              },
+              "whatCanGoWrong": {
+                "da": "For høj temperatur giver vækst af sygdomsfremkaldende bakterier.",
+                "en": "Too high a temperature allows growth of pathogenic bacteria."
+              },
+              "controlMeasures": {
+                "da": "Køleskabe holdes på højst 5 °C (eller produktets mærkede temperatur). Temperaturen kontrolleres dagligt.",
+                "en": "Fridges are kept at max 5 °C (or the product's labelled temperature). Temperature is checked daily."
+              },
+              "ifItGoesWrong": {
+                "da": "Vurdér varerne (flyt/kassér), find årsagen (fx defekt køleskab) og følg op med ny kontrol.",
+                "en": "Assess the food (move/discard), find the cause (e.g. faulty fridge) and follow up with a re-check."
+              }
             }
           },
           {
             "key": "opbevaring.frozen",
-            "name": { "da": "Opbevaring på frost", "en": "Frozen storage" },
+            "name": {
+              "da": "Opbevaring på frost",
+              "en": "Frozen storage"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi opbevarer frostvarer i fryser.", "en": "We store frozen goods in a freezer." },
-              "whatCanGoWrong": { "da": "For høj temperatur forringer kvalitet og sikkerhed.", "en": "Too high a temperature degrades quality and safety." },
-              "controlMeasures": { "da": "Frysere holdes på -18 °C eller koldere. Temperaturen kontrolleres dagligt.", "en": "Freezers are kept at -18 °C or colder. Temperature is checked daily." },
-              "ifItGoesWrong": { "da": "Vurdér varerne (brug straks/kassér), find årsagen og følg op med ny kontrol.", "en": "Assess the goods (use immediately/discard), find the cause and follow up with a re-check." }
+              "whatYouDo": {
+                "da": "Vi opbevarer frostvarer i fryser.",
+                "en": "We store frozen goods in a freezer."
+              },
+              "whatCanGoWrong": {
+                "da": "For høj temperatur forringer kvalitet og sikkerhed.",
+                "en": "Too high a temperature degrades quality and safety."
+              },
+              "controlMeasures": {
+                "da": "Frysere holdes på -18 °C eller koldere. Temperaturen kontrolleres dagligt.",
+                "en": "Freezers are kept at -18 °C or colder. Temperature is checked daily."
+              },
+              "ifItGoesWrong": {
+                "da": "Vurdér varerne (brug straks/kassér), find årsagen og følg op med ny kontrol.",
+                "en": "Assess the goods (use immediately/discard), find the cause and follow up with a re-check."
+              }
             }
           },
-          { "key": "opbevaring.ambient", "name": { "da": "Opbevaring uden for køl (kolonial)", "en": "Ambient storage" } },
-          { "key": "opbevaring.other", "name": { "da": "Andet (opbevaring)", "en": "Other (storage)" } }
+          {
+            "key": "opbevaring.ambient",
+            "name": {
+              "da": "Opbevaring uden for køl (kolonial)",
+              "en": "Ambient storage"
+            }
+          },
+          {
+            "key": "opbevaring.other",
+            "name": {
+              "da": "Andet (opbevaring)",
+              "en": "Other (storage)"
+            }
+          }
         ]
       },
       {
         "key": "tilberedning",
-        "name": { "da": "Tilberedning og håndtering", "en": "Preparation and handling" },
-        "sourceRef": { "docId": "DK-RA-SKEMA", "section": "Tilberedning og håndtering", "page": 6 },
+        "name": {
+          "da": "Tilberedning og håndtering",
+          "en": "Preparation and handling"
+        },
+        "sourceRef": {
+          "docId": "DK-RA-SKEMA",
+          "section": "Tilberedning og håndtering",
+          "page": 6
+        },
         "rows": [
           {
             "key": "tilberedning.hot_prep",
-            "name": { "da": "Varm tilberedning / opvarmning", "en": "Hot preparation / heating" },
+            "name": {
+              "da": "Varm tilberedning / opvarmning",
+              "en": "Hot preparation / heating"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi varmebehandler og genopvarmer retter.", "en": "We heat-treat and reheat dishes." },
-              "whatCanGoWrong": { "da": "Utilstrækkelig opvarmning dræber ikke sygdomsfremkaldende bakterier.", "en": "Insufficient heating does not kill pathogenic bacteria." },
-              "controlMeasures": { "da": "Retter opvarmes til mindst 75 °C i centrum (fisk: mindst 60 °C i 1 minut). Centrumstemperatur måles.", "en": "Dishes are heated to at least 75 °C at the core (fish: at least 60 °C for 1 minute). Core temperature is measured." },
-              "ifItGoesWrong": { "da": "Fortsæt opvarmningen til temperaturen er nået, eller kassér retten.", "en": "Continue heating until the temperature is reached, or discard the dish." }
+              "whatYouDo": {
+                "da": "Vi varmebehandler og genopvarmer retter.",
+                "en": "We heat-treat and reheat dishes."
+              },
+              "whatCanGoWrong": {
+                "da": "Utilstrækkelig opvarmning dræber ikke sygdomsfremkaldende bakterier.",
+                "en": "Insufficient heating does not kill pathogenic bacteria."
+              },
+              "controlMeasures": {
+                "da": "Retter opvarmes til mindst 75 °C i centrum (fisk: mindst 60 °C i 1 minut). Centrumstemperatur måles.",
+                "en": "Dishes are heated to at least 75 °C at the core (fish: at least 60 °C for 1 minute). Core temperature is measured."
+              },
+              "ifItGoesWrong": {
+                "da": "Fortsæt opvarmningen til temperaturen er nået, eller kassér retten.",
+                "en": "Continue heating until the temperature is reached, or discard the dish."
+              }
             }
           },
-          { "key": "tilberedning.cold_prep", "name": { "da": "Kold tilberedning / klargøring", "en": "Cold preparation" } },
+          {
+            "key": "tilberedning.cold_prep",
+            "name": {
+              "da": "Kold tilberedning / klargøring",
+              "en": "Cold preparation"
+            }
+          },
           {
             "key": "tilberedning.hot_holding",
-            "name": { "da": "Varmholdelse", "en": "Keeping hot" },
+            "name": {
+              "da": "Varmholdelse",
+              "en": "Keeping hot"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi varmholder mad i forbindelse med servering.", "en": "We keep food hot for service." },
-              "whatCanGoWrong": { "da": "For lav temperatur under varmholdelse giver bakterievækst.", "en": "Too low a holding temperature allows bacterial growth." },
-              "controlMeasures": { "da": "Varmholdelse ved konstant mindst 56 °C. Temperaturen kontrolleres pr. serveringsperiode.", "en": "Food is held at a constant minimum of 56 °C. Temperature is checked per service period." },
-              "ifItGoesWrong": { "da": "Genopvarm til mindst 75 °C eller kassér maden. Notér afvigelsen.", "en": "Reheat to at least 75 °C or discard the food. Record the deviation." }
+              "whatYouDo": {
+                "da": "Vi varmholder mad i forbindelse med servering.",
+                "en": "We keep food hot for service."
+              },
+              "whatCanGoWrong": {
+                "da": "For lav temperatur under varmholdelse giver bakterievækst.",
+                "en": "Too low a holding temperature allows bacterial growth."
+              },
+              "controlMeasures": {
+                "da": "Varmholdelse ved konstant mindst 56 °C. Temperaturen kontrolleres pr. serveringsperiode.",
+                "en": "Food is held at a constant minimum of 56 °C. Temperature is checked per service period."
+              },
+              "ifItGoesWrong": {
+                "da": "Genopvarm til mindst 75 °C eller kassér maden. Notér afvigelsen.",
+                "en": "Reheat to at least 75 °C or discard the food. Record the deviation."
+              }
             }
           },
           {
             "key": "tilberedning.cooling",
-            "name": { "da": "Nedkøling af varmebehandlet mad", "en": "Cooling of heat-treated food" },
+            "name": {
+              "da": "Nedkøling af varmebehandlet mad",
+              "en": "Cooling of heat-treated food"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi nedkøler varmebehandlede retter til senere brug.", "en": "We cool heat-treated dishes for later use." },
-              "whatCanGoWrong": { "da": "For langsom nedkøling giver vækst af sporedannende bakterier.", "en": "Too slow cooling allows growth of spore-forming bacteria." },
-              "controlMeasures": { "da": "Nedkøling fra 56 °C til 10 °C på højst 4 timer. Tid og temperatur registreres.", "en": "Cooling from 56 °C to 10 °C within at most 4 hours. Time and temperature are recorded." },
-              "ifItGoesWrong": { "da": "Kassér maden, eller genopvarm straks til mindst 75 °C og servér. Find årsagen.", "en": "Discard the food, or immediately reheat to at least 75 °C and serve. Find the cause." }
+              "whatYouDo": {
+                "da": "Vi nedkøler varmebehandlede retter til senere brug.",
+                "en": "We cool heat-treated dishes for later use."
+              },
+              "whatCanGoWrong": {
+                "da": "For langsom nedkøling giver vækst af sporedannende bakterier.",
+                "en": "Too slow cooling allows growth of spore-forming bacteria."
+              },
+              "controlMeasures": {
+                "da": "Nedkøling fra 56 °C til 10 °C på højst 4 timer. Tid og temperatur registreres.",
+                "en": "Cooling from 56 °C to 10 °C within at most 4 hours. Time and temperature are recorded."
+              },
+              "ifItGoesWrong": {
+                "da": "Kassér maden, eller genopvarm straks til mindst 75 °C og servér. Find årsagen.",
+                "en": "Discard the food, or immediately reheat to at least 75 °C and serve. Find the cause."
+              }
             }
           },
           {
             "key": "tilberedning.separation",
-            "name": { "da": "Adskillelse / krydsforurening", "en": "Separation / cross-contamination" },
+            "name": {
+              "da": "Adskillelse / krydsforurening",
+              "en": "Separation / cross-contamination"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi adskiller rå og spiseklare fødevarer under opbevaring og tilberedning.", "en": "We separate raw and ready-to-eat foods during storage and preparation." },
-              "whatCanGoWrong": { "da": "Bakterier fra rå varer kan forurene spiseklar mad.", "en": "Bacteria from raw goods can contaminate ready-to-eat food." },
-              "controlMeasures": { "da": "Separate skærebrætter/redskaber, adskilt opbevaring, rengøring mellem opgaver.", "en": "Separate chopping boards/utensils, separated storage, cleaning between tasks." },
-              "ifItGoesWrong": { "da": "Kassér forurenet spiseklar mad. Rengør og desinficér. Notér fejlen.", "en": "Discard contaminated ready-to-eat food. Clean and disinfect. Record the error." }
+              "whatYouDo": {
+                "da": "Vi adskiller rå og spiseklare fødevarer under opbevaring og tilberedning.",
+                "en": "We separate raw and ready-to-eat foods during storage and preparation."
+              },
+              "whatCanGoWrong": {
+                "da": "Bakterier fra rå varer kan forurene spiseklar mad.",
+                "en": "Bacteria from raw goods can contaminate ready-to-eat food."
+              },
+              "controlMeasures": {
+                "da": "Separate skærebrætter/redskaber, adskilt opbevaring, rengøring mellem opgaver.",
+                "en": "Separate chopping boards/utensils, separated storage, cleaning between tasks."
+              },
+              "ifItGoesWrong": {
+                "da": "Kassér forurenet spiseklar mad. Rengør og desinficér. Notér fejlen.",
+                "en": "Discard contaminated ready-to-eat food. Clean and disinfect. Record the error."
+              }
             }
           },
           {
             "key": "tilberedning.allergen",
-            "name": { "da": "Håndtering af allergener", "en": "Allergen handling" },
+            "name": {
+              "da": "Håndtering af allergener",
+              "en": "Allergen handling"
+            },
             "defaultTexts": {
-              "whatYouDo": { "da": "Vi håndterer ingredienser med allergener og oplyser kunder om indhold.", "en": "We handle allergen ingredients and inform customers about contents." },
-              "whatCanGoWrong": { "da": "Allergener kan overføres utilsigtet eller deklareres forkert.", "en": "Allergens can be transferred unintentionally or declared incorrectly." },
-              "controlMeasures": { "da": "Faste opskrifter, adskilte redskaber, personalet kender allergenerne i menuen.", "en": "Fixed recipes, separated utensils, staff know the allergens in the menu." },
-              "ifItGoesWrong": { "da": "Kassér retten ved tvivl og informér kunden. Gennemgå rutinen.", "en": "Discard the dish when in doubt and inform the customer. Review the routine." }
+              "whatYouDo": {
+                "da": "Vi håndterer ingredienser med allergener og oplyser kunder om indhold.",
+                "en": "We handle allergen ingredients and inform customers about contents."
+              },
+              "whatCanGoWrong": {
+                "da": "Allergener kan overføres utilsigtet eller deklareres forkert.",
+                "en": "Allergens can be transferred unintentionally or declared incorrectly."
+              },
+              "controlMeasures": {
+                "da": "Faste opskrifter, adskilte redskaber, personalet kender allergenerne i menuen.",
+                "en": "Fixed recipes, separated utensils, staff know the allergens in the menu."
+              },
+              "ifItGoesWrong": {
+                "da": "Kassér retten ved tvivl og informér kunden. Gennemgå rutinen.",
+                "en": "Discard the dish when in doubt and inform the customer. Review the routine."
+              }
             }
           }
         ]
       },
       {
         "key": "salg_servering",
-        "name": { "da": "Salg og servering", "en": "Sales and serving" },
-        "sourceRef": { "docId": "DK-RA-SKEMA", "section": "Salg og servering", "page": 9 },
+        "name": {
+          "da": "Salg og servering",
+          "en": "Sales and serving"
+        },
+        "sourceRef": {
+          "docId": "DK-RA-SKEMA",
+          "section": "Salg og servering",
+          "page": 9
+        },
         "rows": [
-          { "key": "salg_servering.packaged_chilled_frozen", "name": { "da": "Salg af færdigpakkede køle-/frostvarer", "en": "Sale of packaged chilled/frozen goods" } },
-          { "key": "salg_servering.packaged_ambient", "name": { "da": "Salg af færdigpakkede kolonialvarer", "en": "Sale of packaged ambient goods" } },
-          { "key": "salg_servering.unpackaged_chilled", "name": { "da": "Salg/servering af uindpakkede kølevarer", "en": "Sale/serving of unpackaged chilled food" } },
-          { "key": "salg_servering.unpackaged_ambient", "name": { "da": "Salg/servering af uindpakkede varer uden for køl", "en": "Sale/serving of unpackaged food outside refrigeration" } },
-          { "key": "salg_servering.allergen_sales", "name": { "da": "Salg af allergenholdige fødevarer", "en": "Sale of allergen-containing food" } },
-          { "key": "salg_servering.other", "name": { "da": "Andet (salg/servering)", "en": "Other (sales/serving)" } }
+          {
+            "key": "salg_servering.packaged_chilled_frozen",
+            "name": {
+              "da": "Salg af færdigpakkede køle-/frostvarer",
+              "en": "Sale of packaged chilled/frozen goods"
+            }
+          },
+          {
+            "key": "salg_servering.packaged_ambient",
+            "name": {
+              "da": "Salg af færdigpakkede kolonialvarer",
+              "en": "Sale of packaged ambient goods"
+            }
+          },
+          {
+            "key": "salg_servering.unpackaged_chilled",
+            "name": {
+              "da": "Salg/servering af uindpakkede kølevarer",
+              "en": "Sale/serving of unpackaged chilled food"
+            }
+          },
+          {
+            "key": "salg_servering.unpackaged_ambient",
+            "name": {
+              "da": "Salg/servering af uindpakkede varer uden for køl",
+              "en": "Sale/serving of unpackaged food outside refrigeration"
+            }
+          },
+          {
+            "key": "salg_servering.allergen_sales",
+            "name": {
+              "da": "Salg af allergenholdige fødevarer",
+              "en": "Sale of allergen-containing food"
+            }
+          },
+          {
+            "key": "salg_servering.other",
+            "name": {
+              "da": "Andet (salg/servering)",
+              "en": "Other (sales/serving)"
+            }
+          }
         ]
       },
       {
         "key": "transport",
-        "name": { "da": "Transport", "en": "Transport" },
-        "sourceRef": { "docId": "DK-RA-SKEMA", "section": "Transport", "page": 12 },
+        "name": {
+          "da": "Transport",
+          "en": "Transport"
+        },
+        "sourceRef": {
+          "docId": "DK-RA-SKEMA",
+          "section": "Transport",
+          "page": 12
+        },
         "rows": [
-          { "key": "transport.chilled_frozen", "name": { "da": "Transport af køle-/frostvarer", "en": "Transport of chilled/frozen goods" } },
-          { "key": "transport.ambient", "name": { "da": "Transport af kolonialvarer", "en": "Transport of ambient goods" } },
-          { "key": "transport.hot_takeaway", "name": { "da": "Transport af varm mad / takeaway", "en": "Transport of hot food / takeaway" } },
-          { "key": "transport.other", "name": { "da": "Andet (transport)", "en": "Other (transport)" } }
+          {
+            "key": "transport.chilled_frozen",
+            "name": {
+              "da": "Transport af køle-/frostvarer",
+              "en": "Transport of chilled/frozen goods"
+            }
+          },
+          {
+            "key": "transport.ambient",
+            "name": {
+              "da": "Transport af kolonialvarer",
+              "en": "Transport of ambient goods"
+            }
+          },
+          {
+            "key": "transport.hot_takeaway",
+            "name": {
+              "da": "Transport af varm mad / takeaway",
+              "en": "Transport of hot food / takeaway"
+            }
+          },
+          {
+            "key": "transport.other",
+            "name": {
+              "da": "Andet (transport)",
+              "en": "Other (transport)"
+            }
+          }
         ]
       },
       {
         "key": "andet",
-        "name": { "da": "Andet", "en": "Other" },
-        "sourceRef": { "docId": "DK-RA-SKEMA", "section": "Andet – har du aktiviteter der ikke er nævnt", "page": 14 },
+        "name": {
+          "da": "Andet",
+          "en": "Other"
+        },
+        "sourceRef": {
+          "docId": "DK-RA-SKEMA",
+          "section": "Andet – har du aktiviteter der ikke er nævnt",
+          "page": 14
+        },
         "rows": [
-          { "key": "andet.custom", "name": { "da": "Andre aktiviteter", "en": "Other activities" } }
+          {
+            "key": "andet.custom",
+            "name": {
+              "da": "Andre aktiviteter",
+              "en": "Other activities"
+            }
+          }
         ]
       }
     ]
@@ -173,438 +501,2179 @@
     {
       "key": "cold_storage_temp",
       "category": "temperature",
-      "name": { "da": "Køletemperatur", "en": "Cold storage temperature" },
-      "appliesTo": ["equipment:fridge"],
-      "defaultLimit": { "max": 5, "unit": "°C" },
-      "defaultFrequency": { "rrule": "FREQ=DAILY", "times": ["08:00"], "dueWindowMinutes": 120 },
+      "name": {
+        "da": "Køletemperatur",
+        "en": "Cold storage temperature"
+      },
+      "appliesTo": [
+        "equipment:fridge"
+      ],
+      "defaultLimit": {
+        "max": 5,
+        "unit": "°C",
+        "measurementKind": "ambient"
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=DAILY",
+        "times": [
+          "08:00"
+        ],
+        "dueWindowMinutes": 120
+      },
       "monitoringMethod": "manual_temp",
-      "instructions": { "da": "Aflæs og registrér temperaturen i køleenheden. Letfordærvelige fødevarer opbevares ved højst 5 °C i detailleddet; følg altid en lavere mærket opbevaringstemperatur.", "en": "Read and record the unit temperature. Perishable food is stored at max 5 °C at retail; always follow a lower labelled storage temperature." },
-      "correctiveGuidance": { "da": "Vurdér varerne (flyt til andet køl/kassér), justér eller tilkald service til enheden, og gentag målingen.", "en": "Assess the food (move to another fridge/discard), adjust the unit or call service, and repeat the measurement." },
+      "instructions": {
+        "da": "Aflæs og registrér temperaturen i køleenheden. Letfordærvelige fødevarer opbevares ved højst 5 °C i detailleddet; følg altid en lavere mærket opbevaringstemperatur.",
+        "en": "Read and record the unit temperature. Perishable food is stored at max 5 °C at retail; always follow a lower labelled storage temperature."
+      },
+      "correctiveGuidance": {
+        "da": "Vurdér varerne (flyt til andet køl/kassér), justér eller tilkald service til enheden, og gentag målingen.",
+        "en": "Assess the food (move to another fridge/discard), adjust the unit or call service, and repeat the measurement."
+      },
       "legalBasis": "Hygiejnebekendtgørelsen § 25, stk. 1, jf. bilag 3; EU 852/2004 bilag II kap. IX",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 26.1 + bilag 3", "page": 56 },
-      "notes": "Per-product temperatures (e.g. fresh fish 0–2 °C on ice) per Bilag 3, pp. 209–213; 5 °C is the general retail default for perishables."
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.1 + bilag 3",
+        "page": 56
+      },
+      "notes": "Per-product temperatures (e.g. fresh fish 0–2 °C on ice) per Bilag 3, pp. 209–213; 5 °C is the general retail default for perishables.",
+      "measurementKindRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.2",
+        "page": 57
+      }
     },
     {
       "key": "freezer_temp",
       "category": "temperature",
-      "name": { "da": "Frysertemperatur", "en": "Freezer temperature" },
-      "appliesTo": ["equipment:freezer"],
-      "defaultLimit": { "max": -18, "unit": "°C" },
-      "defaultFrequency": { "rrule": "FREQ=DAILY", "times": ["08:00"], "dueWindowMinutes": 120 },
+      "name": {
+        "da": "Frysertemperatur",
+        "en": "Freezer temperature"
+      },
+      "appliesTo": [
+        "equipment:freezer"
+      ],
+      "defaultLimit": {
+        "max": -18,
+        "unit": "°C",
+        "measurementKind": "product"
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=DAILY",
+        "times": [
+          "08:00"
+        ],
+        "dueWindowMinutes": 120
+      },
       "monitoringMethod": "manual_temp",
-      "instructions": { "da": "Aflæs og registrér frysertemperaturen. Dybfrosne fødevarer opbevares ved -18 °C eller koldere.", "en": "Read and record the freezer temperature. Frozen food is stored at -18 °C or colder." },
-      "correctiveGuidance": { "da": "Vurdér varerne (brug straks/kassér ved optøning), justér eller tilkald service, og gentag målingen.", "en": "Assess the goods (use immediately/discard if thawed), adjust the unit or call service, and repeat the measurement." },
+      "instructions": {
+        "da": "Aflæs og registrér frysertemperaturen. Dybfrosne fødevarer opbevares ved -18 °C eller koldere.",
+        "en": "Read and record the freezer temperature. Frozen food is stored at -18 °C or colder."
+      },
+      "correctiveGuidance": {
+        "da": "Vurdér varerne (brug straks/kassér ved optøning), justér eller tilkald service, og gentag målingen.",
+        "en": "Assess the goods (use immediately/discard if thawed), adjust the unit or call service, and repeat the measurement."
+      },
       "legalBasis": "Dybfrostbekendtgørelsen § 5, stk. 1",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "bilag 3 (Dybfrosne fødevarer)", "page": 213 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "bilag 3 (Dybfrosne fødevarer)",
+        "page": 213
+      },
+      "measurementKindRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.2",
+        "page": 57
+      }
     },
     {
       "key": "heating_core_temp",
       "category": "temperature",
-      "name": { "da": "Opvarmning — centrumstemperatur", "en": "Heating — core temperature" },
-      "appliesTo": ["process:hot_prep"],
-      "defaultLimit": { "min": 75, "unit": "°C" },
-      "defaultFrequency": { "perEvent": true },
+      "name": {
+        "da": "Opvarmning — centrumstemperatur",
+        "en": "Heating — core temperature"
+      },
+      "appliesTo": [
+        "process:hot_prep"
+      ],
+      "defaultLimit": {
+        "min": 75,
+        "unit": "°C",
+        "measurementKind": "product"
+      },
+      "defaultFrequency": {
+        "perEvent": true
+      },
       "monitoringMethod": "manual_temp",
-      "instructions": { "da": "Mål centrumstemperaturen ved varmebehandling og genopvarmning: mindst 75 °C (fisk: mindst 60 °C i 1 minut). Lavere temperaturer kræver dokumentation for sikkerhed.", "en": "Measure the core temperature when heating and reheating: at least 75 °C (fish: at least 60 °C for 1 minute). Lower temperatures require safety documentation." },
-      "correctiveGuidance": { "da": "Fortsæt opvarmningen til grænsen er nået, eller kassér retten.", "en": "Continue heating until the limit is reached, or discard the dish." },
+      "instructions": {
+        "da": "Mål centrumstemperaturen ved varmebehandling og genopvarmning: mindst 75 °C (fisk: mindst 60 °C i 1 minut). Lavere temperaturer kræver dokumentation for sikkerhed.",
+        "en": "Measure the core temperature when heating and reheating: at least 75 °C (fish: at least 60 °C for 1 minute). Lower temperatures require safety documentation."
+      },
+      "correctiveGuidance": {
+        "da": "Fortsæt opvarmningen til grænsen er nået, eller kassér retten.",
+        "en": "Continue heating until the limit is reached, or discard the dish."
+      },
       "legalBasis": "Hygiejnebekendtgørelsen §§ 26, stk. 1 og 3, og 28",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 27.1", "page": 60 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 27.1",
+        "page": 60
+      },
+      "measurementKindRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.2",
+        "page": 57
+      }
     },
     {
       "key": "cooling_56_10_4h",
       "category": "temperature",
-      "name": { "da": "Nedkøling 56→10 °C", "en": "Cooling 56→10 °C" },
-      "appliesTo": ["process:cooling"],
-      "defaultLimit": { "coolFrom": 56, "coolTo": 10, "withinMinutes": 240, "unit": "°C" },
-      "defaultFrequency": { "perEvent": true },
+      "name": {
+        "da": "Nedkøling 56→10 °C",
+        "en": "Cooling 56→10 °C"
+      },
+      "appliesTo": [
+        "process:cooling"
+      ],
+      "defaultLimit": {
+        "coolFrom": 56,
+        "coolTo": 10,
+        "withinMinutes": 240,
+        "unit": "°C",
+        "measurementKind": "product"
+      },
+      "defaultFrequency": {
+        "perEvent": true
+      },
       "monitoringMethod": "manual_temp",
-      "instructions": { "da": "Start nedkølingslog ved 56 °C og registrér, at maden når 10 °C inden for højst 4 timer. Andre tid/temperatur-kombinationer kræver dokumentation.", "en": "Start the cooling log at 56 °C and record that the food reaches 10 °C within at most 4 hours. Other time/temperature combinations require documentation." },
-      "correctiveGuidance": { "da": "Kassér maden eller genopvarm straks til mindst 75 °C og servér. Find og fjern årsagen (mængde, beholder, udstyr).", "en": "Discard the food or immediately reheat to at least 75 °C and serve. Find and remove the cause (batch size, container, equipment)." },
+      "instructions": {
+        "da": "Start nedkølingslog ved 56 °C og registrér, at maden når 10 °C inden for højst 4 timer. Andre tid/temperatur-kombinationer kræver dokumentation.",
+        "en": "Start the cooling log at 56 °C and record that the food reaches 10 °C within at most 4 hours. Other time/temperature combinations require documentation."
+      },
+      "correctiveGuidance": {
+        "da": "Kassér maden eller genopvarm straks til mindst 75 °C og servér. Find og fjern årsagen (mængde, beholder, udstyr).",
+        "en": "Discard the food or immediately reheat to at least 75 °C and serve. Find and remove the cause (batch size, container, equipment)."
+      },
       "legalBasis": "Hygiejneforordningen art. 5; Hygiejnebekendtgørelsen",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 26.7", "page": 59 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.7",
+        "page": 59
+      },
+      "measurementKindRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.2",
+        "page": 57
+      }
     },
     {
       "key": "hot_holding_56",
       "category": "temperature",
-      "name": { "da": "Varmholdelse ≥ 56 °C", "en": "Hot holding ≥ 56 °C" },
-      "appliesTo": ["equipment:hot_holding", "process:hot_holding"],
-      "defaultLimit": { "min": 56, "unit": "°C" },
-      "defaultFrequency": { "rrule": "FREQ=DAILY", "times": ["12:00", "18:30"], "dueWindowMinutes": 90 },
+      "name": {
+        "da": "Varmholdelse ≥ 56 °C",
+        "en": "Hot holding ≥ 56 °C"
+      },
+      "appliesTo": [
+        "equipment:hot_holding",
+        "process:hot_holding"
+      ],
+      "defaultLimit": {
+        "min": 56,
+        "unit": "°C",
+        "measurementKind": "product"
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=DAILY",
+        "times": [
+          "12:00",
+          "18:30"
+        ],
+        "dueWindowMinutes": 90
+      },
       "monitoringMethod": "manual_temp",
-      "instructions": { "da": "Mål temperaturen i varmholdt mad pr. serveringsperiode: konstant mindst 56 °C. Der er ingen tidsbegrænsning, når temperaturen holdes.", "en": "Measure the temperature of hot-held food per service period: constant minimum 56 °C. There is no time limit while the temperature is maintained." },
-      "correctiveGuidance": { "da": "Genopvarm til mindst 75 °C eller kassér maden. Kontrollér udstyret.", "en": "Reheat to at least 75 °C or discard the food. Check the equipment." },
+      "instructions": {
+        "da": "Mål temperaturen i varmholdt mad pr. serveringsperiode: konstant mindst 56 °C. Der er ingen tidsbegrænsning, når temperaturen holdes.",
+        "en": "Measure the temperature of hot-held food per service period: constant minimum 56 °C. There is no time limit while the temperature is maintained."
+      },
+      "correctiveGuidance": {
+        "da": "Genopvarm til mindst 75 °C eller kassér maden. Kontrollér udstyret.",
+        "en": "Reheat to at least 75 °C or discard the food. Check the equipment."
+      },
       "legalBasis": "Hygiejnebekendtgørelsen § 29",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 27.3", "page": 62 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 27.3",
+        "page": 62
+      },
+      "measurementKindRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.2",
+        "page": 57
+      }
     },
     {
       "key": "receiving_check",
       "category": "receiving",
-      "name": { "da": "Modtagekontrol", "en": "Receiving check" },
-      "appliesTo": ["process:receiving", "supplier:*"],
-      "defaultLimit": { "checklist": true },
-      "defaultFrequency": { "perEvent": true },
+      "name": {
+        "da": "Modtagekontrol",
+        "en": "Receiving check"
+      },
+      "appliesTo": [
+        "process:receiving",
+        "supplier:*"
+      ],
+      "defaultLimit": {
+        "checklist": true
+      },
+      "defaultFrequency": {
+        "perEvent": true
+      },
       "monitoringMethod": "checklist",
-      "instructions": { "da": "Kontrollér ved hver levering: temperatur på kølevarer (højst 5 °C / frost -18 °C), emballagens stand, holdbarhed. Varer må ikke bruges før modtagekontrol.", "en": "Check at every delivery: chilled temperature (max 5 °C / frozen -18 °C), packaging condition, shelf life. Goods must not be used before the receiving check." },
-      "correctiveGuidance": { "da": "Afvis eller kassér varen. Notér fejlen og kontakt leverandøren.", "en": "Reject or discard the goods. Record the error and contact the supplier." },
+      "instructions": {
+        "da": "Kontrollér ved hver levering: temperatur på kølevarer (højst 5 °C / frost -18 °C), emballagens stand, holdbarhed. Varer må ikke bruges før modtagekontrol.",
+        "en": "Check at every delivery: chilled temperature (max 5 °C / frozen -18 °C), packaging condition, shelf life. Goods must not be used before the receiving check."
+      },
+      "correctiveGuidance": {
+        "da": "Afvis eller kassér varen. Notér fejlen og kontakt leverandøren.",
+        "en": "Reject or discard the goods. Record the error and contact the supplier."
+      },
       "legalBasis": "Hygiejneforordningen bilag II, kap. IX, punkt 1; Fødevareforordningen art. 14",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 24–24.1", "page": 54 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 24–24.1",
+        "page": 54
+      }
     },
     {
       "key": "transport_temp_check",
       "category": "temperature",
-      "name": { "da": "Transporttemperatur", "en": "Transport temperature" },
-      "appliesTo": ["process:transport"],
-      "defaultLimit": { "max": 5, "unit": "°C" },
-      "defaultFrequency": { "perEvent": true },
+      "name": {
+        "da": "Transporttemperatur",
+        "en": "Transport temperature"
+      },
+      "appliesTo": [
+        "process:transport"
+      ],
+      "defaultLimit": {
+        "max": 5,
+        "unit": "°C",
+        "measurementKind": "ambient"
+      },
+      "defaultFrequency": {
+        "perEvent": true
+      },
       "monitoringMethod": "manual_temp",
-      "instructions": { "da": "Kontrollér temperaturen ved egen transport af kølevarer (højst 5 °C; frost -18 °C, kortvarig stigning op til 3 °C ved lokal distribution).", "en": "Check the temperature during own transport of chilled goods (max 5 °C; frozen -18 °C, brief rise up to 3 °C in local distribution)." },
-      "correctiveGuidance": { "da": "Vurdér varerne (brug straks/kassér), og forbedr transporten (termokasser, kortere tid).", "en": "Assess the goods (use immediately/discard) and improve transport (thermal boxes, shorter time)." },
+      "instructions": {
+        "da": "Kontrollér temperaturen ved egen transport af kølevarer (højst 5 °C; frost -18 °C, kortvarig stigning op til 3 °C ved lokal distribution).",
+        "en": "Check the temperature during own transport of chilled goods (max 5 °C; frozen -18 °C, brief rise up to 3 °C in local distribution)."
+      },
+      "correctiveGuidance": {
+        "da": "Vurdér varerne (brug straks/kassér), og forbedr transporten (termokasser, kortere tid).",
+        "en": "Assess the goods (use immediately/discard) and improve transport (thermal boxes, shorter time)."
+      },
       "legalBasis": "Hygiejnebekendtgørelsen §§ 23-25; Dybfrostbekendtgørelsen",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 30.2", "page": 69 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 30.2",
+        "page": 69
+      },
+      "measurementKindRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.2",
+        "page": 57
+      }
     },
     {
       "key": "cleaning_plan",
       "category": "cleaning",
-      "name": { "da": "Rengøring", "en": "Cleaning" },
-      "appliesTo": ["area:kitchen"],
-      "defaultLimit": { "checklist": true },
-      "defaultFrequency": { "rrule": "FREQ=DAILY", "times": ["21:00"], "dueWindowMinutes": 180 },
+      "name": {
+        "da": "Rengøring",
+        "en": "Cleaning"
+      },
+      "appliesTo": [
+        "area:kitchen"
+      ],
+      "defaultLimit": {
+        "checklist": true
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=DAILY",
+        "times": [
+          "21:00"
+        ],
+        "dueWindowMinutes": 180
+      },
       "monitoringMethod": "checklist",
-      "instructions": { "da": "Gennemfør rengøring efter rengøringsplanen: overflader, udstyr og lokaler rengøres og ved behov desinficeres.", "en": "Carry out cleaning per the cleaning plan: surfaces, equipment and rooms are cleaned and, where needed, disinfected." },
-      "correctiveGuidance": { "da": "Rengør igen, og desinficér ved behov. Justér planen, hvis et område gentagne gange svigter.", "en": "Re-clean and disinfect where needed. Adjust the plan if an area fails repeatedly." },
+      "instructions": {
+        "da": "Gennemfør rengøring efter rengøringsplanen: overflader, udstyr og lokaler rengøres og ved behov desinficeres.",
+        "en": "Carry out cleaning per the cleaning plan: surfaces, equipment and rooms are cleaned and, where needed, disinfected."
+      },
+      "correctiveGuidance": {
+        "da": "Rengør igen, og desinficér ved behov. Justér planen, hvis et område gentagne gange svigter.",
+        "en": "Re-clean and disinfect where needed. Adjust the plan if an area fails repeatedly."
+      },
       "legalBasis": "Hygiejneforordningen bilag II, kap. I og V",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 19–19.1", "page": 46 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 19–19.1",
+        "page": 46
+      }
     },
     {
       "key": "pest_control",
       "category": "pest",
-      "name": { "da": "Skadedyrssikring", "en": "Pest control" },
-      "appliesTo": ["area:site"],
-      "defaultLimit": { "checklist": true },
-      "defaultFrequency": { "rrule": "FREQ=MONTHLY;BYMONTHDAY=1", "times": ["09:00"], "dueWindowMinutes": 1440 },
+      "name": {
+        "da": "Skadedyrssikring",
+        "en": "Pest control"
+      },
+      "appliesTo": [
+        "area:site"
+      ],
+      "defaultLimit": {
+        "checklist": true
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=MONTHLY;BYMONTHDAY=1",
+        "times": [
+          "09:00"
+        ],
+        "dueWindowMinutes": 1440
+      },
       "monitoringMethod": "checklist",
-      "instructions": { "da": "Kontrollér regelmæssigt (og mindst årligt) for tegn på skadedyr, og at bygningen er sikret (net, tætninger, fælder).", "en": "Check regularly (and at least yearly) for signs of pests and that the building is proofed (nets, sealing, traps)." },
-      "correctiveGuidance": { "da": "Ved fund: vurdér lukning/kassation af berørte fødevarer, rengør, og tilkald autoriseret bekæmper ved behov.", "en": "On findings: consider closure/discarding affected food, clean, and call an authorised exterminator if needed." },
+      "instructions": {
+        "da": "Kontrollér regelmæssigt (og mindst årligt) for tegn på skadedyr, og at bygningen er sikret (net, tætninger, fælder).",
+        "en": "Check regularly (and at least yearly) for signs of pests and that the building is proofed (nets, sealing, traps)."
+      },
+      "correctiveGuidance": {
+        "da": "Ved fund: vurdér lukning/kassation af berørte fødevarer, rengør, og tilkald autoriseret bekæmper ved behov.",
+        "en": "On findings: consider closure/discarding affected food, clean, and call an authorised exterminator if needed."
+      },
       "legalBasis": "Hygiejneforordningen bilag II, kap. I og IX",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 18", "page": 41 },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 18",
+        "page": 41
+      },
       "notes": "EK-EXAMPLE p. 3: 'Regularly … Min. once a year'. Monthly is this pack's tighter default."
     },
     {
       "key": "separation_check",
       "category": "hygiene",
-      "name": { "da": "Adskillelse", "en": "Separation" },
-      "appliesTo": ["process:separation"],
-      "defaultLimit": { "checklist": true },
-      "defaultFrequency": { "rrule": "FREQ=DAILY", "times": ["10:00"], "dueWindowMinutes": 240 },
+      "name": {
+        "da": "Adskillelse",
+        "en": "Separation"
+      },
+      "appliesTo": [
+        "process:separation"
+      ],
+      "defaultLimit": {
+        "checklist": true
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=DAILY",
+        "times": [
+          "10:00"
+        ],
+        "dueWindowMinutes": 240
+      },
       "monitoringMethod": "checklist",
-      "instructions": { "da": "Kontrollér adskillelse mellem rå og spiseklare fødevarer: opbevaring, redskaber og arbejdsgange.", "en": "Check separation between raw and ready-to-eat food: storage, utensils and workflows." },
-      "correctiveGuidance": { "da": "Kassér forurenet spiseklar mad, rengør/desinficér, og indskærp rutinen.", "en": "Discard contaminated ready-to-eat food, clean/disinfect, and reinforce the routine." },
+      "instructions": {
+        "da": "Kontrollér adskillelse mellem rå og spiseklare fødevarer: opbevaring, redskaber og arbejdsgange.",
+        "en": "Check separation between raw and ready-to-eat food: storage, utensils and workflows."
+      },
+      "correctiveGuidance": {
+        "da": "Kassér forurenet spiseklar mad, rengør/desinficér, og indskærp rutinen.",
+        "en": "Discard contaminated ready-to-eat food, clean/disinfect, and reinforce the routine."
+      },
       "legalBasis": "Hygiejneforordningen bilag II, kap. IX",
-      "sourceRef": { "docId": "DK-EK-EXAMPLE", "section": "Activities checklist — Separation", "page": 3 }
+      "sourceRef": {
+        "docId": "DK-EK-EXAMPLE",
+        "section": "Activities checklist — Separation",
+        "page": 3
+      }
     },
     {
       "key": "personal_hygiene",
       "category": "hygiene",
-      "name": { "da": "Personlig hygiejne", "en": "Personal hygiene" },
-      "appliesTo": ["area:site"],
-      "defaultLimit": { "checklist": true },
-      "defaultFrequency": { "rrule": "FREQ=DAILY", "times": ["07:45"], "dueWindowMinutes": 240 },
+      "name": {
+        "da": "Personlig hygiejne",
+        "en": "Personal hygiene"
+      },
+      "appliesTo": [
+        "area:site"
+      ],
+      "defaultLimit": {
+        "checklist": true
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=DAILY",
+        "times": [
+          "07:45"
+        ],
+        "dueWindowMinutes": 240
+      },
       "monitoringMethod": "checklist",
-      "instructions": { "da": "Dagligt: håndvask-faciliteter i orden (sæbe/papir), rent arbejdstøj, ingen syge medarbejdere i produktionen.", "en": "Daily: hand-wash facilities in order (soap/paper), clean workwear, no ill staff in production." },
-      "correctiveGuidance": { "da": "Udbedr straks (fyld op, skift tøj, send syg medarbejder hjem) og notér.", "en": "Fix immediately (restock, change clothes, send ill staff home) and record." },
+      "instructions": {
+        "da": "Dagligt: håndvask-faciliteter i orden (sæbe/papir), rent arbejdstøj, ingen syge medarbejdere i produktionen.",
+        "en": "Daily: hand-wash facilities in order (soap/paper), clean workwear, no ill staff in production."
+      },
+      "correctiveGuidance": {
+        "da": "Udbedr straks (fyld op, skift tøj, send syg medarbejder hjem) og notér.",
+        "en": "Fix immediately (restock, change clothes, send ill staff home) and record."
+      },
       "legalBasis": "Hygiejneforordningen bilag II, kap. VIII",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 21", "page": 47 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 21",
+        "page": 47
+      }
     },
     {
       "key": "training_egenkontrol",
       "category": "other",
-      "name": { "da": "Uddannelse i egenkontrol", "en": "Own-check training" },
-      "appliesTo": ["area:site"],
-      "defaultLimit": { "checklist": true },
-      "defaultFrequency": { "rrule": "FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=15", "times": ["09:00"], "dueWindowMinutes": 10080 },
+      "name": {
+        "da": "Uddannelse i egenkontrol",
+        "en": "Own-check training"
+      },
+      "appliesTo": [
+        "area:site"
+      ],
+      "defaultLimit": {
+        "checklist": true
+      },
+      "defaultFrequency": {
+        "rrule": "FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=15",
+        "times": [
+          "09:00"
+        ],
+        "dueWindowMinutes": 10080
+      },
       "monitoringMethod": "checklist",
-      "instructions": { "da": "Gennemgå egenkontrolprogrammet med personalet og registrér, hvem der er instrueret (mindst årligt og ved ændringer).", "en": "Review the own-check programme with staff and record who has been instructed (at least yearly and on changes)." },
-      "correctiveGuidance": { "da": "Planlæg og gennemfør manglende instruktion hurtigst muligt.", "en": "Plan and complete missing instruction as soon as possible." },
+      "instructions": {
+        "da": "Gennemgå egenkontrolprogrammet med personalet og registrér, hvem der er instrueret (mindst årligt og ved ændringer).",
+        "en": "Review the own-check programme with staff and record who has been instructed (at least yearly and on changes)."
+      },
+      "correctiveGuidance": {
+        "da": "Planlæg og gennemfør manglende instruktion hurtigst muligt.",
+        "en": "Plan and complete missing instruction as soon as possible."
+      },
       "legalBasis": "Hygiejneforordningen bilag II, kap. XII",
-      "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 23.1", "page": 54 }
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 23.1",
+        "page": 54
+      }
     }
   ],
-  "prerequisiteControlPointKeys": ["cleaning_plan", "personal_hygiene", "pest_control", "training_egenkontrol"],
+  "prerequisiteControlPointKeys": [
+    "cleaning_plan",
+    "personal_hygiene",
+    "pest_control",
+    "training_egenkontrol"
+  ],
   "hazardLibrary": [
-    { "key": "micro_cold_chain", "category": "micro", "description": { "da": "Vækst af sygdomsfremkaldende bakterier ved brudt kølekæde eller for høj opbevaringstemperatur.", "en": "Growth of pathogenic bacteria when the cold chain is broken or storage temperature is too high." }, "controlMeasure": { "da": "Kølekæden holdes; kølevarer højst 3 timer uden for køl inkl. tilberedning.", "en": "Cold chain maintained; chilled food max 3 hours outside refrigeration incl. preparation." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 26.3", "page": 57 } },
-    { "key": "micro_unsafe_goods", "category": "micro", "description": { "da": "Modtagelse af fordærvede eller uegnede råvarer.", "en": "Receipt of spoiled or unsuitable raw goods." }, "controlMeasure": { "da": "Modtagekontrol før varerne tages i brug.", "en": "Receiving check before goods are used." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 24", "page": 54 } },
-    { "key": "micro_undercooking", "category": "micro", "description": { "da": "Overlevelse af bakterier (fx salmonella, campylobacter) ved utilstrækkelig varmebehandling.", "en": "Survival of bacteria (e.g. salmonella, campylobacter) from insufficient heat treatment." }, "controlMeasure": { "da": "Centrumstemperatur mindst 75 °C (fisk 60 °C/1 min).", "en": "Core temperature at least 75 °C (fish 60 °C/1 min)." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 27.1", "page": 60 } },
-    { "key": "micro_slow_cooling", "category": "micro", "description": { "da": "Vækst af sporedannende bakterier (fx Bacillus cereus, Clostridium perfringens) ved langsom nedkøling.", "en": "Growth of spore-forming bacteria (e.g. Bacillus cereus, Clostridium perfringens) during slow cooling." }, "controlMeasure": { "da": "Nedkøling 56→10 °C på højst 4 timer.", "en": "Cooling 56→10 °C within at most 4 hours." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 26.7", "page": 59 } },
-    { "key": "micro_hot_holding", "category": "micro", "description": { "da": "Bakterievækst i varmholdt mad under 56 °C.", "en": "Bacterial growth in hot-held food below 56 °C." }, "controlMeasure": { "da": "Konstant varmholdelse ved mindst 56 °C.", "en": "Constant hot holding at minimum 56 °C." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 27.3", "page": 62 } },
-    { "key": "micro_cross_contamination", "category": "micro", "description": { "da": "Overførsel af bakterier fra rå til spiseklare fødevarer.", "en": "Transfer of bacteria from raw to ready-to-eat food." }, "controlMeasure": { "da": "Adskillelse af varer, redskaber og arbejdsgange; rengøring imellem.", "en": "Separation of goods, utensils and workflows; cleaning in between." }, "sourceRef": { "docId": "DK-EK-EXAMPLE", "section": "Activities checklist — Separation", "page": 3 } },
-    { "key": "micro_pests", "category": "micro", "description": { "da": "Forurening af fødevarer og lokaler fra skadedyr.", "en": "Contamination of food and premises by pests." }, "controlMeasure": { "da": "Skadedyrssikring af bygningen og regelmæssig kontrol.", "en": "Pest-proofing of the building and regular checks." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 18", "page": 41 } },
-    { "key": "chemical_cleaning_residues", "category": "chemical", "description": { "da": "Rester af rengørings- og desinfektionsmidler på fødevarekontaktflader.", "en": "Residues of cleaning and disinfection agents on food-contact surfaces." }, "controlMeasure": { "da": "Korrekt dosering og efterskylning iht. rengøringsplanen.", "en": "Correct dosing and rinsing per the cleaning plan." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 19.1", "page": 46 } },
-    { "key": "allergen_cross_contact", "category": "allergen", "description": { "da": "Utilsigtet overførsel af allergener mellem retter eller forkert allergendeklaration.", "en": "Unintended transfer of allergens between dishes or incorrect allergen declaration." }, "controlMeasure": { "da": "Faste opskrifter, adskilte redskaber, information til kunder om de 14 EU-allergener.", "en": "Fixed recipes, separated utensils, customer information on the 14 EU allergens." }, "todo": "TODO(pack-review): locate allergen-handling section in DK-HYGIEJNE and add sourceRef; legal basis EU 1169/2011 (BLUEPRINT §3.1 R7)." },
-    { "key": "physical_foreign_bodies", "category": "physical", "description": { "da": "Fremmedlegemer i maden (glas, metal, plast, knoglestykker).", "en": "Foreign bodies in food (glass, metal, plastic, bone fragments)." }, "controlMeasure": { "da": "Visuel kontrol, intakt udstyr, ingen glas i produktionen, procedurer ved brud.", "en": "Visual checks, intact equipment, no glass in production, breakage procedures." }, "todo": "TODO(pack-review): locate foreign-body/maintenance section in DK-HYGIEJNE and add sourceRef; category required by BLUEPRINT §3.1 R1." }
+    {
+      "key": "micro_cold_chain",
+      "category": "micro",
+      "description": {
+        "da": "Vækst af sygdomsfremkaldende bakterier ved brudt kølekæde eller for høj opbevaringstemperatur.",
+        "en": "Growth of pathogenic bacteria when the cold chain is broken or storage temperature is too high."
+      },
+      "controlMeasure": {
+        "da": "Kølekæden holdes; kølevarer højst 3 timer uden for køl inkl. tilberedning.",
+        "en": "Cold chain maintained; chilled food max 3 hours outside refrigeration incl. preparation."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.3",
+        "page": 57
+      }
+    },
+    {
+      "key": "micro_unsafe_goods",
+      "category": "micro",
+      "description": {
+        "da": "Modtagelse af fordærvede eller uegnede råvarer.",
+        "en": "Receipt of spoiled or unsuitable raw goods."
+      },
+      "controlMeasure": {
+        "da": "Modtagekontrol før varerne tages i brug.",
+        "en": "Receiving check before goods are used."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 24",
+        "page": 54
+      }
+    },
+    {
+      "key": "micro_undercooking",
+      "category": "micro",
+      "description": {
+        "da": "Overlevelse af bakterier (fx salmonella, campylobacter) ved utilstrækkelig varmebehandling.",
+        "en": "Survival of bacteria (e.g. salmonella, campylobacter) from insufficient heat treatment."
+      },
+      "controlMeasure": {
+        "da": "Centrumstemperatur mindst 75 °C (fisk 60 °C/1 min).",
+        "en": "Core temperature at least 75 °C (fish 60 °C/1 min)."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 27.1",
+        "page": 60
+      }
+    },
+    {
+      "key": "micro_slow_cooling",
+      "category": "micro",
+      "description": {
+        "da": "Vækst af sporedannende bakterier (fx Bacillus cereus, Clostridium perfringens) ved langsom nedkøling.",
+        "en": "Growth of spore-forming bacteria (e.g. Bacillus cereus, Clostridium perfringens) during slow cooling."
+      },
+      "controlMeasure": {
+        "da": "Nedkøling 56→10 °C på højst 4 timer.",
+        "en": "Cooling 56→10 °C within at most 4 hours."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.7",
+        "page": 59
+      }
+    },
+    {
+      "key": "micro_hot_holding",
+      "category": "micro",
+      "description": {
+        "da": "Bakterievækst i varmholdt mad under 56 °C.",
+        "en": "Bacterial growth in hot-held food below 56 °C."
+      },
+      "controlMeasure": {
+        "da": "Konstant varmholdelse ved mindst 56 °C.",
+        "en": "Constant hot holding at minimum 56 °C."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 27.3",
+        "page": 62
+      }
+    },
+    {
+      "key": "micro_cross_contamination",
+      "category": "micro",
+      "description": {
+        "da": "Overførsel af bakterier fra rå til spiseklare fødevarer.",
+        "en": "Transfer of bacteria from raw to ready-to-eat food."
+      },
+      "controlMeasure": {
+        "da": "Adskillelse af varer, redskaber og arbejdsgange; rengøring imellem.",
+        "en": "Separation of goods, utensils and workflows; cleaning in between."
+      },
+      "sourceRef": {
+        "docId": "DK-EK-EXAMPLE",
+        "section": "Activities checklist — Separation",
+        "page": 3
+      }
+    },
+    {
+      "key": "micro_pests",
+      "category": "micro",
+      "description": {
+        "da": "Forurening af fødevarer og lokaler fra skadedyr.",
+        "en": "Contamination of food and premises by pests."
+      },
+      "controlMeasure": {
+        "da": "Skadedyrssikring af bygningen og regelmæssig kontrol.",
+        "en": "Pest-proofing of the building and regular checks."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 18",
+        "page": 41
+      }
+    },
+    {
+      "key": "chemical_cleaning_residues",
+      "category": "chemical",
+      "description": {
+        "da": "Rester af rengørings- og desinfektionsmidler på fødevarekontaktflader.",
+        "en": "Residues of cleaning and disinfection agents on food-contact surfaces."
+      },
+      "controlMeasure": {
+        "da": "Korrekt dosering og efterskylning iht. rengøringsplanen.",
+        "en": "Correct dosing and rinsing per the cleaning plan."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 19.1",
+        "page": 46
+      }
+    },
+    {
+      "key": "allergen_cross_contact",
+      "category": "allergen",
+      "description": {
+        "da": "Utilsigtet overførsel af allergener mellem retter eller forkert allergendeklaration.",
+        "en": "Unintended transfer of allergens between dishes or incorrect allergen declaration."
+      },
+      "controlMeasure": {
+        "da": "Faste opskrifter, adskilte redskaber, information til kunder om de 14 EU-allergener.",
+        "en": "Fixed recipes, separated utensils, customer information on the 14 EU allergens."
+      },
+      "todo": "TODO(pack-review): locate allergen-handling section in DK-HYGIEJNE and add sourceRef; legal basis EU 1169/2011 (BLUEPRINT §3.1 R7)."
+    },
+    {
+      "key": "physical_foreign_bodies",
+      "category": "physical",
+      "description": {
+        "da": "Fremmedlegemer i maden (glas, metal, plast, knoglestykker).",
+        "en": "Foreign bodies in food (glass, metal, plastic, bone fragments)."
+      },
+      "controlMeasure": {
+        "da": "Visuel kontrol, intakt udstyr, ingen glas i produktionen, procedurer ved brud.",
+        "en": "Visual checks, intact equipment, no glass in production, breakage procedures."
+      },
+      "todo": "TODO(pack-review): locate foreign-body/maintenance section in DK-HYGIEJNE and add sourceRef; category required by BLUEPRINT §3.1 R1."
+    }
   ],
   "activityTemplates": [
     {
       "code": "restaurant",
-      "name": { "da": "Restaurant", "en": "Restaurant (full service)" },
-      "focus": { "da": "Modtagelse, køleopbevaring, opvarmning ≥75 °C, nedkøling 56→10 °C/4 t, varmholdelse ≥56 °C, allergener.", "en": "Receiving, cold storage, heating ≥75 °C, cooling 56→10 °C/4 h, hot holding ≥56 °C, allergens." },
+      "name": {
+        "da": "Restaurant",
+        "en": "Restaurant (full service)"
+      },
+      "focus": {
+        "da": "Modtagelse, køleopbevaring, opvarmning ≥75 °C, nedkøling 56→10 °C/4 t, varmholdelse ≥56 °C, allergener.",
+        "en": "Receiving, cold storage, heating ≥75 °C, cooling 56→10 °C/4 h, hot holding ≥56 °C, allergens."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab", "en": "Fridge" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } },
-        { "kind": "hot_holding", "count": 1, "name": { "da": "Varmholdelsesenhed", "en": "Hot-holding unit" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab",
+            "en": "Fridge"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        },
+        {
+          "kind": "hot_holding",
+          "count": 1,
+          "name": {
+            "da": "Varmholdelsesenhed",
+            "en": "Hot-holding unit"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.frozen": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.ambient_allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.cold_prep": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.hot_holding": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"] },
-        "tilberedning.separation": { "applies": true, "critical": true, "controlPointKeys": ["separation_check"], "hazardKeys": ["micro_cross_contamination"] },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "salg_servering.unpackaged_chilled": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] },
-        "salg_servering.allergen_sales": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.ambient_allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.cold_prep": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.hot_holding": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ]
+        },
+        "tilberedning.separation": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "separation_check"
+          ],
+          "hazardKeys": [
+            "micro_cross_contamination"
+          ]
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "salg_servering.unpackaged_chilled": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        },
+        "salg_servering.allergen_sales": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for restauranter (not in provided corpus)."
     },
     {
       "code": "cafe",
-      "name": { "da": "Café / kaffebar", "en": "Café / coffee bar" },
-      "focus": { "da": "Køleopbevaring, mælkehåndtering, kølediske, allergener.", "en": "Cold storage, milk handling, display cabinets, allergens." },
+      "name": {
+        "da": "Café / kaffebar",
+        "en": "Café / coffee bar"
+      },
+      "focus": {
+        "da": "Køleopbevaring, mælkehåndtering, kølediske, allergener.",
+        "en": "Cold storage, milk handling, display cabinets, allergens."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab/kølemontre", "en": "Fridge/display cabinet" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab/kølemontre",
+            "en": "Fridge/display cabinet"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.ambient_allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "tilberedning.cold_prep": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "salg_servering.unpackaged_chilled": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] },
-        "salg_servering.allergen_sales": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.ambient_allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "tilberedning.cold_prep": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "salg_servering.unpackaged_chilled": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        },
+        "salg_servering.allergen_sales": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for caféer (not in provided corpus)."
     },
     {
       "code": "takeaway",
-      "name": { "da": "Takeaway / pizzeria / grillbar", "en": "Takeaway / pizzeria / grill" },
-      "focus": { "da": "Shawarma/kebab-regler, varmholdelse, nedkøling, leveringstemperaturer.", "en": "Shawarma/kebab rules, hot holding, cooling, delivery temperatures." },
+      "name": {
+        "da": "Takeaway / pizzeria / grillbar",
+        "en": "Takeaway / pizzeria / grill"
+      },
+      "focus": {
+        "da": "Shawarma/kebab-regler, varmholdelse, nedkøling, leveringstemperaturer.",
+        "en": "Shawarma/kebab rules, hot holding, cooling, delivery temperatures."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab", "en": "Fridge" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } },
-        { "kind": "hot_holding", "count": 1, "name": { "da": "Varmholdelsesenhed", "en": "Hot-holding unit" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab",
+            "en": "Fridge"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        },
+        {
+          "kind": "hot_holding",
+          "count": 1,
+          "name": {
+            "da": "Varmholdelsesenhed",
+            "en": "Hot-holding unit"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.frozen": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"], "texts": { "whatYouDo": { "da": "Vi tilbereder varme retter, herunder shawarma/kebab på spyd, pizza og grillretter.", "en": "We prepare hot dishes, including shawarma/kebab on skewers, pizza and grilled dishes." } } },
-        "tilberedning.hot_holding": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"] },
-        "tilberedning.separation": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cross_contamination"] },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] },
-        "transport.hot_takeaway": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ],
+          "texts": {
+            "whatYouDo": {
+              "da": "Vi tilbereder varme retter, herunder shawarma/kebab på spyd, pizza og grillretter.",
+              "en": "We prepare hot dishes, including shawarma/kebab on skewers, pizza and grilled dishes."
+            }
+          }
+        },
+        "tilberedning.hot_holding": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ]
+        },
+        "tilberedning.separation": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cross_contamination"
+          ]
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        },
+        "transport.hot_takeaway": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for takeaway/pizzeria (not in provided corpus)."
     },
     {
       "code": "canteen",
-      "name": { "da": "Kantine / storkøkken", "en": "Canteen / institutional kitchen" },
-      "focus": { "da": "Nedkøling af store portioner, varmholdelse, regler for sårbare grupper, buffet.", "en": "Large-batch cooling, hot holding, vulnerable-groups rules, buffet." },
+      "name": {
+        "da": "Kantine / storkøkken",
+        "en": "Canteen / institutional kitchen"
+      },
+      "focus": {
+        "da": "Nedkøling af store portioner, varmholdelse, regler for sårbare grupper, buffet.",
+        "en": "Large-batch cooling, hot holding, vulnerable-groups rules, buffet."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 3, "name": { "da": "Køleskab/kølerum", "en": "Fridge/cold room" } },
-        { "kind": "freezer", "count": 2, "name": { "da": "Fryser", "en": "Freezer" } },
-        { "kind": "hot_holding", "count": 1, "name": { "da": "Varmholdelsesenhed", "en": "Hot-holding unit" } },
-        { "kind": "blast_chiller", "count": 1, "name": { "da": "Blæstkøler", "en": "Blast chiller" } }
+        {
+          "kind": "fridge",
+          "count": 3,
+          "name": {
+            "da": "Køleskab/kølerum",
+            "en": "Fridge/cold room"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 2,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        },
+        {
+          "kind": "hot_holding",
+          "count": 1,
+          "name": {
+            "da": "Varmholdelsesenhed",
+            "en": "Hot-holding unit"
+          }
+        },
+        {
+          "kind": "blast_chiller",
+          "count": 1,
+          "name": {
+            "da": "Blæstkøler",
+            "en": "Blast chiller"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.frozen": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.cold_prep": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.hot_holding": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"], "texts": { "whatYouDo": { "da": "Vi nedkøler store portioner, bl.a. med blæstkøler.", "en": "We cool large batches, including with a blast chiller." } } },
-        "tilberedning.separation": { "applies": true, "critical": true, "controlPointKeys": ["separation_check"], "hazardKeys": ["micro_cross_contamination"] },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "salg_servering.unpackaged_chilled": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.cold_prep": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.hot_holding": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ],
+          "texts": {
+            "whatYouDo": {
+              "da": "Vi nedkøler store portioner, bl.a. med blæstkøler.",
+              "en": "We cool large batches, including with a blast chiller."
+            }
+          }
+        },
+        "tilberedning.separation": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "separation_check"
+          ],
+          "hazardKeys": [
+            "micro_cross_contamination"
+          ]
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "salg_servering.unpackaged_chilled": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for kantiner/storkøkkener (not in provided corpus)."
     },
     {
       "code": "bakery",
-      "name": { "da": "Bageri / konditori", "en": "Bakery / pastry" },
-      "focus": { "da": "Kølekæde for cremeprodukter, allergener (gluten!), udstilling.", "en": "Cream products cold chain, allergens (gluten!), display." },
+      "name": {
+        "da": "Bageri / konditori",
+        "en": "Bakery / pastry"
+      },
+      "focus": {
+        "da": "Kølekæde for cremeprodukter, allergener (gluten!), udstilling.",
+        "en": "Cream products cold chain, allergens (gluten!), display."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab/kølemontre", "en": "Fridge/display cabinet" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } },
-        { "kind": "oven", "count": 1, "name": { "da": "Ovn", "en": "Oven" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab/kølemontre",
+            "en": "Fridge/display cabinet"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        },
+        {
+          "kind": "oven",
+          "count": 1,
+          "name": {
+            "da": "Ovn",
+            "en": "Oven"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.ambient_allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"], "texts": { "whatYouDo": { "da": "Vi opbevarer cremeprodukter og kager med fyld på køl.", "en": "We store cream products and filled cakes refrigerated." } } },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"], "texts": { "whatYouDo": { "da": "Vi nedkøler creme og fyld efter kogning.", "en": "We cool custard and fillings after cooking." } } },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "salg_servering.unpackaged_chilled": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] },
-        "salg_servering.allergen_sales": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.ambient_allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ],
+          "texts": {
+            "whatYouDo": {
+              "da": "Vi opbevarer cremeprodukter og kager med fyld på køl.",
+              "en": "We store cream products and filled cakes refrigerated."
+            }
+          }
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ],
+          "texts": {
+            "whatYouDo": {
+              "da": "Vi nedkøler creme og fyld efter kogning.",
+              "en": "We cool custard and fillings after cooking."
+            }
+          }
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "salg_servering.unpackaged_chilled": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        },
+        "salg_servering.allergen_sales": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for bagerier (not in provided corpus)."
     },
     {
       "code": "butcher",
-      "name": { "da": "Slagterbutik", "en": "Butcher shop" },
-      "focus": { "da": "Regler for hakket kød, kølekæde, krydsforurening, egenproduktion.", "en": "Minced meat rules, cold chain, cross-contamination, own production." },
+      "name": {
+        "da": "Slagterbutik",
+        "en": "Butcher shop"
+      },
+      "focus": {
+        "da": "Regler for hakket kød, kølekæde, krydsforurening, egenproduktion.",
+        "en": "Minced meat rules, cold chain, cross-contamination, own production."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 3, "name": { "da": "Køleskab/kølerum", "en": "Fridge/cold room" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } }
+        {
+          "kind": "fridge",
+          "count": 3,
+          "name": {
+            "da": "Køleskab/kølerum",
+            "en": "Fridge/cold room"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"], "texts": { "controlMeasures": { "da": "Hakket kød opbevares ved højst 5 °C i detailleddet; øvrige kølevarer højst 5 °C eller mærket temperatur.", "en": "Minced meat is stored at max 5 °C at retail; other chilled goods at max 5 °C or the labelled temperature." } } },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.cold_prep": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"] },
-        "tilberedning.separation": { "applies": true, "critical": true, "controlPointKeys": ["separation_check"], "hazardKeys": ["micro_cross_contamination"] },
-        "salg_servering.unpackaged_chilled": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "transport.chilled_frozen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ],
+          "texts": {
+            "controlMeasures": {
+              "da": "Hakket kød opbevares ved højst 5 °C i detailleddet; øvrige kølevarer højst 5 °C eller mærket temperatur.",
+              "en": "Minced meat is stored at max 5 °C at retail; other chilled goods at max 5 °C or the labelled temperature."
+            }
+          }
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.cold_prep": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ]
+        },
+        "tilberedning.separation": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "separation_check"
+          ],
+          "hazardKeys": [
+            "micro_cross_contamination"
+          ]
+        },
+        "salg_servering.unpackaged_chilled": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "transport.chilled_frozen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for slagtere (not in provided corpus)."
     },
     {
       "code": "catering",
-      "name": { "da": "Catering / diner transportable", "en": "Catering & events" },
-      "focus": { "da": "Transporttemperaturer, tid uden for køl, servering ude af huset.", "en": "Transport temperatures, time out of refrigeration, off-site service." },
+      "name": {
+        "da": "Catering / diner transportable",
+        "en": "Catering & events"
+      },
+      "focus": {
+        "da": "Transporttemperaturer, tid uden for køl, servering ude af huset.",
+        "en": "Transport temperatures, time out of refrigeration, off-site service."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab", "en": "Fridge" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } },
-        { "kind": "hot_holding", "count": 1, "name": { "da": "Varmholdelsesenhed/termokasser", "en": "Hot-holding unit/thermal boxes" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab",
+            "en": "Fridge"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        },
+        {
+          "kind": "hot_holding",
+          "count": 1,
+          "name": {
+            "da": "Varmholdelsesenhed/termokasser",
+            "en": "Hot-holding unit/thermal boxes"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.hot_holding": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"] },
-        "tilberedning.separation": { "applies": true, "critical": true, "controlPointKeys": ["separation_check"], "hazardKeys": ["micro_cross_contamination"] },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"] },
-        "transport.chilled_frozen": { "applies": true, "critical": true, "controlPointKeys": ["transport_temp_check"], "hazardKeys": ["micro_cold_chain"] },
-        "transport.hot_takeaway": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.hot_holding": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ]
+        },
+        "tilberedning.separation": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "separation_check"
+          ],
+          "hazardKeys": [
+            "micro_cross_contamination"
+          ]
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ]
+        },
+        "transport.chilled_frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "transport_temp_check"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "transport.hot_takeaway": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for catering (not in provided corpus)."
     },
     {
       "code": "foodtruck",
-      "name": { "da": "Food truck / madbod", "en": "Food truck / market stall" },
-      "focus": { "da": "Vandforsyning, begrænsede faciliteter, mobil kølekæde.", "en": "Water supply, limited facilities, mobile cold chain." },
+      "name": {
+        "da": "Food truck / madbod",
+        "en": "Food truck / market stall"
+      },
+      "focus": {
+        "da": "Vandforsyning, begrænsede faciliteter, mobil kølekæde.",
+        "en": "Water supply, limited facilities, mobile cold chain."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 1, "name": { "da": "Køleskab", "en": "Fridge" } },
-        { "kind": "hot_holding", "count": 1, "name": { "da": "Varmholdelsesenhed", "en": "Hot-holding unit" } }
+        {
+          "kind": "fridge",
+          "count": 1,
+          "name": {
+            "da": "Køleskab",
+            "en": "Fridge"
+          }
+        },
+        {
+          "kind": "hot_holding",
+          "count": 1,
+          "name": {
+            "da": "Varmholdelsesenhed",
+            "en": "Hot-holding unit"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.hot_holding": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] },
-        "tilberedning.separation": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cross_contamination"] },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] },
-        "transport.chilled_frozen": { "applies": true, "critical": true, "controlPointKeys": ["transport_temp_check"], "hazardKeys": ["micro_cold_chain"] },
-        "andet.custom": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [], "texts": { "whatYouDo": { "da": "Vandforsyning: vi bruger rent drikkevand fra tank/tilslutning og tømmer spildevand korrekt.", "en": "Water supply: we use clean drinking water from tank/connection and dispose of wastewater correctly." }, "whatCanGoWrong": { "da": "Forurenet vand kan forurene fødevarer og udstyr. TODO(pack-review): specifik korpus-reference for mobil vandforsyning.", "en": "Contaminated water can contaminate food and equipment. TODO(pack-review): specific corpus reference for mobile water supply." } } }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.hot_holding": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        },
+        "tilberedning.separation": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cross_contamination"
+          ]
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        },
+        "transport.chilled_frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "transport_temp_check"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "andet.custom": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [],
+          "texts": {
+            "whatYouDo": {
+              "da": "Vandforsyning: vi bruger rent drikkevand fra tank/tilslutning og tømmer spildevand korrekt.",
+              "en": "Water supply: we use clean drinking water from tank/connection and dispose of wastewater correctly."
+            },
+            "whatCanGoWrong": {
+              "da": "Forurenet vand kan forurene fødevarer og udstyr. TODO(pack-review): specifik korpus-reference for mobil vandforsyning.",
+              "en": "Contaminated water can contaminate food and equipment. TODO(pack-review): specific corpus reference for mobile water supply."
+            }
+          }
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for mobile fødevarevirksomheder (not in provided corpus)."
     },
     {
       "code": "retail_kiosk",
-      "name": { "da": "Kiosk / minimarked", "en": "Kiosk / convenience retail" },
-      "focus": { "da": "Datokontrol, køledisk, modtagelse.", "en": "Date checks, cold display, receiving." },
+      "name": {
+        "da": "Kiosk / minimarked",
+        "en": "Kiosk / convenience retail"
+      },
+      "focus": {
+        "da": "Datokontrol, køledisk, modtagelse.",
+        "en": "Date checks, cold display, receiving."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køledisk", "en": "Cold display" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køledisk",
+            "en": "Cold display"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_pests"] },
-        "salg_servering.packaged_chilled_frozen": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "salg_servering.packaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_pests"
+          ]
+        },
+        "salg_servering.packaged_chilled_frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "salg_servering.packaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for kiosker (not in provided corpus)."
     },
     {
       "code": "hotel_breakfast",
-      "name": { "da": "Hotelmorgenmad / buffet", "en": "Hotel breakfast / buffet" },
-      "focus": { "da": "Buffet-tid og temperatur, æggeretter, rester.", "en": "Buffet time & temperature, egg dishes, leftovers." },
+      "name": {
+        "da": "Hotelmorgenmad / buffet",
+        "en": "Hotel breakfast / buffet"
+      },
+      "focus": {
+        "da": "Buffet-tid og temperatur, æggeretter, rester.",
+        "en": "Buffet time & temperature, egg dishes, leftovers."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab", "en": "Fridge" } },
-        { "kind": "hot_holding", "count": 1, "name": { "da": "Varmholdelsesenhed", "en": "Hot-holding unit" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab",
+            "en": "Fridge"
+          }
+        },
+        {
+          "kind": "hot_holding",
+          "count": 1,
+          "name": {
+            "da": "Varmholdelsesenhed",
+            "en": "Hot-holding unit"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"], "texts": { "whatYouDo": { "da": "Vi tilbereder æggeretter og andre varme retter til buffet.", "en": "We prepare egg dishes and other hot dishes for the buffet." } } },
-        "tilberedning.hot_holding": { "applies": true, "critical": true, "controlPointKeys": ["hot_holding_56"], "hazardKeys": ["micro_hot_holding"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"] },
-        "salg_servering.unpackaged_chilled": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"], "texts": { "controlMeasures": { "da": "Kølevarer på buffet højst 3 timer uden for køl; rester fra buffet kasseres.", "en": "Chilled buffet items max 3 hours outside refrigeration; buffet leftovers are discarded." } } },
-        "salg_servering.unpackaged_ambient": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ],
+          "texts": {
+            "whatYouDo": {
+              "da": "Vi tilbereder æggeretter og andre varme retter til buffet.",
+              "en": "We prepare egg dishes and other hot dishes for the buffet."
+            }
+          }
+        },
+        "tilberedning.hot_holding": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "hot_holding_56"
+          ],
+          "hazardKeys": [
+            "micro_hot_holding"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ]
+        },
+        "salg_servering.unpackaged_chilled": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ],
+          "texts": {
+            "controlMeasures": {
+              "da": "Kølevarer på buffet højst 3 timer uden for køl; rester fra buffet kasseres.",
+              "en": "Chilled buffet items max 3 hours outside refrigeration; buffet leftovers are discarded."
+            }
+          }
+        },
+        "salg_servering.unpackaged_ambient": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": []
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for hotelmorgenmad (not in provided corpus)."
     },
     {
       "code": "small_producer",
-      "name": { "da": "Mindre fødevareproducent", "en": "Small producer / dark kitchen" },
-      "focus": { "da": "Batchproduktion, mærkning, B2B-sporbarhed (ét skridt frem!).", "en": "Batch production, labelling, B2B traceability (one step forward!)." },
+      "name": {
+        "da": "Mindre fødevareproducent",
+        "en": "Small producer / dark kitchen"
+      },
+      "focus": {
+        "da": "Batchproduktion, mærkning, B2B-sporbarhed (ét skridt frem!).",
+        "en": "Batch production, labelling, B2B traceability (one step forward!)."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Køleskab", "en": "Fridge" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Fryser", "en": "Freezer" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Køleskab",
+            "en": "Fridge"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Fryser",
+            "en": "Freezer"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "tilberedning.hot_prep": { "applies": true, "critical": true, "controlPointKeys": ["heating_core_temp"], "hazardKeys": ["micro_undercooking"] },
-        "tilberedning.cooling": { "applies": true, "critical": true, "controlPointKeys": ["cooling_56_10_4h"], "hazardKeys": ["micro_slow_cooling"] },
-        "tilberedning.allergen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["allergen_cross_contact"], "texts": { "controlMeasures": { "da": "Allergener deklareres korrekt på etiketten for hver batch.", "en": "Allergens are declared correctly on the label of every batch." } } },
-        "salg_servering.packaged_chilled_frozen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "transport.chilled_frozen": { "applies": true, "critical": true, "controlPointKeys": ["transport_temp_check"], "hazardKeys": ["micro_cold_chain"] },
-        "andet.custom": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": [], "texts": { "whatYouDo": { "da": "Batchmærkning og B2B-sporbarhed: hver produceret batch får lotnummer, og modtagere registreres (ét skridt frem).", "en": "Batch labelling and B2B traceability: every produced batch gets a lot number and recipients are recorded (one step forward)." } } }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "tilberedning.hot_prep": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "heating_core_temp"
+          ],
+          "hazardKeys": [
+            "micro_undercooking"
+          ]
+        },
+        "tilberedning.cooling": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cooling_56_10_4h"
+          ],
+          "hazardKeys": [
+            "micro_slow_cooling"
+          ]
+        },
+        "tilberedning.allergen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "allergen_cross_contact"
+          ],
+          "texts": {
+            "controlMeasures": {
+              "da": "Allergener deklareres korrekt på etiketten for hver batch.",
+              "en": "Allergens are declared correctly on the label of every batch."
+            }
+          }
+        },
+        "salg_servering.packaged_chilled_frozen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "transport.chilled_frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "transport_temp_check"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "andet.custom": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [],
+          "texts": {
+            "whatYouDo": {
+              "da": "Batchmærkning og B2B-sporbarhed: hver produceret batch får lotnummer, og modtagere registreres (ét skridt frem).",
+              "en": "Batch labelling and B2B traceability: every produced batch gets a lot number and recipients are recorded (one step forward)."
+            }
+          }
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for mindre producenter (not in provided corpus)."
     },
     {
       "code": "wholesale_small",
-      "name": { "da": "Lille engrosvirksomhed", "en": "Small wholesale" },
-      "focus": { "da": "Fuld HACCP-plan, B2B-udgående sporbarhed. Bemærk: skærpede engros-temperaturkrav pr. produkt (fx hakket kød 2 °C).", "en": "Full HACCP plan, outbound B2B traceability. Note: stricter wholesale per-product temperatures (e.g. minced meat 2 °C)." },
+      "name": {
+        "da": "Lille engrosvirksomhed",
+        "en": "Small wholesale"
+      },
+      "focus": {
+        "da": "Fuld HACCP-plan, B2B-udgående sporbarhed. Bemærk: skærpede engros-temperaturkrav pr. produkt (fx hakket kød 2 °C).",
+        "en": "Full HACCP plan, outbound B2B traceability. Note: stricter wholesale per-product temperatures (e.g. minced meat 2 °C)."
+      },
       "equipmentSuggestions": [
-        { "kind": "fridge", "count": 2, "name": { "da": "Kølerum", "en": "Cold room" } },
-        { "kind": "freezer", "count": 1, "name": { "da": "Frostrum", "en": "Freezer room" } }
+        {
+          "kind": "fridge",
+          "count": 2,
+          "name": {
+            "da": "Kølerum",
+            "en": "Cold room"
+          }
+        },
+        {
+          "kind": "freezer",
+          "count": 1,
+          "name": {
+            "da": "Frostrum",
+            "en": "Freezer room"
+          }
+        }
       ],
       "rows": {
-        "modtagelse.chilled": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "modtagelse.frozen": { "applies": true, "critical": true, "controlPointKeys": ["receiving_check"], "hazardKeys": ["micro_unsafe_goods"] },
-        "opbevaring.chilled": { "applies": true, "critical": true, "controlPointKeys": ["cold_storage_temp"], "hazardKeys": ["micro_cold_chain"], "texts": { "controlMeasures": { "da": "TODO(pack-review): engros-temperaturkrav pr. produkt jf. bilag 3 (fx hakket kød 2 °C, fjerkræ 4 °C, kød 7 °C) — fastsæt produkt-specifikke grænser i risikoanalysen.", "en": "TODO(pack-review): wholesale per-product temperatures per bilag 3 (e.g. minced meat 2 °C, poultry 4 °C, meat 7 °C) — set product-specific limits in the risk analysis." } } },
-        "opbevaring.frozen": { "applies": true, "critical": true, "controlPointKeys": ["freezer_temp"], "hazardKeys": ["micro_cold_chain"] },
-        "salg_servering.packaged_chilled_frozen": { "applies": true, "critical": false, "controlPointKeys": [], "hazardKeys": ["micro_cold_chain"] },
-        "transport.chilled_frozen": { "applies": true, "critical": true, "controlPointKeys": ["transport_temp_check"], "hazardKeys": ["micro_cold_chain"] }
+        "modtagelse.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "modtagelse.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "receiving_check"
+          ],
+          "hazardKeys": [
+            "micro_unsafe_goods"
+          ]
+        },
+        "opbevaring.chilled": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "cold_storage_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ],
+          "texts": {
+            "controlMeasures": {
+              "da": "TODO(pack-review): engros-temperaturkrav pr. produkt jf. bilag 3 (fx hakket kød 2 °C, fjerkræ 4 °C, kød 7 °C) — fastsæt produkt-specifikke grænser i risikoanalysen.",
+              "en": "TODO(pack-review): wholesale per-product temperatures per bilag 3 (e.g. minced meat 2 °C, poultry 4 °C, meat 7 °C) — set product-specific limits in the risk analysis."
+            }
+          }
+        },
+        "opbevaring.frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "freezer_temp"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "salg_servering.packaged_chilled_frozen": {
+          "applies": true,
+          "critical": false,
+          "controlPointKeys": [],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        },
+        "transport.chilled_frozen": {
+          "applies": true,
+          "critical": true,
+          "controlPointKeys": [
+            "transport_temp_check"
+          ],
+          "hazardKeys": [
+            "micro_cold_chain"
+          ]
+        }
       },
       "branchekode": "TODO(pack-review): reference relevant branchekode for engrosvirksomheder (not in provided corpus)."
     }
@@ -612,23 +2681,124 @@
   "traceability": {
     "retentionYearsDefault": 5,
     "retentionMonthsPerishable": 6,
-    "requiredFields": ["supplierName", "supplierAddress", "productIdentification", "quantity", "deliveryDate"],
-    "sourceRef": { "docId": "DK-EK-EXAMPLE", "section": "Activities checklist — Traceability (mandatory)", "page": 3 }
+    "requiredFields": [
+      "supplierName",
+      "supplierAddress",
+      "productIdentification",
+      "quantity",
+      "deliveryDate"
+    ],
+    "sourceRef": {
+      "docId": "DK-EK-EXAMPLE",
+      "section": "Activities checklist — Traceability (mandatory)",
+      "page": 3
+    }
   },
-  "documentRetention": { "selfControlMonths": 12, "archiveYears": 5 },
+  "documentRetention": {
+    "selfControlMonths": 12,
+    "archiveYears": 5
+  },
   "revisionTriggers": {
     "repeatedDeviationCount": 3,
     "windowDays": 30,
     "annualReview": true,
-    "sourceRef": { "docId": "DK-EK-EXAMPLE", "section": "Annual inspection and revision (mandatory), Form 7", "page": 3 }
+    "sourceRef": {
+      "docId": "DK-EK-EXAMPLE",
+      "section": "Annual inspection and revision (mandatory), Form 7",
+      "page": 3
+    }
   },
   "guidance": [
-    { "key": "cooling_rules", "topic": "cooling", "text": { "da": "Varmebehandlet mad, der skal gemmes, nedkøles hurtigst muligt: fra 56 °C til 10 °C på højst 4 timer. Andre tid/temperatur-kombinationer kan bruges, hvis virksomheden kan dokumentere, at de er sikre.", "en": "Heat-treated food to be stored must be cooled as quickly as possible: from 56 °C to 10 °C within at most 4 hours. Other time/temperature combinations may be used if the business can document they are safe." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 26.7", "page": 59 } },
-    { "key": "hot_holding_rules", "topic": "hot_holding", "text": { "da": "Varmholdt mad skal holde en konstant temperatur på mindst 56 °C. Der er ingen tidsbegrænsning, når temperaturen holdes. Mad opvarmet til 75 °C behøver ikke nedkøles, hvis den varmholdes ved mindst 56 °C.", "en": "Hot-held food must keep a constant temperature of at least 56 °C. There is no time limit while the temperature is maintained. Food heated to 75 °C need not be cooled if it is hot-held at minimum 56 °C." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 27.3", "page": 62 } },
-    { "key": "heating_rules", "topic": "heating", "text": { "da": "Som hovedregel opvarmes fødevarer til mindst 75 °C i centrum — så kræves ingen yderligere dokumentation. Fisk: mindst 60 °C i 1 minut. Lavere temperaturer kræver skriftlig dokumentation for sikkerhed.", "en": "As a main rule food is heated to at least 75 °C at the core — then no further documentation is required. Fish: at least 60 °C for 1 minute. Lower temperatures require written safety documentation." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 27.1", "page": 60 } },
-    { "key": "cold_chain_3h", "topic": "cold_chain", "text": { "da": "Kølekrævende fødevarer bør højst være uden for køl i 3 timer i alt, inklusive tid til tilberedning og anretning. Længere tid kræver en dokumenteret risikovurdering.", "en": "Chilled food should be outside refrigeration for at most 3 hours in total, including preparation and plating time. Longer periods require a documented risk assessment." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 26.3", "page": 57 } },
-    { "key": "receiving_rules", "topic": "receiving", "text": { "da": "Varer må ikke tages i brug, før de har været gennem modtagekontrol. Kan kontrollen ikke ske straks ved levering, skal varerne opbevares korrekt (fx på køl), indtil den er udført.", "en": "Goods must not be used before they have passed the receiving check. If the check cannot happen immediately on delivery, goods must be stored correctly (e.g. refrigerated) until it is done." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "kap. 24.1", "page": 55 } },
-    { "key": "storage_temps_table", "topic": "storage", "text": { "da": "Bilag 3 i Hygiejnevejledningen indeholder den fulde oversigt over temperaturkrav pr. produkt ved opbevaring og transport, opdelt i engros- og detailled (fx hakket kød 2 °C engros / 5 °C detail; ferske fiskevarer 0–2 °C; dybfrost -18 °C).", "en": "Annex 3 of the hygiene guide holds the full per-product temperature table for storage and transport, split into wholesale and retail (e.g. minced meat 2 °C wholesale / 5 °C retail; fresh fish 0–2 °C; frozen -18 °C)." }, "sourceRef": { "docId": "DK-HYGIEJNE", "section": "bilag 3", "page": 209 } },
-    { "key": "documentation_frequency", "topic": "documentation", "text": { "da": "Det officielle egenkontrol-eksempel angiver kontrol- og dokumentationsfrekvenser pr. aktivitet: fx køl/frost kontrolleres dagligt og dokumenteres mindst ugentligt; opvarmning, nedkøling og varmholdelse kontrolleres hver gang.", "en": "The official own-check example states check and documentation frequencies per activity: e.g. chilled/frozen checked daily and documented at least weekly; heating, cooling and hot holding checked every time." }, "sourceRef": { "docId": "DK-EK-EXAMPLE", "section": "Activities checklist", "page": 3 } }
+    {
+      "key": "cooling_rules",
+      "topic": "cooling",
+      "text": {
+        "da": "Varmebehandlet mad, der skal gemmes, nedkøles hurtigst muligt: fra 56 °C til 10 °C på højst 4 timer. Andre tid/temperatur-kombinationer kan bruges, hvis virksomheden kan dokumentere, at de er sikre.",
+        "en": "Heat-treated food to be stored must be cooled as quickly as possible: from 56 °C to 10 °C within at most 4 hours. Other time/temperature combinations may be used if the business can document they are safe."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.7",
+        "page": 59
+      }
+    },
+    {
+      "key": "hot_holding_rules",
+      "topic": "hot_holding",
+      "text": {
+        "da": "Varmholdt mad skal holde en konstant temperatur på mindst 56 °C. Der er ingen tidsbegrænsning, når temperaturen holdes. Mad opvarmet til 75 °C behøver ikke nedkøles, hvis den varmholdes ved mindst 56 °C.",
+        "en": "Hot-held food must keep a constant temperature of at least 56 °C. There is no time limit while the temperature is maintained. Food heated to 75 °C need not be cooled if it is hot-held at minimum 56 °C."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 27.3",
+        "page": 62
+      }
+    },
+    {
+      "key": "heating_rules",
+      "topic": "heating",
+      "text": {
+        "da": "Som hovedregel opvarmes fødevarer til mindst 75 °C i centrum — så kræves ingen yderligere dokumentation. Fisk: mindst 60 °C i 1 minut. Lavere temperaturer kræver skriftlig dokumentation for sikkerhed.",
+        "en": "As a main rule food is heated to at least 75 °C at the core — then no further documentation is required. Fish: at least 60 °C for 1 minute. Lower temperatures require written safety documentation."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 27.1",
+        "page": 60
+      }
+    },
+    {
+      "key": "cold_chain_3h",
+      "topic": "cold_chain",
+      "text": {
+        "da": "Kølekrævende fødevarer bør højst være uden for køl i 3 timer i alt, inklusive tid til tilberedning og anretning. Længere tid kræver en dokumenteret risikovurdering.",
+        "en": "Chilled food should be outside refrigeration for at most 3 hours in total, including preparation and plating time. Longer periods require a documented risk assessment."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 26.3",
+        "page": 57
+      }
+    },
+    {
+      "key": "receiving_rules",
+      "topic": "receiving",
+      "text": {
+        "da": "Varer må ikke tages i brug, før de har været gennem modtagekontrol. Kan kontrollen ikke ske straks ved levering, skal varerne opbevares korrekt (fx på køl), indtil den er udført.",
+        "en": "Goods must not be used before they have passed the receiving check. If the check cannot happen immediately on delivery, goods must be stored correctly (e.g. refrigerated) until it is done."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "kap. 24.1",
+        "page": 55
+      }
+    },
+    {
+      "key": "storage_temps_table",
+      "topic": "storage",
+      "text": {
+        "da": "Bilag 3 i Hygiejnevejledningen indeholder den fulde oversigt over temperaturkrav pr. produkt ved opbevaring og transport, opdelt i engros- og detailled (fx hakket kød 2 °C engros / 5 °C detail; ferske fiskevarer 0–2 °C; dybfrost -18 °C).",
+        "en": "Annex 3 of the hygiene guide holds the full per-product temperature table for storage and transport, split into wholesale and retail (e.g. minced meat 2 °C wholesale / 5 °C retail; fresh fish 0–2 °C; frozen -18 °C)."
+      },
+      "sourceRef": {
+        "docId": "DK-HYGIEJNE",
+        "section": "bilag 3",
+        "page": 209
+      }
+    },
+    {
+      "key": "documentation_frequency",
+      "topic": "documentation",
+      "text": {
+        "da": "Det officielle egenkontrol-eksempel angiver kontrol- og dokumentationsfrekvenser pr. aktivitet: fx køl/frost kontrolleres dagligt og dokumenteres mindst ugentligt; opvarmning, nedkøling og varmholdelse kontrolleres hver gang.",
+        "en": "The official own-check example states check and documentation frequencies per activity: e.g. chilled/frozen checked daily and documented at least weekly; heating, cooling and hot holding checked every time."
+      },
+      "sourceRef": {
+        "docId": "DK-EK-EXAMPLE",
+        "section": "Activities checklist",
+        "page": 3
+      }
+    }
   ]
 }

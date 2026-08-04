@@ -91,6 +91,9 @@ test("full day: pass, fail→corrective→verification, PIN attribution", async 
     .first()
     .click();
   await expect(page.getByTestId("temp-display")).toBeVisible();
+  // §3.3 + DK-HYGIEJNE kap. 26.2: the screen says WHICH temperature to take,
+  // so nobody measures the air when the limit is about the food (or vice versa)
+  await expect(page.getByTestId("measure-what")).toContainText("lufttemperaturen");
   await completeTemp(page, ["3", "dot", "4"]);
   await page.waitForURL(`**/app/${siteId}/today`);
   await expect(page.getByTestId("progress-label")).toContainText("1 af");

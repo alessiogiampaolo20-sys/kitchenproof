@@ -10,7 +10,7 @@ import {
   materializeSiteTasks,
   rescheduleControlPoint,
 } from "@/lib/compliance/materialize-runner";
-import { compareStrictness, parseLimit } from "@/lib/compliance/limits";
+import { compareStrictness, limitMeasurementKind, parseLimit } from "@/lib/compliance/limits";
 import { findUncoveredCriticalRows } from "@/lib/compliance/approval";
 import { uploadProgrammeSnapshot } from "@/lib/pdf/render";
 import { frequencySchema, type PackLimit } from "@/lib/compliance/pack-schema";
@@ -236,20 +236,28 @@ export async function editControlPoint(
     .maybeSingle();
   if (!cp) return { error: "error" };
 
-  // Build the proposed limit from the current shape.
+  // Build the proposed limit from the current shape. The measurement kind is
+  // NOT a form field — it says what the number is about (DK-HYGIEJNE kap. 26.2)
+  // and comes from the pack, so it must survive an edit of the value or the
+  // schedule. Rebuilding the object without it used to silently drop it, which
+  // turned an evaluable limit back into an ambiguous one.
   const current = parseLimit(cp.limit_json);
+  const keptKind = limitMeasurementKind(current);
+  const withKind = <T extends object>(limit: T): T =>
+    keptKind ? ({ ...limit, measurementKind: keptKind } as T) : limit;
+
   let proposed: PackLimit = current;
   if ("max" in current && parsed.data.max !== undefined) {
-    proposed = { max: parsed.data.max, unit: "°C" };
+    proposed = withKind({ max: parsed.data.max, unit: "°C" as const });
   } else if ("min" in current && parsed.data.min !== undefined) {
-    proposed = { min: parsed.data.min, unit: "°C" };
+    proposed = withKind({ min: parsed.data.min, unit: "°C" as const });
   } else if ("coolFrom" in current) {
-    proposed = {
+    proposed = withKind({
       coolFrom: parsed.data.coolFrom ?? current.coolFrom,
       coolTo: parsed.data.coolTo ?? current.coolTo,
       withinMinutes: parsed.data.withinMinutes ?? current.withinMinutes,
-      unit: "°C",
-    };
+      unit: "°C" as const,
+    });
   }
 
   // §7.3 [DECISION]: loosening a PACK default requires a written justification

@@ -2772,6 +2772,9 @@ export type Database = {
           equipment_id: string | null
           id: string
           is_late: boolean
+          measurement_kind:
+            | Database["public"]["Enums"]["measurement_kind"]
+            | null
           note: string | null
           passed: boolean | null
           performed_by: string
@@ -2792,6 +2795,9 @@ export type Database = {
           equipment_id?: string | null
           id?: string
           is_late?: boolean
+          measurement_kind?:
+            | Database["public"]["Enums"]["measurement_kind"]
+            | null
           note?: string | null
           passed?: boolean | null
           performed_by: string
@@ -2812,6 +2818,9 @@ export type Database = {
           equipment_id?: string | null
           id?: string
           is_late?: boolean
+          measurement_kind?:
+            | Database["public"]["Enums"]["measurement_kind"]
+            | null
           note?: string | null
           passed?: boolean | null
           performed_by?: string
@@ -3300,6 +3309,7 @@ export type Database = {
         | "needs_review"
         | "confirmed"
         | "failed"
+      measurement_kind: "product" | "ambient"
       move_kind:
         | "receive"
         | "use"
@@ -3538,6 +3548,7 @@ export const Constants = {
         "confirmed",
         "failed",
       ],
+      measurement_kind: ["product", "ambient"],
       move_kind: [
         "receive",
         "use",

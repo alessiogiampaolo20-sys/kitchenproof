@@ -81,6 +81,8 @@ export async function syncCompleteTask(input: {
       value: parsed.data.value,
       note: parsed.data.note,
       clientUuid: parsed.data.clientUuid,
+      // queued work draining after the fact: nobody is at the screen to ask
+      source: parsed.data.clientUuid ? "replay" : "interactive",
       clientCreatedAt: parsed.data.clientCreatedAt,
       photoPaths: parsed.data.photoPaths,
       deviationSteps: parsed.data.deviationSteps,

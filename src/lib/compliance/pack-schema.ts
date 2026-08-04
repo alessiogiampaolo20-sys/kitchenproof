@@ -34,15 +34,42 @@ export const i18nSchema = z
   .strict();
 export type I18nText = z.infer<typeof i18nSchema>;
 
+/**
+ * Which temperature a limit is about (DK-HYGIEJNE kap. 26.2, p. 57):
+ * "Temperaturkravene i hygiejneforordningen for animalske fødevarer og i
+ * dybfrostbekendtgørelsen er i de fleste tilfælde produkttemperaturer, mens
+ * temperaturbestemmelserne i hygiejnebekendtgørelsen er omgivelsestemperaturer."
+ *
+ * It matters because checking a fridge's air against a limit written for the
+ * food itself (or the reverse) produces a wrong verdict in either direction.
+ * Optional so packs and site limits written before this stay valid — but a
+ * reading whose kind is unknown is not evaluated, it is asked about.
+ */
+export const measurementKindSchema = z.enum(["product", "ambient"]);
+export type MeasurementKind = z.infer<typeof measurementKindSchema>;
+
 export const limitSchema = z.union([
-  z.object({ max: z.number(), unit: z.literal("°C") }).strict(),
-  z.object({ min: z.number(), unit: z.literal("°C") }).strict(),
+  z
+    .object({
+      max: z.number(),
+      unit: z.literal("°C"),
+      measurementKind: measurementKindSchema.optional(),
+    })
+    .strict(),
+  z
+    .object({
+      min: z.number(),
+      unit: z.literal("°C"),
+      measurementKind: measurementKindSchema.optional(),
+    })
+    .strict(),
   z
     .object({
       coolFrom: z.number(),
       coolTo: z.number(),
       withinMinutes: z.number().int().positive(),
       unit: z.literal("°C"),
+      measurementKind: measurementKindSchema.optional(),
     })
     .strict(),
   z.object({ checklist: z.literal(true) }).strict(),
@@ -85,6 +112,13 @@ export const controlPointTemplateSchema = z
     correctiveGuidance: i18nSchema,
     legalBasis: z.string().min(1),
     sourceRef: sourceRefSchema, // REQUIRED — §3.3 rule (a)
+    /**
+     * Where `defaultLimit.measurementKind` comes from. It is a different
+     * citation from `sourceRef`: the threshold is set in one section, the
+     * product/ambient rule in kap. 26.2 — and §3.3(a) wants every limit fact
+     * traceable, not just the number.
+     */
+    measurementKindRef: sourceRefSchema.optional(),
     notes: z.string().optional(),
   })
   .strict();

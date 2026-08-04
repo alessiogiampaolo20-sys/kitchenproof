@@ -98,6 +98,7 @@ describe("idempotent replay (client_uuid)", () => {
         actor: { profileId: ownerId, role: "org_owner" },
         value: { temp_c: 3 },
         clientUuid,
+        source: "replay" as const,
         clientCreatedAt,
       },
       auditFn(owner),
@@ -112,6 +113,7 @@ describe("idempotent replay (client_uuid)", () => {
         actor: { profileId: ownerId, role: "org_owner" },
         value: { temp_c: 3 },
         clientUuid,
+        source: "replay" as const,
         clientCreatedAt,
       },
       auditFn(owner),
@@ -144,6 +146,7 @@ describe("idempotent replay (client_uuid)", () => {
         actor: { profileId: ownerId, role: "org_owner" },
         value: { temp_c: 2 },
         clientUuid,
+        source: "replay" as const,
         clientCreatedAt: new Date(Date.now() + 3 * 3_600_000).toISOString(), // +3h
       },
       auditFn(owner),
@@ -173,6 +176,7 @@ describe("composite offline entry (completion + deviation steps)", () => {
         actor: { profileId: ownerId, role: "org_owner" },
         value: { temp_c: 12 }, // fails vs max 5
         clientUuid,
+        source: "replay" as const,
         clientCreatedAt: new Date(Date.now() - 20 * 60_000).toISOString(),
         deviationSteps: {
           foodAssessment: "discarded",
@@ -211,6 +215,7 @@ describe("composite offline entry (completion + deviation steps)", () => {
         actor: { profileId: ownerId, role: "org_owner" },
         value: { temp_c: 12 },
         clientUuid,
+        source: "replay" as const,
         clientCreatedAt: new Date().toISOString(),
         deviationSteps: {
           foodAssessment: "discarded",

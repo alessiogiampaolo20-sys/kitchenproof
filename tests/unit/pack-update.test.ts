@@ -22,7 +22,15 @@ describe("computePackDiff (§13 regulation change pipeline)", () => {
     const next = withTemplates((templates) =>
       templates.map((tpl) =>
         tpl.key === "hot_holding_56"
-          ? { ...tpl, defaultLimit: { min: 58, unit: "°C" as const } }
+          ? {
+              ...tpl,
+              // tightening the threshold, keeping what the number is about
+              defaultLimit: {
+                min: 58,
+                unit: "°C" as const,
+                measurementKind: "product" as const,
+              },
+            }
           : tpl,
       ),
     );
@@ -31,8 +39,8 @@ describe("computePackDiff (§13 regulation change pipeline)", () => {
       {
         key: "hot_holding_56",
         kind: "limit_changed",
-        before: { min: 56, unit: "°C" },
-        after: { min: 58, unit: "°C" },
+        before: { min: 56, unit: "°C", measurementKind: "product" },
+        after: { min: 58, unit: "°C", measurementKind: "product" },
       },
     ]);
   });
