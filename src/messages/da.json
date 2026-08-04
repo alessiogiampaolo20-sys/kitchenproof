@@ -296,7 +296,8 @@
     "deviations": "Afvigelser",
     "reports": "Rapporter",
     "receive": "Varer ind",
-    "stock": "Lager"
+    "stock": "Lager",
+    "orders": "Ordrer"
   },
   "sites": {
     "title": "Steder",
@@ -747,7 +748,27 @@
       "to": "til",
       "footer": "Genereret af KitchenProof — dokumentation for et-skridt-frem/tilbage sporbarhed (forordning (EF) nr. 178/2002, art. 18)."
     },
-    "recallOpen": "Åbn rapporten (PDF)"
+    "recallOpen": "Åbn rapporten (PDF)",
+    "verdict": {
+      "clean": "Alle {count} registreringer på denne kæde var inden for grænserne",
+      "deviations": "{count} afvigelser på denne kæde",
+      "none": "Ingen registreringer dækker denne kæde",
+      "late": "{count} registreret for sent"
+    },
+    "clients": "Kunder der skal kontaktes ({count})",
+    "noClients": "Ingen ordrer knyttet endnu",
+    "noContact": "Ingen kontaktoplysninger — ring",
+    "ingredients": "Varer brugt",
+    "noIngredients": "Ingen varer knyttet",
+    "records": "Egenkontrol",
+    "noRecords": "Ingen registreringer den dag",
+    "failed": "Fejl",
+    "late": "for sent",
+    "suppliers": "Leverandører: {names}",
+    "kind": {
+      "product": "kernetemp.",
+      "ambient": "lufttemp."
+    }
   },
   "outbound": {
     "title": "Levering ud af huset (B2B)",
@@ -1085,7 +1106,8 @@
     "invoice": "Ny faktura",
     "quickReceive": "Hurtig modtagelse",
     "prep": "Ny tilberedning",
-    "outbound": "Levering ud (B2B)"
+    "outbound": "Levering ud (B2B)",
+    "production": "Registrér produktion"
   },
   "setup": {
     "title": "Kom godt i gang",
@@ -1173,5 +1195,55 @@
       "6": "Lør",
       "7": "Søn"
     }
+  },
+  "orders": {
+    "title": "Ordrer og produktion",
+    "newOrder": "Ny ordre",
+    "logProduction": "Registrér produktion",
+    "ordersHeading": "Ordrer",
+    "productionsHeading": "Seneste produktioner",
+    "noOrders": "Ingen ordrer endnu",
+    "noProductions": "Ingen produktioner endnu",
+    "orderRef": "Ordrenavn",
+    "clientName": "Kunde",
+    "contact": "Kontakt",
+    "contactHint": "E-mail eller telefon — det er den, I ringer til ved en tilbagetrækning.",
+    "eventDate": "Dato",
+    "venue": "Adresse",
+    "portions": "Portioner",
+    "destination": "Type",
+    "delivery": "Levering",
+    "save": "Gem ordre",
+    "cancel": "Annullér",
+    "created": "Ordren er gemt",
+    "error": "Noget gik galt",
+    "destinations": {
+      "catering": "Catering",
+      "private": "Privat",
+      "event": "Event",
+      "community_delivery": "Fællesudbringning",
+      "other": "Andet"
+    },
+    "deliveryModes": {
+      "cold": "Kold",
+      "warm": "Varm",
+      "mixed": "Blandet",
+      "none": "Ingen levering"
+    },
+    "productionHint": "Hvad lavede I, af hvilke varer, og til hvilke ordrer? Sammenhængen laves for jer.",
+    "product": "Hvad lavede I?",
+    "productPlaceholder": "F.eks. Ragù",
+    "producedOn": "Dato",
+    "quantity": "Mængde",
+    "ingredientsUsed": "Varer brugt",
+    "ingredientsHint": "Alt på lager er valgt — fravælg det, I ikke brugte.",
+    "forOrders": "Til hvilke ordrer?",
+    "forOrdersHint": "Kommende ordrer er valgt — fravælg dem, det ikke gælder.",
+    "noStock": "Intet på lager",
+    "noUpcomingOrders": "Ingen kommende ordrer",
+    "saveProduction": "Gem produktion",
+    "productionLogged": "Produktionen er registreret",
+    "productRequired": "Skriv hvad I lavede",
+    "chainHeading": "Hele kæden bag ordren"
   }
 }

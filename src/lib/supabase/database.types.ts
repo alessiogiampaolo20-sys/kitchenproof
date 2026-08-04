@@ -248,6 +248,7 @@ export type Database = {
           origin: Database["public"]["Enums"]["batch_origin"]
           parent_batch_ids: string[] | null
           product_id: string
+          production_id: string | null
           quantity: number
           remaining: number
           site_id: string
@@ -266,6 +267,7 @@ export type Database = {
           origin?: Database["public"]["Enums"]["batch_origin"]
           parent_batch_ids?: string[] | null
           product_id: string
+          production_id?: string | null
           quantity: number
           remaining: number
           site_id: string
@@ -284,6 +286,7 @@ export type Database = {
           origin?: Database["public"]["Enums"]["batch_origin"]
           parent_batch_ids?: string[] | null
           product_id?: string
+          production_id?: string | null
           quantity?: number
           remaining?: number
           site_id?: string
@@ -319,6 +322,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "v_traceability_lookup"
             referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "batches_production_id_fkey"
+            columns: ["production_id"]
+            isOneToOne: false
+            referencedRelation: "productions"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "batches_site_id_fkey"
@@ -1574,6 +1584,89 @@ export type Database = {
           },
         ]
       }
+      orders: {
+        Row: {
+          b2b_customer_id: string | null
+          client_name: string
+          contact: string | null
+          created_at: string
+          created_by: string | null
+          delivery_mode: Database["public"]["Enums"]["order_delivery_mode"]
+          destination: Database["public"]["Enums"]["order_destination"]
+          event_date: string
+          id: string
+          notes: string | null
+          order_ref: string
+          portions: number | null
+          site_id: string
+          updated_at: string
+          venue_address: string | null
+        }
+        Insert: {
+          b2b_customer_id?: string | null
+          client_name: string
+          contact?: string | null
+          created_at?: string
+          created_by?: string | null
+          delivery_mode?: Database["public"]["Enums"]["order_delivery_mode"]
+          destination?: Database["public"]["Enums"]["order_destination"]
+          event_date: string
+          id?: string
+          notes?: string | null
+          order_ref: string
+          portions?: number | null
+          site_id: string
+          updated_at?: string
+          venue_address?: string | null
+        }
+        Update: {
+          b2b_customer_id?: string | null
+          client_name?: string
+          contact?: string | null
+          created_at?: string
+          created_by?: string | null
+          delivery_mode?: Database["public"]["Enums"]["order_delivery_mode"]
+          destination?: Database["public"]["Enums"]["order_destination"]
+          event_date?: string
+          id?: string
+          notes?: string | null
+          order_ref?: string
+          portions?: number | null
+          site_id?: string
+          updated_at?: string
+          venue_address?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_b2b_customer_id_fkey"
+            columns: ["b2b_customer_id"]
+            isOneToOne: false
+            referencedRelation: "b2b_customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
+          },
+        ]
+      }
       org_programme_templates: {
         Row: {
           content: Json
@@ -1778,6 +1871,158 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "risk_analyses"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      production_batches: {
+        Row: {
+          batch_id: string
+          production_id: string
+        }
+        Insert: {
+          batch_id: string
+          production_id: string
+        }
+        Update: {
+          batch_id?: string
+          production_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "production_batches_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "production_batches_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "v_expiring_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "production_batches_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["batch_id"]
+          },
+          {
+            foreignKeyName: "production_batches_production_id_fkey"
+            columns: ["production_id"]
+            isOneToOne: false
+            referencedRelation: "productions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      production_orders: {
+        Row: {
+          order_id: string
+          production_id: string
+        }
+        Insert: {
+          order_id: string
+          production_id: string
+        }
+        Update: {
+          order_id?: string
+          production_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "production_orders_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "production_orders_production_id_fkey"
+            columns: ["production_id"]
+            isOneToOne: false
+            referencedRelation: "productions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      productions: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          produced_by: string | null
+          produced_on: string
+          product_id: string | null
+          product_name: string
+          quantity: number | null
+          site_id: string
+          unit: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          produced_by?: string | null
+          produced_on: string
+          product_id?: string | null
+          product_name: string
+          quantity?: number | null
+          site_id: string
+          unit?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          produced_by?: string | null
+          produced_on?: string
+          product_id?: string | null
+          product_name?: string
+          quantity?: number | null
+          site_id?: string
+          unit?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "productions_produced_by_fkey"
+            columns: ["produced_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "productions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "productions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v_traceability_lookup"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "productions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "productions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "v_site_compliance_today"
+            referencedColumns: ["site_id"]
           },
         ]
       }
@@ -2780,6 +3025,7 @@ export type Database = {
           performed_by: string
           photo_ai_reading: Json | null
           photo_paths: string[]
+          production_id: string | null
           server_received_at: string
           site_id: string
           task_id: string | null
@@ -2803,6 +3049,7 @@ export type Database = {
           performed_by: string
           photo_ai_reading?: Json | null
           photo_paths?: string[]
+          production_id?: string | null
           server_received_at?: string
           site_id: string
           task_id?: string | null
@@ -2826,6 +3073,7 @@ export type Database = {
           performed_by?: string
           photo_ai_reading?: Json | null
           photo_paths?: string[]
+          production_id?: string | null
           server_received_at?: string
           site_id?: string
           task_id?: string | null
@@ -2872,6 +3120,13 @@ export type Database = {
             columns: ["performed_by"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_completions_production_id_fkey"
+            columns: ["production_id"]
+            isOneToOne: false
+            referencedRelation: "productions"
             referencedColumns: ["id"]
           },
           {
@@ -3319,6 +3574,13 @@ export type Database = {
         | "sale_b2b"
         | "correction"
       operating_day_status: "open" | "closed"
+      order_delivery_mode: "cold" | "warm" | "mixed" | "none"
+      order_destination:
+        | "catering"
+        | "private"
+        | "event"
+        | "community_delivery"
+        | "other"
       org_role:
         | "org_owner"
         | "org_admin"
@@ -3559,6 +3821,14 @@ export const Constants = {
         "correction",
       ],
       operating_day_status: ["open", "closed"],
+      order_delivery_mode: ["cold", "warm", "mixed", "none"],
+      order_destination: [
+        "catering",
+        "private",
+        "event",
+        "community_delivery",
+        "other",
+      ],
       org_role: [
         "org_owner",
         "org_admin",

@@ -5,7 +5,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { CookingPot, FileText, PackagePlus, Plus, Truck } from "lucide-react";
+import { ChefHat, CookingPot, FileText, PackagePlus, Plus, Truck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function QuickAddFab({ siteId }: { siteId: string }) {
@@ -15,6 +15,7 @@ export function QuickAddFab({ siteId }: { siteId: string }) {
   const actions = [
     { key: "invoice", href: `/app/${siteId}/receive`, icon: FileText, label: t("invoice") },
     { key: "quickReceive", href: `/app/${siteId}/receive/quick`, icon: PackagePlus, label: t("quickReceive") },
+    { key: "production", href: `/app/${siteId}/orders/production`, icon: ChefHat, label: t("production") },
     { key: "prep", href: `/app/${siteId}/stock/prep`, icon: CookingPot, label: t("prep") },
     { key: "outbound", href: `/app/${siteId}/stock/outbound`, icon: Truck, label: t("outbound") },
   ];

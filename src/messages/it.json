@@ -296,7 +296,8 @@
     "deviations": "Deviazioni",
     "reports": "Report",
     "receive": "Merci in",
-    "stock": "Magazzino"
+    "stock": "Magazzino",
+    "orders": "Ordini"
   },
   "sites": {
     "title": "Sedi",
@@ -747,7 +748,27 @@
       "to": "al",
       "footer": "Generato da KitchenProof — documentazione di tracciabilità un passo indietro/avanti (Reg. (CE) n. 178/2002, art. 18)."
     },
-    "recallOpen": "Apri il report (PDF)"
+    "recallOpen": "Apri il report (PDF)",
+    "verdict": {
+      "clean": "Tutti i {count} controlli su questa catena erano nei limiti",
+      "deviations": "{count} deviazioni su questa catena",
+      "none": "Nessun controllo copre questa catena",
+      "late": "{count} registrati in ritardo"
+    },
+    "clients": "Clienti da contattare ({count})",
+    "noClients": "Nessun ordine collegato",
+    "noContact": "Nessun contatto — telefonare",
+    "ingredients": "Merci usate",
+    "noIngredients": "Nessuna merce collegata",
+    "records": "Registri di autocontrollo",
+    "noRecords": "Nessun controllo quel giorno",
+    "failed": "Fallito",
+    "late": "in ritardo",
+    "suppliers": "Fornitori: {names}",
+    "kind": {
+      "product": "al cuore",
+      "ambient": "aria"
+    }
   },
   "outbound": {
     "title": "Consegna in uscita (B2B)",
@@ -1085,7 +1106,8 @@
     "invoice": "Nuova fattura",
     "quickReceive": "Ricezione rapida",
     "prep": "Nuova preparazione",
-    "outbound": "Consegna in uscita (B2B)"
+    "outbound": "Consegna in uscita (B2B)",
+    "production": "Registra produzione"
   },
   "setup": {
     "title": "Come iniziare",
@@ -1173,5 +1195,55 @@
       "6": "Sab",
       "7": "Dom"
     }
+  },
+  "orders": {
+    "title": "Ordini e produzione",
+    "newOrder": "Nuovo ordine",
+    "logProduction": "Registra produzione",
+    "ordersHeading": "Ordini",
+    "productionsHeading": "Ultime produzioni",
+    "noOrders": "Ancora nessun ordine",
+    "noProductions": "Ancora nessuna produzione",
+    "orderRef": "Nome ordine",
+    "clientName": "Cliente",
+    "contact": "Contatto",
+    "contactHint": "Email o telefono — è chi chiami in caso di richiamo.",
+    "eventDate": "Data",
+    "venue": "Indirizzo",
+    "portions": "Porzioni",
+    "destination": "Tipo",
+    "delivery": "Consegna",
+    "save": "Salva ordine",
+    "cancel": "Annulla",
+    "created": "Ordine salvato",
+    "error": "Qualcosa è andato storto",
+    "destinations": {
+      "catering": "Catering",
+      "private": "Privato",
+      "event": "Evento",
+      "community_delivery": "Consegna collettiva",
+      "other": "Altro"
+    },
+    "deliveryModes": {
+      "cold": "Freddo",
+      "warm": "Caldo",
+      "mixed": "Misto",
+      "none": "Nessuna consegna"
+    },
+    "productionHint": "Cosa avete cucinato, con quali merci e per quali ordini? I collegamenti li creiamo noi.",
+    "product": "Cosa avete cucinato?",
+    "productPlaceholder": "Es. Ragù",
+    "producedOn": "Data",
+    "quantity": "Quantità",
+    "ingredientsUsed": "Merci usate",
+    "ingredientsHint": "Tutto ciò che è a magazzino è selezionato — deseleziona ciò che non hai usato.",
+    "forOrders": "Per quali ordini?",
+    "forOrdersHint": "Gli ordini in arrivo sono selezionati — deseleziona quelli che non c'entrano.",
+    "noStock": "Niente a magazzino",
+    "noUpcomingOrders": "Nessun ordine in arrivo",
+    "saveProduction": "Salva produzione",
+    "productionLogged": "Produzione registrata",
+    "productRequired": "Scrivi cosa avete cucinato",
+    "chainHeading": "Tutta la catena dietro questo ordine"
   }
 }
