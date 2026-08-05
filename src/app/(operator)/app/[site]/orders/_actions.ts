@@ -5,6 +5,8 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { writeAudit } from "@/lib/audit/log";
 import { getOrgContext } from "@/lib/tenancy";
+import { normalizeName } from "@/lib/inventory/similarity";
+import { uniqueShortCode } from "@/lib/inventory/short-code";
 
 export type OrderState = { ok: true; id?: string } | { error: "error" } | null;
 
@@ -95,6 +97,12 @@ const productionSchema = z.object({
   producedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   quantity: z.coerce.number().min(0).optional(),
   unit: z.string().trim().max(40).optional().or(z.literal("")),
+  /** §26.6: the business sets its own shelf life. Empty stays empty. */
+  useBy: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional()
+    .or(z.literal("")),
   batchIds: z.array(z.uuid()).default([]),
   orderIds: z.array(z.uuid()).default([]),
   notes: z.string().trim().max(1000).optional().or(z.literal("")),
@@ -143,6 +151,13 @@ export async function logProduction(input: unknown): Promise<OrderState> {
     );
   }
 
+  // ── the pot of ragù becomes a real thing in the kitchen ──────────────────
+  // §3.4: inventory items are created as a by-product of work already
+  // recorded, never from an empty form — the reference spreadsheet's own
+  // Inventories sheet is empty, which is what happens when entering an item is
+  // a separate chore.
+  const outputBatchId = await createPreparation(sc, parsed.data, production.id);
+
   // records made today about this food belong to this production (the real
   // forms already work this way: "Lasagna, 80 °C" on the production's date)
   await sc.supabase
@@ -166,6 +181,7 @@ export async function logProduction(input: unknown): Promise<OrderState> {
       product: parsed.data.productName,
       batches: parsed.data.batchIds.length,
       orders: parsed.data.orderIds.length,
+      output_batch: outputBatchId,
     },
   });
 
@@ -184,4 +200,90 @@ async function heatAndCoolingControlPoints(
     .eq("site_id", siteId)
     .in("template_key", ["heating_core_temp", "cooling_56_10_4h", "hot_holding_56"]);
   return (data ?? []).map((cp) => cp.id);
+}
+
+
+/**
+ * Creates the preparation the production put in the fridge, and gives it a
+ * code short enough to write on masking tape (§9.1 — no printer required).
+ *
+ * Two deliberate departures from the prep flow:
+ *
+ *  - the inputs are LINKED, not consumed. The operator ticked which goods went
+ *    in; they never said how much. Writing a quantity nobody stated would be
+ *    inventing data (§7.5), so stock depletion stays a separate, deliberate
+ *    act. Provenance is complete either way — parent_batch_ids carries it.
+ *  - the use-by comes from the business's own rule or from what the operator
+ *    typed. If neither exists it stays EMPTY: §26.6 makes the durability period
+ *    the business's own responsibility, and a guessed date on food is exactly
+ *    the kind of invention this product refuses.
+ */
+async function createPreparation(
+  sc: NonNullable<Awaited<ReturnType<typeof siteContext>>>,
+  input: z.infer<typeof productionSchema>,
+  productionId: string,
+): Promise<string | null> {
+  const normalized = normalizeName(input.productName);
+  const { data: existing } = await sc.supabase
+    .from("products")
+    .select("id, default_shelf_life_days")
+    .eq("org_id", sc.site.org_id)
+    .eq("normalized_name", normalized)
+    .is("merged_into_id", null)
+    .limit(1)
+    .maybeSingle();
+
+  let productId = existing?.id;
+  if (!productId) {
+    const { data: created } = await sc.supabase
+      .from("products")
+      .insert({
+        org_id: sc.site.org_id,
+        name: input.productName,
+        normalized_name: normalized,
+        category: "other",
+        storage_type: "fridge",
+        unit_default: input.unit || "portioner",
+        is_food: true,
+      })
+      .select("id")
+      .single();
+    if (!created) return null;
+    productId = created.id;
+  }
+
+  // a code the cook can copy onto the tape, unique among what is in the fridge
+  const { data: activeCodes } = await sc.supabase
+    .from("batches")
+    .select("lot_code")
+    .eq("site_id", sc.site.id)
+    .eq("status", "active");
+  const code = uniqueShortCode(new Set((activeCodes ?? []).map((b) => b.lot_code)));
+  if (!code) return null; // never silently reuse a code
+
+  let useBy = input.useBy || null;
+  if (!useBy && existing?.default_shelf_life_days) {
+    const date = new Date(`${input.producedOn}T00:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + existing.default_shelf_life_days);
+    useBy = date.toISOString().slice(0, 10);
+  }
+
+  const { data: batch } = await sc.supabase
+    .from("batches")
+    .insert({
+      site_id: sc.site.id,
+      product_id: productId,
+      production_id: productionId,
+      lot_code: code,
+      quantity: input.quantity ?? 0,
+      unit: input.unit || "portioner",
+      remaining: input.quantity ?? 0,
+      expiry_date: useBy,
+      expiry_kind: useBy ? "internal" : null,
+      origin: "produced",
+      parent_batch_ids: input.batchIds.length > 0 ? input.batchIds : null,
+    })
+    .select("id")
+    .single();
+  return batch?.id ?? null;
 }

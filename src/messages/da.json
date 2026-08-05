@@ -1251,6 +1251,9 @@
     "saveProduction": "Gem produktion",
     "productionLogged": "Produktionen er registreret",
     "productRequired": "Skriv hvad I lavede",
-    "chainHeading": "Hele kæden bag ordren"
+    "chainHeading": "Hele kæden bag ordren",
+    "useBy": "Holdbar til (valgfri)",
+    "useByHint": "Jeres egen holdbarhed. Lader I feltet stå tomt, og varen ikke har en fast regel, får den ingen dato — appen gætter aldrig.",
+    "preparationCreated": "{name} er lagt på lager · kode {code}"
   }
 }

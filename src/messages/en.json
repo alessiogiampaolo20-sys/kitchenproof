@@ -1251,6 +1251,9 @@
     "saveProduction": "Save production",
     "productionLogged": "Production logged",
     "productRequired": "Say what you cooked",
-    "chainHeading": "The whole chain behind this order"
+    "chainHeading": "The whole chain behind this order",
+    "useBy": "Use by (optional)",
+    "useByHint": "Your own shelf life. Leave it empty and, unless the product has a fixed rule, the item gets no date — the app never guesses one.",
+    "preparationCreated": "{name} added to stock · code {code}"
   }
 }

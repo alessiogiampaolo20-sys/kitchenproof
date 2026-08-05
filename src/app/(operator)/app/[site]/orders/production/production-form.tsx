@@ -33,6 +33,7 @@ export function ProductionForm({
   const [productName, setProductName] = useState("");
   const [producedOn, setProducedOn] = useState(today);
   const [quantity, setQuantity] = useState("");
+  const [useBy, setUseBy] = useState("");
   // pre-selected: everything currently in stock is a plausible input, and the
   // upcoming orders are the plausible destinations. Deselect what doesn't apply.
   const [batchIds, setBatchIds] = useState<string[]>(batches.map((b) => b.id));
@@ -54,6 +55,7 @@ export function ProductionForm({
         productName,
         producedOn,
         quantity: quantity ? Number(quantity) : undefined,
+        useBy: useBy || undefined,
         batchIds,
         orderIds,
       });
@@ -101,8 +103,24 @@ export function ProductionForm({
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 className="min-h-12"
+                data-testid="production-quantity"
               />
             </div>
+          </div>
+          {/* §26.6: the durability period is the business's own decision. The
+              app offers the field and computes from a configured rule — it
+              never suggests a shelf life of its own. */}
+          <div className="grid gap-2">
+            <Label htmlFor="useBy">{t("useBy")}</Label>
+            <Input
+              id="useBy"
+              type="date"
+              value={useBy}
+              onChange={(e) => setUseBy(e.target.value)}
+              className="min-h-12"
+              data-testid="production-useby"
+            />
+            <p className="text-xs text-muted-foreground">{t("useByHint")}</p>
           </div>
         </CardContent>
       </Card>

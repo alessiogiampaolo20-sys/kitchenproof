@@ -1251,6 +1251,9 @@
     "saveProduction": "Salva produzione",
     "productionLogged": "Produzione registrata",
     "productRequired": "Scrivi cosa avete cucinato",
-    "chainHeading": "Tutta la catena dietro questo ordine"
+    "chainHeading": "Tutta la catena dietro questo ordine",
+    "useBy": "Da consumarsi entro (opzionale)",
+    "useByHint": "La vostra durabilità. Se lasci vuoto e il prodotto non ha una regola fissa, l'articolo resta senza data — l'app non tira mai a indovinare.",
+    "preparationCreated": "{name} messo a magazzino · codice {code}"
   }
 }

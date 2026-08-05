@@ -188,6 +188,7 @@ test("chain drills: order → whole chain, and goods → clients to contact", as
   await page.getByTestId("log-production").click();
   await page.waitForURL(`**/app/${siteId}/orders/production`);
   await page.fill('[data-testid="production-product"]', "Ragù");
+  await page.fill('[data-testid="production-quantity"]', "20");
   // the app proposes: stock in, orders upcoming — both already ticked
   await expect(page.getByTestId("production-batch").first()).toHaveAttribute(
     "aria-pressed",
@@ -201,7 +202,29 @@ test("chain drills: order → whole chain, and goods → clients to contact", as
   await page.waitForURL(`**/app/${siteId}/orders`, { timeout: 30_000 });
   await expect(page.getByTestId("production-row").first()).toContainText("Ragù");
 
+  // ── the pot of ragù is now a real thing in the kitchen ──────────────────
+  // §3.4: the preparation is created as a by-product of the work already
+  // recorded, with a code short enough to write on masking tape (§9.1)
+  await page.goto(`/app/${siteId}/stock`);
+  const prepared = page.getByTestId("stock-batch").filter({ hasText: "Ragù" });
+  await expect(prepared).toBeVisible({ timeout: 30_000 });
+  const preparedText = await prepared.innerText();
+  expect(preparedText).toMatch(/[34679ACDEFGHJKMNPQRTUVWXY]{4}/); // the tape code
+
+  // no use-by was given and the product has no rule: the field stays EMPTY
+  // rather than the app inventing a shelf life (§26.6)
+  const { data: prepBatch } = await admin
+    .from("batches")
+    .select("expiry_date, origin, production_id, parent_batch_ids")
+    .eq("site_id", siteId)
+    .eq("origin", "produced")
+    .single();
+  expect(prepBatch!.expiry_date).toBeNull();
+  expect(prepBatch!.production_id).not.toBeNull();
+  expect(prepBatch!.parent_batch_ids).not.toBeNull(); // provenance kept
+
   // ── REVERSE DRILL: from the order, the whole chain in one screen ────────
+  await page.goto(`/app/${siteId}/orders`);
   await page.getByTestId("order-row").first().click();
   await page.waitForURL(new RegExp(`/app/${siteId}/orders/[0-9a-f-]{36}$`));
 
