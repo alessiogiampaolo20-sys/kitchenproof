@@ -78,6 +78,12 @@ export async function ExportBar({ ctx, tab }: { ctx: TabContext; tab: Inspection
         </a>
       </Button>
       <Button asChild variant="outline" size="sm">
+        {/* §4.3 the same data as CSV, for the customer's own records */}
+        <a href={`${ctx.exportHref(tab)}&format=csv`} data-testid={`export-${tab}-csv`}>
+          {t("exportCsv")}
+        </a>
+      </Button>
+      <Button asChild variant="outline" size="sm">
         {/* §10.3 one-click full inspection bundle (ZIP) */}
         <a
           href={ctx.exportHref("bundle" as InspectionTab)}

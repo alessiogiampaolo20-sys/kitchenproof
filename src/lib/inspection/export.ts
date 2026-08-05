@@ -138,23 +138,38 @@ async function buildSections(
         {
           kind: "table",
           title: t("tabs.records"),
+          // §4.3: the official own-check forms carry the deviation and the
+          // corrective action next to the check, and a "checked by" column —
+          // an inspector looks for who signed off. Empty stays empty: a record
+          // without a deviation shows blank cells, never a plausible filler.
           columns: [
-            { label: t("export.colWhen"), width: "16%" },
-            { label: t("export.colName"), width: "30%" },
-            { label: t("export.colValue"), width: "14%" },
-            { label: t("export.colResult"), width: "12%" },
-            { label: t("export.colWho"), width: "18%" },
-            { label: t("export.colFlags"), width: "10%" },
+            { label: t("export.colWhen"), width: "11%" },
+            { label: t("export.colName"), width: "20%" },
+            { label: t("export.colValue"), width: "10%" },
+            { label: t("export.colKind"), width: "8%" },
+            { label: t("export.colResult"), width: "8%" },
+            { label: t("export.colWho"), width: "13%" },
+            { label: t("export.colDeviation"), width: "15%" },
+            { label: t("export.colCorrective"), width: "15%" },
           ],
-          rows: data.completions.map((completion) => [
-            fmt(completion.created_at),
-            pickText(completion.control_point?.name_i18n ?? null, LOCALE) ||
-              t("records.adhoc"),
-            summarizeValue(completion.value_json),
-            completion.passed === false ? t("records.failed") : "OK",
-            (completion.performer as { full_name: string } | null)?.full_name ?? "",
-            completion.is_late ? t("records.late") : "",
-          ]),
+          rows: data.completions.map((completion) => {
+            const deviation = completion.deviation as
+              | { description: string | null; corrective_action_text: string | null }
+              | null;
+            return [
+              fmt(completion.created_at),
+              pickText(completion.control_point?.name_i18n ?? null, LOCALE) ||
+                t("records.adhoc"),
+              summarizeValue(completion.value_json),
+              completion.measurement_kind
+                ? t(`export.kind.${completion.measurement_kind}`)
+                : "",
+              completion.passed === false ? t("records.failed") : "OK",
+              (completion.performer as { full_name: string } | null)?.full_name ?? "",
+              deviation?.description ?? "",
+              deviation?.corrective_action_text ?? "",
+            ];
+          }),
         },
       ],
     };
@@ -351,4 +366,49 @@ export async function buildInspectionBundle(
   zip.file("sporbarhed-index.csv", [csvHeader, ...csvLines].join("\n"));
 
   return zip.generateAsync({ type: "nodebuffer" }) as Promise<Buffer>;
+}
+
+/**
+ * §4.3: the same tab as CSV, for the customer's own records and for anyone who
+ * wants the data in a spreadsheet. Built from the very same sections as the
+ * PDF, so the two can never disagree — and blank cells stay blank.
+ */
+export async function renderInspectionCsv(
+  supabase: Client,
+  siteId: string,
+  tab: Exclude<ExportTab, "bundle">,
+  options: { fromDate: string; toDate: string; query?: string },
+): Promise<string> {
+  const [header, body] = await Promise.all([
+    siteHeader(supabase, siteId),
+    buildSections(supabase, siteId, tab, options),
+  ]);
+
+  const escape = (value: string) =>
+    /[",\n;]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+
+  const lines: string[] = [
+    // the page furniture the PDF carries, kept with the data
+    escape(header.siteName),
+    escape(
+      [header.siteAddress, header.cvr ? `CVR ${header.cvr}` : ""]
+        .filter(Boolean)
+        .join(" · "),
+    ),
+    escape(`${options.fromDate} – ${options.toDate}`),
+    escape(new Date().toISOString().slice(0, 16).replace("T", " ")),
+    "",
+  ];
+
+  for (const section of body.sections) {
+    lines.push(escape(section.title));
+    if (section.kind === "table") {
+      lines.push(section.columns.map((c) => escape(c.label)).join(","));
+      for (const row of section.rows) lines.push(row.map(escape).join(","));
+    } else {
+      for (const line of section.lines) lines.push(escape(line));
+    }
+    lines.push("");
+  }
+  return lines.join("\n");
 }

@@ -4,6 +4,7 @@
 // service path never reads beyond the resolved site.
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/database.types";
+import { unwrap } from "@/lib/supabase/unwrap";
 
 type Client = SupabaseClient<Database>;
 
@@ -103,7 +104,10 @@ export async function getRecordsData(
   let completionsQuery = supabase
     .from("task_completions")
     .select(
-      "id, value_json, passed, is_late, photo_paths, note, created_at, client_created_at, performer:profiles!task_completions_performed_by_fkey(full_name), control_point:control_points(name_i18n, category), equipment:equipment(name)",
+      // the deviation travels WITH the record: the official forms put the
+      // corrective action on the same row as the check that failed, and that
+      // is what an inspector reads
+      "id, value_json, passed, is_late, measurement_kind, photo_paths, note, created_at, client_created_at, performer:profiles!task_completions_performed_by_fkey(full_name), control_point:control_points(name_i18n, category), equipment:equipment(name), deviation:deviations(description, corrective_action_text, food_assessment, status)",
     )
     .eq("site_id", siteId)
     .gte("created_at", fromIso)
@@ -122,8 +126,10 @@ export async function getRecordsData(
     .gte("day", range.fromDate)
     .lte("day", range.toDate);
 
-  const [{ data: completions }, { data: missedTasks }, { data: deviations }] =
-    await Promise.all([
+  // An empty records table must mean "no records", never "the query broke".
+  // A failed embed has now emptied a compliance view four times (decision log
+  // 2026-07-27 fail-loud policy), so this one raises instead of going quiet.
+  const [completionsResult, missedResult, deviationsResult] = await Promise.all([
       completionsQuery,
       supabase
         .from("tasks")
@@ -138,7 +144,11 @@ export async function getRecordsData(
         .eq("site_id", siteId)
         .gte("detected_at", fromIso)
         .lte("detected_at", toIso),
-    ]);
+  ]);
+
+  const completions = unwrap(completionsResult, "records: completions");
+  const missedTasks = unwrap(missedResult, "records: missed tasks");
+  const deviations = unwrap(deviationsResult, "records: deviations");
 
   const filteredCompletions = (completions ?? []).filter(
     (completion) => !range.category || completion.control_point?.category === range.category,

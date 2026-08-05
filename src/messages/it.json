@@ -949,7 +949,13 @@
       "colInvoice": "Fattura",
       "colQty": "Q.tà",
       "colKind": "Tipo",
-      "colDetail": "Dettaglio"
+      "colDetail": "Dettaglio",
+      "colDeviation": "Deviazione",
+      "colCorrective": "Azione correttiva",
+      "kind": {
+        "product": "cuore",
+        "ambient": "aria"
+      }
     },
     "magicLinkDuration": "Valido per:",
     "magicLinkHours": "{hours} h",
@@ -958,7 +964,8 @@
     "linkOpened": "Aperto alle {time} · {views} visualizzazioni",
     "linkNotOpened": "Non ancora aperto",
     "revokeButton": "Revoca",
-    "revokedToast": "Link revocato"
+    "revokedToast": "Link revocato",
+    "exportCsv": "CSV"
   },
   "orgDashboard": {
     "title": "Panoramica sedi",

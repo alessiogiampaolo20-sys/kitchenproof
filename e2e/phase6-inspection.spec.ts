@@ -200,6 +200,20 @@ test("inspection: guest lock, magic link truth, exports, audit", async ({ page, 
   expect(programmeText).toContain("Køleskab 1"); // on-screen CP appears in the export
   expect(programmeText).toContain("DK-"); // sourceRef column populated
 
+  // §4.3: the own-check export carries the columns an inspector looks for —
+  // who signed off, and what was done when something failed
+  const recordsCsv = await page.request.get(
+    `/app/${siteId}/inspection/export?tab=records&format=csv`,
+  );
+  expect(recordsCsv.status()).toBe(200);
+  expect(recordsCsv.headers()["content-type"]).toContain("csv");
+  const csvText = await recordsCsv.text();
+  expect(csvText).toContain("Person");           // checked by
+  expect(csvText).toContain("Afvigelse");        // deviation
+  expect(csvText).toContain("Korrigerende handling"); // corrective action
+  expect(csvText).toContain("3.4 °C");           // the record itself
+  expect(csvText).toContain("Kontrolklar Køkken"); // page furniture travels with it
+
   const recordsPdf = await guest.request.get(`/inspect/${token}/export?tab=records`);
   const recordsText = (
     await new PDFParse({ data: new Uint8Array(await recordsPdf.body()) }).getText()

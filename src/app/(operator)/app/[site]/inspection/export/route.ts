@@ -4,6 +4,7 @@ import { getOrgContext } from "@/lib/tenancy";
 import { writeAudit } from "@/lib/audit/log";
 import {
   buildInspectionBundle,
+  renderInspectionCsv,
   renderInspectionPdf,
   type ExportTab,
 } from "@/lib/inspection/export";
@@ -38,8 +39,19 @@ export async function GET(
     query: request.nextUrl.searchParams.get("q") ?? undefined,
   };
 
-  const buffer =
-    tab === "bundle"
+  // format=csv gives the customer the same data for their own records
+  const wantsCsv = request.nextUrl.searchParams.get("format") === "csv" && tab !== "bundle";
+  const buffer = wantsCsv
+    ? Buffer.from(
+        await renderInspectionCsv(
+          supabase,
+          siteId,
+          tab as Exclude<ExportTab, "bundle">,
+          options,
+        ),
+        "utf8",
+      )
+    : tab === "bundle"
       ? await buildInspectionBundle(supabase, siteId)
       : await renderInspectionPdf(supabase, siteId, tab, options);
 
@@ -51,14 +63,21 @@ export async function GET(
     action: "inspection.exported",
     entityTable: "sites",
     entityId: siteId,
-    diff: { tab, ...options },
+    diff: { tab, format: wantsCsv ? "csv" : tab === "bundle" ? "zip" : "pdf", ...options },
   });
 
-  const filename =
-    tab === "bundle" ? `inspektionspakke-${today}.zip` : `${tab}-${today}.pdf`;
+  const filename = wantsCsv
+    ? `${tab}-${today}.csv`
+    : tab === "bundle"
+      ? `inspektionspakke-${today}.zip`
+      : `${tab}-${today}.pdf`;
   return new NextResponse(new Uint8Array(buffer), {
     headers: {
-      "Content-Type": tab === "bundle" ? "application/zip" : "application/pdf",
+      "Content-Type": wantsCsv
+        ? "text/csv; charset=utf-8"
+        : tab === "bundle"
+          ? "application/zip"
+          : "application/pdf",
       "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "private, no-store",
     },

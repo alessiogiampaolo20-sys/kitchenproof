@@ -948,8 +948,14 @@
       "colSupplier": "Supplier",
       "colInvoice": "Invoice",
       "colQty": "Qty",
-      "colKind": "Kind",
-      "colDetail": "Detail"
+      "colKind": "Type",
+      "colDetail": "Detail",
+      "colDeviation": "Deviation",
+      "colCorrective": "Corrective action",
+      "kind": {
+        "product": "core",
+        "ambient": "air"
+      }
     },
     "magicLinkDuration": "Valid for:",
     "magicLinkHours": "{hours} h",
@@ -958,7 +964,8 @@
     "linkOpened": "Opened at {time} · {views} views",
     "linkNotOpened": "Not opened yet",
     "revokeButton": "Revoke",
-    "revokedToast": "Link revoked"
+    "revokedToast": "Link revoked",
+    "exportCsv": "CSV"
   },
   "orgDashboard": {
     "title": "Portfolio overview",

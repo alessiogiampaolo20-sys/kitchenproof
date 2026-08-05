@@ -949,7 +949,13 @@
       "colInvoice": "Faktura",
       "colQty": "Mængde",
       "colKind": "Type",
-      "colDetail": "Detalje"
+      "colDetail": "Detalje",
+      "colDeviation": "Afvigelse",
+      "colCorrective": "Korrigerende handling",
+      "kind": {
+        "product": "kerne",
+        "ambient": "luft"
+      }
     },
     "magicLinkDuration": "Varighed:",
     "magicLinkHours": "{hours} t",
@@ -958,7 +964,8 @@
     "linkOpened": "Åbnet kl. {time} · {views} visninger",
     "linkNotOpened": "Endnu ikke åbnet",
     "revokeButton": "Tilbagekald",
-    "revokedToast": "Linket er tilbagekaldt"
+    "revokedToast": "Linket er tilbagekaldt",
+    "exportCsv": "CSV"
   },
   "orgDashboard": {
     "title": "Porteføljeoverblik",
